@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { FC } from 'react';
+import { BrowserRouter, Routes } from 'react-router-dom';
 import styles from './Meetup.module.scss';
 
-function Meetup() {
+const Meetup: FC = () => {
 return (
-    <div>
-    </div>
+    <BrowserRouter>
+      <Routes></Routes>
+    </BrowserRouter>
   );
 }
 

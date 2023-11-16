@@ -1,14 +1,15 @@
 import React, { FC } from 'react';
-import { BrowserRouter, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import styles from './Meetup.module.scss';
-import BackgroundMap from './pages/BackgroundMap/BackgroundMap';
+import HomePage from './pages/BackgroundMap/HomePage';
 
 const Meetup: FC = () => {
 return (
-    // <BrowserRouter>
-    //   <Routes></Routes>
-    // </BrowserRouter>
-    <BackgroundMap />
+    <BrowserRouter>
+      <Routes>
+        <Route path='/' element={<HomePage />}/>
+      </Routes>
+    </BrowserRouter>
   );
 }
 

@@ -11,16 +11,18 @@ import {
 const apiKey: string = (process.env.REACT_APP_GOOGLE_MAP_API_KEY as string) 
 
 
-const BackgroundMap: FC = () => {
+const HomePage: FC = () => {
     const position = { lat: 53.90228, lng: 27.561831 };
 
 return (
     <APIProvider apiKey={apiKey}>
         <div style={{height: '100vh'}}>
-            <Map zoom={12} center={position}></Map>
+            <Map zoom={12} center={position}>
+                <AdvancedMarker position={position}></AdvancedMarker>
+            </Map>
         </div>
     </APIProvider>
     );
 }
 
-export default BackgroundMap;
+export default HomePage;

@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import styles from './Meetup.module.scss';
-import HomePage from './pages/BackgroundMap/HomePage';
+import HomePage from './pages/HomePage/HomePage';
 
 const Meetup: FC = () => {
 return (

@@ -38,12 +38,12 @@ return (
     <APIProvider apiKey={apiKey}>
         <div style={{height: '100vh'}}>
             <Map zoom={12} center={position} mapId={mapId}>
-                {events.map(event => 
+                {/* {events.map(event => 
                     <AdvancedMarker position={position}>
                         <Pin borderColor={'brown'}/>
                     </AdvancedMarker> 
                 )}
-                
+                 */}
             </Map>
         </div>
     </APIProvider>

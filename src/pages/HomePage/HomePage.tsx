@@ -13,10 +13,6 @@ const apiKey: string = (process.env.REACT_APP_GOOGLE_MAP_API_KEY as string)
 const mapId: string = (process.env.REACT_APP_GOOGLE_MAP_ID as string)
 
 
-interface Markers {
-    type: string
-}
-
 const HomePage: FC = () => {
     const position = { lat: 53.90228, lng: 27.561831 };
     const [events, setEvents] = useState([])
@@ -32,18 +28,20 @@ const HomePage: FC = () => {
             })
     }, [])
 
-    console.log(events)
+    const eventsArr = events.map(arr => 
+        arr['geometry']['coordinates']).map(([lng, lat]) => 
+        ({ lng, lat }));
 
 return (
     <APIProvider apiKey={apiKey}>
         <div style={{height: '100vh'}}>
-            <Map zoom={12} center={position} mapId={mapId}>
-                {/* {events.map(event => 
-                    <AdvancedMarker position={position}>
+            <Map zoom={12} center={position} mapId={mapId}> 
+                {eventsArr.map(event => 
+                    <AdvancedMarker position={event}>  
                         <Pin borderColor={'brown'}/>
                     </AdvancedMarker> 
                 )}
-                 */}
+                
             </Map>
         </div>
     </APIProvider>

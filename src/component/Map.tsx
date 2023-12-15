@@ -6,6 +6,7 @@ import {
     InfoWindow
 } from '@vis.gl/react-google-maps';
 import { useGetMapQuery } from '../store/map/mapApi';
+import styles from './Map.module.scss';
 
 const mapId: string = (process.env.REACT_APP_GOOGLE_MAP_ID as string)
 
@@ -20,6 +21,8 @@ const MapComponent: FC = () => {
             setEvents(data.features)
     }, [data, isSuccess]);
 
+    // console.log(data.features.map( (el: any) => el.properties))
+
     const eventsArr = events.map(arr =>
         arr['geometry']['coordinates']).map(([lng, lat]) =>
             ({ lng, lat }));
@@ -28,7 +31,27 @@ const MapComponent: FC = () => {
         <Map zoom={12} center={position} mapId={mapId}>
             {eventsArr.map((event, index) =>
                 <AdvancedMarker position={event} key={index} onClick={() => setOpen(index)}>
-                    {open === index && <InfoWindow onCloseClick={() => setOpen(null)} position={event}>ss</InfoWindow>}
+                    {open === index && 
+                        <InfoWindow className={styles.info_window} position={event} >
+                            {data.features.map((el:any, i: number) => i === index ? 
+                                <div>
+                                    <p className={styles.info_window_p}>
+                                        {el.properties.name}
+                                    </p> 
+                                    <p className={styles.info_window_p}>
+                                        {el.properties.address}
+                                    </p> 
+                                    <p className={styles.info_window_p}>
+                                        {new Date(el.properties.start_date).toLocaleString()}
+                                    </p> 
+                                    <p className={styles.info_window_p}>
+                                        {new Date(el.properties.end_date).toLocaleString()}
+                                    </p> 
+                                    <button className={styles.info_window_button}>join</button>
+                                </div>
+                            : null)}
+                        </InfoWindow>}
+                    {/* {open === index && data.features.map((el:any) => <InfoWindow position={event} className="App"><p>{el.properties.name}</p></InfoWindow>)} */}
                     <Pin borderColor={'brown'} />
                 </AdvancedMarker>
             )}

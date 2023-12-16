@@ -28,7 +28,7 @@ const MapComponent: FC = () => {
             ({ lng, lat }));
 
     return (
-        <Map zoom={12} center={position} mapId={mapId}>
+        <Map zoom={12} center={position} mapId={mapId} className={styles.map}>
             {eventsArr.map((event, index) =>
                 <AdvancedMarker position={event} key={index} onClick={() => setOpen(index)}>
                     {open === index && 

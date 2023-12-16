@@ -1,8 +1,8 @@
 import { FC } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import HomePage from './pages/HomePage/HomePage';
+import HomePage from './pages/HomePage';
 import NonFound from './pages/NonFound';
-import RegistrationPage from './pages/HomePage/RegistrationPage';
+import RegistrationPage from './pages/RegistrationPage';
 
 const Meetup: FC = () => {
 return (

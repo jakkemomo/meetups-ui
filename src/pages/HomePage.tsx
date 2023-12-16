@@ -1,6 +1,6 @@
 import { FC } from 'react';
-import MapComponent from '../../component/Map';
-import Calendar from '../../component/Calendar';
+import MapComponent from '../component/Map';
+import Calendar from '../component/Calendar';
 
 const HomePage: FC = () => {
     return (

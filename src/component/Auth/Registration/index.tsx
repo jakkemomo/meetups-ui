@@ -1,39 +1,37 @@
-import CreateLoginStep from "./CreateLoginStep"
-import MailAndPassordStep from "./MailAndPassordStep"
-import OTPStep from "./OTPStep"
-import Review from "./Review"
-
-
-const TABS = [
-    {
-        component: MailAndPassordStep,
-        title: "Create and account",
-    },
-    {
-        component: OTPStep,
-        title: "Сode from email",
-    },
-    {
-        component: CreateLoginStep,
-        title: "Create login",
-    },
-    {
-        component: Review,
-        title: "Review",
-    },
-];
-
+import { useLocation } from "react-router-dom";
+import { useEffect } from "react";
+import { clearFormData } from "./Service/seveAndGetData";
+import { Step, TABS } from "./Service/step";
+import { FormProvider, useForm } from "react-hook-form";
+import TitleForm from "./UI/TitleForm.tsx";
+import FormContainer from "./UI/FormContainer";
 
 const Registation = () => {
+    const methods = useForm()
+
+    let { state } = useLocation()
+    if (!state) {
+        state = { activeStep: Step.MAIL_AND_PASSWORD }
+    }
+
+    const step = TABS[state.activeStep]
+
+    /* очистка данных в сессион стор при переходе на другую страницу */
+    useEffect(() => {
+        return () => {
+            clearFormData();
+        };
+    }, []);
+
     return (
-        <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
-            <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
-                <h1 className="text-center text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
-                    Create and account
-                </h1>
-                <Review />
-            </div>
-        </div>
+        <FormContainer>
+            <>
+                <TitleForm title={step.title} />
+                <FormProvider {...methods}>
+                    <step.component />
+                </FormProvider>
+            </>
+        </FormContainer>
     )
 }
 

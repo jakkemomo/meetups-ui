@@ -1,0 +1,16 @@
+FROM node:20-buster
+
+
+WORKDIR /usr/src/app
+
+COPY package*.json ./
+
+RUN npm ci
+
+COPY . .
+
+# Expose the port that the app will run on
+EXPOSE 3000
+
+# Define the command to run your app
+CMD ["npm", "start"]

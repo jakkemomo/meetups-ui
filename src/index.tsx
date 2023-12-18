@@ -13,15 +13,16 @@ const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
-  <ProviderSpectrum theme={darkTheme}> 
+  /* pass height and display for centering the whole page layouts */
+  <ProviderSpectrum theme={darkTheme} height={"100%"} UNSAFE_style={{ display: 'flex'}}>
     <APIProvider apiKey={apiKey}>
-    <Provider store={store}>
-      <React.StrictMode>
-        <Meetup />
-      </React.StrictMode>
-    </Provider>
-  </APIProvider>
+      <Provider store={store}>
+        <React.StrictMode>
+          <Meetup />
+        </React.StrictMode>
+      </Provider>
+    </APIProvider>
   </ProviderSpectrum>
-  
+
 
 );

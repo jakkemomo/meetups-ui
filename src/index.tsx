@@ -23,6 +23,4 @@ root.render(
       </Provider>
     </APIProvider>
   </ProviderSpectrum>
-
-
 );

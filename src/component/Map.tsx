@@ -8,7 +8,6 @@ import {
 } from '@vis.gl/react-google-maps';
 import { useGetMapQuery } from '../store/map/mapApi';
 import styles from './Map.module.scss';
-import { ApiProvider } from '@reduxjs/toolkit/dist/query/react';
 
 const mapId: string = (process.env.REACT_APP_GOOGLE_MAP_ID as string);
 const apiKey: string = (process.env.REACT_APP_GOOGLE_MAP_API_KEY as string);

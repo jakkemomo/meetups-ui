@@ -3,12 +3,14 @@ import { useEffect } from "react";
 import { clearFormData } from "./Service/seveAndGetData";
 import { Step, TABS } from "./Service/step";
 import { FormProvider, useForm } from "react-hook-form";
-import TitleForm from "./UI/TitleForm.tsx";
-import FormContainer from "./UI/FormContainer";
+import TitleForm from "../UI/TitleForm.tsx";
+import FormContainer from "../UI/FormContainer";
 
 const Registation = () => {
     const methods = useForm()
 
+    const locate = useLocation()
+console.log(locate)
     let { state } = useLocation()
     if (!state) {
         state = { activeStep: Step.MAIL_AND_PASSWORD }

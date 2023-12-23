@@ -5,7 +5,8 @@ import Meetup from './Meetup';
 import { Provider } from 'react-redux';
 import { store } from './store';
 import { APIProvider } from '@vis.gl/react-google-maps';
-import {darkTheme, defaultTheme, Provider as ProviderSpectrum} from '@adobe/react-spectrum';
+import {darkTheme, Provider as ProviderSpectrum} from '@adobe/react-spectrum';
+import 'react-toastify/dist/ReactToastify.css';
 
 const apiKey: string = (process.env.REACT_APP_GOOGLE_MAP_API_KEY as string)
 

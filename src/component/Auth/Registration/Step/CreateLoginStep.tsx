@@ -1,9 +1,10 @@
 import { useFormContext } from "react-hook-form"
-import { ValueTextField } from "../../Service/seveAndGetData"
-import Button from "../Button"
-import TextField from "../TextField"
-import useOnSubmitForm from "../../Service/onSubmitForm"
-import { Step } from "../../Service/step"
+import useOnSubmitForm from "../Service/onSubmitForm"
+import { Step } from "../Service/step"
+import TextField from "../../UI/TextField"
+import { ValueTextField } from "../Service/seveAndGetData"
+import Button from "../../UI/Button"
+
 
 
 const CreateLoginStep = () => {

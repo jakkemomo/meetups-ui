@@ -1,14 +1,14 @@
 import { AxiosResponse } from "axios"
 import $api, { AuthResponse } from "../api"
 
-const LOGIN_URL = "login"
+const LOGIN_URL = "login/"
 const EVENTS_URL = "events"
 const REGISTRATION_URL = "signup"
 const LOGOUT_URL = "logout"
 
 export class AuthService {
 
-    static async login(login: string, password: string): Promise<AxiosResponse<AuthResponse>> {
+    static async login(username: string, password: string): Promise<AxiosResponse<AuthResponse>> {
         // if (AuthService.validate(login, password)) {
             // return new Promise((resolve) => {
             //     resolve({
@@ -48,7 +48,7 @@ export class AuthService {
         // }
         //return $api.get<AuthResponse>(EVENTS_URL)
 
-        return $api.post<AuthResponse>(LOGIN_URL, { login, password })
+        return $api.post<AuthResponse>(LOGIN_URL, { username: username, password })
     }
 
     public static validate(login: string, password: string) {

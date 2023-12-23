@@ -40,7 +40,7 @@ const MapComponent: FC = () => {
                         onClick={() => setOpen((prevIndex) => (prevIndex === index ? null : index))}
                     >
                         {open === index && (
-                            <InfoWindow className={styles.info_window} position={event}  onCloseClick={()=>setOpen(null)}>
+                            <InfoWindow className={styles.info_window} position={event}  onCloseClick={() => setOpen(null)}>
                                 {data.features.map((el: any, i: number) =>
                                     i === index ? (
                                         <div key={i}>

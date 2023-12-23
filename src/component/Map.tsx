@@ -23,8 +23,6 @@ const MapComponent: FC = () => {
             setEvents(data.features)
     }, [data, isSuccess]);
 
-    // console.log(data.features.map( (el: any) => el.properties))
-
     const eventsArr = events.map(arr =>
         arr['geometry']['coordinates']).map(([lng, lat]) =>
             ({ lng, lat }));

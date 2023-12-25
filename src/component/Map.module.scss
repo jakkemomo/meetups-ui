@@ -1,0 +1,25 @@
+@import '../shared/design-tokens/scss-variables';
+@import '../shared/design-tokens/css-variables';
+
+ .map {
+     width: 100%;
+     height: 100%;
+     position: absolute;
+ }
+
+.info_window {
+    max-width: 8.85vw;
+}
+
+.info_window_p {
+    color: var(--color-primary);
+    font-family: var(--font-family-m600);
+    font-size: 17px;
+    line-height: 20px;
+}
+
+.info_window_button {
+    color: var(--color-primary);
+    width: 100%;
+    border: 1px solid orange;
+}

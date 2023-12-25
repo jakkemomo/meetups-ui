@@ -1,13 +1,13 @@
-import { FC } from 'react';
+import {FC} from 'react';
 import MapComponent from '../component/Map';
-// import Calendar from '../component/Calendar';
+import Header from '../component/Header/Header';
 
 const HomePage: FC = () => {
     return (
         <div className={"h-screen"}>
-            {/* <Calendar/> */}
-            < MapComponent />
-        </div >
+            <Header/>
+            <MapComponent/>
+        </div>
     );
 }
 

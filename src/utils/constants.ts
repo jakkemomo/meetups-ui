@@ -51,6 +51,15 @@ export const mockEventList: TEvent[] = [
   },
 ]
 
-export const monthsByNumbers: string[] = [
-  'января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря',
-]
+export function getLocaleMonth(idx: number, locale: string) {
+  const objDate = new Date();
+  objDate.setDate(1);
+  objDate.setMonth(idx-1);
+  const month = objDate.toLocaleString(locale, { month: "long" });
+  if (locale.includes('ru')) {
+    return month.slice(0, -1) + 'я';
+  } else {
+    return month;
+  }
+}
+

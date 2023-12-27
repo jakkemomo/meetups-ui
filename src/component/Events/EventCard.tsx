@@ -1,6 +1,7 @@
-import { ReactElement } from "react";
-import {TEvent} from "../../utils/types";
-import { monthsByNumbers } from "../../utils/constants";
+import { memo, ReactElement } from "react";
+import { TEvent } from "../../utils/types";
+import { getLocaleMonth } from "../../utils/constants";
+import * as _ from "lodash";
 
 
 type TEventCardProps = {
@@ -10,7 +11,7 @@ type TEventCardProps = {
 function EventCard({ event }: TEventCardProps): ReactElement {
 
   const startDate = new Date(event.start_date);
-  const month = String(monthsByNumbers[startDate.getMonth()]);
+  const month = String(getLocaleMonth(startDate.getMonth(), 'ru-ru'));
   const day = String(startDate.getDate()).padStart(2, '0');
 
   return (
@@ -28,4 +29,4 @@ function EventCard({ event }: TEventCardProps): ReactElement {
   )
 }
 
-export default EventCard;
+export default memo(EventCard, _.isEqual);

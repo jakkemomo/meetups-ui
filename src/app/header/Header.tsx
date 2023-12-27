@@ -1,4 +1,5 @@
 import { FC } from 'react';
+// @ts-ignore
 import styles from './Header.module.scss';
 
 const Header: FC = () => {
@@ -8,9 +9,9 @@ const Header: FC = () => {
                 MEVENT
             </h1>
             <div className={styles.menu_list}>
-                <div className={styles.menu_list_subs}>
+                <div className={styles.menu_list}>
                     <p>Подписки</p>
-                    <div className={styles.subs_counter}></div>
+                    <div/>
                 </div>
                 <div>
                     <p>Мой Аккаунт</p>

@@ -1,5 +1,5 @@
-import { FC } from "react";
-import { useNavigate } from 'react-router-dom';
+import {FC} from "react";
+import {useNavigate} from 'react-router-dom';
 
 const Forbidden403: FC = () => {
   const navigate = useNavigate();
@@ -23,4 +23,4 @@ const Forbidden403: FC = () => {
   )
 }
 
-export default Forbidden403
+export default Forbidden403;

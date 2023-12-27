@@ -1,6 +1,6 @@
-import { configureStore } from '@reduxjs/toolkit'
-import { useDispatch } from 'react-redux'
-import { mapApi } from './map/mapApi'
+import {configureStore} from '@reduxjs/toolkit'
+import {useDispatch} from 'react-redux'
+import {mapApi} from './map/mapApi'
 
 export const store = configureStore({
   reducer: {

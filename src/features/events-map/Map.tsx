@@ -6,11 +6,10 @@ import {
     Pin,
     InfoWindow
 } from '@vis.gl/react-google-maps';
-import { useGetMapQuery } from '../store/map/mapApi';
+import { useGetMapQuery } from '../../shared/api/map/mapApi';
+import {GOOGLE_MAP_API_KEY, GOOGLE_MAP_ID} from '../../shared/config'
+// @ts-ignore
 import styles from './Map.module.scss';
-
-const mapId: string = (process.env.REACT_APP_GOOGLE_MAP_ID as string);
-const apiKey: string = (process.env.REACT_APP_GOOGLE_MAP_API_KEY as string);
 
 const MapComponent: FC = () => {
     const position = { lat: 53.90228, lng: 27.561831 };
@@ -28,8 +27,8 @@ const MapComponent: FC = () => {
             ({ lng, lat }));
 
     return (
-        <APIProvider apiKey={apiKey}>
-            <Map zoom={12} center={position} mapId={mapId} className={styles.map}>
+        <APIProvider apiKey={GOOGLE_MAP_API_KEY}>
+            <Map zoom={12} center={position} mapId={GOOGLE_MAP_ID} className={styles.map}>
                 {eventsArr.map((event, index) => (
                     <AdvancedMarker
                         position={event}

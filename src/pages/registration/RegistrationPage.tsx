@@ -1,6 +1,6 @@
-import Registation from "../component/Auth/Registration"
-import MailAndPassordStep from "../component/Auth/Registration/UI/Step/MailAndPassordStep"
-import OTPStep from "../component/Auth/Registration/UI/Step/OTPStep"
+import Registation from "../../features/auth/Registration"
+import MailAndPassordStep from "../../features/auth/Registration/UI/Step/MailAndPassordStep"
+import OTPStep from "../../features/auth/Registration/UI/Step/OTPStep"
 
 const RegistrationPage = () => {
     return (

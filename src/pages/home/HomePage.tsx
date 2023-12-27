@@ -1,6 +1,6 @@
 import {FC} from 'react';
 import MapComponent from '../../features/events-map/Map';
-import Header from '../../app/header/Header';
+import Header from '../../widgets/header/Header';
 // @ts-ignore
 import styles from './HomePage.module.scss';
 

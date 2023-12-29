@@ -1,6 +1,5 @@
-import { FC } from "react";
+import {FC} from "react";
 import MailAndPasswordStep from "../Step/MailAndPasswordStep";
-import OTPStep from "../Step/OTPStep";
 import CreateLoginStep from "../Step/CreateLoginStep";
 import Review from "../Step/Review";
 

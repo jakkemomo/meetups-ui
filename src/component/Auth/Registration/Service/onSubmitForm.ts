@@ -1,17 +1,16 @@
-import { useCallback } from "react"
-import { useLocation, useNavigate } from "react-router-dom"
-import { setFormData } from "./seveAndGetData"
-import { FieldValues } from "react-hook-form"
+import {useCallback} from "react"
+import {useLocation, useNavigate} from "react-router-dom"
+import {setFormData} from "./seveAndGetData"
+import {FieldValues} from "react-hook-form"
 
-const useOnSubmitForm = (activeStep : number) => {
+const useOnSubmitForm = (activeStep: number) => {
     const navigation = useNavigate()
     const location = useLocation()
 
     return useCallback(
         (data : FieldValues) => {
-            setFormData(data)
-            console.log("прошел запрос ", data)
-            navigation("/registration", { ...location, state: { activeStep } })
+            setFormData(data);
+            navigation("/registration", { ...location, state: { activeStep } });
         },
         [navigation, location, activeStep]
     );

@@ -1,15 +1,16 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { useDispatch } from 'react-redux'
 import { mapApi } from './map/mapApi'
-import userSlice from './user/slice';
-import middleware from './user/middleware';
+import registerSlice from "./user/registerSlice";
+import authSlice from './user/loginSlice'
 
 export const store = configureStore({
   reducer: {
-    userSlice,
+    authSlice,
+    registerSlice,
     [mapApi.reducerPath] : mapApi.reducer
   },
-  middleware: (getDefaultMiddlware) => getDefaultMiddlware().concat(mapApi.middleware),
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(mapApi.middleware),
 })
 
 export type RootState = ReturnType<typeof store.getState>

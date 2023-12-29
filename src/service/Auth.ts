@@ -1,5 +1,5 @@
 import { AxiosResponse } from "axios"
-import $api, { AuthResponse } from "../api"
+import $api, {AuthResponse, RegisterResponse} from "../api"
 
 const LOGIN_URL = "login/"
 const EVENTS_URL = "events/"
@@ -48,23 +48,23 @@ export class AuthService {
         // }
         //return $api.get<AuthResponse>(EVENTS_URL)
 
-        return $api.post<AuthResponse>(LOGIN_URL, { username: username, password })
+        return $api.post<AuthResponse>(LOGIN_URL, { username, password })
     }
 
-    public static validate(login: string, password: string) {
+    public static validate(username: string, password: string) {
         const regexEmail = new RegExp('[a-z0-9]+@[a-z]+\.[a-z]{2,3}');
 
-        if (!login.match(regexEmail) || password.length < 4)
+        if (!username.match(regexEmail) || password.length < 4)
             return false
         else
             return true
     }
 
-    // static async registration(): Promise<AxiosResponse<AuthResponse>>{
-    //     return null
-    // }
+    static async registration(username: string, email: string, password: string, password2: string): Promise<AxiosResponse<RegisterResponse>>{
+        return $api.post<RegisterResponse>(REGISTRATION_URL, { username, email, password, password2 })
+     }
 
     static async logout(): Promise<AxiosResponse<AuthResponse>> {
         return $api.post(LOGOUT_URL)
     }
-} 
+}

@@ -1,4 +1,4 @@
-import { FieldValues } from "react-hook-form"
+import {FieldValues} from "react-hook-form"
 
 const REGISTRATION_FORM_DATA_KEY = "registration-form-data"
 
@@ -6,7 +6,7 @@ export enum ValueTextField {
     EMAIL = "email",
     PASSWORD1 = "password",
     PASSWORD2 = "password",
-    LOGIN = "login",
+    USERNAME = "username",
 }
 
 export const clearFormData = () => sessionStorage.removeItem(REGISTRATION_FORM_DATA_KEY)
@@ -16,7 +16,7 @@ export const setFormData = (formData : FieldValues) => sessionStorage.setItem(RE
 type ReturnType = {
     email? : ValueTextField.EMAIL,
     password? : ValueTextField.PASSWORD1,
-    login? : ValueTextField.LOGIN
+    username? : ValueTextField.USERNAME
 }
 
 export const getFormData = () : ReturnType => {

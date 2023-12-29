@@ -1,9 +1,9 @@
-import { FC } from "react";
-import { useFormContext } from "react-hook-form";
+import {FC} from "react";
+import {useFormContext} from "react-hook-form";
 import useOnSubmitForm from "../Service/onSubmitForm";
-import { Step } from "../Service/step";
+import {Step} from "../Service/step";
 import useFilledValue from "../Service/useFilledValue";
-import { ValueTextField } from "../Service/seveAndGetData";
+import {ValueTextField} from "../Service/seveAndGetData";
 import TextField from "../../UI/TextField";
 import ParagrafWithRedirect from "../../UI/ParagrafWithRedirect";
 import Button from "../../UI/Button";

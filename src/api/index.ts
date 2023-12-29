@@ -6,8 +6,8 @@ export type User = {
 }
 
 export type AuthResponse = {
-    accessToken: string,
-    refreshToken: string,
+    access: string,
+    refresh: string,
     user: User
 }
 
@@ -41,7 +41,7 @@ $api.interceptors.response.use(
         ) {
             try {
                 const resp = await $api.get<AuthResponse>("/api/refresh");
-                localStorage.setItem("token", resp.data.accessToken);
+                localStorage.setItem("token", resp.data.access);
                 return $api.request(originalRequest);
             } catch (error) {
                 console.log("AUTH ERROR");

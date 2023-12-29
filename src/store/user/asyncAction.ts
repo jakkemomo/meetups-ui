@@ -16,9 +16,9 @@ export const login = createAsyncThunk<User, LoginParams>(
         if (localStorage.getItem("user")) {
             return new Promise((reject => reject(JSON.parse(localStorage.getItem("user") as string))))
         } else {
-            const responce = await AuthService.login(params.login, params.password)
-            localStorage.setItem("token", responce.data.accessToken)
-            return responce.data.user
+            const response = await AuthService.login(params.login, params.password)
+            localStorage.setItem("token", response.data.access)
+            return response.data.user
         }
     },
 

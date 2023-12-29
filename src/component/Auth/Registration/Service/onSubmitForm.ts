@@ -11,10 +11,10 @@ const useOnSubmitForm = (activeStep : number) => {
         (data : FieldValues) => {
             setFormData(data)
             console.log("прошел запрос ", data)
-            navigation("/registration", { ...location, state: { activeStep} })
+            navigation("/registration", { ...location, state: { activeStep } })
         },
         [navigation, location, activeStep]
-    ); 
+    );
 }
 
 export default useOnSubmitForm

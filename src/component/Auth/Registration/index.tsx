@@ -6,35 +6,36 @@ import { FormProvider, useForm } from "react-hook-form";
 import TitleForm from "../UI/TitleForm.tsx";
 import FormContainer from "../UI/FormContainer";
 
-const Registation = () => {
-    const methods = useForm()
+const Registration = () => {
+  const methods = useForm()
 
-    const locate = useLocation()
-console.log(locate)
-    let { state } = useLocation()
-    if (!state) {
-        state = { activeStep: Step.MAIL_AND_PASSWORD }
-    }
+  const locate = useLocation()
+  console.log('Registration locate: ', locate);
+  let { state } = useLocation()
 
-    const step = TABS[state.activeStep]
+  if (!state) {
+      state = { activeStep: Step.MAIL_AND_PASSWORD }
+  }
 
-    /* очистка данных в сессион стор при переходе на другую страницу */
-    useEffect(() => {
-        return () => {
-            clearFormData();
-        };
-    }, []);
+  const step = TABS[state.activeStep]
 
-    return (
-        <FormContainer>
-            <>
-                <TitleForm title={step.title} />
-                <FormProvider {...methods}>
-                    <step.component />
-                </FormProvider>
-            </>
-        </FormContainer>
-    )
+  /* очистка данных в сессион стор при переходе на другую страницу */
+  useEffect(() => {
+      return () => {
+          clearFormData();
+      };
+  }, []);
+
+  return (
+      <FormContainer>
+          <>
+              <TitleForm title={step.title} />
+              <FormProvider {...methods}>
+                  <step.component />
+              </FormProvider>
+          </>
+      </FormContainer>
+  )
 }
 
-export default Registation
+export default Registration

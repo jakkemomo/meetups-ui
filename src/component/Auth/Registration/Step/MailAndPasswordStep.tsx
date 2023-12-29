@@ -9,9 +9,9 @@ import ParagrafWithRedirect from "../../UI/ParagrafWithRedirect";
 import Button from "../../UI/Button";
 
 
-const MailAndPassordStep: FC = () => {
+const MailAndPasswordStep: FC = () => {
     const { handleSubmit, setValue, register, formState: { errors } } = useFormContext()
-    const handler = useOnSubmitForm(Step.OTP)
+    const handler = useOnSubmitForm(Step.CREATE_LOGIN)
 
     useFilledValue(setValue, [ValueTextField.EMAIL])
 
@@ -68,4 +68,4 @@ const MailAndPassordStep: FC = () => {
     )
 }
 
-export default MailAndPassordStep
+export default MailAndPasswordStep

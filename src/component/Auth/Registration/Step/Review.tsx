@@ -1,9 +1,8 @@
-import React from 'react'
-import Button from '../Button'
-import TextField from '../TextField'
-import { ValueTextField } from '../../Service/seveAndGetData'
 import { useFormContext } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
+import TextField from '../../UI/TextField'
+import { ValueTextField } from '../Service/seveAndGetData'
+import Button from '../../UI/Button'
 
 const Review = () => {
     const { handleSubmit } = useFormContext()

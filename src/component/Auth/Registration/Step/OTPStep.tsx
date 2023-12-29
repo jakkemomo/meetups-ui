@@ -1,8 +1,9 @@
 import { useFormContext } from 'react-hook-form'
-import useOnSubmitForm from '../../Service/onSubmitForm'
-import { Step } from '../../Service/step'
-import Button from '../Button'
-import ParagrafWithRedirect from '../ParagrafWithRedirect'
+import useOnSubmitForm from '../Service/onSubmitForm'
+import { Step } from '../Service/step'
+import Button from '../../UI/Button'
+import ParagrafWithRedirect from '../../UI/ParagrafWithRedirect'
+
 
 const OTPStep = () => {
     const { register, handleSubmit } = useFormContext()

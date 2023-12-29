@@ -1,5 +1,5 @@
 import { useFormContext } from "react-hook-form"
-import { ValueTextField } from "../../Service/seveAndGetData"
+import { ValueTextField } from "../../Registration/Service/seveAndGetData"
 import { FC } from "react"
 
  type Props = {
@@ -22,7 +22,7 @@ const TextField : FC<Props> = ({inputFor, label, placeholder, errorMsg, readOnly
                 {label}
             </label>
             <input 
-                // type={inputFor}
+                type={inputFor}
                 {...register(inputFor, 
                     { required: true, minLength: 1 })} 
                 name={inputFor} 

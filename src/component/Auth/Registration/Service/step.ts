@@ -1,8 +1,9 @@
 import { FC } from "react";
-import CreateLoginStep from "../UI/Step/CreateLoginStep";
-import MailAndPassordStep from "../UI/Step/MailAndPassordStep";
-import OTPStep from "../UI/Step/OTPStep";
-import Review from "../UI/Step/Review";
+import MailAndPassordStep from "../Step/MailAndPassordStep";
+import OTPStep from "../Step/OTPStep";
+import CreateLoginStep from "../Step/CreateLoginStep";
+import Review from "../Step/Review";
+
 
 type TabType = {
     title: string,

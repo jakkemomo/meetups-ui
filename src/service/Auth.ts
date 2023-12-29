@@ -2,9 +2,9 @@ import { AxiosResponse } from "axios"
 import $api, { AuthResponse } from "../api"
 
 const LOGIN_URL = "login/"
-const EVENTS_URL = "events"
-const REGISTRATION_URL = "signup"
-const LOGOUT_URL = "logout"
+const EVENTS_URL = "events/"
+const REGISTRATION_URL = "signup/"
+const LOGOUT_URL = "logout/"
 
 export class AuthService {
 

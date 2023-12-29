@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import {FC} from 'react';
 import MapComponent from '../component/Map';
 import EventsSection from "../component/Events/EventsSection";
 // import Calendar from '../component/Calendar';

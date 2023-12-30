@@ -13,7 +13,7 @@ const mapId: string = (process.env.REACT_APP_GOOGLE_MAP_ID as string);
 const apiKey: string = (process.env.REACT_APP_GOOGLE_MAP_API_KEY as string);
 
 const MapComponent: FC = () => {
-    const position = { lat: 53.90228, lng: 27.561831 };
+    const position = { lat: 53.91228, lng: 27.431831 };
     const [events, setEvents] = useState([]);
     const { data, isSuccess } = useGetMapQuery('');
     const [open, setOpen] = useState<number | null | boolean>(null);

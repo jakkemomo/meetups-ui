@@ -1,10 +1,9 @@
-import { useFormContext } from "react-hook-form"
+import {useFormContext} from "react-hook-form"
 import useOnSubmitForm from "../Service/onSubmitForm"
-import { Step } from "../Service/step"
+import {Step} from "../Service/step"
 import TextField from "../../UI/TextField"
-import { ValueTextField } from "../Service/seveAndGetData"
+import {ValueTextField} from "../Service/seveAndGetData"
 import Button from "../../UI/Button"
-
 
 
 const CreateLoginStep = () => {
@@ -18,10 +17,10 @@ const CreateLoginStep = () => {
                 <p>Any text</p>
             </div>
             <form action="" className="space-y-4 md:space-y-6" onSubmit={handleSubmit(handler)}>
-               <TextField inputFor={ValueTextField.LOGIN} label="Your login" placeholder="login"/>
+               <TextField inputFor={ValueTextField.USERNAME} label="Your login" placeholder="login"/>
                <Button text="Create an account"/>
             </form>
-            
+
         </>
 
     )

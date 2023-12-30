@@ -1,12 +1,12 @@
-import { UseFormSetValue } from "react-hook-form"
-import { useEffect } from "react"
-import { ValueTextField, getFormData } from "./seveAndGetData"
+import {UseFormSetValue} from "react-hook-form"
+import {useEffect} from "react"
+import {getFormData, ValueTextField} from "./seveAndGetData"
 
 type Prop = (setValue : UseFormSetValue<any>, fieldArray : ValueTextField[]) => void
 
 const useFilledValue : Prop = (setValue, fieldArray) => {
   const dataInSessionStore = getFormData()
-  
+
   /**/
   useEffect(()=>{
     // if(Array.isArray(fieldArray)){

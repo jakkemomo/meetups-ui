@@ -1,6 +1,6 @@
-import { useFormContext } from 'react-hook-form'
+import {useFormContext} from 'react-hook-form'
 import useOnSubmitForm from '../Service/onSubmitForm'
-import { Step } from '../Service/step'
+import {Step} from '../Service/step'
 import Button from '../../UI/Button'
 import ParagrafWithRedirect from '../../UI/ParagrafWithRedirect'
 

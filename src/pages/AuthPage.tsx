@@ -1,5 +1,5 @@
 import { FC } from "react"
-import Registation from "../component/Auth/Registration"
+import Registration from "../component/Auth/Registration"
 import Login from '../component/Auth/Login/index';
 
 type Prop = {
@@ -13,7 +13,7 @@ const AuthPage : FC<Prop> = ({type}) => {
                 <p className="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white">
                     Meetup
                 </p>
-                {type === "registration" ? <Registation /> : <Login />}
+                {type === "registration" ? <Registration /> : <Login />}
             </div>
         </section>
     )

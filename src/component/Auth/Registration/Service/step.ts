@@ -1,5 +1,5 @@
 import { FC } from "react";
-import MailAndPassordStep from "../Step/MailAndPassordStep";
+import MailAndPasswordStep from "../Step/MailAndPasswordStep";
 import OTPStep from "../Step/OTPStep";
 import CreateLoginStep from "../Step/CreateLoginStep";
 import Review from "../Step/Review";
@@ -12,12 +12,8 @@ type TabType = {
 
 export const TABS: TabType[] = [
     {
-        component: MailAndPassordStep,
+        component: MailAndPasswordStep,
         title: "Create and account",
-    },
-    {
-        component: OTPStep,
-        title: "Сode from email",
     },
     {
         component: CreateLoginStep,
@@ -31,7 +27,6 @@ export const TABS: TabType[] = [
 
 export enum Step {
     MAIL_AND_PASSWORD,
-    OTP,
     CREATE_LOGIN,
     REVIEW
 }

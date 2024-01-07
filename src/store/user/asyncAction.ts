@@ -1,6 +1,6 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
-import {AuthService} from "../../service/Auth";
-import {AuthResponse, RegisterResponse} from "../../api";
+import {AuthResponse, RegisterResponse} from "@/entities/session/api/types";
+import {AuthService} from "@/service/Auth";
 
 export type LoginParams = {
     username: string,

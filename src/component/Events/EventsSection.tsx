@@ -1,5 +1,5 @@
 import EventList from "./EventList";
-import {mockEventList} from "../../utils/constants";
+import {mockEventList} from "@/entities/event/api/mocks/constants";
 import SearchMenu from "../SearchMenu/SearchMenu";
 import {ReactElement} from "react";
 

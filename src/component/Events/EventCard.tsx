@@ -1,6 +1,6 @@
 import { memo, ReactElement } from "react";
-import { TEvent } from "../../utils/types";
-import { getLocaleMonth } from "../../utils/constants";
+import { TEvent } from "@/entities/event/api/mocks/types";
+import { getLocaleMonth } from "@/entities/event/api/mocks/constants";
 import * as _ from "lodash";
 
 

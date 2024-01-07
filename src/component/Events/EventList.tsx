@@ -1,5 +1,5 @@
 import {ReactElement, useMemo} from "react";
-import {TEvent} from "../../utils/types";
+import {TEvent} from "@/entities/event/api/mocks/types";
 import EventCard from "./EventCard";
 
 

@@ -1,7 +1,7 @@
 import {createSlice} from '@reduxjs/toolkit'
 import {register} from './asyncAction';
-import {RegisterResponse} from '../../api';
 import {Status} from '../type';
+import {RegisterResponse} from "@/entities/session/api/types";
 
 export interface AuthState extends RegisterResponse {
   status: Status,

@@ -1,5 +1,6 @@
 import { ReactElement } from "react";
-import { ReactComponent as FilterIcon } from "../../images/filter-icon.svg";
+// @ts-ignore
+import { ReactComponent as FilterIcon } from "../../../public/filter-icon.svg";
 
 function FilterComponent(): ReactElement {
   return (

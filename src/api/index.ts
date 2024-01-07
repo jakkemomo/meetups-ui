@@ -1,21 +1,8 @@
+// todo: remove
 import axios from "axios"
+import { BASE_URL_API } from "@/shared/config"
+import {AuthResponse} from "@/entities/session/api/types";
 
-export type User = {
-    username: string,
-    email: string
-}
-
-export type AuthResponse = {
-    access: string,
-    refresh: string
-}
-
-export type RegisterResponse = {
-  username: string,
-  email: string,
-}
-
-export const BASE_URL_API = "https://meetups-dev-6vuzexfx2q-lm.a.run.app/api/v1/"
 
 const $api = axios.create({
     withCredentials: false,
@@ -29,7 +16,7 @@ const $api = axios.create({
 $api.interceptors.request.use((config) => {
   const token = localStorage.getItem("token");
   if (token) {
-    config.headers.Authorization = `Bearer ${localStorage.getItem("token")}`;
+    config.headers.Authorization = `Bearer ${token}`;
   }
   return config;
 })

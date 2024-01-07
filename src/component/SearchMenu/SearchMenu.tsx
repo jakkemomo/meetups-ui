@@ -1,7 +1,8 @@
 import SearchInput from "./SearchInput";
 import FilterComponent from "./FilterComponent";
 import { ReactElement } from "react";
-import { ReactComponent as AddIcon } from "../../images/search-icon.svg";
+// @ts-ignore
+import { ReactComponent as AddIcon } from "../../../public/search-icon.svg";
 
 function SearchMenu(): ReactElement {
   return (

@@ -1,5 +1,6 @@
 import { ReactElement } from "react";
-import { ReactComponent as SearchIcon } from "../../images/search-icon.svg";
+// @ts-ignore
+import { ReactComponent as SearchIcon } from "../../../public/search-icon.svg";
 
 function SearchInput(): ReactElement {
   return (

@@ -3,36 +3,34 @@ Frontend for Meetups app
 
 ## Before starting:
 
-Add a .env file with two lines following the example from the .env.example file.\
-You can find the data to fill out in the documentation in Clickup.
 
 ------
 
-## React + TypeScript + Vite
+## Tech stack: React + TypeScript + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+------
 
-Currently, two official plugins are available:
+## Running locally
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+1. Install dependencies
 
-### Expanding the ESLint configuration
+```bash
+npm install
+```
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+2. Copy `.env.example` to `.env` anf fill `.env.`.
 
-- Configure the top-level `parserOptions` property like this:
+```bash
+cp .env.example .env.local
+```
+3. Fill up `.env` using documentation in Clickup.
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+4. Start Vite development server
+
+```bash
+npm run dev
+```
+
 ```
 
 - Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`

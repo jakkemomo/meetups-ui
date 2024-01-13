@@ -6,10 +6,11 @@ import { RouterProvider } from 'react-router-dom'
 import {Provider as ProviderSpectrum} from "@react-spectrum/provider";
 import {APIProvider} from "@vis.gl/react-google-maps";
 import { GOOGLE_MAP_API_KEY } from "@/shared/config";
-import { appRouter } from './appRouter'
+import { appRouter } from './appRouter';
+import {darkTheme} from "@adobe/react-spectrum";
 
 ReactDOM.render(
-    <ProviderSpectrum height={"100%"}>
+    <ProviderSpectrum height={"100%"} theme={darkTheme}>
         <APIProvider apiKey={GOOGLE_MAP_API_KEY}>
             <Provider store={appStore}>
                 <React.StrictMode>

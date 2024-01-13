@@ -21,7 +21,7 @@ npm install
 2. Copy `.env.example` to `.env` anf fill `.env.`.
 
 ```bash
-cp .env.example .env.local
+cp .env.example .env
 ```
 3. Fill up `.env` using documentation in Clickup.
 

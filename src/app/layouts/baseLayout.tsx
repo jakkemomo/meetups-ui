@@ -1,4 +1,3 @@
-import { Announcement, Layout } from '@/shared/ui'
 import Header from "@/widgets/header/Header.tsx";
 
 /**
@@ -11,15 +10,5 @@ import Header from "@/widgets/header/Header.tsx";
  * Pass widgets as props to layout
  */
 export const baseLayout = (
-  <Layout
-    announcementSlot={
-      <Announcement>
-        <span>
-          An open source frontend application built with React ⚛️ and
-          Feature-Sliced Design 🍰.
-        </span>
-      </Announcement>
-    }
-    headerSlot={<Header/>}
-  />
+  <Header/>
 )

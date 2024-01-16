@@ -26,6 +26,66 @@ cp .env.example .env
 ```bash
 npm run dev
 ```
+
+## Local development with docker
+
+### Requirements 
+- Docker compose
+- make
+
+### Initial steps
+1. Build docker image  
+  `make docker-build`
+2. Download node_modules to the host   
+  `make download_node_modules`
+3. Run dev server  
+  `make dev` or run it in daemon mode `make dev-daemon`
+
+### Other commands
+ 
+To see other available commands, please visit the file [Makefile](./Makefile)
+
+### Example
+```bash
+~/Projects/meetups-ui (fix/asakalouski/fix-docker|✚4) make docker-rm
+docker compose rm dev
+? Going to remove react-app-dev Yes
+[+] Removing 1/0
+ ✔ Container react-app-dev  Removed 
+~/Projects/meetups-ui (fix/asakalouski/fix-docker|✚4) make download_node_modules 
+docker compose up -d dev
+[+] Running 2/0
+ ✔ Container react-app-dev                                                                                                                            C[+] Running 2/2
+              Started0.0s 
+
+docker compose cp dev:/usr/src/app/node_modules ./node_modules
+[+] Copying 1/1
+ ✔ react-app-dev copy react-app-dev:/usr/src/app/node_modules to ./node_modules Copied                                                           13.3s 
+docker compose stop dev
+[+] Stopping 1/1
+ ✔ Container react-app-dev  Stopped                                                                                                              10.4s 
+~/Projects/meetups-ui (fix/asakalouski/fix-docker|✚4) make dev
+docker compose up dev || true
+[+] Running 1/0
+ ✔ Container react-app-dev  Created                                                                                                               0.0s 
+Attaching to react-app-dev
+react-app-dev  | 
+react-app-dev  | > meetups-ui@0.0.5 dev
+react-app-dev  | > vite
+react-app-dev  | 
+react-app-dev  | 
+react-app-dev  |   VITE v5.0.11  ready in 910 ms
+react-app-dev  | 
+react-app-dev  |   ➜  Local:   http://localhost:3000/
+react-app-dev  |   ➜  Network: http://172.22.0.4:3000/
+^CGracefully stopping... (press Ctrl+C again to force)
+[+] Stopping 1/1
+ ✔ Container react-app-dev  Stopped                                                                                                              10.3s 
+react-app-dev exited with code 0
+canceled
+~/Projects/meetups-ui (fix/asakalouski/fix-docker|✚4)
+```
+
 ------
 ## Follow the Feature-sliced design
 ### Hierarchy

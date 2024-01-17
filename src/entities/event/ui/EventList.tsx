@@ -1,13 +1,13 @@
 import {ReactElement, useMemo} from "react";
-import {TEvent} from "../api/mocks/types.ts";
+import {IEvent} from "../api/mocks/types.ts";
 import EventCard from "./EventCard.tsx";
 
 
-type TEventListProps = {
-  events: TEvent[]
+interface IEventListProps {
+  events: IEvent[]
 }
 
-function EventList({ events }: TEventListProps): ReactElement {
+function EventList({ events }: IEventListProps): ReactElement {
   const eventCards = useMemo(() =>
     events.map(event => <EventCard event={event} key={event.id} />)
   , [events]);

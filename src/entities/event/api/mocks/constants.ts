@@ -1,6 +1,6 @@
-import {TEvent} from "./types";
+import {IEvent} from "./types";
 
-export const mockEventList: TEvent[] = [
+export const mockEventList: IEvent[] = [
   { id: 1,
     name: 'Волейбол',
     rating: 'Отлично',

@@ -1,4 +1,4 @@
-import Header from "@/widgets/header/Header.tsx";
+// import Header from "@/widgets/header/Header.tsx";
 import {Outlet} from "react-router-dom";
 
 /**
@@ -12,7 +12,7 @@ import {Outlet} from "react-router-dom";
  */
 export default function BaseLayout() {
   return (
-    <p>Base Layout
+    <p>
       {/*<Header/>*/}
       <Outlet />
     </p>

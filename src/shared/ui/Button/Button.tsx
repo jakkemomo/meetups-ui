@@ -1,42 +1,49 @@
-import cn from 'classnames'
-import { type ReactNode } from 'react'
-import { Icon } from '@/shared/ui'
-import css from './Button.module.css'
+import React, { type ReactNode } from 'react';
 
-type ButtonTheme = 'primary' | 'secondary'
-
-type Props = {
-  onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void
-  children: ReactNode
-  theme?: ButtonTheme
-  size?: 'm' | 's'
-  type?: 'submit'
-  isLoading?: boolean
+interface IButtonProps {
+  onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  children: ReactNode;
+  type: 'primary' | 'secondary';
+  HTMLType: 'submit' | 'button' | 'reset';
+  extraClass?: string;
+  iconType?: 'next';
   disabled?: boolean
 }
 
 export function Button({
                          onClick,
                          children,
-                         isLoading,
-                         size = 'm',
-                         theme = 'primary',
-                         disabled,
                          type,
-                       }: Props) {
+                         extraClass,
+                         disabled,
+                         HTMLType,
+                         iconType
+                       }: IButtonProps) {
   return (
+    (type === 'primary') ? (
       <button
-          type={type}
-          disabled={disabled}
-          className={cn(
-              css.root,
-              css[`root_size_${size}`],
-              css[`root_theme_${theme}`],
-              disabled && css.root_disabled
-          )}
-          onClick={onClick}
+        type={HTMLType}
+        disabled={disabled}
+        onClick={onClick}
+        className={`w-80 h-50 flex bg-main-purple text-white text-lg font-bold rounded-full items-center p-3.5 ${iconType ? 'justify-between' : 'justify-center'} ${extraClass}`}
       >
-        {isLoading ? <Icon className={css.loader} type="loader" /> : children}
+        {iconType && <div className='w-6 h-6 invisible' />}
+        <p>{children}</p>
+        {iconType &&
+          <div
+            className='w-6 h-6 bg-center bg-no-repeat'
+            style={{ backgroundImage: `url("/images/${iconType}.svg")` }}
+          />}
       </button>
+      ) : (
+      <button
+        type={HTMLType}
+        disabled={disabled}
+        onClick={onClick}
+        className={`bg-transparent text-neutral-500 text-lg font-normal ${extraClass}`}
+      >
+        <p className='text-left'>{children}</p>
+      </button>
+    )
   )
 }

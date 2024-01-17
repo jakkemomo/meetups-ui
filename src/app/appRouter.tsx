@@ -6,50 +6,53 @@ import {useAppSelector} from '@/shared/model'
 import HomePage from "@/pages/HomePage";
 import NonFound from "@/pages/NonFound";
 import AuthPage from "@/pages/AuthPage";
-import {baseLayout} from "@/app/layouts/baseLayout.tsx";
+import BaseLayout from "@/app/layouts/baseLayout.tsx";
 
 type GuestGuardProps = {
-    children: ReactElement
+  children: ReactElement
 }
 
 function GuestGuard({children}: GuestGuardProps) {
-    const isAuthorized = useAppSelector(selectIsAuthorized)
+  const isAuthorized = useAppSelector(selectIsAuthorized)
 
-    if (!isAuthorized) return <Navigate to="/login"/>
+  if (!isAuthorized) return <Navigate to="/login"/>
 
-    return children
+  return children
 }
 
 type AuthGuardProps = {
-    children: ReactElement
+  children: ReactElement
 }
 
 function AuthGuard({children}: AuthGuardProps) {
-    const isAuthorized = useAppSelector(selectIsAuthorized)
+  const isAuthorized = useAppSelector(selectIsAuthorized)
 
-    if (isAuthorized) return <Navigate to="/"/>
+  if (isAuthorized) return <Navigate to="/"/>
 
-    return children
+  return children
 }
 
-export const appRouter = () =>
-    createBrowserRouter([
-        {
-            element: baseLayout,
-            errorElement: <div>error</div>,
-            children: [
-                {
-                    path: '/',
-                    element: (
-                        <HomePage/>
-                    ),
-                },
-                {
-                    path: '*',
-                    element: (
-                        <NonFound/>
-                    ),
-                }
-            ]
-        },
-    ])
+export const appRouter = createBrowserRouter([
+  {
+    element: <BaseLayout />,
+    errorElement: <div>error</div>,
+    children: [
+      {
+        path: '/',
+        element: (
+          <HomePage/>
+        ),
+      },
+      {
+        path: 'login',
+        element: <AuthPage type='login'/>,
+      },
+      {
+        path: '*',
+        element: (
+          <NonFound/>
+        ),
+      }
+    ]
+  },
+])

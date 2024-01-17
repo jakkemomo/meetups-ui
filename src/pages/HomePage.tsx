@@ -4,7 +4,7 @@ const HomePage: FC = () => {
     return (
         <div className={"h-screen w-screen"}>
             <p>TEST PAGE</p>
-        </div >
+        </div>
     );
 }
 

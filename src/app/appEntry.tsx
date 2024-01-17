@@ -8,17 +8,18 @@ import { config } from "@/shared/config";
 import { appRouter } from './appRouter';
 import {darkTheme} from "@adobe/react-spectrum";
 import {createRoot} from "react-dom/client";
+import './index.css';
 
-const root = document.getElementById('root') as HTMLElement
+const root = document.getElementById('root')!
 
 createRoot(root).render(
-    <ProviderSpectrum height={"100%"} theme={darkTheme}>
-        <APIProvider apiKey={config.GOOGLE_MAP_API_KEY}>
-            <Provider store={appStore}>
-                <React.StrictMode>
-                    <RouterProvider router={appRouter()} />
-                </React.StrictMode>
-            </Provider>
-        </APIProvider>
-    </ProviderSpectrum>
+  <React.StrictMode>
+{/*    <ProviderSpectrum height={"100%"} theme={darkTheme}>*/}
+      <APIProvider apiKey={config.GOOGLE_MAP_API_KEY}>
+        <Provider store={appStore}>
+          <RouterProvider router={appRouter} />
+        </Provider>
+      </APIProvider>
+    {/*</ProviderSpectrum>*/}
+  </React.StrictMode>
 );

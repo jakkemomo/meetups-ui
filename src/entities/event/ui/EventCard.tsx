@@ -1,10 +1,10 @@
 import { memo, ReactElement } from "react";
-import { TEvent } from "../api/mocks/types.ts";
+import { IEvent } from "../api/mocks/types.ts";
 import { getLocaleMonth } from "../api/mocks/constants.ts";
 import {isEqual} from "lodash";
 
-type TEventCardProps = {
-  event: TEvent
+interface TEventCardProps {
+  event: IEvent
 }
 
 function EventCard({ event }: TEventCardProps): ReactElement {

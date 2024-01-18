@@ -1,55 +1,57 @@
 import type {ReactElement} from 'react'
-import React from "react";
 import {createBrowserRouter, Navigate} from 'react-router-dom'
 import {selectIsAuthorized} from '@/entities/session'
 import {useAppSelector} from '@/shared/model'
-import HomePage from "@/pages/HomePage";
-import NonFound from "@/pages/NonFound";
-import AuthPage from "@/pages/AuthPage";
-import {baseLayout} from "@/app/layouts/baseLayout.tsx";
+import HomePage from "@/pages/home/HomePage";
+import NonFound from "@/pages/errors/NonFound";
+import LoginPage from "@/pages/login/LoginPage";
+import BaseLayout from "@/app/layouts/baseLayout.tsx";
 
-type GuestGuardProps = {
-    children: ReactElement
+interface GuestGuardProps {
+  children: ReactElement
 }
 
 function GuestGuard({children}: GuestGuardProps) {
-    const isAuthorized = useAppSelector(selectIsAuthorized)
+  const isAuthorized = useAppSelector(selectIsAuthorized)
 
-    if (!isAuthorized) return <Navigate to="/login"/>
+  if (!isAuthorized) return <Navigate to="/login"/>
 
-    return children
+  return children
 }
 
-type AuthGuardProps = {
-    children: ReactElement
+interface AuthGuardProps {
+  children: ReactElement
 }
 
 function AuthGuard({children}: AuthGuardProps) {
-    const isAuthorized = useAppSelector(selectIsAuthorized)
+  const isAuthorized = useAppSelector(selectIsAuthorized)
 
-    if (isAuthorized) return <Navigate to="/"/>
+  if (isAuthorized) return <Navigate to="/"/>
 
-    return children
+  return children
 }
 
-export const appRouter = () =>
-    createBrowserRouter([
-        {
-            element: baseLayout,
-            errorElement: <div>error</div>,
-            children: [
-                {
-                    path: '/',
-                    element: (
-                        <HomePage/>
-                    ),
-                },
-                {
-                    path: '*',
-                    element: (
-                        <NonFound/>
-                    ),
-                }
-            ]
-        },
-    ])
+export const appRouter = createBrowserRouter([
+  {
+    element: <BaseLayout />,
+    errorElement: <div>error</div>,
+    children: [
+      {
+        path: '/',
+        element: (
+          <HomePage/>
+        ),
+      },
+      {
+        path: 'login',
+        element: <LoginPage/>,
+      },
+      {
+        path: '*',
+        element: (
+          <NonFound/>
+        ),
+      }
+    ]
+  },
+])

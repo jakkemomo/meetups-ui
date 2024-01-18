@@ -1,4 +1,5 @@
-import Header from "@/widgets/header/Header.tsx";
+// import Header from "@/widgets/header/Header.tsx";
+import {Outlet} from "react-router-dom";
 
 /**
  * ✅ FSD Best practice
@@ -9,6 +10,11 @@ import Header from "@/widgets/header/Header.tsx";
  * (2) Avoid cross-import using slot (render prop) pattern
  * Pass widgets as props to layout
  */
-export const baseLayout = (
-  <Header/>
-)
+export default function BaseLayout() {
+  return (
+    <p>
+      {/*<Header/>*/}
+      <Outlet />
+    </p>
+  )
+}

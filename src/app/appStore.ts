@@ -1,5 +1,5 @@
 import {configureStore} from '@reduxjs/toolkit'
-import {invalidateAccessTokenListener} from '@/features/authentication/invalidateAccessToken'
+// import {invalidateAccessTokenListener} from '@/features/auth/invalidateAccessToken'
 import {baseApi} from '@/shared/api'
 import {setupListeners} from "@reduxjs/toolkit/query";
 import {rootReducer} from "@/app/rootReducer";
@@ -12,7 +12,7 @@ export function makeStore() {
     } as unknown as typeof rootReducer,
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware().concat(
-            baseApi.middleware, invalidateAccessTokenListener.middleware
+            baseApi.middleware, /*invalidateAccessTokenListener.middleware*/
         ),
   })
 

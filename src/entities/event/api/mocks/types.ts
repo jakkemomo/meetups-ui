@@ -1,9 +1,9 @@
-type TEventTag = {
+interface IEventTag {
   id: number,
   name: string
 }
 
-export type TEvent = {
+export interface IEvent {
   id: number,
   name: string,
   rating: string | null,
@@ -11,7 +11,7 @@ export type TEvent = {
   description: string,
   start_date: string,
   end_date: string,
-  tags: TEventTag[] | [],
+  tags: IEventTag[] | [],
   address: string,
   category: number | null,
   participants_number: number,

@@ -1,7 +1,7 @@
 import {Layout} from "@/shared/ui";
 
 
-export function LoginLayout() {
+export function AuthLayout() {
   return (
     <Layout />
   )

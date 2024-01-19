@@ -7,9 +7,7 @@ import {rootReducer} from "@/app/rootReducer";
 
 export function makeStore() {
   const store = configureStore({
-    reducer: {
-      [baseApi.reducerPath]: baseApi.reducer
-    } as unknown as typeof rootReducer,
+    reducer: rootReducer,
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware().concat(
             baseApi.middleware, /*invalidateAccessTokenListener.middleware*/

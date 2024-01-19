@@ -1,5 +1,6 @@
 // import Header from "@/widgets/header/Header.tsx";
 import {Outlet} from "react-router-dom";
+import Header from "@/widgets/header/Header";
 
 /**
  * ✅ FSD Best practice
@@ -12,9 +13,9 @@ import {Outlet} from "react-router-dom";
  */
 export default function BaseLayout() {
   return (
-    <p>
-      {/*<Header/>*/}
+    <>
+      <Header/>
       <Outlet />
-    </p>
+    </>
   )
 }

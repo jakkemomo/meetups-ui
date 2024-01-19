@@ -17,16 +17,7 @@ export function LoginForm({onComplete}: ILoginFormProps): ReactElement  {
     handleSubmit,
     register,
   } = useForm<LoginValidationSchema>({
-    resolver: async (data, context, options) => {
-      // you can debug your validation schema here
-      console.log("formData", data)
-      console.log(
-        "validation result",
-        await zodResolver(loginSchema)(data, context, options)
-      )
-      return zodResolver(loginSchema)(data, context, options);
-    }
-    // resolver: zodResolver(formValidationSchema)
+    resolver: zodResolver(loginSchema)
   });
 
   const dispatch = useAppDispatch();

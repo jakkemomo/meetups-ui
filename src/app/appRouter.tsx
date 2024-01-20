@@ -6,6 +6,7 @@ import HomePage from "@/pages/home/HomePage";
 import NonFound from "@/pages/errors/NonFound";
 import LoginPage from "@/pages/login/LoginPage";
 import BaseLayout from "@/app/layouts/baseLayout.tsx";
+import {AuthLayout} from "@/app/layouts/authLayout";
 
 interface GuestGuardProps {
   children: ReactElement
@@ -43,15 +44,21 @@ export const appRouter = createBrowserRouter([
         ),
       },
       {
-        path: 'login',
-        element: <LoginPage/>,
-      },
-      {
         path: '*',
         element: (
           <NonFound/>
         ),
       }
+    ]
+  },
+  {
+    element: <AuthLayout />,
+    errorElement: <div>error</div>,
+    children: [
+     {
+        path: 'login',
+        element: <LoginPage/>,
+      },
     ]
   },
 ])

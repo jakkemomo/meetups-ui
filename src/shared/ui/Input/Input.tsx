@@ -1,6 +1,6 @@
 import {FieldPath, UseFormRegisterReturn} from "react-hook-form";
 import {useState} from "react";
-import {LoginValidationSchema} from "@/features/authentication/login/model/LoginFormSchema";
+import {ILoginFormValues, IRegisterFormValues} from "@/shared/types";
 
 interface IInputProps {
   onChange?: () => void;
@@ -11,17 +11,20 @@ interface IInputProps {
   extraClass?: string;
   defaultValue?: string;
   error?: any;
-  hookFormValues: UseFormRegisterReturn<FieldPath<LoginValidationSchema>>;
+  hookFormValues: UseFormRegisterReturn<FieldPath<ILoginFormValues>> | UseFormRegisterReturn<FieldPath<IRegisterFormValues>>;
 }
 
 export function Input({ HTMLType, iconType, placeholder, extraClass, defaultValue, error, hookFormValues }: IInputProps) {
-  const [type, setType] = useState(HTMLType);
+  const [type, setType] = useState<string>(HTMLType);
+  const [passwordIcon, setPasswordIcon] = useState<string>('show-password');
 
   const toggleShowPassword = () => {
     if (type === 'password') {
       setType('text');
+      setPasswordIcon('hide-password');
     } else {
       setType('password');
+      setPasswordIcon('show-password');
     }
   };
 
@@ -46,7 +49,7 @@ export function Input({ HTMLType, iconType, placeholder, extraClass, defaultValu
           {(HTMLType === 'password') &&
             <div
               className='w-6 h-6 bg-center bg-no-repeat cursor-pointer'
-              style={{ backgroundImage: `url("/images/show.svg")` }}
+              style={{ backgroundImage: `url("/images/${passwordIcon}.svg")` }}
               onClick={toggleShowPassword}
             />}
         </div>

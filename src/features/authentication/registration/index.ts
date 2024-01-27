@@ -1,1 +1,1 @@
-export { RegistrationMultiStepFormContainer } from './ui/RegistrationForm';
+export { RegisterMultiStepForm } from './ui/RegisterMultiStepForm';

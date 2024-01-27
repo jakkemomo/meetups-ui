@@ -9,10 +9,10 @@ interface Params {
 }
 
 export const registerThunk = createAsyncThunk<void, Params, { state: RootState }>(
-  'authentication/registration',
+  'authentication/register',
   async (body: Params, { dispatch }) => {
     try {
-      await dispatch(sessionApi.endpoints.registration.initiate(body)).unwrap()
+      await dispatch(sessionApi.endpoints.register.initiate(body)).unwrap()
     } catch (error: any) {
       if (isFetchBaseQueryError(error)) {
         if (typeof error.data === 'string') {

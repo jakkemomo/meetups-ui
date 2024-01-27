@@ -23,7 +23,7 @@ export const sessionApi = baseApi.injectEndpoints({
             }),
             invalidatesTags: [SESSION_TAG],
         }),
-        registration: build.mutation<null, RequestRegistrationBody>({
+        register: build.mutation<null, RequestRegistrationBody>({
             query: (body) => ({
               url: `/signup/`,
               method: 'POST',

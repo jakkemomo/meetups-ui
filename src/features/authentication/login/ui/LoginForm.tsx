@@ -67,7 +67,7 @@ export function LoginForm({onComplete}: ILoginFormProps): ReactElement {
         </form>
         <div className='flex mt-28'>
           <p className='text-neutral-500 text-lg font-normal'>Нет аккаунта?&nbsp;</p>
-          <Link className="text-neutral-500 hover:text-neutral-950 text-lg font-normal" to="/registration">Зарегистрируйтесь</Link>
+          <Link className="text-neutral-500 hover:text-neutral-950 text-lg font-normal" to="/register">Зарегистрируйтесь</Link>
         </div>
       </div>
   )

@@ -4,6 +4,7 @@ import {useAppSelector} from '@/shared/model'
 import HomePage from "@/pages/home/HomePage";
 import NonFound from "@/pages/errors/NonFound";
 import LoginPage from "@/pages/login/LoginPage";
+import RegistrationPage from "@/pages/registration/RegistrationPage";
 import BaseLayout from "@/app/layouts/baseLayout.tsx";
 import {AuthLayout} from "@/app/layouts/authLayout";
 import {selectIsAuthorized} from "@/entities/session";
@@ -55,9 +56,13 @@ export const appRouter = createBrowserRouter([
     element: <AuthLayout />,
     errorElement: <div>error</div>,
     children: [
-     {
+      {
         path: 'login',
         element: <LoginPage/>,
+      },
+      {
+        path: 'registration',
+        element: <RegistrationPage/>,
       },
     ]
   },

@@ -1,0 +1,43 @@
+.header_wrapper {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    height: 60px;
+    margin: 40px 10% 0 10%;
+    z-index: 1;
+
+    svg {
+        margin-top: 18px;
+    }
+}
+
+.header_logo {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: #545454;
+    text-align: center;
+    font-family: Mulish; 
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    border-radius: 60px;
+    background: #F0F0EE;
+    width: 165px;
+    height: 60px;
+    flex-shrink: 0;
+}
+
+.control_panel {
+    display: flex;
+}
+
+.search_field {
+    width: 375px;
+    height: 60px;
+    flex-shrink: 0;
+    border-radius: 40px;
+    background: #F0F0EE;
+    margin-right: 29px;
+}

@@ -4,6 +4,8 @@ import {zodResolver} from "@hookform/resolvers/zod";
 import {loginSchema, LoginValidationSchema} from "@/features/authentication/login/model/LoginFormSchema";
 import {useLoginMutation} from "@/entities/session/api/sessionApi.ts";
 import {Button, Input} from "@/shared";
+import { Link } from "react-router-dom";
+
 
 interface ILoginFormProps {
   onComplete?: () => void;
@@ -65,7 +67,7 @@ export function LoginForm({onComplete}: ILoginFormProps): ReactElement {
         </form>
         <div className='flex mt-28'>
           <p className='text-neutral-500 text-lg font-normal'>Нет аккаунта?&nbsp;</p>
-          <Button HTMLType='button' type='secondary'>Зарегистрируйтесь</Button>
+          <Link className="text-neutral-500 hover:text-neutral-950 text-lg font-normal" to="/registration">Зарегистрируйтесь</Link>
         </div>
       </div>
   )

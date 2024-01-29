@@ -1,5 +1,5 @@
 import {BaseQueryFn, fetchBaseQuery} from '@reduxjs/toolkit/query/react'
-import { config } from '@/shared/config'
+import { config } from '../config'
 import {FetchArgs, FetchBaseQueryError, FetchBaseQueryMeta} from "@reduxjs/toolkit/query";
 
 export const baseQuery: BaseQueryFn<

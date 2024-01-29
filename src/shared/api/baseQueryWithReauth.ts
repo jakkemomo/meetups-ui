@@ -1,49 +1,46 @@
-import { type FetchBaseQueryMeta} from '@reduxjs/toolkit/query'
-import {
-  type FetchArgs,
-  type FetchBaseQueryError,
-} from '@reduxjs/toolkit/query'
-import { baseQuery } from './baseQuery'
-import { invalidateAccessToken } from './invalidateTokenEvent'
-import {
-  type BaseQueryApi,
-} from '@reduxjs/toolkit/query'
+import {type FetchArgs, type FetchBaseQueryError} from '@reduxjs/toolkit/query'
+import {baseQuery} from './baseQuery'
+import {Mutex} from 'async-mutex'
+import {jwtApi} from "@/shared/api/baseApi.ts";
+import {BaseQueryFn} from "@reduxjs/toolkit/query/react";
+import {setAccessToken} from "../model/slice.ts";
+import {AccessToken} from "@/shared/model/types.ts";
 
-const AUTH_ERROR_CODES = new Set([401])
+const mutex: Mutex = new Mutex()
 
-export type QueryReturnValue<T = unknown, E = unknown, M = unknown> = {
-  error: E;
-  data?: undefined;
-  meta?: M;
-} | {
-  error?: undefined;
-  data: T;
-  meta?: M;
-};
 
-export async function baseQueryWithReauth(
-    args: string | FetchArgs,
-    api: BaseQueryApi,
-    extraOptions: {}
-): Promise<QueryReturnValue<unknown, FetchBaseQueryError, FetchBaseQueryMeta>> {
-  const result = await baseQuery(args, api, extraOptions)
-
-  /**
-   * 👇 ATTENTION: We can't use any thunk in direct mode,
-   * coz it's FSD Violation:
-   *
-   * api.dispatch(logoutThunk()) // 👎
-   *
-   * So we dispatch shared event `invalidateAccessToken`,
-   * which has subscribes via redux middleware in other layers.
-   * See example in @/features/authentication/InvalidateAccessToken
-   */
-  if (
-      typeof result.error?.status === 'number' &&
-      AUTH_ERROR_CODES.has(result.error.status)
-  ) {
-    api.dispatch(invalidateAccessToken())
+export const baseQueryWithReauth: BaseQueryFn<
+    string | FetchArgs,
+    unknown,
+    FetchBaseQueryError
+> = async (args, api, extraOptions) => {
+  await mutex.waitForUnlock()
+  console.log(api.endpoint, 'ENDPOINT')
+  let result = await baseQuery(args, api, extraOptions)
+  if (result.error && result.error.status === 401) {
+    // @ts-ignore
+    let refreshToken = api.getState().session.refresh
+    if (!mutex.isLocked() && refreshToken) {
+      const release = await mutex.acquire()
+      try {
+        const refreshedTokenResponse: AccessToken = await api.dispatch(
+            jwtApi.endpoints.refreshAccessToken.initiate({
+              refresh: refreshToken
+            })).unwrap();
+        api.dispatch(setAccessToken(refreshedTokenResponse))
+        // Retry the original query with the new token
+        result = await baseQuery(args, api, extraOptions)
+      } catch (error) {
+        console.error('Error refreshing access token:', error);
+      } finally {
+        // release must be called once the mutex should be released again.
+        release()
+      }
+    } else {
+      // wait until the mutex is available without locking it
+      await mutex.waitForUnlock()
+      result = await baseQuery(args, api, extraOptions)
+    }
   }
-
   return result
 }

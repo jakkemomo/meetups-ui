@@ -1,7 +1,6 @@
 import type {ReactElement} from 'react'
 import {createBrowserRouter, Navigate} from 'react-router-dom'
-import {selectIsAuthorized} from '@/entities/session'
-import {useAppSelector} from '@/shared/model'
+import {selectIsAuthorized, useAppSelector} from '@/shared/model'
 import HomePage from "@/pages/home/HomePage";
 import NonFound from "@/pages/errors/NonFound";
 import LoginPage from "@/pages/login/LoginPage";

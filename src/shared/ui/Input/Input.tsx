@@ -1,6 +1,6 @@
 import {FieldPath, UseFormRegisterReturn} from "react-hook-form";
 import {useState} from "react";
-import {ILoginFormValues, IRegisterFormValues} from "@/shared/types";
+import {ILoginFormValues, IRegisterFormValues} from "../../types";
 
 interface IInputProps {
   onChange?: () => void;

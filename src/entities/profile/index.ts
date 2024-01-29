@@ -1,0 +1,1 @@
+export { profileApi, useProfileDetailsQuery } from './api/profileApi.ts'

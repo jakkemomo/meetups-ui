@@ -1,4 +1,4 @@
-import {Layout} from "@/shared/ui";
+import {Layout} from "@/shared";
 
 
 export function AuthLayout() {

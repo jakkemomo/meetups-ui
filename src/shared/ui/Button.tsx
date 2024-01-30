@@ -11,14 +11,14 @@ interface IButtonProps {
 }
 
 export function Button({
-                         onClick,
-                         children,
-                         type,
-                         extraClass,
-                         disabled,
-                         HTMLType,
-                         iconType
-                       }: IButtonProps) {
+  onClick,
+  children,
+  type,
+  extraClass,
+  disabled,
+  HTMLType,
+  iconType
+}: IButtonProps) {
   return (
     (type === 'primary') ? (
       <button

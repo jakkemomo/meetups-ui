@@ -1,5 +1,5 @@
 import {ReactElement, useCallback} from "react";
-import { Button, Input } from "@/shared/ui";
+import { Button, Input } from "@/shared";
 import {useForm} from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {loginSchema, LoginValidationSchema} from "@/features/authentication/login/model/LoginFormSchema";

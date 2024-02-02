@@ -1,6 +1,6 @@
 import { CalendarCard } from "@/shared/ui/CalendarCard";
 import { SlickSlider } from "@/shared/ui/SlickSlider/SlickSlider";
-import { generateCalendarDays } from "./lib/generateCalendarDays";
+import { generateCalendarDays } from "../lib/generateCalendarDays";
 import { ICardProps } from "@/shared/types";
 
 export function DateSlider() {

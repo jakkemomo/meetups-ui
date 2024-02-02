@@ -1,5 +1,5 @@
 import { ReactElement } from "react"
-import { Button, Input } from "@/shared/ui";
+import { Button, Input } from "@/shared";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { UserDataValidationSchema, userDataSchema } from "@/features/authentication/registration/model/RegisterFormSchema";
@@ -27,7 +27,8 @@ export function DetailForm(): ReactElement {
     }
   
     return (
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form noValidate onSubmit={handleSubmit(onSubmit)} className="flex flex-col">
+        <p className="text-neutral-500 text-lg font-normal mb-[10px]">Отображаемое другим людям</p>
         <Input 
           HTMLType='text'
           iconType='person'
@@ -43,7 +44,7 @@ export function DetailForm(): ReactElement {
           error={errors.email}
           hookFormValues={register('email')}
         />
-        <Button HTMLType='submit' type='primary' extraClass='mt-5' iconType="next">Далее</Button>
+        <Button HTMLType='submit' type='primary' extraClass='mt-10' iconType="next">Далее</Button>
       </form>
     )
   }

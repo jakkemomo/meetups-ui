@@ -23,14 +23,15 @@ export function RegisterMultiStepForm(): ReactElement {
   ]
  
   return (
-    <div className="w-[500px] h-[600px] bg-white flex flex-col items-center justify-center px-90 pb-10 pt-102 rounded-2xl shadow-custom translate-x-10">
-      <p className="text-main-purple text-40 font-bold text-center pb-60">
+    <div className="w-[500px] h-[600px] bg-white flex flex-col justify-between px-90 pb-10 pt-102 rounded-2xl shadow-custom translate-x-10">
+      <p className="text-main-purple text-40 font-bold text-center">
         { titles[selectedIndex] }
       </p>
       { tabs[selectedIndex] }
-      <div className='flex mt-28 border-b border-b-neutral-500'>
+      <div className="h-[50px]"></div>
+      <div className='flex items-center justify-center'>
         <p className='text-neutral-500 text-lg font-normal'>Уже есть аккаунт?&nbsp;</p>
-        <Link className="text-neutral-500 hover:text-neutral-950 text-lg font-normal" to={"/login"}>Войти</Link>
+        <Link className="text-neutral-500 hover:text-neutral-950 text-lg font-normal border-b border-b-neutral-500" to={"/login"}>Войти</Link>
       </div>
     </div>
   );

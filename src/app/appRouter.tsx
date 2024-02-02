@@ -26,7 +26,7 @@ interface AuthGuardProps {
 }
 
 function AuthGuard({children}: AuthGuardProps) {
-  const isAuthorized = useAppSelector(selectIsAuthorized)
+  const isAuthorized = useAppSelector(selectIsAuthorized);
 
   if (isAuthorized) return <Navigate to="/"/>
 
@@ -53,7 +53,7 @@ export const appRouter = createBrowserRouter([
     ]
   },
   {
-    element: <AuthLayout />,
+    element: <AuthGuard><AuthLayout /></AuthGuard>,
     errorElement: <div>error</div>,
     children: [
       {

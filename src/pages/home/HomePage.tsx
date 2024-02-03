@@ -1,11 +1,14 @@
-import {FC} from 'react';
+import { DateSlider } from '@/features/calendarFilter';
+import { HomePageTitle } from '@/features/townFilter';
+import { FC } from 'react';
 
 const HomePage: FC = () => {
-    return (
-        <div className={"h-screen w-screen"}>
-            <p>TEST PAGE</p>
-        </div>
-    );
+  return (
+    <main className={"w-full"}>
+      <HomePageTitle />
+      <DateSlider />
+    </main>
+  );
 }
 
 export default HomePage;

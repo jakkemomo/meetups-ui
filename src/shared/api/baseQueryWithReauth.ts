@@ -13,7 +13,7 @@ export const baseQueryWithReauth: BaseQueryFn<
     FetchBaseQueryError
 > = async (args, api, extraOptions) => {
   await mutex.waitForUnlock()
-  console.log(api.endpoint, 'ENDPOINT')
+  console.debug(api.endpoint, 'ENDPOINT')
   let result = await baseQuery(args, api, extraOptions)
   if (result.error && result.error.status === 401 && api.endpoint !== "refreshAccessToken") {
     let state = api.getState() as RootState

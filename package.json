@@ -15,6 +15,7 @@
     "@hookform/resolvers": "^3.3.4",
     "@react-spectrum/provider": "^3.9.3",
     "@vis.gl/react-google-maps": "^0.4.3",
+    "async-mutex": "^0.4.1",
     "dotenv": "^16.3.1",
     "lodash": "^4.17.21",
     "react": "^18.2.0",

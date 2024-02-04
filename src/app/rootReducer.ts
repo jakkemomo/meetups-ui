@@ -1,8 +1,9 @@
 import { combineReducers } from '@reduxjs/toolkit'
-import { sessionSlice } from '@/entities/session'
-import { baseApi } from '@/shared/api'
+import { baseApi, jwtApi } from '@/shared/api'
+import {SessionSlice} from "@/entities/session/model/slice";
 
 export const rootReducer = combineReducers({
-  [sessionSlice.name]: sessionSlice.reducer,
+  session: SessionSlice.reducer,
   [baseApi.reducerPath]: baseApi.reducer,
+  [jwtApi.reducerPath]: jwtApi.reducer,
 })

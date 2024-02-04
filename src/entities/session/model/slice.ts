@@ -1,50 +1,59 @@
-import { createSlice } from '@reduxjs/toolkit'
-import { sessionApi } from '../api/sessionApi'
+import {createSlice} from '@reduxjs/toolkit'
+import {jwtApi} from "@/shared/api";
+import {sessionApi} from "@/entities/session";
 
 type SessionSliceState =
-  | {
-      access: string,
-      refresh: string,
-      isAuthorized: true
-    }
-  | {
-      isAuthorized: false
-      access?: string
-      refresh?: string,
-    }
-
-const initialState: SessionSliceState = {
-  isAuthorized: false,
-  access: undefined,
-  refresh: undefined,
+    | {
+    access: string,
+    refresh: string,
+    isAuthorized: boolean
+}
+    | {
+    isAuthorized: boolean
+    access?: string
+    refresh?: string,
 }
 
-export const sessionSlice = createSlice({
-  name: 'session',
-  initialState,
-  reducers: {
-    clearSessionData: (state) => {
-      state.access = undefined;
-      state.isAuthorized = false;
-    },
-  },
-  extraReducers: (builder) => {
-    builder.addMatcher(
-      sessionApi.endpoints.login.matchFulfilled,
-      (state: SessionSliceState, { payload }) => {
-        state.isAuthorized = true;
+const initialState: SessionSliceState = {
+    isAuthorized: false,
+    access: undefined,
+    refresh: undefined,
+}
 
-        // say TypeScript that isAuthorized = true
-        if (state.isAuthorized) {
-          state.access = payload.access;
-          state.access = payload.refresh;
-        }
-      }
-    )
-  },
+export const SessionSlice = createSlice({
+    name: 'base',
+    initialState,
+    reducers: {},
+    extraReducers: (builder) => {
+        builder.addMatcher(
+            sessionApi.endpoints.login.matchFulfilled,
+            (state, { payload }) => {
+                state.access = payload.access;
+                state.refresh = payload.refresh;
+                state.isAuthorized = true;
+            }
+        )
+        builder.addMatcher(
+            sessionApi.endpoints.logout.matchFulfilled,
+            (state) => {
+                state.access = undefined;
+                state.refresh = undefined;
+                state.isAuthorized = false;
+            }
+        )
+        builder.addMatcher(
+            jwtApi.endpoints.refreshAccessToken.matchFulfilled,
+            (state, { payload }) => {
+                state.access = payload.access;
+                state.isAuthorized = true;
+            }
+        )
+    },
 })
 
 export const selectIsAuthorized = (state: RootState) =>
-  state.session.isAuthorized
-
-export const { clearSessionData } = sessionSlice.actions
+    state.session.isAuthorized
+export const selectAccessToken = (state: RootState) =>
+    state.session.access
+export const selectRefreshToken = (state: RootState) =>
+    state.session.refresh

@@ -1,4 +1,3 @@
-export {baseApi} from './baseApi'
-export {SESSION_TAG} from './tags'
-export {invalidateAccessToken} from './invalidateTokenEvent'
+export {baseApi, jwtApi} from './baseApi'
+export {SESSION_TAG, PROFILE_TAG} from './tags'
 export {isFetchBaseQueryError} from './isFetchBaseQueryError'

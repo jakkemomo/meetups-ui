@@ -1,6 +1,2 @@
-export {
-  selectIsAuthorized,
-  clearSessionData,
-  sessionSlice,
-} from './model/slice'
 export { sessionApi } from './api/sessionApi'
+export { selectIsAuthorized, selectAccessToken, selectRefreshToken } from './model/slice'

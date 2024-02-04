@@ -7,7 +7,7 @@ interface LayoutProfileCardProps {
     access: string;
 }
 
-export function LayoutProfileCard({access}: LayoutProfileCardProps) {
+export function ProfileButton({access}: LayoutProfileCardProps) {
     let decodedToken = atob(access.split('.')[1])
     let tokenData = JSON.parse(decodedToken)
     var userId: ProfileId = tokenData.user_id

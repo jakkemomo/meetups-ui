@@ -3,7 +3,7 @@ import Logo from "./Logo";
 import React, {ReactElement, useState} from "react";
 import {selectAccessToken, selectIsAuthorized, selectRefreshToken, useAppSelector} from "@/shared/model";
 import {Link} from "react-router-dom";
-import {LayoutProfileCard} from "@/widgets/LayoutProfileCard";
+import {ProfileButton} from "@/widgets/LayoutProfileCard";
 import {LogoutButton} from "@/features/authentication/logout";
 import {Button} from "@/shared";
 
@@ -26,7 +26,7 @@ export function Header(): ReactElement {
             )}
             {refreshToken && accessToken && (
                 <div className="ml-[364.4px]">
-                    <LayoutProfileCard access={accessToken}/>
+                    <ProfileButton access={accessToken}/>
                     <LogoutButton refresh={refreshToken}/>
                 </div>
             )}

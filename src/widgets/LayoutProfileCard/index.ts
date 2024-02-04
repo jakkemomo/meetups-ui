@@ -1,1 +1,1 @@
-export { LayoutProfileCard } from './LayoutProfileCard'
+export { ProfileButton } from './ProfileButton.tsx'

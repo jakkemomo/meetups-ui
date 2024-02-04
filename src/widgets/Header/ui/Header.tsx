@@ -1,11 +1,12 @@
 import {InputWithFilter} from "@/features/globalFilter";
 import Logo from "./Logo";
-import React, {ReactElement, useState} from "react";
-import {selectAccessToken, selectIsAuthorized, selectRefreshToken, useAppSelector} from "@/shared/model";
+import React, {ReactElement} from "react";
 import {Link} from "react-router-dom";
 import {ProfileButton} from "@/widgets/LayoutProfileCard";
 import {LogoutButton} from "@/features/authentication/logout";
 import {Button} from "@/shared";
+import {useAppSelector} from "@/shared/model";
+import {selectAccessToken, selectIsAuthorized, selectRefreshToken} from "@/entities/session";
 
 export function Header(): ReactElement {
     const isAuthorized: boolean = useAppSelector(selectIsAuthorized)

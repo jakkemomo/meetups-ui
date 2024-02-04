@@ -1,11 +1,12 @@
 import type {ReactElement} from 'react'
 import {createBrowserRouter, Navigate} from 'react-router-dom'
-import {selectIsAuthorized, useAppSelector} from '@/shared/model'
+import {useAppSelector} from '@/shared/model'
 import HomePage from "@/pages/home/HomePage";
 import NonFound from "@/pages/errors/NonFound";
 import LoginPage from "@/pages/login/LoginPage";
 import BaseLayout from "@/app/layouts/baseLayout.tsx";
 import {AuthLayout} from "@/app/layouts/authLayout";
+import {selectIsAuthorized} from "@/entities/session";
 
 interface GuestGuardProps {
   children: ReactElement

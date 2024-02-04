@@ -1,7 +1,7 @@
 import {InputWithFilter} from "@/features/globalFilter";
 import Logo from "./Logo";
 import React, {ReactElement} from "react";
-import {Link} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import {ProfileButton} from "@/widgets/LayoutProfileCard";
 import {LogoutButton} from "@/features/authentication/logout";
 import {Button} from "@/shared";
@@ -13,6 +13,14 @@ export function Header(): ReactElement {
     const refreshToken: string | undefined = useAppSelector(selectRefreshToken)
     const accessToken: string | undefined = useAppSelector(selectAccessToken)
 
+    const navigate = useNavigate();
+
+    const onLoginClick = (e: React.MouseEvent<HTMLElement>) => {
+        e.stopPropagation()
+        e.preventDefault()
+        navigate('/login')
+    }
+
     return (
         <header className="w-full flex items-center">
             <Logo/>
@@ -20,9 +28,7 @@ export function Header(): ReactElement {
             {/*<div className="bg-burger-menu-icon w-7 h-[25px] bg-cover bg-no-repeat bg-center ml-[364.4px] cursor-pointer"></div>*/}
             {!isAuthorized && (
                 <div className="ml-[364.4px]">
-                    <Link to="/login">
-                        <Button HTMLType='button' type='secondary'>Войти</Button>
-                    </Link>
+                    <Button HTMLType='button' type='secondary' onClick={onLoginClick}>Войти</Button>
                 </div>
             )}
             {refreshToken && accessToken && (

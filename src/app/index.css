@@ -16,11 +16,12 @@ html,
 body {
   font-family: Mulish, Arial, sans-serif;
   min-height: 100vh;
+  width: 100%;
   padding: 0;
   margin: 0;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
 }
 
 @font-face {

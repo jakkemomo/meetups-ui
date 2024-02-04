@@ -1,9 +1,9 @@
 import {ReactElement} from "react";
-import {Button, Input} from "@/shared/ui";
 import {useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {loginSchema, LoginValidationSchema} from "@/features/authentication/login/model/LoginFormSchema";
 import {useLoginMutation} from "@/entities/session/api/sessionApi.ts";
+import {Button, Input} from "@/shared";
 
 interface ILoginFormProps {
   onComplete?: () => void;

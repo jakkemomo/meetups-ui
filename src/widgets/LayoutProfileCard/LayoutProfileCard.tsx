@@ -1,13 +1,13 @@
 import {useProfileDetailsQuery} from '@/entities/profile'
 import {LogoutButton} from '@/features/authentication/logout'
 import {ProfileId} from "@/entities/profile/model/types.ts";
+import {Button} from "@/shared";
 
 interface LayoutProfileCardProps {
     access: string;
-    refresh: string;
 }
 
-export function LayoutProfileCard({access, refresh}: LayoutProfileCardProps) {
+export function LayoutProfileCard({access}: LayoutProfileCardProps) {
     let decodedToken = atob(access.split('.')[1])
     let tokenData = JSON.parse(decodedToken)
     var userId: ProfileId = tokenData.user_id
@@ -16,14 +16,6 @@ export function LayoutProfileCard({access, refresh}: LayoutProfileCardProps) {
         {skip: !userId}
     )
     return (
-        <div>
-            <div>
-                Привет, <span className="text_bold">{profileData?.username}</span>!&nbsp;
-                <br/>
-                {refresh && (
-                    <LogoutButton refresh={refresh}/>
-                )}
-            </div>
-        </div>
+        <Button HTMLType='button' type='secondary' extraClass='text-base mt-2.5'>{profileData?.username}</Button>
     )
 }

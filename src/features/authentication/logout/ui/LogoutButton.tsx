@@ -1,6 +1,8 @@
 import {Link} from "react-router-dom";
 import {RefreshToken} from "@/shared/model/types.ts";
 import {useLogoutMutation} from "@/entities/session/api/sessionApi.ts";
+import {Button} from "@/shared";
+import React from "react";
 
 
 export function LogoutButton(token: RefreshToken) {
@@ -13,6 +15,8 @@ export function LogoutButton(token: RefreshToken) {
         .catch((error) => {throw new Error(error.data.details)})
   }
   return (
-      <Link to="/" onClick={onConfirmLogout}>Выйти</Link>
+      <Link to="/" onClick={onConfirmLogout}>
+        <Button HTMLType='button' type='secondary'>Выйти</Button>
+      </Link>
   )
 }

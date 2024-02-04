@@ -1,6 +1,6 @@
 import {createSlice} from '@reduxjs/toolkit'
-import {sessionApi} from "entities/session";
 import {jwtApi} from "@/shared/api";
+import {sessionApi} from "@/entities/session";
 
 type SessionSliceState =
     | {

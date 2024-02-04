@@ -1,1 +1,1 @@
-export { sessionApi } from './api/sessionApi.ts'
+export { sessionApi } from './api/sessionApi'

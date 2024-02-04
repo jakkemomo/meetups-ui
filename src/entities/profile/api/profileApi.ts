@@ -1,7 +1,7 @@
 import {baseApi} from '@/shared/api'
-import {ProfileDetailsDto} from "@/entities/profile/api/types.ts";
-import {ProfileDetails, ProfileId} from "@/entities/profile/model/types.ts";
-import {mapProfileDetails} from "@/entities/profile/lib/mapProfileDetails.ts";
+import {ProfileDetailsDto} from "@/entities/profile/api/types";
+import {ProfileDetails, ProfileId} from "@/entities/profile/model/types";
+import {mapProfileDetails} from "@/entities/profile/lib/mapProfileDetails";
 
 
 export const profileApi = baseApi.injectEndpoints({

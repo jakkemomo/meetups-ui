@@ -1,9 +1,9 @@
 import { createApi } from '@reduxjs/toolkit/query/react'
-import { baseQueryWithReauth } from './baseQueryWithReauth'
 import {PROFILE_TAG, SESSION_TAG} from './tags'
-import {baseQuery} from "./baseQuery.ts";
-import {AccessToken, AccessTokenDto, RefreshToken} from "../model/types.ts";
-import {mapAccessToken} from "../lib/mapSession.ts";
+import {baseQuery} from "./baseQuery";
+import {AccessToken, AccessTokenDto, RefreshToken} from "../model/types";
+import {mapAccessToken} from "../lib/mapSession";
+import {baseQueryWithReauth} from "./baseQueryWithReauth";
 
 export const baseApi = createApi({
   tagTypes: [SESSION_TAG, PROFILE_TAG],

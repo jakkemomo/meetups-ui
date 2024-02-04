@@ -1,10 +1,8 @@
 import {type FetchArgs, type FetchBaseQueryError} from '@reduxjs/toolkit/query'
 import {baseQuery} from './baseQuery'
 import {Mutex} from 'async-mutex'
-import {jwtApi} from "@/shared/api/baseApi.ts";
+import {jwtApi} from "@/shared/api/baseApi";
 import {BaseQueryFn} from "@reduxjs/toolkit/query/react";
-import {setAccessToken} from "../model/slice.ts";
-import {AccessToken} from "@/shared/model/types.ts";
 
 const mutex: Mutex = new Mutex()
 
@@ -17,17 +15,16 @@ export const baseQueryWithReauth: BaseQueryFn<
   await mutex.waitForUnlock()
   console.log(api.endpoint, 'ENDPOINT')
   let result = await baseQuery(args, api, extraOptions)
-  if (result.error && result.error.status === 401) {
-    // @ts-ignore
-    let refreshToken = api.getState().session.refresh
+  if (result.error && result.error.status === 401 && api.endpoint !== "refreshAccessToken") {
+    let state = api.getState() as RootState
+    let refreshToken = state.session.refresh
     if (!mutex.isLocked() && refreshToken) {
       const release = await mutex.acquire()
       try {
-        const refreshedTokenResponse: AccessToken = await api.dispatch(
+        await api.dispatch(
             jwtApi.endpoints.refreshAccessToken.initiate({
               refresh: refreshToken
             })).unwrap();
-        api.dispatch(setAccessToken(refreshedTokenResponse))
         // Retry the original query with the new token
         result = await baseQuery(args, api, extraOptions)
       } catch (error) {

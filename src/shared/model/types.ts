@@ -16,10 +16,6 @@ export interface SessionDto {
   refresh: string
 }
 
-export interface RequestLoginBody {
-  email: string;
-  password: string;
-}
 
 export interface AccessTokenDto {
   access: string,

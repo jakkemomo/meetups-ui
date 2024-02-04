@@ -1,1 +1,1 @@
-export { LogoutButton } from './ui/LogoutButton/LogoutButton'
+export { LogoutButton } from './ui/LogoutButton.tsx'

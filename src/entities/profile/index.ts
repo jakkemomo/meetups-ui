@@ -1,1 +1,1 @@
-export { profileApi, useProfileDetailsQuery } from './api/profileApi.ts'
+export { profileApi, useProfileDetailsQuery } from './api/profileApi'

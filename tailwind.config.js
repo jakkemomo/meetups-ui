@@ -22,8 +22,10 @@ module.exports = {
         '18': '18px'
       },
       height: {
+        '48px': '48px',
         '50': '50px',
         '700': '700px',
+        '600': '600px'
       },
       colors: {
         'main-purple': 'rgb(87, 84, 198)',
@@ -31,6 +33,7 @@ module.exports = {
         'main-dark-blue': 'rgb(49, 46, 112)',
         'light-gray': 'rgb(255, 250, 250)',
         'hover-pink': 'rgb(188, 115, 206)',
+        'input-error': 'rgb(202, 106, 106)'
         'light-gray': 'rgb(240, 240, 238)',
         'transparent-gray': 'rgb(255, 250, 250)',
         'text-gray': 'rgb(84, 84, 84)',

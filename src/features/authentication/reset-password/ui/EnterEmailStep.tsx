@@ -1,5 +1,5 @@
 import {ReactElement, useCallback} from "react";
-import { Button, Input } from "@/shared/ui";
+import {Button, Input, InputErrorMessage} from "@/shared/ui";
 import {useForm} from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
@@ -31,6 +31,7 @@ export function EnterEmailStep(): ReactElement  {
   const handlePrevStep = () => {
     navigate('/login');
   }
+
   const onSubmit = useCallback(({email}: EmailValidationSchema) => {
     postResetPassword({email})
       .unwrap()
@@ -41,9 +42,8 @@ export function EnterEmailStep(): ReactElement  {
   }, []);
 
   return (
-    <div className="bg-white flex flex-col items-center justify-center pb-10 pt-30 px-30 rounded-2xl shadow-custom translate-x-10 w-500">
-      <Button type='back' HTMLType='button' onClick={handlePrevStep} extraClass='self-start'/>
-      <p className="text-main-purple text-40 font-bold pb-60 pt-7">
+    <div className="bg-white flex flex-col items-center justify-center pb-9 pt-102 px-30 rounded-2xl shadow-custom translate-x-10 w-500 h-600">
+      <p className="text-main-purple text-40 font-bold pb-14">
         Забыли пароль?
       </p>
       <form noValidate onSubmit={handleSubmit(onSubmit)} className="flex flex-col">
@@ -52,20 +52,23 @@ export function EnterEmailStep(): ReactElement  {
           HTMLType='email'
           iconType='mail'
           placeholder='Почта'
-          error={errors.email}
           hookFormValues={register('email')}
+          extraClass='mb-2.5'
+          error={errors.email}
         />
+        <InputErrorMessage error={errors.email} />
         <Button
           HTMLType='submit'
           type='primary'
-          extraClass='mt-50'
+          extraClass='mt-5'
           iconType='next'
           disabled={!isValid && isSubmitted}
         >
           Далее
         </Button>
+        <Button type='secondary' HTMLType='button' onClick={handlePrevStep} extraClass='mt-6'>Назад</Button>
       </form>
-      <div className='flex mt-107 border-b border-neutral-500'>
+      <div className='flex pt-60 border-b border-neutral-500'>
         <p className='text-neutral-500 text-lg font-normal'>Нет аккаунта?&nbsp;</p>
         <Link to='/register' className="text-neutral-500 hover:text-neutral-950 text-lg font-normal">Зарегистрируйтесь</Link>
       </div>

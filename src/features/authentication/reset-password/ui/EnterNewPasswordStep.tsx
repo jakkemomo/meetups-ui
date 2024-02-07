@@ -1,5 +1,5 @@
 import {ReactElement, useCallback} from "react";
-import { Button, Input } from "@/shared/ui";
+import {Button, Input, InputErrorMessage} from "@/shared/ui";
 import {useForm} from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
@@ -44,30 +44,26 @@ export function EnterNewPasswordStep({onComplete}: ILoginFormProps): ReactElemen
       .catch(err => console.log(err))
   }, [searchParams]);
 
-  const onPrevClick = () => {
-    navigate('/password/reset/');
-  }
-
   return (
-    <div className="bg-white flex flex-col items-center justify-center pb-10 pt-30 px-30 pt-102 rounded-2xl shadow-custom translate-x-10 w-500">
-      <Button type='back' HTMLType='button' extraClass='self-start' onClick={onPrevClick}/>
-      <p className="text-main-purple text-40 font-bold pb-12 pt-7">
+    <div className="bg-white flex flex-col items-center justify-center pb-9 pt-102 px-30 rounded-2xl shadow-custom translate-x-10 w-500 h-600">
+      <p className="text-main-purple text-40 font-bold pb-10">
         Новый пароль
       </p>
       <form noValidate onSubmit={handleSubmit(onSubmit)} className="flex flex-col">
-        <p className='text-neutral-500 text-lg font-normal w-80 mb-5'>Придумайте уникальный пароль</p>
+        <p className='text-neutral-500 text-lg font-normal mb-3.5'>Придумайте уникальный пароль</p>
         <Input
           HTMLType='password'
           iconType='password'
           placeholder='Пароль'
-          error={errors.password}
           hookFormValues={register('password')}
+          error={errors.password}
         />
-        <p className='text-neutral-500 text-lg font-normal w-80 pt-5'>Минимум 6 символов</p>
+        <p className='text-neutral-500 text-lg font-normal mt-18 pb-3'>Минимум 6 символов</p>
+        <InputErrorMessage error={errors.password} />
         <Button
           HTMLType='submit'
           type='primary'
-          extraClass='mt-11'
+          extraClass='mt-6'
           disabled={!isValid && isSubmitted}
         >
           Войти

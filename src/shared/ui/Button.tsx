@@ -3,7 +3,7 @@ import React, { type ReactNode } from 'react';
 interface IButtonProps {
   onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
   children?: ReactNode;
-  type: 'primary' | 'back';
+  type: 'primary' | 'secondary' | 'back';
   HTMLType: 'submit' | 'button' | 'reset';
   extraClass?: string;
   iconType?: 'next';
@@ -39,9 +39,9 @@ export function Button({
       <button
         type={HTMLType}
         onClick={onClick}
-        className={`bg-main-purple hover:bg-hover-pink w-11 h-11 rounded-full flex justify-center items-center ${extraClass}`}
+        className={`bg-transparent text-neutral-500 text-lg font-normal hover:text-neutral-950 ${extraClass}`}
       >
-        <img src={"/images/left-arrow.svg"} alt='Назад'/>
+        <p>{children}</p>
       </button>
     )
   )

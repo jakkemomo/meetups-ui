@@ -8,7 +8,7 @@ import {ValueTextField} from "@/shared/types";
 import {setFormValuesInStorage} from "@/shared/lib/saveAndGetFormValues";
 import {useFilledValue} from "@/shared/lib/hooks";
 import {useLoginMutation} from "@/entities/session/api/sessionApi.ts";
-import {Button, Input} from "@/shared";
+import {Button, Input, InputErrorMessage} from "@/shared";
 
 
 interface ILoginFormProps {
@@ -48,8 +48,8 @@ export function LoginForm({onComplete}: ILoginFormProps): ReactElement {
   }, [navigate])
 
   return (
-    <div className="bg-white flex flex-col items-center justify-center px-90 pb-10 pt-102 rounded-2xl shadow-custom translate-x-10">
-      <p className="text-main-purple text-40 font-bold pb-60">
+    <div className="bg-white flex flex-col items-center justify-center px-90 pb-9 pt-102 rounded-2xl shadow-custom translate-x-10 h-600">
+      <p className="text-main-purple text-40 font-bold pb-9">
         Вход в Аккаунт
       </p>
       <form noValidate onSubmit={handleSubmit(onSubmit)} className="flex flex-col">
@@ -57,28 +57,29 @@ export function LoginForm({onComplete}: ILoginFormProps): ReactElement {
           HTMLType='email'
           iconType='mail'
           placeholder='Почта'
-          error={errors.email}
           hookFormValues={register('email')}
+          error={errors.email}
         />
         <Input
-          extraClass='mt-18'
+          extraClass='mt-3.5'
           HTMLType='password'
           iconType='password'
           placeholder='Пароль'
-          error={errors.password}
           hookFormValues={register('password')}
+          error={errors.password}
         />
         <Link
           to='/password/reset/'
-          className="text-neutral-500 hover:text-neutral-950 font-normal text-base mt-2.5"
+          className="text-neutral-500 hover:text-neutral-950 font-normal text-base mt-2.5 mb-2"
           onClick={onResetPasswordClick}
         >
           Забыли пароль?
         </Link>
+        <InputErrorMessage error={errors.email ?? errors.password}/>
         <Button
           HTMLType='submit'
           type='primary'
-          extraClass='mt-5'
+          extraClass='mt-4'
           disabled={!isValid && isSubmitted}
         >
           Войти

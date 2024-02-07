@@ -1,0 +1,1 @@
+export { EventSlider } from './ui/EventSlider';

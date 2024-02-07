@@ -3,22 +3,23 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { SlickSliderArrow } from "./SlickSliderArrow";
-import { ISlickSliderSettings } from "@/shared/types";
+import { ArrowsExtraClasses, ISlickSliderSettings } from "@/shared/types";
 
 interface ISlickSliderProps {
   children: ReactElement[];
   extraSettings?: ISlickSliderSettings;
+  arrowsExtraClasses: ArrowsExtraClasses;
 }
 
-export function SlickSlider({ children, extraSettings }: ISlickSliderProps): ReactElement {
+export function SlickSlider({ children, extraSettings, arrowsExtraClasses }: ISlickSliderProps): ReactElement {
   const [slide, setSlide] = useState(0);
 
   // About Settings for react-slick: https://react-slick.neostack.com/docs/api
   const settings = {
     dots: false,
     infinite: false,
-    nextArrow: <SlickSliderArrow previous={false} />,
-    prevArrow: <SlickSliderArrow previous={true} slide={slide} />,
+    nextArrow: <SlickSliderArrow previous={false} extraClasses={arrowsExtraClasses} />,
+    prevArrow: <SlickSliderArrow previous={true} slide={slide} extraClasses={arrowsExtraClasses} />,
     afterChange: (current: number) => setSlide(current),
     ...extraSettings
   }

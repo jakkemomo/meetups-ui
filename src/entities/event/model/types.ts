@@ -10,9 +10,9 @@ export interface IEvent {
   image_url: string,
   description: string,
   start_date: string,
-  end_date: string,
+  end_date: string | null,
   tags: IEventTag[] | [],
   address: string,
-  category: number | null,
+  category: IEventTag | null,
   participants_number: number,
 }

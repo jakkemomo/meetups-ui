@@ -11,7 +11,9 @@ const HomePage: FC = () => {
     <main className="w-full">
       <HomePageTitle />
       <DateSlider />
-      <EventsList listTitle="Ближайшие" isLoading={isLoading} data={events.results} />
+      <EventsList listTitle="Ближайшие" isLoading={isLoading} data={events.results} extraClasses="mt-14" />
+      <EventsList listTitle="Рекомендации для Вас" isLoading={isLoading} data={events.results} extraClasses="mt-[50px]" />
+      <EventsList listTitle="Топ мероприятий" isLoading={isLoading} data={events.results} extraClasses="mt-[50px]" />
     </main>
   );
 }

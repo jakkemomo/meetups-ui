@@ -1,17 +1,13 @@
 import { ReactElement } from "react";
 import { IEvent } from "../model/types";
+import { getDateAndTime } from "../lib/getDateAndTime";
 
 export interface IEventCard {
   event: IEvent;
 }
 
 export function EventCard({ event }: IEventCard): ReactElement {
-  const eventDate = new Date(event.start_date).toLocaleString('default', {
-    month: 'long',
-    day: 'numeric'
-  });
-
-  const eventTime = `${new Date(event.start_date).getHours()}:${new Date(event.start_date).getMinutes() ? new Date(event.start_date).getMinutes() : "00"}`;
+  const { eventDate, eventTime } = getDateAndTime(event.start_date);
 
   return (
     <div className="event-card flex flex-col max-w-[270px] mr-[45px]">
@@ -21,7 +17,7 @@ export function EventCard({ event }: IEventCard): ReactElement {
       </div>
       <figure className="flex flex-col cursor-pointer rounded-12 max-h-[188px] mt-[7px]">
         <img className="rounded-t-12 h-[143px] object-cover" src={`https://storage.googleapis.com/meetups-dev/media/${event.image_url}`} alt={`Изображение ивента ${event.name}`} />
-        <div className={`h-[45px] bg-gray rounded-b-12 flex items-center justify-center pl-[16px] pr-[7px] relative ${event.name.length > 20 && "before:w-[60px] before:rounded-b-[12px] before:absolute before:right-0 before:h-full before:bg-text-fade-out"}`}>
+        <div className={`h-[45px] bg-gray rounded-b-12 flex items-center justify-center pl-[16px] pr-[7px] relative ${event.name.length > 21 && "before:w-[60px] before:rounded-b-[12px] before:absolute before:right-0 before:h-full before:bg-text-fade-out"}`}>
           <figcaption className="capitalize text-[20px] font-bold text-text-black overflow-hidden whitespace-nowrap text-clip">{event.name}</figcaption>
         </div>
       </figure>

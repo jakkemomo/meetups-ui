@@ -8,7 +8,7 @@ import {ValueTextField} from "@/shared/types";
 import {setFormValuesInStorage} from "@/shared/lib/saveAndGetFormValues";
 import {useFilledValue} from "@/shared/lib/hooks";
 import {useLoginMutation} from "@/entities/session/api/sessionApi.ts";
-import {Button, Input, InputErrorMessage} from "@/shared";
+import {FormWrapper, Button, Input, InputErrorMessage} from "@/shared";
 
 
 interface ILoginFormProps {
@@ -48,25 +48,22 @@ export function LoginForm({onComplete}: ILoginFormProps): ReactElement {
   }, [navigate])
 
   return (
-    <div className="bg-white flex flex-col items-center justify-center px-90 pb-9 pt-102 rounded-2xl shadow-custom translate-x-10 h-600">
-      <p className="text-main-purple text-40 font-bold pb-9">
-        Вход в Аккаунт
-      </p>
+    <FormWrapper redirectType='register'>
       <form noValidate onSubmit={handleSubmit(onSubmit)} className="flex flex-col">
         <Input
           HTMLType='email'
           iconType='mail'
           placeholder='Почта'
-          hookFormValues={register('email')}
           error={errors.email}
+          hookFormValues={register('email')}
         />
         <Input
-          extraClass='mt-3.5'
+          extraClass='mt-18'
           HTMLType='password'
           iconType='password'
           placeholder='Пароль'
-          hookFormValues={register('password')}
           error={errors.password}
+          hookFormValues={register('password')}
         />
         <Link
           to='/password/reset/'
@@ -75,20 +72,15 @@ export function LoginForm({onComplete}: ILoginFormProps): ReactElement {
         >
           Забыли пароль?
         </Link>
-        <InputErrorMessage error={errors.email ?? errors.password}/>
         <Button
           HTMLType='submit'
           type='primary'
-          extraClass='mt-4'
-          disabled={!isValid && isSubmitted}
+          extraClass='mt-5'
+          disabled={!isDirty || isSubmitting}
         >
           Войти
         </Button>
       </form>
-      <div className='flex mt-107 border-b border-neutral-500'>
-        <p className='text-neutral-500 text-lg font-normal'>Нет аккаунта?&nbsp;</p>
-        <Link to='/register' className="text-neutral-500 hover:text-neutral-950 text-lg font-normal">Зарегистрируйтесь</Link>
-      </div>
-    </div>
+    </FormWrapper>
   )
 }

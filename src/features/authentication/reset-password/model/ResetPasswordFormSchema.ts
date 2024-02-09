@@ -1,8 +1,8 @@
-import { z } from 'zod'
+import {z} from 'zod'
 
 export const emailSchema = z.object({
   email: z
-    .string()
+    .string({ invalid_type_error: 'Обязательное поле', required_error: 'Обязательное поле'})
     .min(1, { message: 'Обязательное поле' })
     .email({ message: 'Неверный формат', }),
 })

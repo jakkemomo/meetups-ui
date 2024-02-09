@@ -1,5 +1,4 @@
 import {useProfileDetailsQuery} from '@/entities/profile'
-import {LogoutButton} from '@/features/authentication/logout'
 import {ProfileId} from "@/entities/profile/model/types.ts";
 import {Button} from "@/shared";
 

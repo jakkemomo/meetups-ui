@@ -1,9 +1,9 @@
-import { ReactElement } from "react"
-import { useAppSelector } from "@/shared/model";
-import { selectTabId } from "../model/formState";
-import { DetailForm } from "./DetailForm";
-import { PasswordForm } from "./PasswordForm";
-import { CheckEmail } from "./CheckEmail";
+import {ReactElement} from "react"
+import {useAppSelector} from "@/shared/model";
+import {selectTabId} from "../model/formState";
+import {DetailForm} from "./DetailForm";
+import {PasswordForm} from "./PasswordForm";
+import {CheckEmail} from "./CheckEmail";
 import {FormWrapper} from "@/shared/ui";
 
 

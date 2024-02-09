@@ -1,6 +1,6 @@
-import { ReactElement } from "react";
-import { IEvent } from "../model/types";
-import { getDateAndTime } from "../lib/getDateAndTime";
+import { ReactElement} from "react";
+import {IEvent} from "../model/types";
+import {getDateAndTime} from "../lib/getDateAndTime";
 
 export interface IEventCard {
   event: IEvent;

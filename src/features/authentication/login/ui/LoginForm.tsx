@@ -8,8 +8,7 @@ import {ValueTextField} from "@/shared/types";
 import {setFormValuesInStorage} from "@/shared/lib/saveAndGetFormValues";
 import {useFilledValue} from "@/shared/lib/hooks";
 import {useLoginMutation} from "@/entities/session/api/sessionApi.ts";
-import {FormWrapper, Button, Input, InputErrorMessage} from "@/shared/ui";
-import {useMediaQuery} from "@uidotdev/usehooks";
+import {Button, FormWrapper, Input, InputErrorMessage} from "@/shared/ui";
 
 
 interface ILoginFormProps {

@@ -1,7 +1,6 @@
 import {FieldPath, UseFormRegisterReturn} from "react-hook-form";
 import {useState} from "react";
 import {ILoginFormValues, IRegisterFormValues} from "@/shared/types";
-import {useMediaQuery} from "@uidotdev/usehooks";
 
 interface IInputProps {
   onChange?: () => void;
@@ -18,7 +17,6 @@ interface IInputProps {
 export function Input({ HTMLType, iconType, placeholder, extraClass, defaultValue, error, hookFormValues }: IInputProps) {
   const [type, setType] = useState<string>(HTMLType);
   const [passwordIcon, setPasswordIcon] = useState<string>('show-password');
-  const isMobileDevice = useMediaQuery("only screen and (max-width : 768px)");
 
   const toggleShowPassword = () => {
     if (type === 'password') {
@@ -32,7 +30,7 @@ export function Input({ HTMLType, iconType, placeholder, extraClass, defaultValu
 
   return (
     <>
-      <div className={`bg-custom-gray rounded-[10px] border ${isMobileDevice ? 'w-[316px]' : 'w-80'} ${extraClass} ${error ? 'border-input-error' : 'border-transparent'}`}>
+      <div className={`bg-custom-gray rounded-[10px] border w-[316px] md:w-80 ${extraClass} ${error ? 'border-input-error' : 'border-transparent'}`}>
         <div className='flex items-center w-full h-48px overflow-hidden p-3.5'>
           {iconType &&
             <div
@@ -45,7 +43,7 @@ export function Input({ HTMLType, iconType, placeholder, extraClass, defaultValu
             defaultValue={defaultValue}
             placeholder={placeholder}
             aria-invalid={error ? 'true' : 'false'}
-            className={`h-full w-full outline-none text-black bg-inherit px-3 font-normal ${isMobileDevice ? 'text-base' : 'text-lg'}`}
+            className={`h-full w-full outline-none text-black bg-inherit px-3 font-normal text-base md:text-lg`}
           />
           {(HTMLType === 'password') &&
             <div

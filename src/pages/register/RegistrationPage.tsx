@@ -1,9 +1,8 @@
-
-import { RegisterMultiStepForm } from "@/features/authentication/registration";
-import { selectBGCard } from "@/features/authentication/registration/model/formState";
-import { useAppSelector } from "@/shared/model";
-import { BackgroundCard } from "@/shared";
-import { ReactElement } from "react";
+import {RegisterMultiStepForm} from "@/features/authentication/registration";
+import {selectBGCard} from "@/features/authentication/registration/model/formState";
+import {useAppSelector} from "@/shared/model";
+import {BackgroundCard} from "@/shared";
+import {ReactElement} from "react";
 
 
 export default function RegistrationPage(): ReactElement {

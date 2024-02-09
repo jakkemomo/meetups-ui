@@ -1,4 +1,4 @@
-import { createApi } from '@reduxjs/toolkit/query/react'
+import {createApi} from '@reduxjs/toolkit/query/react'
 import {PROFILE_TAG, SESSION_TAG} from './tags'
 import {baseQuery} from "./baseQuery";
 import {AccessToken, AccessTokenDto, RefreshToken} from "../model/types";

@@ -20,14 +20,6 @@ export function FormWrapper({children, headerText, redirectType}: ILoginFormProp
       mobile: "items-center justify-center relative z-10 w-full bg-transparent",
       desktop: "justify-between pb-[38px] w-500 h-600 pt-102 rounded-2xl shadow-custom translate-x-10 bg-white"
     },
-    header: {
-      mobile: "text-38 pb-10",
-      desktop: "text-40 pb-[37px]"
-    },
-    fonts: {
-      mobile: "text-base",
-      desktop: "text-lg"
-    }
   }
 
   return (

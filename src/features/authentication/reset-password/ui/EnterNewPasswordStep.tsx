@@ -1,7 +1,7 @@
 import {ReactElement, useCallback} from "react";
 import {Button, FormWrapper, Input, InputErrorMessage} from "@/shared/ui";
 import {useForm} from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
+import {zodResolver} from "@hookform/resolvers/zod";
 import {
   passwordSchema,
   PasswordValidationSchema

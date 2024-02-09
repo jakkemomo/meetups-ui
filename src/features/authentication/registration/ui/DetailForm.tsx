@@ -1,8 +1,11 @@
-import { ReactElement } from "react"
+import {ReactElement} from "react"
 import {Button, Input, InputErrorMessage} from "@/shared";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { UserDataValidationSchema, userDataSchema } from "@/features/authentication/registration/model/RegisterFormSchema";
+import {useForm} from "react-hook-form";
+import {zodResolver} from "@hookform/resolvers/zod";
+import {
+  userDataSchema,
+  UserDataValidationSchema
+} from "@/features/authentication/registration/model/RegisterFormSchema";
 import {useAppDispatch, useAppSelector} from "@/shared/model";
 import {selectUserData, userDataFilled} from "../model/formState";
 

@@ -1,11 +1,11 @@
-import { ReactElement } from "react"
+import {ReactElement} from "react"
 import {Button, Input, InputErrorMessage} from "@/shared";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useAppDispatch, useAppSelector } from "@/shared/model";
-import { PasswordValidationSchema, passwordSchema } from "../model/RegisterFormSchema";
-import { registerThunk } from "../model/register";
-import { goBack, selectUserData, passwordFilled } from "../model/formState";
+import {useForm} from "react-hook-form";
+import {zodResolver} from "@hookform/resolvers/zod";
+import {useAppDispatch, useAppSelector} from "@/shared/model";
+import {passwordSchema, PasswordValidationSchema} from "../model/RegisterFormSchema";
+import {registerThunk} from "../model/register";
+import {goBack, passwordFilled, selectUserData} from "../model/formState";
 
 
 export function PasswordForm(): ReactElement {

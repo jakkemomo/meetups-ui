@@ -1,4 +1,4 @@
-import React, { type ReactNode } from 'react';
+import React, {type ReactNode} from 'react';
 import {useMediaQuery} from "@uidotdev/usehooks";
 
 interface IButtonProps {

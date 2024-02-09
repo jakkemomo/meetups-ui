@@ -1,8 +1,6 @@
 import {UseFormSetValue} from "react-hook-form";
 import {useEffect} from "react";
-import {
-  getFormValuesFromStorage,
-} from "@/shared/lib/saveAndGetFormValues";
+import {getFormValuesFromStorage,} from "@/shared/lib/saveAndGetFormValues";
 import {ValueTextField} from "@/shared/types";
 
 type Prop = (formKey: string, setValue: UseFormSetValue<any>, fieldArray: ValueTextField[]) => void

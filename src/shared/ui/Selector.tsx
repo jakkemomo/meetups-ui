@@ -1,5 +1,5 @@
-import { ReactElement } from "react";
-import { ISelectorOptions } from "../types";
+import {ReactElement} from "react";
+import {ISelectorOptions} from "../types";
 
 interface ISelectorProps {
   options: ISelectorOptions[];

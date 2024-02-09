@@ -1,4 +1,4 @@
-import { ICardProps } from "@/shared/types";
+import {ICardProps} from "@/shared/types";
 
 interface IFormatedWeekDays {
   "0": string;

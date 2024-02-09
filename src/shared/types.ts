@@ -31,3 +31,8 @@ export interface ICardProps {
   date: string | number;
   weekDay: string;
 }
+
+export interface ArrowsExtraClasses {
+  rightArrow: string;
+  leftArrow: string;
+}

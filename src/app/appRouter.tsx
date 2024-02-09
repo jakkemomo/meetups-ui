@@ -7,6 +7,7 @@ import LoginPage from "@/pages/login/LoginPage";
 import RegistrationPage from "@/pages/register/RegistrationPage";
 import BaseLayout from "@/app/layouts/baseLayout.tsx";
 import {AuthLayout} from "@/app/layouts/authLayout";
+import ResetPasswordPage from "@/pages/reset-password/ResetPasswordPage";
 import {selectIsAuthorized} from "@/entities/session";
 
 interface GuestGuardProps {
@@ -63,6 +64,14 @@ export const appRouter = createBrowserRouter([
       {
         path: 'register',
         element: <RegistrationPage/>,
+      },
+      {
+        path: 'password/reset/',
+        element: <ResetPasswordPage type='ENTER_EMAIL'/>,
+      },
+      {
+        path: 'password/reset/confirm/',
+        element: <ResetPasswordPage type='ENTER_NEW_PASSWORD'/>,
       },
     ]
   },

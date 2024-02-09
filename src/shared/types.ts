@@ -9,6 +9,12 @@ export interface IRegisterFormValues {
   password: string;
 }
 
+export enum ValueTextField {
+  USERNAME = "username",
+  EMAIL = "email",
+  PASSWORD = "password",
+}
+
 export interface ISelectorOptions {
   value: string;
   name: string;

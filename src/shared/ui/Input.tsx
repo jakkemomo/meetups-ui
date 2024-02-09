@@ -1,6 +1,7 @@
 import {FieldPath, UseFormRegisterReturn} from "react-hook-form";
 import {useState} from "react";
 import {ILoginFormValues, IRegisterFormValues} from "@/shared/types";
+import {useMediaQuery} from "@uidotdev/usehooks";
 
 interface IInputProps {
   onChange?: () => void;
@@ -11,12 +12,13 @@ interface IInputProps {
   extraClass?: string;
   defaultValue?: string;
   error?: any;
-  hookFormValues?: UseFormRegisterReturn<FieldPath<ILoginFormValues>> | UseFormRegisterReturn<FieldPath<IRegisterFormValues>>;
+  hookFormValues?: UseFormRegisterReturn<FieldPath<ILoginFormValues>>;
 }
 
 export function Input({ HTMLType, iconType, placeholder, extraClass, defaultValue, error, hookFormValues }: IInputProps) {
   const [type, setType] = useState<string>(HTMLType);
   const [passwordIcon, setPasswordIcon] = useState<string>('show-password');
+  const isMobileDevice = useMediaQuery("only screen and (max-width : 768px)");
 
   const toggleShowPassword = () => {
     if (type === 'password') {
@@ -30,7 +32,7 @@ export function Input({ HTMLType, iconType, placeholder, extraClass, defaultValu
 
   return (
     <>
-      <div className={`w-80 bg-custom-gray rounded-[10px] border ${extraClass} ${error ? 'border-input-error' : 'border-transparent'}`}>
+      <div className={`bg-custom-gray rounded-[10px] border ${isMobileDevice ? 'w-[316px]' : 'w-80'} ${extraClass} ${error ? 'border-input-error' : 'border-transparent'}`}>
         <div className='flex items-center w-full h-48px overflow-hidden p-3.5'>
           {iconType &&
             <div
@@ -43,7 +45,7 @@ export function Input({ HTMLType, iconType, placeholder, extraClass, defaultValu
             defaultValue={defaultValue}
             placeholder={placeholder}
             aria-invalid={error ? 'true' : 'false'}
-            className='h-full w-full text-black bg-inherit px-3 text-lg font-normal outline-none'
+            className={`h-full w-full outline-none text-black bg-inherit px-3 font-normal ${isMobileDevice ? 'text-base' : 'text-lg'}`}
           />
           {(HTMLType === 'password') &&
             <div

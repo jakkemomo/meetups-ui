@@ -14,6 +14,7 @@
     "@ebay/nice-modal-react": "^1.2.13",
     "@hookform/resolvers": "^3.3.4",
     "@react-spectrum/provider": "^3.9.3",
+    "@uidotdev/usehooks": "^2.4.1",
     "@vis.gl/react-google-maps": "^0.4.3",
     "async-mutex": "^0.4.1",
     "dotenv": "^16.3.1",

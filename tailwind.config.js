@@ -31,9 +31,8 @@ module.exports = {
         'main-purple': 'rgb(87, 84, 198)',
         'custom-gray': 'rgb(237, 237, 237)',
         'main-dark-blue': 'rgb(49, 46, 112)',
-        'light-gray': 'rgb(255, 250, 250)',
         'hover-pink': 'rgb(188, 115, 206)',
-        'input-error': 'rgb(202, 106, 106)'
+        'input-error': 'rgb(202, 106, 106)',
         'light-gray': 'rgb(240, 240, 238)',
         'transparent-gray': 'rgb(255, 250, 250)',
         'text-gray': 'rgb(84, 84, 84)',

@@ -1,6 +1,6 @@
-export { InputErrorMessage } from "./InputErrorMessage/InputErrorMessage";
-export { Button } from './Button/Button'
-export { Input } from './Input/Input'
-export { Modal } from './Modal/Modal'
-export { BackgroundCard } from './BackgroundCard/BackgroundCard'
-export { Layout } from './Layout/Layout'
+export { InputErrorMessage } from "./InputErrorMessage";
+export { Button } from './Button';
+export { Input } from './Input';
+export { Modal } from './Modal';
+export { BackgroundCard } from './BackgroundCard';
+export { Layout } from './Layout'

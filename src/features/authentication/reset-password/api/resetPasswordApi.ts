@@ -1,33 +1,28 @@
 import {baseApi} from "@/shared/api";
 import {
   IConfirmResetPasswordParams,
-  IConfirmResetPasswordResponse,
   IResetPasswordParams,
-  IResetPasswordResponse
+  TResetPasswordResponse
 } from "@/features/authentication/reset-password/model/types";
-import {
-  mapEmail,
-  mapPassword,
-} from "@/features/authentication/reset-password/lib/mapResponse";
 
 export const passwordApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
-    resetPassword: build.mutation<IResetPasswordResponse, IResetPasswordParams>({
+    resetPassword: build.mutation<TResetPasswordResponse, IResetPasswordParams>({
       query: (body) => ({
         url: `/password/reset/`,
         method: 'POST',
         body,
       }),
-      transformResponse: (response: IResetPasswordResponse) => mapEmail(response),
+      transformResponse: (response: TResetPasswordResponse) => response,
     }),
-    confirmResetPassword: build.mutation<IConfirmResetPasswordResponse, IConfirmResetPasswordParams>({
+    confirmResetPassword: build.mutation<TResetPasswordResponse, IConfirmResetPasswordParams>({
       query: ({password, token}) => ({
         url: `/password/reset/confirm/`,
         method: 'POST',
         body: { password: password },
         params: { token }
       }),
-      transformResponse: (response: IConfirmResetPasswordResponse) => mapPassword(response),
+      transformResponse: (response: TResetPasswordResponse) => response,
     }),
   }),
 })

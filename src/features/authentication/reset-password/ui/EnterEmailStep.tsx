@@ -12,7 +12,8 @@ import {useResetPasswordMutation} from "@/features/authentication/reset-password
 import {resetPasswordPath} from "@/features/authentication/reset-password/model/constants";
 import {ValueTextField} from "@/shared/types";
 import {AUTH_FORM_VALUES_KEY} from "@/features/authentication/lib/constants";
-import {useChangeStep, useFilledValue} from "@/shared/lib/hooks";
+import {useFilledValue} from "@/shared/lib/hooks";
+import {useChangeStep} from "@/features/authentication/reset-password/lib/hooks/useChangeStep";
 
 export function EnterEmailStep(): ReactElement  {
   const {

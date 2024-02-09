@@ -12,7 +12,7 @@ interface IInputProps {
   extraClass?: string;
   defaultValue?: string;
   error?: any;
-  hookFormValues?: UseFormRegisterReturn<FieldPath<ILoginFormValues>>;
+  hookFormValues?: UseFormRegisterReturn<FieldPath<ILoginFormValues>> | UseFormRegisterReturn<FieldPath<IRegisterFormValues>>;
 }
 
 export function Input({ HTMLType, iconType, placeholder, extraClass, defaultValue, error, hookFormValues }: IInputProps) {

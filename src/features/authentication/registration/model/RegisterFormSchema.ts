@@ -4,7 +4,7 @@ export const userDataSchema = z.object({
   email: z
     .string()
     .min(1, { message: 'Обязательное поле' })
-    .email({ message: 'Почта должна быть в формате abc@email.com', }),
+    .email({ message: 'Неверный формат' }),
   username: z
     .string()
     .min(2, { message: 'Имя пользователя должно быть не менее 2 символов' })
@@ -15,7 +15,7 @@ export const userDataSchema = z.object({
 export const passwordSchema = z.object({
   password: z
     .string()
-    .min(8, { message: 'Пароль должен быть не менее 8 символов' }),
+    .min(8, { message: 'Неверное количество символов' }),
 });
 
 export type UserDataValidationSchema = z.infer<typeof userDataSchema>;

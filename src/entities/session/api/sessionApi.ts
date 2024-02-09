@@ -1,7 +1,8 @@
 import {baseApi, SESSION_TAG} from '@/shared/api'
 import {mapSession} from '@/shared/lib/mapSession'
 import {RefreshToken, Session, SessionDto} from "@/shared/model/types";
-import {RequestLoginBody} from '../model/types';
+import {RequestLoginBody, RequestRegistrationBody} from '../model/types';
+
 
 export const sessionApi = baseApi.injectEndpoints({
     endpoints: (build) => ({
@@ -22,7 +23,14 @@ export const sessionApi = baseApi.injectEndpoints({
             }),
             invalidatesTags: [SESSION_TAG],
         }),
-
+        register: build.mutation<null, RequestRegistrationBody>({
+            query: (body) => ({
+              url: `/signup/`,
+              method: 'POST',
+              body,
+            }),
+            invalidatesTags: [SESSION_TAG]
+        })
     }),
 })
 

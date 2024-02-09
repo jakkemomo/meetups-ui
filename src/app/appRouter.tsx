@@ -4,6 +4,7 @@ import {useAppSelector} from '@/shared/model'
 import HomePage from "@/pages/home/HomePage";
 import NonFound from "@/pages/errors/NonFound";
 import LoginPage from "@/pages/login/LoginPage";
+import RegistrationPage from "@/pages/register/RegistrationPage";
 import BaseLayout from "@/app/layouts/baseLayout.tsx";
 import {AuthLayout} from "@/app/layouts/authLayout";
 import {selectIsAuthorized} from "@/entities/session";
@@ -25,7 +26,7 @@ interface AuthGuardProps {
 }
 
 function AuthGuard({children}: AuthGuardProps) {
-  const isAuthorized = useAppSelector(selectIsAuthorized)
+  const isAuthorized = useAppSelector(selectIsAuthorized);
 
   if (isAuthorized) return <Navigate to="/"/>
 
@@ -52,12 +53,16 @@ export const appRouter = createBrowserRouter([
     ]
   },
   {
-    element: <AuthLayout />,
+    element: <AuthGuard><AuthLayout /></AuthGuard>,
     errorElement: <div>error</div>,
     children: [
-     {
+      {
         path: 'login',
         element: <LoginPage/>,
+      },
+      {
+        path: 'register',
+        element: <RegistrationPage/>,
       },
     ]
   },

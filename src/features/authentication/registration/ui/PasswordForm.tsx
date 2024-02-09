@@ -13,7 +13,7 @@ export function PasswordForm(): ReactElement {
     const data = useAppSelector(selectUserData);
 
     const {
-      formState: { errors, isValid, isSubmitted },
+      formState: { isValid, isSubmitted },
       handleSubmit,
       register,
     } = useForm<PasswordValidationSchema>({
@@ -48,7 +48,12 @@ export function PasswordForm(): ReactElement {
           hookFormValues={register('password')}
         />
         <p className={`before:h-[18px] before:w-[18px] before:inline-block before:rounded-full ${helperBeforeBg} before:text-[rgba(0,0,0,0)]  before:mr-[12px] text-lg font-normal mt-[19px] ${helperTextColor}`}>Минимум 8 символов</p>
-        <Button HTMLType='submit' type='primary' extraClass='mt-[40px]'>Зарегистрироваться</Button>
+        <Button 
+          HTMLType='submit'
+          type='primary'
+          extraClass='mt-[40px]'
+          disabled={!isValid && isSubmitted}
+        >Зарегистрироваться</Button>
         <Button onClick={onPrev} HTMLType='button' type='secondary' extraClass='w-80 mt-5 flex justify-center hover:text-neutral-950 text-lg font-normal text-center'>Назад</Button>
       </form> 
     )

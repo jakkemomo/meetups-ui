@@ -11,7 +11,7 @@ export function DetailForm(): ReactElement {
     const data = useAppSelector(selectUserData);
   
     const {
-      formState: { errors },
+      formState: { errors, isValid, isSubmitted },
       handleSubmit,
       register,
     } = useForm<UserDataValidationSchema>({
@@ -44,7 +44,13 @@ export function DetailForm(): ReactElement {
           error={errors.email}
           hookFormValues={register('email')}
         />
-        <Button HTMLType='submit' type='primary' extraClass='mt-10' iconType="next">Далее</Button>
+        <Button 
+          HTMLType='submit'
+          type='primary'
+          extraClass='mt-10'
+          iconType="next"
+          disabled={!isValid && isSubmitted}
+        >Далее</Button>
       </form>
     )
   }

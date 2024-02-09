@@ -9,6 +9,10 @@ interface ILoginFormProps {
 
 export function FormWrapper({children, redirectType}: ILoginFormProps): ReactElement {
   const isMobileDevice = useMediaQuery("only screen and (max-width : 768px)");
+  const redirectText = {
+    login: ['Уже есть аккаунт?', 'Войти'],
+    register: ['Нет аккаунта?', 'Зарегистрируйтесь']
+  }
 
   const classNames = {
     container: {
@@ -31,18 +35,14 @@ export function FormWrapper({children, redirectType}: ILoginFormProps): ReactEle
         Вход в Аккаунт
       </p>
       {children}
-      {(redirectType === 'register') &&
-        <div className={`flex border-b border-neutral-500 ${isMobileDevice ? 'mt-101' : 'mt-107'}`}>
-          <p className={`text-neutral-500 font-normal ${isMobileDevice ? classNames.fonts.mobile : classNames.fonts.desktop}`}>Нет аккаунта?&nbsp;</p>
-          <Link to='/register/' className={`text-neutral-500 hover:text-neutral-950 font-normal ${isMobileDevice ? classNames.fonts.mobile : classNames.fonts.desktop}`}>Зарегистрируйтесь</Link>
-        </div>
-      }
-      {(redirectType === 'login') &&
-        <div className={`flex border-b border-neutral-500 ${isMobileDevice ? 'mt-101' : 'mt-107'}`}>
-          <p className={`text-neutral-500 font-normal ${isMobileDevice ? classNames.fonts.mobile : classNames.fonts.desktop}`}>Уже есть аккаунт?&nbsp;</p>
-          <Link to='/login/' className={`text-neutral-500 hover:text-neutral-950 font-normal ${isMobileDevice ? classNames.fonts.mobile : classNames.fonts.desktop}`}>Войти</Link>
-        </div>
-      }
+      <div className={`flex border-b border-neutral-500 ${isMobileDevice ? 'mt-101' : 'mt-107'}`}>
+        <p className={`text-neutral-500 font-normal ${isMobileDevice ? classNames.fonts.mobile : classNames.fonts.desktop}`}>
+          {redirectType === 'register' ? redirectText.register[0] : redirectText.login[0]}&nbsp;
+        </p>
+        <Link to={`/${redirectType}/`} className={`text-neutral-500 hover:text-neutral-950 font-normal ${isMobileDevice ? classNames.fonts.mobile : classNames.fonts.desktop}`}>
+          {redirectType === 'register' ? redirectText.register[1] : redirectText.login[1]}
+        </Link>
+      </div>
     </div>
   )
 }

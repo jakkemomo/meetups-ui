@@ -1,4 +1,4 @@
-import { PayloadAction, configureStore, createSlice } from '@reduxjs/toolkit'
+import {createSlice, PayloadAction} from '@reduxjs/toolkit'
 
 export interface IRegisterFormState {
     selectedTab: number,

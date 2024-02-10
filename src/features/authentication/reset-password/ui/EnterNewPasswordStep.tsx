@@ -1,12 +1,12 @@
 import {ReactElement, useCallback} from "react";
-import {Button, Input, InputErrorMessage} from "@/shared/ui";
+import {Button, FormWrapper, Input, InputErrorMessage} from "@/shared/ui";
 import {useForm} from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
+import {zodResolver} from "@hookform/resolvers/zod";
 import {
   passwordSchema,
   PasswordValidationSchema
 } from "@/features/authentication/reset-password/model/ResetPasswordFormSchema";
-import {Link, useNavigate, useSearchParams} from "react-router-dom";
+import {useNavigate, useSearchParams} from "react-router-dom";
 import {useConfirmResetPasswordMutation} from "@/features/authentication/reset-password/api/resetPasswordApi";
 import {RESET_PASSWORD_FORM_VALUES_KEY} from "@/features/authentication/reset-password/model/constants";
 import {ValueTextField} from "@/shared/types";
@@ -45,12 +45,9 @@ export function EnterNewPasswordStep({onComplete}: ILoginFormProps): ReactElemen
   }, [searchParams]);
 
   return (
-    <div className="bg-white flex flex-col items-center justify-center pb-9 pt-102 px-30 rounded-2xl shadow-custom translate-x-10 w-500 h-600">
-      <p className="text-main-purple text-40 font-bold pb-10">
-        Новый пароль
-      </p>
-      <form noValidate onSubmit={handleSubmit(onSubmit)} className="flex flex-col">
-        <p className='text-neutral-500 text-lg font-normal mb-3.5'>Придумайте уникальный пароль</p>
+    <FormWrapper redirectType='register' headerText='Новый пароль'>
+      <form noValidate onSubmit={handleSubmit(onSubmit)} className="flex flex-col px-0 md:px-90">
+        <p className='text-neutral-500 text-base md:text-lg font-normal mb-2.5 md:mb-3.5'>Придумайте уникальный пароль</p>
         <Input
           HTMLType='password'
           iconType='password'
@@ -58,7 +55,7 @@ export function EnterNewPasswordStep({onComplete}: ILoginFormProps): ReactElemen
           hookFormValues={register('password')}
           error={errors.password}
         />
-        <p className='text-neutral-500 text-lg font-normal mt-18 pb-3'>Минимум 6 символов</p>
+        <p className='text-neutral-500 text-base md:text-lg font-normal mt-5 md:mt-18 pb-3.5 md:pb-3'>Минимум 8 символов</p>
         <InputErrorMessage error={errors.password} />
         <Button
           HTMLType='submit'
@@ -69,10 +66,6 @@ export function EnterNewPasswordStep({onComplete}: ILoginFormProps): ReactElemen
           Войти
         </Button>
       </form>
-      <div className='flex mt-107 border-b border-neutral-500'>
-        <p className='text-neutral-500 text-lg font-normal'>Нет аккаунта?&nbsp;</p>
-        <Link to='/register' className="text-neutral-500 hover:text-neutral-950 text-lg font-normal">Зарегистрируйтесь</Link>
-      </div>
-    </div>
+    </FormWrapper>
   )
 }

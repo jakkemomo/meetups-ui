@@ -1,9 +1,9 @@
-import { ReactElement, useState } from "react";
+import {ReactElement, useState} from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { SlickSliderArrow } from "./SlickSliderArrow";
-import { ArrowsExtraClasses, ISlickSliderSettings } from "@/shared/types";
+import {SlickSliderArrow} from "./SlickSliderArrow";
+import {ArrowsExtraClasses,ISlickSliderSettings} from "@/shared/types";
 
 interface ISlickSliderProps {
   children: ReactElement[];

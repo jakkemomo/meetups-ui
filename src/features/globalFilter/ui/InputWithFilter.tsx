@@ -1,4 +1,4 @@
-import { Input } from "@/shared";
+import {Input} from "@/shared";
 
 export function InputWithFilter() {
   return (

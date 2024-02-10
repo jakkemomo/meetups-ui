@@ -1,12 +1,12 @@
 import React from 'react'
 import {Provider} from 'react-redux'
 import {appStore} from './appStore'
-import { RouterProvider } from 'react-router-dom'
+import {RouterProvider} from 'react-router-dom'
 // import {Provider as ProviderSpectrum} from "@react-spectrum/provider";
 // import {darkTheme} from "@adobe/react-spectrum";
 import {APIProvider} from "@vis.gl/react-google-maps";
-import { config } from "@/shared/config";
-import { appRouter } from './appRouter';
+import {config} from "@/shared/config";
+import {appRouter} from './appRouter';
 import {createRoot} from "react-dom/client";
 import './index.css';
 

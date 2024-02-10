@@ -4,3 +4,4 @@ export { Input } from './Input';
 export { Modal } from './Modal';
 export { BackgroundCard } from './BackgroundCard';
 export { Layout } from './Layout'
+export { FormWrapper } from "./FormWrapper";

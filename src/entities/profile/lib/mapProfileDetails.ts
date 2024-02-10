@@ -1,5 +1,5 @@
-import { type ProfileDetailsDto } from '../api/types'
-import { type ProfileDetails, type ProfileId } from '../model/types'
+import {type ProfileDetailsDto} from '../api/types'
+import {type ProfileDetails, type ProfileId} from '../model/types'
 
 export function mapProfileDetails(dto: ProfileDetailsDto): ProfileDetails {
     return {

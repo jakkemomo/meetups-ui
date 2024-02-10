@@ -1,5 +1,5 @@
-import { ReactElement } from "react";
-import { ICardProps } from "../types";
+import {ReactElement} from "react";
+import {ICardProps} from "../types";
 
 export function CalendarCard({ date, weekDay }: ICardProps): ReactElement {
   return (

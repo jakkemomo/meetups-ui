@@ -8,7 +8,7 @@ import {ValueTextField} from "@/shared/types";
 import {setFormValuesInStorage} from "@/shared/lib/saveAndGetFormValues";
 import {useFilledValue} from "@/shared/lib/hooks";
 import {useLoginMutation} from "@/entities/session/api/sessionApi.ts";
-import {FormWrapper, Button, Input, InputErrorMessage} from "@/shared";
+import {Button, FormWrapper, Input, InputErrorMessage} from "@/shared/ui";
 
 
 interface ILoginFormProps {
@@ -16,7 +16,6 @@ interface ILoginFormProps {
 }
 
 export function LoginForm({onComplete}: ILoginFormProps): ReactElement {
-
   const {
     setError,
     formState: {errors, isValid, isSubmitted},
@@ -32,7 +31,7 @@ export function LoginForm({onComplete}: ILoginFormProps): ReactElement {
   useFilledValue(AUTH_FORM_VALUES_KEY, setValue, [ValueTextField.EMAIL])
   const [
     loginTrigger,
-  ] = useLoginMutation()
+  ] = useLoginMutation();
 
   const onSubmit = ({email, password}: LoginValidationSchema) => {
     setFormValuesInStorage(AUTH_FORM_VALUES_KEY, { email });
@@ -48,8 +47,8 @@ export function LoginForm({onComplete}: ILoginFormProps): ReactElement {
   }, [navigate])
 
   return (
-    <FormWrapper redirectType='register'>
-      <form noValidate onSubmit={handleSubmit(onSubmit)} className="flex flex-col">
+    <FormWrapper redirectType='register' headerText='Вход в Аккаунт'>
+      <form noValidate onSubmit={handleSubmit(onSubmit)} className="flex flex-col px-0 md:px-90">
         <Input
           HTMLType='email'
           iconType='mail'
@@ -58,7 +57,7 @@ export function LoginForm({onComplete}: ILoginFormProps): ReactElement {
           hookFormValues={register('email')}
         />
         <Input
-          extraClass='mt-18'
+          extraClass='mt-3.5'
           HTMLType='password'
           iconType='password'
           placeholder='Пароль'
@@ -72,11 +71,12 @@ export function LoginForm({onComplete}: ILoginFormProps): ReactElement {
         >
           Забыли пароль?
         </Link>
+        <InputErrorMessage error={errors.email ?? errors.password} />
         <Button
           HTMLType='submit'
           type='primary'
-          extraClass='mt-5'
-          disabled={!isDirty || isSubmitting}
+          extraClass='mt-[21px] md:mt-[15px] mb-[31px] md:mb-0'
+          disabled={!isValid && isSubmitted}
         >
           Войти
         </Button>

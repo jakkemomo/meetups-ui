@@ -9,7 +9,7 @@ interface IResetPasswordPage {
 export default function ResetPasswordPage({type}: IResetPasswordPage): ReactElement {
 
   return (
-    <section className="bg-transparent-gray w-full relative flex items-center justify-center">
+    <section className="bg-transparent-gray w-full h-full relative flex items-center justify-center">
       {(type === 'ENTER_EMAIL') ? (
         <ResetPasswordForm />
         ) : (

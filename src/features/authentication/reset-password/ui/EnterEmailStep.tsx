@@ -1,13 +1,13 @@
 import {ReactElement, useCallback} from "react";
-import {Button, Input, InputErrorMessage} from "@/shared/ui";
+import {Button, FormWrapper, Input, InputErrorMessage} from "@/shared/ui";
 import {useForm} from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
+import {zodResolver} from "@hookform/resolvers/zod";
 import {
   emailSchema,
   EmailValidationSchema
 } from "@/features/authentication/reset-password/model/ResetPasswordFormSchema";
 import {Step} from "@/features/authentication/reset-password/model/step";
-import {Link, useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import {useResetPasswordMutation} from "@/features/authentication/reset-password/api/resetPasswordApi";
 import {resetPasswordPath} from "@/features/authentication/reset-password/model/constants";
 import {ValueTextField} from "@/shared/types";
@@ -43,12 +43,9 @@ export function EnterEmailStep(): ReactElement  {
   }, []);
 
   return (
-    <div className="bg-white flex flex-col items-center justify-center pb-9 pt-102 px-30 rounded-2xl shadow-custom translate-x-10 w-500 h-600">
-      <p className="text-main-purple text-40 font-bold pb-14">
-        Забыли пароль?
-      </p>
-      <form noValidate onSubmit={handleSubmit(onSubmit)} className="flex flex-col">
-        <p className='text-neutral-500 text-lg font-normal w-80 mb-5'>Для подтверждения личности введите вашу почту</p>
+    <FormWrapper redirectType='register' headerText='Забыли пароль?' >
+      <form noValidate onSubmit={handleSubmit(onSubmit)} className="flex flex-col px-0 md:px-90">
+        <p className='text-neutral-500 text-base md:text-lg font-normal w-80 mb-3 md:mb-5 mt-6 md:mt-5'>Для подтверждения личности введите вашу почту</p>
         <Input
           HTMLType='email'
           iconType='mail'
@@ -61,7 +58,7 @@ export function EnterEmailStep(): ReactElement  {
         <Button
           HTMLType='submit'
           type='primary'
-          extraClass='mt-5'
+          extraClass='mt-9 md:mt-5'
           iconType='next'
           disabled={!isValid && isSubmitted}
         >
@@ -69,10 +66,6 @@ export function EnterEmailStep(): ReactElement  {
         </Button>
         <Button type='secondary' HTMLType='button' onClick={handlePrevStep} extraClass='mt-6'>Назад</Button>
       </form>
-      <div className='flex pt-60 border-b border-neutral-500'>
-        <p className='text-neutral-500 text-lg font-normal'>Нет аккаунта?&nbsp;</p>
-        <Link to='/register' className="text-neutral-500 hover:text-neutral-950 text-lg font-normal">Зарегистрируйтесь</Link>
-      </div>
-    </div>
+    </FormWrapper>
   )
 }

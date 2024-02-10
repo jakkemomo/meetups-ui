@@ -1,5 +1,5 @@
 import {ReactElement} from "react";
-import { useMediaQuery } from "@uidotdev/usehooks";
+import {useMediaQuery} from "@uidotdev/usehooks";
 
 interface IBackgroundCardProps {
   cardType: 'LOGIN' | 'WELCOME' | 'VISIT_EVENTS' | 'FIND_FRIENDS' | 'CREATE_EVENTS'

@@ -1,6 +1,6 @@
-import { createAsyncThunk } from '@reduxjs/toolkit'
-import { sessionApi } from '@/entities/session'
-import { isFetchBaseQueryError } from '@/shared/api'
+import {createAsyncThunk} from '@reduxjs/toolkit'
+import {sessionApi} from '@/entities/session'
+import {isFetchBaseQueryError} from '@/shared/api'
 
 interface Params {
   username: string,

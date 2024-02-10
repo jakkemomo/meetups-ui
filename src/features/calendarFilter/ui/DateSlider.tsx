@@ -1,8 +1,8 @@
-import { CalendarCard } from "@/shared/ui/CalendarCard";
-import { SlickSlider } from "@/shared/ui/SlickSlider/SlickSlider";
-import { ICardProps } from "@/shared/types";
-import { generateCalendarDays } from "../lib/generateCalendarDays";
-import { currentMonth, settings } from "../model/constants";
+import {CalendarCard} from "@/shared/ui/CalendarCard";
+import {SlickSlider} from "@/shared/ui/SlickSlider/SlickSlider";
+import {ICardProps } from "@/shared/types";
+import {generateCalendarDays} from "../lib/generateCalendarDays";
+import {currentMonth, settings} from "../model/constants";
 
 export function DateSlider() {
   const dateArr = generateCalendarDays(40);

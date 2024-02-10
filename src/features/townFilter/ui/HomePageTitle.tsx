@@ -1,5 +1,5 @@
-import { Selector } from "@/shared/ui/Selector";
-import { ReactElement } from "react";
+import {Selector} from "@/shared/ui/Selector";
+import {ReactElement} from "react";
 
 export function HomePageTitle(): ReactElement {
   return (

@@ -40,7 +40,7 @@ export function DetailForm(): ReactElement {
           hookFormValues={register('username')}
         />
         <Input
-          extraClass='mt-3.5 mb-3 md:mb-2.5'
+          extraBoxClass='mt-3.5 mb-3 md:mb-2.5'
           HTMLType='email'
           iconType='mail'
           placeholder='Почта'

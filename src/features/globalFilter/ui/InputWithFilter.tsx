@@ -1,10 +1,18 @@
-import {Input} from "@/shared";
+import { Input } from "@/shared";
+import { useAppDispatch } from "@/shared/model";
+import { setFilter } from "../model/GlobalFilterSlice";
+import { ChangeEvent, useState } from "react";
+import { useDebounce } from "@/shared/lib/hooks/useDebounce";
 
 export function InputWithFilter() {
+  const [inputValue, setInputValue] = useState('');
+  const dispatch = useAppDispatch();
+  useDebounce({ value: inputValue, func: () => dispatch(setFilter(inputValue)), delay: 500 });
+
   return (
     <div className="flex items-center ml-[225px]">
-      <Input HTMLType="text" iconType="search-icon-gray" extraClass="w-[375px] h-[60px] rounded-[40px] bg-light-gray py-[18px] px-8"/>
-      <div className="bg-filter-icon w-7 h-6 bg-cover bg-no-repeat bg-center ml-[30px] cursor-pointer"></div>
+      <Input HTMLType="text" iconType="search-icon-gray" onInput={(e: ChangeEvent<HTMLInputElement>) => setInputValue(e.target.value)} inputValue={inputValue} extraInputClass="py-[10px] h-[42px]"/>
+      <div className="bg-filter-icon w-6 h-6 bg-cover bg-no-repeat bg-center ml-5 cursor-pointer"></div>
     </div>
   );
 }

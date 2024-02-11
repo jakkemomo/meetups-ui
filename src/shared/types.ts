@@ -9,6 +9,10 @@ export interface IRegisterFormValues {
   password: string;
 }
 
+export interface IGlobalFilterFormValues {
+  filter: string;
+}
+
 export enum ValueTextField {
   USERNAME = "username",
   EMAIL = "email",
@@ -35,4 +39,9 @@ export interface ICardProps {
 export interface ArrowsExtraClasses {
   rightArrow: string;
   leftArrow: string;
+}
+
+export type DebounceFunctionType = () => {
+  payload: string;
+  type: "globalFilter/setFilter";
 }

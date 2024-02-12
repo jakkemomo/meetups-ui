@@ -12,7 +12,7 @@ export function EventSlider({ events }: IEventSlider): ReactElement {
   const cards = events.map((el, index) => <EventCard key={index} event={el} />);
 
   return (
-    <SlickSlider extraSettings={settings} arrowsExtraClasses={{rightArrow: 'right-[45px] top-[110px]', leftArrow: 'left-[-30px]'}}>
+    <SlickSlider extraSettings={settings} arrowsExtraClasses={{rightArrow: 'right-[45px] top-[110px]', leftArrow: 'left-[-30px] top-[110px]'}}>
       {cards}
     </SlickSlider>
   )

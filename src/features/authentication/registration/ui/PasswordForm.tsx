@@ -1,5 +1,5 @@
 import {ReactElement} from "react"
-import {Button, Input, InputErrorMessage} from "@/shared";
+import {Button, Input} from "@/shared";
 import {useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {useAppDispatch, useAppSelector} from "@/shared/model";
@@ -36,8 +36,6 @@ export function PasswordForm(): ReactElement {
       regUser(data.password);
     }
 
-    const helperTextColor = isSubmitted ? isValid ? 'text-emerald-500' : 'text-rose-600' : 'text-neutral-500';
-    const helperBeforeBg = isSubmitted ? isValid ? "before:bg-emerald-500": "before:bg-rose-600" : "before:bg-custom-gray";
     return (
       <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col">
         <p className="text-neutral-500 text-base md:text-lg font-normal mb-[10px]">Придумайте уникальный пароль</p>
@@ -47,8 +45,19 @@ export function PasswordForm(): ReactElement {
           placeholder='Пароль'
           hookFormValues={register('password')}
         />
-        <p className={`before:h-[18px] before:w-[18px] before:inline-block before:rounded-full ${helperBeforeBg} before:text-[rgba(0,0,0,0)]  before:mr-[12px] text-base md:text-lg font-normal mt-5 md:mt-[18px] mb-3.5 md:mb-3 ${helperTextColor}`}>Минимум 8 символов</p>
-        <InputErrorMessage error={errors.password} />
+        <div className='flex mt-5 md:mt-18 pb-3.5 md:pb-3 items-center'>
+          {(isValid && isSubmitted) ? (
+            <div
+              className='w-[18px] h-[18px] mr-3 bg-center bg-no-repeat'
+              style={{ backgroundImage: `url("/images/icon-checked.svg")` }}
+            />
+          ) : (
+            <div className='bg-custom-gray w-[18px] h-[18px] rounded-full mr-3' />
+          )}
+          <p className={`text-base md:text-lg font-normal  ${errors.password ? 'text-input-error' : 'text-neutral-500'}`}>
+            Минимум 8 символов
+          </p>
+        </div>
         <Button
           HTMLType='submit'
           type='primary'

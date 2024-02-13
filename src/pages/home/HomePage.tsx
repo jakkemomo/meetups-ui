@@ -4,11 +4,13 @@ import { MapWidget } from '@/features/mapWidget';
 import { HomePageTitle } from '@/features/townFilter';
 import { useAppSelector } from '@/shared/model';
 import { EventsList } from '@/widgets/EventsList';
-import { FC } from 'react';
+import { ReactElement } from 'react';
 
-const HomePage: FC = () => {
+export function HomePage(): ReactElement {
   const filter = useAppSelector(state => state.globalFilter.filter);
-  const { data: events = {results: []}, isLoading } = useGetEventsQuery(filter);
+  const { data: events = {results: []}, isLoading, isError } = useGetEventsQuery(filter && filter);
+
+  isError && console.log('Ошибка при получении ивентов');
 
   return (
     <main className="w-full">
@@ -21,5 +23,3 @@ const HomePage: FC = () => {
     </main>
   );
 }
-
-export default HomePage;

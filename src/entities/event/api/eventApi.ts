@@ -1,7 +1,7 @@
 import { baseApi } from "@/shared/api";
 import { IEvent } from "../model/types";
 
-interface ApiResponse<T> {
+interface IApiResponse<T> {
   count: number;
   next: string | null;
   previous: string | null;
@@ -10,7 +10,7 @@ interface ApiResponse<T> {
 
 export const eventApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
-    getEvents: build.query<ApiResponse<IEvent[]>, string>({
+    getEvents: build.query<IApiResponse<IEvent[]>, string>({
       query: (filter) => ({
         url: '/events/',
         method: 'GET',

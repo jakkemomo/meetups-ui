@@ -5,9 +5,11 @@ import { useAppSelector } from '@/shared/model';
 import { EventsList } from '@/widgets/EventsList';
 import { ReactElement } from 'react';
 
-function HomePage(): ReactElement {
+export function HomePage(): ReactElement {
   const filter = useAppSelector(state => state.globalFilter.filter);
-  const { data: events = {results: []}, isLoading } = useGetEventsQuery(filter);
+  const { data: events = {results: []}, isLoading, isError } = useGetEventsQuery(filter && filter);
+
+  isError && console.log('Ошибка при получении ивентов');
 
   return (
     <main className="w-full">
@@ -19,5 +21,3 @@ function HomePage(): ReactElement {
     </main>
   );
 }
-
-export default HomePage;

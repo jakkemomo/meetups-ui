@@ -8,7 +8,9 @@ const apiKey = import.meta.env.VITE_APP_GOOGLE_MAP_API_KEY as string;
 
 export function MapWidget(): ReactElement {
   const position = { lat: 53.9, lng: 27.56667 };
-  const { data: markers = {features: []}, isLoading } = useGetMarkersQuery();
+  const { data: markers = {features: []}, isLoading, isError } = useGetMarkersQuery();
+
+  isError && console.log('Ошибка при получении mapMarkers');
 
   return (
     <APIProvider apiKey={apiKey}>

@@ -1,3 +1,4 @@
+import { Header } from "@/widgets/Header";
 import { Outlet } from "react-router-dom";
 
 /**
@@ -12,6 +13,7 @@ import { Outlet } from "react-router-dom";
 export default function BaseLayout() {
   return (
     <div className="pl-[113px] pr-[112px] pt-10">
+      <Header />
       <Outlet />
     </div>
   )

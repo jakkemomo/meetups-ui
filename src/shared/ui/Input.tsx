@@ -1,9 +1,9 @@
 import {FieldPath, UseFormRegisterReturn} from "react-hook-form";
-import {useState} from "react";
+import {ChangeEvent, useState} from "react";
 import {IGlobalFilterFormValues, ILoginFormValues, IRegisterFormValues} from "@/shared/types";
 
 interface IInputProps {
-  onChange?: () => void;
+  onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
   HTMLType: 'email' | 'text' | 'password';
   iconType?: 'person' | 'mail' | 'password' | 'search-icon-gray';
   value?: string;
@@ -13,11 +13,10 @@ interface IInputProps {
   defaultValue?: string;
   error?: any;
   hookFormValues?: UseFormRegisterReturn<FieldPath<ILoginFormValues>> | UseFormRegisterReturn<FieldPath<IRegisterFormValues>> | UseFormRegisterReturn<FieldPath<IGlobalFilterFormValues>>;
-  onInput?: any;
   inputValue: string;
 }
 
-export function Input({ HTMLType, iconType, placeholder, extraBoxClass, extraInputClass, defaultValue, error, hookFormValues, onInput, inputValue }: IInputProps) {
+export function Input({ onChange, HTMLType, iconType, placeholder, extraBoxClass, extraInputClass, defaultValue, error, hookFormValues, inputValue }: IInputProps) {
   const [type, setType] = useState<string>(HTMLType);
   const [passwordIcon, setPasswordIcon] = useState<string>('show-password');
 
@@ -41,7 +40,7 @@ export function Input({ HTMLType, iconType, placeholder, extraBoxClass, extraInp
           />}
         <input
           {...hookFormValues}
-          onChange={onInput}
+          onChange={onChange}
           value={inputValue}
           type={type}
           defaultValue={defaultValue}

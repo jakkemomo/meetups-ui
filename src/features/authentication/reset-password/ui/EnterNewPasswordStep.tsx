@@ -1,5 +1,5 @@
 import {ReactElement, useCallback} from "react";
-import {Button, FormWrapper, Input, InputErrorMessage} from "@/shared/ui";
+import {Button, FormWrapper, Input} from "@/shared/ui";
 import {useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {
@@ -55,8 +55,19 @@ export function EnterNewPasswordStep({onComplete}: ILoginFormProps): ReactElemen
           hookFormValues={register('password')}
           error={errors.password}
         />
-        <p className='text-neutral-500 text-base md:text-lg font-normal mt-5 md:mt-18 pb-3.5 md:pb-3'>Минимум 8 символов</p>
-        <InputErrorMessage error={errors.password} />
+        <div className='flex mt-5 md:mt-18 pb-3.5 md:pb-3 items-center'>
+          {(isValid && isSubmitted) ? (
+            <div
+              className='w-[18px] h-[18px] mr-3 bg-center bg-no-repeat'
+              style={{ backgroundImage: `url("/images/icon-checked.svg")` }}
+            />
+            ) : (
+            <div className='bg-custom-gray w-[18px] h-[18px] rounded-full mr-3' />
+          )}
+          <p className={`text-base md:text-lg font-normal  ${errors.password ? 'text-input-error' : 'text-neutral-500'}`}>
+            Минимум 8 символов
+          </p>
+        </div>
         <Button
           HTMLType='submit'
           type='primary'

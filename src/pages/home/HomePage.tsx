@@ -2,10 +2,13 @@ import { useGetEventsQuery } from '@/entities/event/api/eventApi';
 import {DateSlider} from '@/features/calendarFilter';
 import {HomePageTitle} from '@/features/townFilter';
 import { EventsList } from '@/widgets/EventsList';
-import {FC} from 'react';
+import { ReactElement } from 'react';
 
-const HomePage: FC = () => {
-  const { data: events = {results: []}, isLoading } = useGetEventsQuery();
+export function HomePage(): ReactElement {
+  const filter = useAppSelector(state => state.globalFilter.filter);
+  const { data: events = {results: []}, isLoading, isError } = useGetEventsQuery(filter && filter);
+
+  isError && console.log('Ошибка при получении ивентов');
 
   return (
     <main className="w-full">
@@ -17,5 +20,3 @@ const HomePage: FC = () => {
     </main>
   );
 }
-
-export default HomePage;

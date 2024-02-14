@@ -1,7 +1,6 @@
 import type {ReactElement} from 'react'
 import {createBrowserRouter, Navigate} from 'react-router-dom'
-import {useAppSelector} from '@/shared/model'
-import HomePage from "@/pages/home/HomePage";
+import {useAppSelector} from '@/shared/model';
 import NonFound from "@/pages/errors/NonFound";
 import LoginPage from "@/pages/login/LoginPage";
 import RegistrationPage from "@/pages/register/RegistrationPage";
@@ -9,6 +8,7 @@ import BaseLayout from "@/app/layouts/baseLayout.tsx";
 import {AuthLayout} from "@/app/layouts/authLayout";
 import ResetPasswordPage from "@/pages/reset-password/ResetPasswordPage";
 import {selectIsAuthorized} from "@/entities/session";
+import { HomePage } from '@/pages/home/HomePage';
 
 interface GuestGuardProps {
   children: ReactElement
@@ -42,7 +42,7 @@ export const appRouter = createBrowserRouter([
       {
         path: '/',
         element: (
-          <HomePage/>
+          <HomePage />
         ),
       },
       {

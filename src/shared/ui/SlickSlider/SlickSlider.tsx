@@ -1,13 +1,14 @@
-import {ReactElement, useState} from "react";
+import { ReactElement, useState } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import {SlickSliderArrow} from "./SlickSliderArrow";
-import {ArrowsExtraClasses,ISlickSliderSettings} from "@/shared/types";
+import { ArrowsExtraClasses, ISlickSliderSettings } from "@/shared/types";
+import { SlickSliderPrevArrow } from "./SlickSliderPrevArrow";
+import { SlickSliderNextArrow } from "./SlickSliderNextArrow";
 
 interface ISlickSliderProps {
   children: ReactElement[];
-  extraSettings?: ISlickSliderSettings;
+  extraSettings: ISlickSliderSettings;
   arrowsExtraClasses: ArrowsExtraClasses;
 }
 
@@ -18,8 +19,8 @@ export function SlickSlider({ children, extraSettings, arrowsExtraClasses }: ISl
   const settings = {
     dots: false,
     infinite: false,
-    nextArrow: <SlickSliderArrow previous={false} extraClasses={arrowsExtraClasses} />,
-    prevArrow: <SlickSliderArrow previous={true} slide={slide} extraClasses={arrowsExtraClasses} />,
+    nextArrow: <SlickSliderNextArrow slide={slide} slidesToShow={extraSettings.slidesToShow} arrLength={children.length} extraClasses={arrowsExtraClasses} />,
+    prevArrow: <SlickSliderPrevArrow slide={slide} extraClasses={arrowsExtraClasses} />,
     afterChange: (current: number) => setSlide(current),
     ...extraSettings
   }

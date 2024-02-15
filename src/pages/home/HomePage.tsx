@@ -1,5 +1,6 @@
 import { useGetEventsQuery } from '@/entities/event/api/eventApi';
 import {DateSlider} from '@/features/calendarFilter';
+import { MapWidget } from '@/features/mapWidget';
 import {HomePageTitle} from '@/features/townFilter';
 import { EventsList } from '@/widgets/EventsList';
 import {FC} from 'react';
@@ -12,6 +13,7 @@ const HomePage: FC = () => {
       <HomePageTitle />
       <DateSlider />
       <EventsList listTitle="Ближайшие" isLoading={isLoading} data={events.results} extraClasses="mt-14" />
+      <MapWidget />
       <EventsList listTitle="Рекомендации для Вас" isLoading={isLoading} data={events.results} extraClasses="mt-[50px]" />
       <EventsList listTitle="Топ мероприятий" isLoading={isLoading} data={events.results} extraClasses="mt-[50px]" />
     </main>

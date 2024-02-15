@@ -51,7 +51,7 @@ export function EnterEmailStep(): ReactElement  {
           iconType='mail'
           placeholder='Почта'
           hookFormValues={register('email')}
-          extraClass='mb-2.5'
+          extraBoxClass='mb-2.5'
           error={errors.email}
         />
         <InputErrorMessage error={errors.email} />

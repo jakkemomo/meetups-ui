@@ -11,7 +11,7 @@ export function InputWithFilter() {
 
   return (
     <div className="flex items-center ml-[225px]">
-      <Input HTMLType="text" iconType="search-icon-gray" onChange={(e: ChangeEvent<HTMLInputElement>) => setInputValue(e.target.value)} inputValue={inputValue} extraInputClass="py-[10px] h-[42px]"/>
+      <Input HTMLType="text" iconType="search-icon-gray" onChange={(e: ChangeEvent<HTMLInputElement>) => setInputValue(e.target.value)} value={inputValue} extraContentClass="py-[10px] h-[42px]"/>
       <div className="bg-filter-icon w-6 h-6 bg-cover bg-no-repeat bg-center ml-5 cursor-pointer"></div>
     </div>
   );

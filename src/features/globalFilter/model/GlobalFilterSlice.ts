@@ -1,23 +1,23 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 interface IGlobalFilterState {
-  filter: string;
+  search: string;
 }
 
 const initialState: IGlobalFilterState = {
-  filter: '',
+  search: '',
 }
 
 const globalFilterSlice = createSlice({
   name: 'globalFilter',
   initialState,
   reducers: {
-    setFilter: (state, { payload: inputValue }: { payload: string }) => ({
-      filter: inputValue,
+    setSearchFilter: (state, { payload: inputValue }: { payload: string }) => ({
+      search: inputValue,
     })
   }
 })
 
-export const { setFilter } = globalFilterSlice.actions;
+export const { setSearchFilter } = globalFilterSlice.actions;
 
 export default globalFilterSlice.reducer;

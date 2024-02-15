@@ -1,13 +1,14 @@
 import { Input } from "@/shared";
 import { useAppDispatch } from "@/shared/model";
-import { setFilter } from "../model/GlobalFilterSlice";
+import { setSearchFilter } from "../model/GlobalFilterSlice";
 import { ChangeEvent, useState } from "react";
 import { useDebounce } from "@/shared/lib/hooks/useDebounce";
 
 export function InputWithFilter() {
   const [inputValue, setInputValue] = useState('');
   const dispatch = useAppDispatch();
-  useDebounce({ value: inputValue, func: () => dispatch(setFilter(inputValue)), delay: 500 });
+
+  useDebounce({ value: inputValue, func: () => dispatch(setSearchFilter(inputValue)), delay: 500 });
 
   return (
     <div className="flex items-center ml-[225px]">

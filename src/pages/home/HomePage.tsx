@@ -3,11 +3,13 @@ import {DateSlider} from '@/features/calendarFilter';
 import {HomePageTitle} from '@/features/townFilter';
 import { useAppSelector } from '@/shared/model';
 import { EventsList } from '@/widgets/EventsList';
-import {FC} from 'react';
+import { ReactElement } from 'react';
 
-const HomePage: FC = () => {
-  const filter = useAppSelector(state => state.globalFilter.filter);
-  const { data: events = {results: []}, isLoading } = useGetEventsQuery(filter);
+export function HomePage(): ReactElement {
+  const searchFilter = useAppSelector(state => state.globalFilter.search);
+  const { data: events = {results: []}, isLoading, isError } = useGetEventsQuery(searchFilter && searchFilter);
+
+  isError && console.log('Ошибка при получении ивентов');
 
   return (
     <main className="w-full">
@@ -19,5 +21,3 @@ const HomePage: FC = () => {
     </main>
   );
 }
-
-export default HomePage;

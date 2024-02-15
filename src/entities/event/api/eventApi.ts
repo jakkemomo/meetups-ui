@@ -10,10 +10,13 @@ interface ApiResponse<T> {
 
 export const eventApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
-    getEvents: build.query<ApiResponse<IEvent[]>, void>({
-      query: () => ({
+    getEvents: build.query<ApiResponse<IEvent[]>, string>({
+      query: (filter) => ({
         url: '/events/',
-        method: 'GET'
+        method: 'GET',
+        params: {
+          search: filter
+        }
       })
     })
   })

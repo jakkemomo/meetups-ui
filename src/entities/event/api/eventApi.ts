@@ -8,18 +8,19 @@ interface IApiResponse<T> {
   results: T;
 }
 
+interface IApiRequest {
+  search?: string;
+}
+
 export const eventApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
-    getEvents: build.query<IApiResponse<IEvent[]>, string | null>({
-      query: (filter) => (filter ? {
+    getEvents: build.query<IApiResponse<IEvent[]>, IApiRequest>({
+      query: ({ search }) => ({
         url: '/events/',
         method: 'GET',
         params: {
-          search: filter
+          search
         }
-      } : {
-        url: '/events/',
-        method: 'GET',
       })
     })
   })

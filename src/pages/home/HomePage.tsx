@@ -6,10 +6,10 @@ import { EventsList } from '@/widgets/EventsList';
 import { ReactElement } from 'react';
 
 export function HomePage(): ReactElement {
-  const searchFilter = useAppSelector(state => state.globalFilter.search);
-  const { data: events = {results: []}, isLoading, isError } = useGetEventsQuery(searchFilter && searchFilter);
+  const { search } = useAppSelector(state => state.globalFilter);
+  const { data: events = {results: []}, isLoading, isError, error } = useGetEventsQuery({ search: search });
 
-  isError && console.log('Ошибка при получении ивентов');
+  isError && console.log(`Ошибка при получении ивентов - ${JSON.stringify(error)}`);
 
   return (
     <main className="w-full">

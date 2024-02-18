@@ -1,6 +1,5 @@
 import type {ReactElement} from 'react'
 import {createBrowserRouter, Navigate} from 'react-router-dom'
-import {useAppSelector} from '@/shared/model'
 import HomePage from "@/pages/home/HomePage";
 import NonFound from "@/pages/errors/NonFound";
 import LoginPage from "@/pages/login/LoginPage";
@@ -8,16 +7,14 @@ import RegistrationPage from "@/pages/register/RegistrationPage";
 import BaseLayout from "@/app/layouts/baseLayout.tsx";
 import {AuthLayout} from "@/app/layouts/authLayout";
 import ResetPasswordPage from "@/pages/reset-password/ResetPasswordPage";
-import {selectIsAuthorized} from "@/entities/session";
+import {selectAccessToken} from "@/shared/lib";
 
 interface GuestGuardProps {
   children: ReactElement
 }
 
 function GuestGuard({children}: GuestGuardProps) {
-  const isAuthorized = useAppSelector(selectIsAuthorized)
-
-  if (!isAuthorized) return <Navigate to="/login"/>
+  if (!selectAccessToken()) return <Navigate to="/login"/>
 
   return children
 }
@@ -27,9 +24,7 @@ interface AuthGuardProps {
 }
 
 function AuthGuard({children}: AuthGuardProps) {
-  const isAuthorized = useAppSelector(selectIsAuthorized);
-
-  if (isAuthorized) return <Navigate to="/"/>
+  if (selectAccessToken()) return <Navigate to="/"/>
 
   return children
 }
@@ -54,7 +49,7 @@ export const appRouter = createBrowserRouter([
     ]
   },
   {
-    element: <AuthGuard><AuthLayout /></AuthGuard>,
+    element: <AuthLayout/>,
     errorElement: <div>error</div>,
     children: [
       {

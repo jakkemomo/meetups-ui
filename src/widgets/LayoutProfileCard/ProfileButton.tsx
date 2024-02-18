@@ -9,8 +9,8 @@ interface LayoutProfileCardProps {
 export function ProfileButton({access}: LayoutProfileCardProps) {
     let decodedToken = atob(access.split('.')[1])
     let tokenData = JSON.parse(decodedToken)
-    var userId: ProfileId = tokenData.user_id
-    const {data: profileData} = useProfileDetailsQuery(
+    let userId: ProfileId = tokenData.user_id
+    let {data: profileData} = useProfileDetailsQuery(
         userId,
         {skip: !userId}
     )

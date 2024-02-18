@@ -17,7 +17,7 @@ export const SessionSlice = createSlice({
             }
         )
         builder.addMatcher(
-            sessionApi.endpoints.logout.matchPending,
+            sessionApi.endpoints.logout.matchFulfilled,
             (state) => {
                 localStorage.removeItem('access-token')
                 localStorage.removeItem('refresh-token')

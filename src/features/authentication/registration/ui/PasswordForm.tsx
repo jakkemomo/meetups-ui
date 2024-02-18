@@ -4,8 +4,8 @@ import {useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {useAppDispatch, useAppSelector} from "@/shared/model";
 import {passwordSchema, PasswordValidationSchema} from "../model/RegisterFormSchema";
-import {registerThunk} from "../model/register";
 import {goBack, passwordFilled, selectUserData} from "../model/formState";
+import { useRegisterMutation } from "@/entities/session/api/sessionApi";
 
 
 export function PasswordForm(): ReactElement {
@@ -16,24 +16,27 @@ export function PasswordForm(): ReactElement {
       formState: { errors, isValid, isSubmitted },
       handleSubmit,
       register,
+      setError,
     } = useForm<PasswordValidationSchema>({
       resolver: zodResolver(passwordSchema),
       defaultValues: data
     })
 
+    const [
+      registerTrigger
+    ] = useRegisterMutation();
+
     const regUser = (password: string) => {
-      dispatch(registerThunk({...data, password: password}))
+      registerTrigger({...data, password: password})
         .unwrap()
         .then(() => dispatch(passwordFilled({password: password})))
-        .catch((error) => {
-          console.log("Register error ", error.message);
-        })
+        .catch((error) => setError('password', {message: error.data.detail}))
     };
 
     const onPrev = () => dispatch(goBack());
 
-    const onSubmit = (data: PasswordValidationSchema) => {
-      regUser(data.password);
+    const onSubmit = ({password}: PasswordValidationSchema) => {
+      regUser(password);
     }
 
     return (

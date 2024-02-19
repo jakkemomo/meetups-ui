@@ -8,8 +8,8 @@ const initialState: IGlobalFilterState = {
   search: '',
 }
 
-const globalFilterSlice = createSlice({
-  name: 'globalFilter',
+export const searchFilterSlice = createSlice({
+  name: 'searchFilter',
   initialState,
   reducers: {
     setSearchFilter: (state, { payload: inputValue }: { payload: string }) => ({
@@ -18,6 +18,4 @@ const globalFilterSlice = createSlice({
   }
 })
 
-export const { setSearchFilter } = globalFilterSlice.actions;
-
-export default globalFilterSlice.reducer;
+export const { setSearchFilter } = searchFilterSlice.actions;

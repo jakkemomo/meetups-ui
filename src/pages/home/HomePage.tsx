@@ -6,7 +6,7 @@ import { EventsList } from '@/widgets/EventsList';
 import { ReactElement } from 'react';
 
 export function HomePage(): ReactElement {
-  const { search } = useAppSelector(state => state.globalFilter);
+  const { search } = useAppSelector(state => state.searchFilter);
   const { data: events = {results: []}, isLoading, isError, error } = useGetEventsQuery({ search: search });
 
   isError && console.log(`Ошибка при получении ивентов - ${JSON.stringify(error)}`);

@@ -28,5 +28,5 @@ export interface ArrowsExtraClasses {
 
 export type DebounceFunctionType = () => {
   payload: string;
-  type: "globalFilter/setSearchFilter";
+  type: "searchFilter/setSearchFilter";
 }

@@ -1,6 +1,6 @@
 import { Input } from "@/shared";
 import { useAppDispatch } from "@/shared/model";
-import { setSearchFilter } from "../model/GlobalFilterSlice";
+import { setSearchFilter } from "../model/SearchFilterSlice";
 import { ChangeEvent, useState } from "react";
 import { useDebounce } from "@/shared/lib/hooks/useDebounce";
 

@@ -1,14 +1,3 @@
-export interface ILoginFormValues {
-  email: string;
-  password: string;
-}
-
-export interface IRegisterFormValues {
-  username: string;
-  email: string;
-  password: string;
-}
-
 export enum ValueTextField {
   USERNAME = "username",
   EMAIL = "email",
@@ -35,4 +24,9 @@ export interface ICardProps {
 export interface ArrowsExtraClasses {
   rightArrow: string;
   leftArrow: string;
+}
+
+export type DebounceFunctionType = () => {
+  payload: string;
+  type: "searchFilter/setSearchFilter";
 }

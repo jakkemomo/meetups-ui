@@ -16,7 +16,6 @@ export interface SessionDto {
   refresh: string
 }
 
-
 export interface AccessTokenDto {
   access: string,
 }

@@ -11,7 +11,7 @@ export function DateSlider() {
   return (
     <div className="flex flex-col relative before:w-[165px] before:absolute before:right-[-5px] before:h-full before:bg-slider-fade-out before:z-10 mt-[46px]">
       <h3 className="capitalize text-[20px] font-normal text-text-black">{currentMonth}</h3>
-      <SlickSlider extraSettings={settings} arrowsExtraClasses={{rightArrow: 'right-0 top-1/2 translate-y-[-50%]', leftArrow: 'left-[-30px]'}}>
+      <SlickSlider extraSettings={settings} arrowsExtraClasses={{rightArrow: 'right-0 top-1/2 translate-y-[-50%]', leftArrow: 'left-[-30px] top-1/2 translate-y-[-50%]'}}>
         {cards}
       </SlickSlider>
     </div>

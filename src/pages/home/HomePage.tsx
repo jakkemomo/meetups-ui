@@ -2,11 +2,15 @@ import { useGetEventsQuery } from '@/entities/event/api/eventApi';
 import {DateSlider} from '@/features/calendarFilter';
 import { MapWidget } from '@/features/mapWidget';
 import {HomePageTitle} from '@/features/townFilter';
+import { useAppSelector } from '@/shared/model';
 import { EventsList } from '@/widgets/EventsList';
-import {FC} from 'react';
+import { ReactElement } from 'react';
 
-const HomePage: FC = () => {
-  const { data: events = {results: []}, isLoading } = useGetEventsQuery();
+export function HomePage(): ReactElement {
+  const { search } = useAppSelector(state => state.searchFilter);
+  const { data: events = {results: []}, isLoading, isError, error } = useGetEventsQuery({ search: search });
+
+  isError && console.log(`Ошибка при получении ивентов - ${JSON.stringify(error)}`);
 
   return (
     <main className="w-full">
@@ -19,5 +23,3 @@ const HomePage: FC = () => {
     </main>
   );
 }
-
-export default HomePage;

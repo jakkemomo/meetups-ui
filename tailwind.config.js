@@ -35,12 +35,13 @@ module.exports = {
         'hover-pink': 'rgb(188, 115, 206)',
         'input-error': 'rgb(202, 106, 106)',
         'light-gray': 'rgb(240, 240, 238)',
-        'gray': 'rgb(229, 229, 227);',
+        'gray': 'rgb(229, 229, 227)',
         'transparent-gray': 'rgb(255, 250, 250)',
         'text-gray': 'rgb(84, 84, 84)',
         'text-light-gray': 'rgb(153, 153, 153);',
         'text-black': 'rgb(46, 46, 46)',
-        'text-red': 'rgb(187, 16, 16)'
+        'text-red': 'rgb(187, 16, 16)',
+        'text-light-gray': 'rgb(153, 153, 153)'
       },
       padding: {
         '60': '60px',

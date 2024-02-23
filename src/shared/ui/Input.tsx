@@ -3,7 +3,7 @@ import {ChangeEvent, useState} from "react";
 
 interface IInputProps {
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
-  HTMLType: 'email' | 'text' | 'password';
+  HTMLType: 'email' | 'text' | 'password' |'date' | 'number';
   iconType?: 'person' | 'mail' | 'password' | 'search-icon-gray';
   value?: string;
   placeholder?: string;
@@ -11,10 +11,12 @@ interface IInputProps {
   extraContentClass?: string;
   defaultValue?: string;
   error?: any;
+  id?: string;
+  labelText?: string;
   hookFormValues?: UseFormRegisterReturn<string>;
 }
 
-export function Input({ onChange, HTMLType, iconType, value, placeholder, extraBoxClass, extraContentClass, defaultValue, error, hookFormValues }: IInputProps) {
+export function Input({ onChange, HTMLType, iconType, value, placeholder, extraBoxClass, extraContentClass, defaultValue, error, id, labelText, hookFormValues }: IInputProps) {
   const [type, setType] = useState<string>(HTMLType);
   const [passwordIcon, setPasswordIcon] = useState<string>('show-password');
 
@@ -29,7 +31,10 @@ export function Input({ onChange, HTMLType, iconType, value, placeholder, extraB
   };
 
   return (
-    <>
+    <div>
+      {labelText && (
+        <label htmlFor={id} className={`text-xl mb-2 text-text-black mb-2`}>{labelText}</label>
+      )}
       <div className={`bg-custom-gray rounded-[10px] border w-[316px] md:w-80 ${extraBoxClass} ${error ? 'border-input-error' : 'border-transparent'}`}>
         <div className={`flex items-center h-48px w-full overflow-hidden p-3.5 ${extraContentClass}`}>
           {iconType &&
@@ -45,7 +50,8 @@ export function Input({ onChange, HTMLType, iconType, value, placeholder, extraB
             defaultValue={defaultValue}
             placeholder={placeholder}
             aria-invalid={error ? 'true' : 'false'}
-            className={`h-full w-full outline-none text-black bg-inherit px-3 font-normal text-base md:text-lg`}
+            className={`h-full w-full outline-none text-text-black bg-inherit px-3 font-normal text-base md:text-lg`}
+            id={id}
           />
           {(HTMLType === 'password') &&
             <div
@@ -55,6 +61,6 @@ export function Input({ onChange, HTMLType, iconType, value, placeholder, extraB
             />}
         </div>
       </div>
-    </>
+    </div>
   )
 }

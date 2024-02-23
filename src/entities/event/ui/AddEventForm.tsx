@@ -1,5 +1,14 @@
 import {ReactElement} from "react";
 import {Button, Input} from "@/shared";
+import SelectInput from "@/shared/ui/SelectInput";
+
+const people = [
+  { id: 1, name: 'Durward Reynolds', unavailable: false },
+  { id: 2, name: 'Kenton Towne', unavailable: false },
+  { id: 3, name: 'Therese Wunsch', unavailable: false },
+  { id: 4, name: 'Benedict Kessler', unavailable: true },
+  { id: 5, name: 'Katelyn Rohan', unavailable: false },
+]
 
 export default function AddEventForm(): ReactElement {
 
@@ -10,32 +19,10 @@ export default function AddEventForm(): ReactElement {
         labelText='Название'
         placeholder='Введите название'
         id='add-event-name'
+        extraBoxClass={'w-[480px] md:w-[480px] mt-[7px]'}
+        extraContentClass={'h-[44px]'}
       />
-
-      <Input
-        HTMLType='text'
-        labelText='Категория'
-        placeholder='Выберите'
-        id='add-event-category'
-      />
-
-      <div>
-        <Input
-        HTMLType='text'
-        iconType='search-icon-gray'
-        labelText='Тэги (необязательно)'
-        placeholder='Ищите теги'
-        id='add-event-name'
-      />
-        <p className='text-text-light-gray mt-2'>Тезисно опишите свое мероприятие</p>
-      </div>
-
-      <Input
-        HTMLType='text'
-        labelText='Галерея фото (необязательно)'
-        placeholder='Загрузите дополнительные фото'
-        id='add-event-photos'
-      />
+      <SelectInput labelText={"Категория"} options={people}/>
 
       <Input
         HTMLType='text'
@@ -82,6 +69,24 @@ export default function AddEventForm(): ReactElement {
           placeholder='Выберите'
           id='add-event-type'
         />
+      </div>
+
+      <Input
+        HTMLType='text'
+        labelText='Галерея фото (необязательно)'
+        placeholder='Загрузите дополнительные фото'
+        id='add-event-photos'
+      />
+
+      <div>
+        <Input
+          HTMLType='text'
+          iconType='search-icon-gray'
+          labelText='Тэги (необязательно)'
+          placeholder='Ищите теги'
+          id='add-event-name'
+        />
+        <p className='text-text-light-gray mt-2'>Тезисно опишите свое мероприятие</p>
       </div>
 
       <Button type={'primary'} HTMLType={'submit'}>Создать</Button>

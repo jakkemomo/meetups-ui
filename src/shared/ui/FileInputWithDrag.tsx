@@ -61,10 +61,10 @@ export function FileInputWithDrag(): ReactElement {
       <label onDragEnter={handleDrag} onDragOver={handleDrag} onDragLeave={handleDrag} onDrop={handleDrop} htmlFor="input-upload-file" className={`bg-gray flex flex-col items-center max-w-[270px] rounded-[10px] box-border h-[170px] overflow-hidden flex items-center justify-center ${isDragActive ? "border-dashed border-2 border-text-light-gray" : ""}`}>
         {
           imageState.isImageUpload ? (
-            <img className="object-cover" src={imageState.src} />
+            <img className="object-cover" src={imageState.src} alt="Ваше загруженное изображение" />
           ) : (
             <>
-              <img className="mt-[45px]" src={addImageIcon} />
+              <img className="mt-[45px]" src={addImageIcon} alt="Поле для загрузки фото" />
               <p className="text-[18px] text-text-light-gray mt-5 mb-[22px] leading-[22.59px]">Загрузите главное фото</p>
             </>
           )

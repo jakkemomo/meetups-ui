@@ -1,6 +1,5 @@
 import {ReactElement} from "react";
-import {Button, Input} from "@/shared";
-import SelectInput from "@/shared/ui/SelectInput";
+import {Button, Input, SelectInput, LargeTextInput} from "@/shared";
 
 const people = [
   { id: 1, name: 'Durward Reynolds', unavailable: false },
@@ -22,13 +21,15 @@ export default function AddEventForm(): ReactElement {
         extraBoxClass={'w-[480px] md:w-[480px] mt-[7px]'}
         extraContentClass={'h-[44px]'}
       />
-      <SelectInput labelText={"Категория"} options={people}/>
-
-      <Input
-        HTMLType='text'
+      <SelectInput
+        labelText='Категория'
+        options={people}
+      />
+      
+      <LargeTextInput
         labelText='Описание'
         placeholder='Расскажите подробнее'
-        id='add-event-description'
+        extraBoxClass={'mt-[7px]'}
       />
 
       <div className='flex'>

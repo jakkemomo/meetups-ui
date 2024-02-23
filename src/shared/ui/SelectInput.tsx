@@ -6,7 +6,7 @@ interface ISelectInputProps {
   options: any[]
 }
 
-export default function SelectInput({labelText, options}: ISelectInputProps) {
+export function SelectInput({labelText, options}: ISelectInputProps) {
   const [selectedOption, setSelectedOption] = useState("")
 
   return (
@@ -52,6 +52,5 @@ export default function SelectInput({labelText, options}: ISelectInputProps) {
         )}
       </Listbox>
     </div>
-
   )
 }

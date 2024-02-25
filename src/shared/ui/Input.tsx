@@ -9,6 +9,7 @@ interface IInputProps {
   placeholder?: string;
   extraBoxClass?: string;
   extraContentClass?: string;
+  inlineLabel?: boolean;
   defaultValue?: string;
   error?: any;
   id?: string;
@@ -16,7 +17,7 @@ interface IInputProps {
   hookFormValues?: UseFormRegisterReturn<string>;
 }
 
-export function Input({ onChange, HTMLType, iconType, value, placeholder, extraBoxClass, extraContentClass, defaultValue, error, id, labelText, hookFormValues }: IInputProps) {
+export function Input({ onChange, HTMLType, iconType, value, placeholder, extraBoxClass, extraContentClass, inlineLabel, defaultValue, error, id, labelText, hookFormValues }: IInputProps) {
   const [type, setType] = useState<string>(HTMLType);
   const [passwordIcon, setPasswordIcon] = useState<string>('show-password');
 
@@ -31,9 +32,9 @@ export function Input({ onChange, HTMLType, iconType, value, placeholder, extraB
   };
 
   return (
-    <div>
+    <div className={`flex  ${inlineLabel ? 'flex-row items-center gap-x-3.5' : 'flex-col'}`}>
       {labelText && (
-        <label htmlFor={id} className={`text-xl text-text-black mb-2`}>{labelText}</label>
+        <label htmlFor={id} className={`text-xl text-text-black`}>{labelText}</label>
       )}
       <div className={`bg-custom-gray rounded-[10px] border w-[316px] md:w-80 ${extraBoxClass} ${error ? 'border-input-error' : 'border-transparent'}`}>
         <div className={`flex items-center h-48px w-full overflow-hidden p-3.5 ${extraContentClass}`}>
@@ -50,7 +51,7 @@ export function Input({ onChange, HTMLType, iconType, value, placeholder, extraB
             defaultValue={defaultValue}
             placeholder={placeholder}
             aria-invalid={error ? 'true' : 'false'}
-            className={`h-full w-full outline-none text-text-black bg-inherit px-3 font-normal placeholder:text-text-light-gray text-base md:text-lg`}
+            className={`h-full w-full outline-none text-text-black bg-inherit px-2 font-normal placeholder:text-text-light-gray text-base md:text-lg`}
             id={id}
           />
           {(HTMLType === 'password') &&

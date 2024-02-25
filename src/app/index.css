@@ -2,6 +2,28 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer utilities {
+  .scrollbar::-webkit-scrollbar {
+    width: 4px;
+    color: rgba(153, 153, 153, 1);
+  }
+
+  .scrollbar::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background: rgba(255, 252, 252, 1);
+    margin: 15px;
+  }
+
+  .scrollbar::-webkit-scrollbar-thumb {
+    background: rgba(153, 153, 153, 0.7);
+    border-radius: 10px;
+  }
+
+  .scrollbar::-webkit-scrollbar-thumb:hover {
+    background: rgba(153, 153, 153, 1);
+  }
+}
+
 * {
   box-sizing: border-box;
 }
@@ -10,6 +32,7 @@
   max-width: 1440px;
   width: 100%;
   margin: 0 auto;
+  overflow-y: auto;
 }
 
 html,

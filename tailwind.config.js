@@ -1,5 +1,8 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
+  plugins: [
+    require('tailwind-scrollbar'),
+  ],
   content: [
     "./index.html",
     "./src/**/*.{js,jsx,ts,tsx}",
@@ -76,5 +79,4 @@ module.exports = {
       }
     },
   },
-  plugins: [],
 }

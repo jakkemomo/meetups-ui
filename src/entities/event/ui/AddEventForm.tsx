@@ -7,12 +7,28 @@ const people = [
   { id: 3, name: 'Therese Wunsch', unavailable: false },
   { id: 4, name: 'Benedict Kessler', unavailable: true },
   { id: 5, name: 'Katelyn Rohan', unavailable: false },
+  { id: 6, name: 'Durward Reynolds', unavailable: false },
+  { id: 7, name: 'Kenton Towne', unavailable: false },
+  { id: 8, name: 'Therese Wunsch', unavailable: false },
+  { id: 9, name: 'Benedict Kessler', unavailable: true },
+  { id: 10, name: 'Katelyn Rohan', unavailable: false },
+]
+
+const typeOfEvent = [
+  { id: 1, name: 'Публичное', unavailable: false },
+  { id: 2, name: 'По ссылке', unavailable: false },
+]
+
+const currency = [
+  { id: 1, name: 'BYN', unavailable: false },
+  { id: 2, name: 'USD', unavailable: false },
+  { id: 3, name: 'RUB', unavailable: false },
 ]
 
 export default function AddEventForm(): ReactElement {
 
   return (
-    <form noValidate className="flex flex-col gap-[30px] ">
+    <form noValidate className="flex flex-col gap-[30px] scrollbar">
       <Input
         HTMLType='text'
         labelText='Название'
@@ -21,16 +37,65 @@ export default function AddEventForm(): ReactElement {
         extraBoxClass={'w-[480px] md:w-[480px] mt-[7px]'}
         extraContentClass={'h-[44px]'}
       />
+
       <SelectInput
         labelText='Категория'
         options={people}
+        placeholder='Выберите категорию'
       />
-      
+
       <LargeTextInput
         labelText='Описание'
         placeholder='Расскажите подробнее'
         extraBoxClass={'mt-[7px]'}
       />
+
+      <Input
+        HTMLType='number'
+        labelText='Количество мест'
+        placeholder='25'
+        id='add-event-people-number'
+        inlineLabel={true}
+        extraBoxClass={'w-[70px] md:w-[70px]  mt-[7px]'}
+        extraContentClass={'h-[44px]'}
+      />
+
+      <div className={`flex items-center`}>
+        <Input
+          HTMLType='number'
+          labelText='Возраст участников'
+          placeholder='18'
+          id='add-event-people-age'
+          inlineLabel={true}
+          extraBoxClass={'w-[70px] md:w-[70px]  mt-[7px]'}
+          extraContentClass={'h-[44px]'}
+        />
+        <p className={`text-xl text-text-black font-medium ml-1.5`}>+</p>
+      </div>
+
+      <SelectInput
+        labelText='Доступ к мероприятию'
+        options={typeOfEvent}
+        placeholder='Публичное/по ссылке'
+      />
+
+      <div className={'flex items-center'}>
+        <Input
+          HTMLType='number'
+          labelText='Стоимость'
+          placeholder='12'
+          id='add-event-price'
+          inlineLabel={true}
+          extraBoxClass={'w-[92px] md:w-[92px] mr-1.5'}
+          extraContentClass={'h-[44px]'}
+        />
+        <SelectInput
+          extraBoxClass={'w-[90px] my-auto'}
+          extraContentClass={'pl-[14px] pr-[10px]'}
+          options={currency}
+        />
+      </div>
+
 
       <div className='flex'>
         <Input
@@ -48,28 +113,6 @@ export default function AddEventForm(): ReactElement {
           />
           <p className='text-text-light-gray mt-2'>Необязательное поле</p>
         </div>
-      </div>
-
-      <Input
-        HTMLType='text'
-        labelText='Адрес'
-        placeholder='Введите адрес'
-        id='add-event-address'
-      />
-      <div className='flex'>
-        <Input
-          HTMLType='number'
-          labelText='Количество людей'
-          placeholder='Введите число'
-          id='add-event-people-number'
-        />
-
-        <Input
-          HTMLType='text'
-          labelText='Тип'
-          placeholder='Выберите'
-          id='add-event-type'
-        />
       </div>
 
       <Input

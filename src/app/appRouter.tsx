@@ -49,40 +49,24 @@ export const appRouter = createBrowserRouter([
     ]
   },
   {
-    element: <AuthLayout/>,
+    element: <AuthGuard><AuthLayout/></AuthGuard>,
     errorElement: <div>error</div>,
     children: [
       {
         path: 'login',
-        element: (
-            <AuthGuard>
-              <LoginPage/>
-            </AuthGuard>
-        ),
+        element: <LoginPage/>,
       },
       {
         path: 'register',
-        element: (
-            <AuthGuard>
-              <RegistrationPage/>
-            </AuthGuard>
-        ),
+        element: <RegistrationPage/>,
       },
       {
         path: 'password/reset/',
-        element: (
-            <AuthGuard>
-              <ResetPasswordPage type='ENTER_EMAIL'/>
-            </AuthGuard>
-        ),
+        element: <ResetPasswordPage type='ENTER_EMAIL'/>,
       },
       {
         path: 'password/reset/confirm/',
-        element: (
-            <AuthGuard>
-              <ResetPasswordPage type='ENTER_NEW_PASSWORD'/>
-            </AuthGuard>
-        ),
+        element: <ResetPasswordPage type='ENTER_NEW_PASSWORD'/>,
       },
     ]
   },

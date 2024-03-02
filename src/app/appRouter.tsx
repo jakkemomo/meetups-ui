@@ -54,19 +54,35 @@ export const appRouter = createBrowserRouter([
     children: [
       {
         path: 'login',
-        element: <LoginPage/>,
+        element: (
+            <AuthGuard>
+              <LoginPage/>
+            </AuthGuard>
+        ),
       },
       {
         path: 'register',
-        element: <RegistrationPage/>,
+        element: (
+            <AuthGuard>
+              <RegistrationPage/>
+            </AuthGuard>
+        ),
       },
       {
         path: 'password/reset/',
-        element: <ResetPasswordPage type='ENTER_EMAIL'/>,
+        element: (
+            <AuthGuard>
+              <ResetPasswordPage type='ENTER_EMAIL'/>
+            </AuthGuard>
+        ),
       },
       {
         path: 'password/reset/confirm/',
-        element: <ResetPasswordPage type='ENTER_NEW_PASSWORD'/>,
+        element: (
+            <AuthGuard>
+              <ResetPasswordPage type='ENTER_NEW_PASSWORD'/>
+            </AuthGuard>
+        ),
       },
     ]
   },

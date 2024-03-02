@@ -2,7 +2,7 @@ import {InputWithFilter} from "@/features/globalFilter";
 import Logo from "./Logo";
 import React, {ReactElement} from "react";
 import {useNavigate} from "react-router-dom";
-import {ProfileButton} from "@/widgets/LayoutProfileCard";
+import {ProfileButton} from "@/widgets/ProfileButton";
 import {LogoutButton} from "@/features/authentication/logout";
 import {Button} from "@/shared";
 import {selectAccessToken, selectRefreshToken} from "@/shared/lib";
@@ -20,10 +20,9 @@ export function Header(): ReactElement {
         <header className="w-full flex items-center">
             <Logo/>
             <InputWithFilter/>
-            {/*<div className="bg-burger-menu-icon w-7 h-[25px] bg-cover bg-no-repeat bg-center ml-[364.4px] cursor-pointer"></div>*/}
             <div className="ml-[364.4px]">
                 {!access && <Button HTMLType='button' type='secondary' onClick={onLoginClick}>Войти</Button>}
-                {access &&  <ProfileButton access={access}/>}
+                {access &&  <ProfileButton/>}
                 {refresh && <LogoutButton refresh={refresh}/>}
             </div>
         </header>

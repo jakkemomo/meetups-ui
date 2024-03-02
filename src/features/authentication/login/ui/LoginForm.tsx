@@ -57,7 +57,7 @@ export function LoginForm({onComplete}: ILoginFormProps): ReactElement {
           hookFormValues={register('email')}
         />
         <Input
-          extraClass='mt-3.5'
+          extraBoxClass='mt-3.5'
           HTMLType='password'
           iconType='password'
           placeholder='Пароль'

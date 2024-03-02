@@ -9,6 +9,7 @@ import {AuthLayout} from "@/app/layouts/authLayout";
 import ResetPasswordPage from "@/pages/reset-password/ResetPasswordPage";
 import {selectAccessToken} from "@/shared/lib";
 
+
 interface GuestGuardProps {
   children: ReactElement
 }
@@ -37,7 +38,7 @@ export const appRouter = createBrowserRouter([
       {
         path: '/',
         element: (
-          <HomePage/>
+          <HomePage />
         ),
       },
       {

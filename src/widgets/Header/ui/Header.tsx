@@ -1,4 +1,4 @@
-import {InputWithFilter} from "@/features/globalFilter";
+import {InputWithFilter} from "@/features/searchFilter";
 import Logo from "./Logo";
 import React, {ReactElement} from "react";
 import {useNavigate} from "react-router-dom";

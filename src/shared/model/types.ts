@@ -19,3 +19,8 @@ export interface SessionDto {
 export interface AccessTokenDto {
   access: string,
 }
+
+export interface IUploadImageResponse {
+  url: string;
+  test_url: string;
+}

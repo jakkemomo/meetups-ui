@@ -9,7 +9,7 @@ export function makeStore() {
     reducer: rootReducer,
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware().concat(
-            baseApi.middleware, jwtApi.middleware,
+            baseApi.middleware, jwtApi.middleware
         ),
   })
 

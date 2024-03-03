@@ -13,6 +13,7 @@ export const baseQuery: BaseQueryFn<
   baseUrl: config.BASE_URL_API,
   prepareHeaders: (headers) => {
     console.log('Envs', import.meta.env)
+    console.log('Envs System', process.env)
     console.log(config.BASE_URL_API)
     let accessToken = selectAccessToken();
 

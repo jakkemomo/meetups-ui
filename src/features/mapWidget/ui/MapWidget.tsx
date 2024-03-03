@@ -11,7 +11,7 @@ export function MapWidget(): ReactElement {
   const { data: markers = {features: []}, isLoading, isError } = useGetMarkersQuery();
 
   isError && console.log('Ошибка при получении mapMarkers');
-
+  console.log(mapId, apiKey, 'Google')
   return (
     <APIProvider apiKey={apiKey}>
       <Map zoom={13} center={position} mapId={mapId} disableDefaultUI={true} className="w-full h-[365px] mt-[50px] rounded-[12px]">

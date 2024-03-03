@@ -12,6 +12,7 @@ export const baseQuery: BaseQueryFn<
 > = fetchBaseQuery({
   baseUrl: config.BASE_URL_API,
   prepareHeaders: (headers) => {
+    console.log(config.BASE_URL_API)
     let accessToken = selectAccessToken();
 
     if (accessToken) {

@@ -5,9 +5,14 @@ import { resolve } from 'path'
 
 // https://vitejs.dev/config/
 export default defineConfig(({ command, mode }) => {
-  process.env = { ...process.env, ...loadEnv(mode, process.cwd(), '') };
+  const env = loadEnv(mode, process.cwd(), '');
   return {
     plugins: [react()],
+    define: {
+      'process.env.VITE_APP_BASE_URL_API': JSON.stringify(env.BASE_URL_API),
+      'process.env.VITE_APP_GOOGLE_MAP_API_KEY': JSON.stringify(env.GOOGLE_MAP_API_KEY),
+      'process.env.VITE_APP_GOOGLE_MAP_ID': JSON.stringify(env.GOOGLE_MAP_ID),
+    },
     resolve: {
       alias: [{find: "@", replacement: resolve(__dirname, "./src")}],
     },

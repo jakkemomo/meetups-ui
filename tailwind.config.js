@@ -34,6 +34,7 @@ module.exports = {
       colors: {
         'main-purple': 'rgb(87, 84, 198)',
         'custom-gray': 'rgb(237, 237, 237)',
+        'main-blue': 'rgb(94, 92, 206)',
         'main-dark-blue': 'rgb(49, 46, 112)',
         'hover-pink': 'rgb(188, 115, 206)',
         'input-error': 'rgb(202, 106, 106)',
@@ -44,7 +45,8 @@ module.exports = {
         'text-light-gray': 'rgb(153, 153, 153);',
         'text-black': 'rgb(46, 46, 46)',
         'text-red': 'rgb(187, 16, 16)',
-        'text-light-gray': 'rgb(153, 153, 153)'
+        'text-light-gray': 'rgb(153, 153, 153)',
+        'toggle-color': 'rgb(185, 185, 186, 1)',
       },
       padding: {
         '60': '60px',

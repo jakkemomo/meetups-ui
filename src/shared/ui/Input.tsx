@@ -3,7 +3,7 @@ import {ChangeEvent, useState} from "react";
 
 interface IInputProps {
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
-  HTMLType: 'email' | 'text' | 'password' |'date' | 'number';
+  HTMLType: 'email' | 'text' | 'password' |'date' | 'number' | 'time';
   iconType?: 'person' | 'mail' | 'password' | 'search-icon-gray';
   value?: string;
   placeholder?: string;

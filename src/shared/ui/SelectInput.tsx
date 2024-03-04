@@ -2,14 +2,15 @@ import {Fragment, useEffect, useState} from 'react'
 import { Listbox } from '@headlessui/react'
 
 interface ISelectInputProps {
-  labelText?: string,
-  placeholder?: string,
-  extraBoxClass?: string,
-  extraContentClass?: stirng,
+  labelText?: string;
+  placeholder?: string;
+  extraBoxClass?: string;
+  extraContentClass?: string;
+  extraDropdownClass?: string;
   options: any[]
 }
 
-export function SelectInput({options, labelText, placeholder, extraBoxClass, extraContentClass}: ISelectInputProps) {
+export function SelectInput({options, labelText, placeholder, extraBoxClass, extraContentClass, extraDropdownClass}: ISelectInputProps) {
   const [selectedOption, setSelectedOption] = useState("")
 
   useEffect(() => {
@@ -48,7 +49,7 @@ export function SelectInput({options, labelText, placeholder, extraBoxClass, ext
             </Listbox.Button>
               <Listbox.Options
                 as='div'
-                className={`flex flex-col bg-custom-gray rounded-[10px] w-[480px] max-h-[170px] pl-[22px] py-3 mt-1 absolute z-10 ${placeholder ? 'top-[80px]' : 'top-11'} left-0 overflow-y-auto scrollbar`}
+                className={`flex flex-col bg-custom-gray rounded-[10px] w-[480px] max-h-[170px] pl-[22px] py-3 mt-1 absolute z-10 ${extraDropdownClass} ${placeholder ? 'top-[80px]' : 'top-11'} left-0 overflow-y-auto scrollbar`}
               >
                 {options.map((option) => (
                   <Listbox.Option

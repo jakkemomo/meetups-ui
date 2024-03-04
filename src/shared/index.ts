@@ -5,6 +5,7 @@ export { BackgroundCard } from './ui/BackgroundCard';
 export { Layout } from './ui/Layout';
 export { Selector } from './ui/Selector';
 export { SlickSlider } from './ui/SlickSlider/SlickSlider';
-export { InputErrorMessage } from './ui/InputErrorMessage'
-export { SelectInput } from './ui/SelectInput'
-export { LargeTextInput } from './ui/LargeTextInput'
+export { InputErrorMessage } from './ui/InputErrorMessage';
+export { SelectInput } from './ui/SelectInput';
+export { LargeTextInput } from './ui/LargeTextInput';
+export { SwitchInput } from './ui/SwitchInput';

@@ -1,5 +1,5 @@
 import {ReactElement} from "react";
-import {Button, Input, SelectInput, LargeTextInput} from "@/shared";
+import {Button, Input, SelectInput, LargeTextInput, SwitchInput} from "@/shared";
 
 const people = [
   { id: 1, name: 'Durward Reynolds', unavailable: false },
@@ -50,15 +50,71 @@ export default function AddEventForm(): ReactElement {
         extraBoxClass={'mt-[7px]'}
       />
 
-      <Input
-        HTMLType='number'
-        labelText='Количество мест'
-        placeholder='25'
-        id='add-event-people-number'
-        inlineLabel={true}
-        extraBoxClass={'w-[70px] md:w-[70px]  mt-[7px]'}
-        extraContentClass={'h-[44px]'}
-      />
+      <div className='flex items-center relative'>
+        <Input
+          HTMLType='date'
+          labelText='Дата'
+          placeholder='Начало'
+          id='add-event-start-date'
+          extraBoxClass={'w-[480px] md:w-[480px] mt-[7px]'}
+          extraContentClass={'h-[44px]'}
+        />
+        <div
+          className='w-4 h-0.5 mx-3.5 mt-8'
+          style={{ backgroundImage: `url("/images/line-icon.svg")` }}
+        />
+        <div className='self-end relative'>
+          <Input
+            HTMLType='date'
+            placeholder='Конец'
+            id='add-event-end-date'
+            extraBoxClass={'w-[480px] md:w-[480px] mt-[7px]'}
+            extraContentClass={'h-[44px]'}
+          />
+          <p className='text-text-light-gray mt-2 absolute bottom-[-26px] left-0'>Необязательное поле</p>
+        </div>
+      </div>
+
+      <div className='flex items-center relative'>
+        <Input
+          HTMLType='time'
+          labelText='Время'
+          placeholder='Начало'
+          id='add-event-start-time'
+          extraBoxClass={'w-[480px] md:w-[480px] mt-[7px]'}
+          extraContentClass={'h-[44px]'}
+        />
+        <div
+          className='w-4 h-0.5 mx-3.5 mt-8'
+          style={{ backgroundImage: `url("/images/line-icon.svg")` }}
+        />
+        <div className='self-end relative'>
+          <Input
+            HTMLType='time'
+            placeholder='Конец'
+            id='add-event-end-time'
+            extraBoxClass={'w-[480px] md:w-[480px] mt-[7px]'}
+            extraContentClass={'h-[44px]'}
+          />
+          <p className='text-text-light-gray mt-2 absolute bottom-[-26px] left-0'>Необязательное поле</p>
+        </div>
+      </div>
+
+      <div className={'flex'}>
+        <Input
+          HTMLType='number'
+          labelText='Количество мест'
+          placeholder='25'
+          id='add-event-people-number'
+          inlineLabel={true}
+          extraBoxClass={'w-[70px] md:w-[70px] mt-[7px]'}
+          extraContentClass={'h-[44px]'}
+        />
+        <SwitchInput
+          labelText={'Места не ограничены'}
+          extraBoxClass={'ml-[60px]'}
+        />
+      </div>
 
       <div className={`flex items-center`}>
         <Input
@@ -92,27 +148,13 @@ export default function AddEventForm(): ReactElement {
         <SelectInput
           extraBoxClass={'w-[90px] my-auto'}
           extraContentClass={'pl-[14px] pr-[10px]'}
+          extraDropdownClass={'w-[90px]'}
           options={currency}
         />
-      </div>
-
-
-      <div className='flex'>
-        <Input
-          HTMLType='date'
-          labelText='Дата'
-          placeholder='Начало'
-          id='add-event-start-date'
+        <SwitchInput
+          labelText={'Бесплатное'}
+          extraBoxClass={'ml-[60px]'}
         />
-        <div className='self-end'>
-          <Input
-            HTMLType='date'
-            labelText='Дата'
-            placeholder='Конец'
-            id='add-event-end-date'
-          />
-          <p className='text-text-light-gray mt-2'>Необязательное поле</p>
-        </div>
       </div>
 
       <Input

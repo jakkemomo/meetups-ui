@@ -1,6 +1,7 @@
 import {ReactElement} from "react";
 import {Button, Input, SelectInput, LargeTextInput, SwitchInput} from "@/shared";
 
+// mock data for testing
 const people = [
   { id: 1, name: 'Durward Reynolds', unavailable: false },
   { id: 2, name: 'Kenton Towne', unavailable: false },

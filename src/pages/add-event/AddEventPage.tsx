@@ -1,5 +1,5 @@
 import {ReactElement} from "react";
-import AddEventForm from "@/entities/event/ui/AddEventForm";
+import AddEventForm from "@/features/event/addEvent/ui/AddEventForm";
 
 function AddEventPage(): ReactElement {
 

@@ -55,6 +55,8 @@ export function LoginForm({onComplete}: ILoginFormProps): ReactElement {
           placeholder='Почта'
           error={errors.email}
           hookFormValues={register('email')}
+          extraContentClass="p-3.5"
+          extraInputClass="px-3"
         />
         <Input
           extraBoxClass='mt-3.5'
@@ -63,6 +65,8 @@ export function LoginForm({onComplete}: ILoginFormProps): ReactElement {
           placeholder='Пароль'
           error={errors.password}
           hookFormValues={register('password')}
+          extraContentClass="p-3.5"
+          extraInputClass="px-3"
         />
         <Link
           to='/password/reset/'

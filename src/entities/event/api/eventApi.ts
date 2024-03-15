@@ -1,12 +1,6 @@
 import { baseApi } from "@/shared/api";
 import { IEvent } from "../model/types";
-
-interface IApiResponse<T> {
-  count: number;
-  next: string | null;
-  previous: string | null;
-  results: T;
-}
+import { IApiResponse } from "@/shared/types";
 
 interface IApiRequest {
   search?: string;

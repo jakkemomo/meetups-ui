@@ -27,12 +27,12 @@ export function Header(): ReactElement {
             <InputWithFilter/>
             {/*<div className="bg-burger-menu-icon w-7 h-[25px] bg-cover bg-no-repeat bg-center ml-[364.4px] cursor-pointer"></div>*/}
             {!isAuthorized && (
-                <div className="ml-[364.4px]">
+                <div className="ml-auto">
                     <Button HTMLType='button' type='secondary' onClick={onLoginClick}>Войти</Button>
                 </div>
             )}
             {refreshToken && accessToken && (
-                <div className="ml-[364.4px]">
+                <div className="ml-auto">
                     <ProfileButton access={accessToken}/>
                     <LogoutButton refresh={refreshToken}/>
                 </div>

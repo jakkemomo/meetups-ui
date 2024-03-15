@@ -72,7 +72,9 @@ module.exports = {
         'close-cross': "url('images/close-cross.svg')",
         'checkbox': "url('images/checkbox.svg')",
         'checkbox-checked': "url('images/checkbox-checked.svg')",
-        'check': "url('images/check.svg')"
+        'check': "url('images/check.svg')",
+        'event-card-people': "url('images/event-card-people.png')",
+        'selector-triangle': "url('images/selector-triangle.png')"
       },
       borderRadius: {
         '12': '12px',

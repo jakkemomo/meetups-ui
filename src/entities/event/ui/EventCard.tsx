@@ -18,16 +18,19 @@ export function EventCard({ event }: IEventCard): ReactElement {
       <figure className="flex flex-col cursor-pointer rounded-12 max-h-[188px] mt-[7px]">
         <img className="rounded-t-12 h-[143px] object-cover" src={`https://storage.googleapis.com/meetups-dev/media/${event.image_url}`} alt={`Изображение ивента ${event.name}`} />
         <div className={`h-[45px] bg-gray rounded-b-12 flex items-center justify-center pl-[16px] pr-[7px] relative ${event.name.length > 21 && "before:w-[60px] before:rounded-b-[12px] before:absolute before:right-0 before:h-full before:bg-text-fade-out"}`}>
-          <figcaption className="capitalize text-[20px] font-bold text-text-black overflow-hidden whitespace-nowrap text-clip">{event.name}</figcaption>
+          <figcaption className="capitalize text-[20px] font-semibold text-text-black overflow-hidden whitespace-nowrap text-clip">{event.name}</figcaption>
         </div>
       </figure>
       <div className="flex justify-between mt-[10px]">
         <div className="flex flex-col">
-          <p className="text-[18px] font-semibold">{eventDate}</p>
-          <p className="text-[18px] font-semibold mt-[2px]">{eventTime}</p>
+          <p className="text-[18px] font-medium">{eventDate}</p>
+          <p className="text-[18px] font-medium mt-[2px]">{eventTime}</p>
         </div>
         <div className="flex flex-col mt-[4px]">
-          <p className="text-[14px] font-medium">5 км от вас</p>
+          <div className="flex items-center">
+            <p className="text-[14px]">6/12</p>
+            <div className="w-6 h-6 bg-event-card-people bg-no-repeat bg-center ml-1"></div>
+          </div>
             {
               event.rating && (
                 <div className="flex items-center mt-[8px]">

@@ -3,8 +3,8 @@ import { autocompleteServiceSetted, placesServiceSetted } from "@/widgets/mapWid
 import { ControlPosition, MapControl, useMap, useMapsLibrary } from "@vis.gl/react-google-maps";
 import { ReactElement, useEffect } from "react";
 
-export function CustomMapControl(): ReactElement {
-  const map = useMap('map');
+export function AddressMapControl(): ReactElement {
+  const map = useMap();
   const places = useMapsLibrary('places');
   const dispatch = useAppDispatch();
 
@@ -13,8 +13,7 @@ export function CustomMapControl(): ReactElement {
 
     dispatch(autocompleteServiceSetted(new places.AutocompleteService()));
     dispatch(placesServiceSetted(new places.PlacesService(map)));
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [map, places]);
+  }, [map, places, dispatch]);
 
   return (
     <MapControl position={ControlPosition.TOP}></MapControl>

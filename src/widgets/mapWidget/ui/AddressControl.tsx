@@ -1,7 +1,7 @@
 import { useAppDispatch, useAppSelector } from "@/shared/model";
 import { useMapsLibrary } from "@vis.gl/react-google-maps";
 import { FormEvent, ReactElement, useState } from "react";
-import { selectedPlaceSetted } from "../model/addressControlSlice";
+import { implementMarkerSetted, selectedPlaceSetted } from "../model/addressControlSlice";
 import { Input } from "@/shared";
 
 export function AddressControl(): ReactElement {
@@ -25,6 +25,13 @@ export function AddressControl(): ReactElement {
       dispatch(selectedPlaceSetted(placeDetails));
       setPredictionResults([]);
       setInputValue(placeDetails?.formatted_address ?? '');
+
+      if (!placeDetails?.geometry?.location?.lng || !placeDetails.geometry.location.lat) return;
+
+      const lng = placeDetails.geometry.location.lng();
+      const lat = placeDetails.geometry.location.lat();
+
+      dispatch(implementMarkerSetted({lng, lat}));
     };
 
     placesService?.getDetails(detailRequestOptions, detailsRequestCallback);

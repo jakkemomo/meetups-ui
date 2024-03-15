@@ -18,7 +18,7 @@ export function MapWidget({ text, position, zoom, markers, isLoading, withAddres
     <>
       {withAddressControl && <AddressControl />}
       {text && <p className="text-[20px] font-normal leading-[25.1px] mb-[7px] mt-[15px]">{text}</p>}
-      <GoogleMap position={position} markersArr={markers} isLoading={isLoading} zoom={zoom} />
+      <GoogleMap position={position} markersArr={markers} isLoading={isLoading} zoom={zoom} withAddressControl={withAddressControl} />
     </>
   )
 }

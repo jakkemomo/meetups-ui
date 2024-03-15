@@ -8,7 +8,20 @@ export function makeStore() {
   const store = configureStore({
     reducer: rootReducer,
     middleware: (getDefaultMiddleware) =>
-        getDefaultMiddleware().concat(
+        getDefaultMiddleware({
+          serializableCheck: {
+            ignoredActions: [
+              'addressControl/placesServiceSetted',
+              'addressControl/autocompleteServiceSetted',
+              'addressControl/selectedPlaceSetted'
+            ],
+            ignoredPaths: [
+              'addressControl.placesService',
+              'addressControl.autocompleteService',
+              'addressControl.selectedPlace'
+            ]
+          }
+        }).concat(
             baseApi.middleware, jwtApi.middleware,
         ),
   })

@@ -4,16 +4,18 @@ import { IApiResponse } from "@/shared/types";
 
 interface IApiRequest {
   search?: string;
+  categories?: string;
 }
 
 export const eventApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
     getEvents: build.query<IApiResponse<IEvent[]>, IApiRequest>({
-      query: ({ search }) => ({
+      query: ({ search, categories }) => ({
         url: '/events/',
         method: 'GET',
         params: {
-          search
+          search,
+          category__name__in: categories
         }
       })
     })

@@ -6,3 +6,5 @@ export { Layout } from './ui/Layout';
 export { Selector } from './ui/Selector';
 export { SlickSlider } from './ui/SlickSlider/SlickSlider';
 export { InputErrorMessage } from './ui/InputErrorMessage'
+export { Popup } from './ui/Popup';
+export { CheckboxWithValue } from './ui/CheckboxWithValue';

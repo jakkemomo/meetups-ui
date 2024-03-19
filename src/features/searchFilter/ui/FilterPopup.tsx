@@ -1,8 +1,9 @@
-import { Input } from "@/shared";
-import { ReactElement } from "react";
+import { CheckboxWithValue, Input } from "@/shared";
+import { ChangeEvent, ReactElement, useState } from "react";
 import { ICategory } from "../model/types";
 import { useAppDispatch } from "@/shared/model";
 import { isPopupOpenSetted } from "../model/filterPopupSlice";
+import { categorySetted } from "../model/SearchFilterSlice";
 
 interface IFilterPopupProps {
   categories: ICategory[];
@@ -10,6 +11,21 @@ interface IFilterPopupProps {
 
 export function FilterPopup({ categories }: IFilterPopupProps): ReactElement {
   const dispatch = useAppDispatch();
+  const [checkedCategories, setCheckedCategories] = useState<ICategory[]>([]);
+
+  const handleCheckedCategories = (e: ChangeEvent<HTMLInputElement>, category: ICategory) => {
+    e.target.checked
+    ? setCheckedCategories((state) => ([...state, category]))
+    : setCheckedCategories((state) => state.filter((el) => el.id !== category.id));
+  }
+
+  const onButtonClick = () => {
+    dispatch(isPopupOpenSetted(false));
+
+    const checkedCategoriesString = checkedCategories.map((el) => el.name).join(',');
+
+    dispatch(categorySetted(checkedCategoriesString));
+  }
 
   return (
     <>
@@ -24,10 +40,7 @@ export function FilterPopup({ categories }: IFilterPopupProps): ReactElement {
             <h3 className="text-[24px] font-semibold leading-[30.12px] w-[148px]">Катерогии</h3>
             {
               categories.map((category, index) =>
-              <div key={index} className="flex items-center mt-4">
-                <input id={String(category.id)} type="checkbox" className="relative h-5 w-5 m-0.5 cursor-pointer appearance-none rounded-[4px] border-2 border-black bg-center bg-no-repeat checked:bg-check" />
-                <label htmlFor={String(category.id)} className="text-[18px] ml-2.5">{category.name}</label>
-              </div>
+              <CheckboxWithValue key={index} id={String(category.id)} value={category.name} onChangeFunc={(e) => handleCheckedCategories(e, category)} />
             )
             }
           </div>
@@ -46,17 +59,11 @@ export function FilterPopup({ categories }: IFilterPopupProps): ReactElement {
           </div>
           <div className="ml-[65px]">
             <h3 className="text-[24px] font-semibold leading-[30.12px] w-[137px]">Стоимость</h3>
-            <div className="flex items-center mt-4">
-              <input id="paid" type="checkbox" className="relative h-5 w-5 m-0.5 cursor-pointer appearance-none rounded-[4px] border-2 border-black bg-center bg-no-repeat checked:bg-check" />
-              <label htmlFor="paid" className="text-[18px] ml-2.5">Платное</label>
-            </div>
-            <div className="flex items-center mt-3">
-              <input id="paid" type="checkbox" className="relative h-5 w-5 m-0.5 cursor-pointer appearance-none rounded-[4px] border-2 border-black bg-center bg-no-repeat checked:bg-check" />
-              <label htmlFor="free" className="text-[18px] ml-2.5">Бесплатное</label>
-            </div>
+            <CheckboxWithValue id="paid" value="Платное"/>
+            <CheckboxWithValue id="free" value="Бесплатное"/>
           </div>
         </div>
-        <button type="button" className="text-[18px] font-bold text-white bg-button-purple rounded-[10px] min-h-[44px] min-w-[127px] duration-150 hover:opacity-[0.8] self-end">Найти</button>
+        <button type="button" onClick={onButtonClick} className="text-[18px] font-bold text-white bg-button-purple rounded-[10px] min-h-[44px] min-w-[127px] duration-150 hover:opacity-[0.8] self-end">Найти</button>
       </div>
     </>
   )

@@ -10,7 +10,7 @@ export function EventCard({ event }: IEventCard): ReactElement {
   const { eventDate, eventTime } = getDateAndTime(event.start_date);
 
   return (
-    <div className="event-card flex flex-col max-w-[270px] mr-[45px]">
+    <div className="flex flex-col max-w-[270px] mr-[45px]">
       <div className="flex justify-between">
         <p className="text-[14px] font-medium capitalize">{event.category?.name}</p>
         <div className="w-[24px] h-[24px] bg-heart-icon cursor-pointer"></div>

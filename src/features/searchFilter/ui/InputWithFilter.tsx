@@ -1,15 +1,19 @@
 import { Input } from "@/shared";
 import { useAppDispatch } from "@/shared/model";
 import { setSearchFilter } from "../model/SearchFilterSlice";
-import { ChangeEvent, useState } from "react";
-import { useDebounce } from "@/shared/lib/hooks/useDebounce";
+import { ChangeEvent, useEffect, useState } from "react";
 import { isPopupOpenSetted } from "../model/filterPopupSlice";
+import { useDebounce } from "use-debounce";
 
 export function InputWithFilter() {
   const [inputValue, setInputValue] = useState('');
   const dispatch = useAppDispatch();
 
-  useDebounce({ value: inputValue, func: () => dispatch(setSearchFilter(inputValue)), delay: 500 });
+  const [debouncedValue] = useDebounce(inputValue, 700);
+
+  useEffect(() => {
+    dispatch(setSearchFilter(debouncedValue));
+  }, [debouncedValue, dispatch]);
 
   return (
     <div className="flex items-center ml-[235px]">

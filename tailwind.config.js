@@ -38,6 +38,7 @@ module.exports = {
         'gray': 'rgb(229, 229, 227);',
         'transparent-gray': 'rgb(255, 250, 250)',
         'text-gray': 'rgb(84, 84, 84)',
+        'text-light-gray': 'rgb(153, 153, 153);',
         'text-black': 'rgb(46, 46, 46)',
         'text-red': 'rgb(187, 16, 16)',
         'popup-bg': 'rgba(26, 26, 26, .4)',

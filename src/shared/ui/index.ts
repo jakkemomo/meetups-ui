@@ -5,3 +5,4 @@ export { Modal } from './Modal';
 export { BackgroundCard } from './BackgroundCard';
 export { Layout } from './Layout'
 export { FormWrapper } from "./FormWrapper";
+export { FileInputWithDrag } from './FileInputWithDrag';

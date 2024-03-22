@@ -3,6 +3,7 @@ import {baseQuery} from './baseQuery'
 import {Mutex} from 'async-mutex'
 import {jwtApi} from "@/shared/api/baseApi";
 import {BaseQueryFn} from "@reduxjs/toolkit/query/react";
+import {selectRefreshToken} from "@/shared/lib";
 
 const mutex: Mutex = new Mutex()
 
@@ -16,8 +17,7 @@ export const baseQueryWithReauth: BaseQueryFn<
   console.debug(api.endpoint, 'ENDPOINT')
   let result = await baseQuery(args, api, extraOptions)
   if (result.error && result.error.status === 401) {
-    let state = api.getState() as RootState
-    let refreshToken = state.session.refresh
+    let refreshToken = selectRefreshToken()
     if (!mutex.isLocked() && refreshToken) {
       const release = await mutex.acquire()
       try {

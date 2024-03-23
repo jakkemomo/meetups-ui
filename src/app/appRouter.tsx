@@ -8,6 +8,7 @@ import {AuthLayout} from "@/app/layouts/authLayout";
 import ResetPasswordPage from "@/pages/reset-password/ResetPasswordPage";
 import {selectAccessToken} from "@/shared/lib";
 import {HomePage} from "@/pages/home/HomePage.tsx";
+import {EventPage} from "@/pages/event/DetailedEventPage.tsx";
 
 
 interface GuestGuardProps {
@@ -40,6 +41,12 @@ export const appRouter = createBrowserRouter([
         element: (
           <HomePage/>
         ),
+      },
+      {
+        path: '/events/:eventId',
+        element: (
+          <EventPage/>
+        )
       },
       {
         path: '*',

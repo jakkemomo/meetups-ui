@@ -1,6 +1,7 @@
-import { ReactElement} from "react";
+import {ReactElement} from "react";
 import {IEvent} from "../model/types";
 import {getDateAndTime} from "../lib/getDateAndTime";
+import { Link } from "react-router-dom";
 
 export interface IEventCard {
   event: IEvent;
@@ -10,11 +11,11 @@ export function EventCard({ event }: IEventCard): ReactElement {
   const { eventDate, eventTime } = getDateAndTime(event.start_date);
 
   return (
-    <div className="flex flex-col max-w-[270px] mr-[45px]">
-      <div className="flex justify-between">
-        <p className="text-[14px] font-medium capitalize">{event.category?.name}</p>
-        <div className="w-[24px] h-[24px] bg-heart-icon cursor-pointer"></div>
-      </div>
+      <Link to={`/events/${event.id}`} className="flex flex-col max-w-[270px] mr-[45px]">
+          <div className="flex justify-between">
+              <p className="text-[14px] font-medium capitalize">{event.category?.name}</p>
+              <div className="w-[24px] h-[24px] bg-heart-icon cursor-pointer"></div>
+          </div>
       <figure className="flex flex-col cursor-pointer rounded-12 max-h-[188px] mt-[7px]">
         <img className="rounded-t-12 h-[143px] object-cover" src={`https://storage.googleapis.com/meetups-dev/media/${event.image_url}`} alt={`Изображение ивента ${event.name}`} />
         <div className={`h-[45px] bg-gray rounded-b-12 flex items-center justify-center pl-[16px] pr-[7px] relative ${event.name.length > 21 && "before:w-[60px] before:rounded-b-[12px] before:absolute before:right-0 before:h-full before:bg-text-fade-out"}`}>
@@ -41,6 +42,6 @@ export function EventCard({ event }: IEventCard): ReactElement {
             }
         </div>
       </div>
-    </div>
+    </Link>
   )
 }

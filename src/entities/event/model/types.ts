@@ -15,4 +15,5 @@ export interface IEvent {
   address: string,
   category: IEventTag | null,
   participants_number: number,
+  desired_participants_number: number
 }

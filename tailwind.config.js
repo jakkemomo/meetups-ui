@@ -67,6 +67,7 @@ module.exports = {
         'right-arrow': "url('images/right-arrow.png')",
         'black-right-arrow': "url('images/black-right-arrow.png')",
         'heart-icon': "url('images/heart-icon.png')",
+        'user-profile-group': "url('images/user-profile-group.svg')",
         'rating-star': "url('images/rating-star.png')",
         'text-fade-out': "linear-gradient(to right, transparent, #E5E5E3 50%)",
         'slider-fade-out': "linear-gradient(to right, transparent, #FFFEFC 60%)",

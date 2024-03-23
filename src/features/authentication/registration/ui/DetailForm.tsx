@@ -8,6 +8,7 @@ import {
 } from "@/features/authentication/registration/model/RegisterFormSchema";
 import {useAppDispatch, useAppSelector} from "@/shared/model";
 import {selectUserData, userDataFilled} from "../model/formState";
+import { useCheckEmailMutation } from "@/entities/session/api/sessionApi";
 
 
 export function DetailForm(): ReactElement {
@@ -15,6 +16,7 @@ export function DetailForm(): ReactElement {
 
     const {
       formState: { errors, isValid, isSubmitted },
+      setError,
       handleSubmit,
       register,
     } = useForm<UserDataValidationSchema>({
@@ -24,9 +26,22 @@ export function DetailForm(): ReactElement {
 
     const dispatch = useAppDispatch();
 
-    const onSubmit = (data: UserDataValidationSchema) => {
-      // TODO: Check email emailRef.current?.value
-      dispatch(userDataFilled({username: data.username, email: data.email}))
+    const [
+      checkEmailTrigger,
+    ] = useCheckEmailMutation()
+
+    const onSubmit = ({username, email}: UserDataValidationSchema) => {
+      // setFormValuesInStorage(AUTH_FORM_VALUES_KEY, { email });
+      checkEmailTrigger({email})
+          .unwrap()
+          .then((payload) => {
+            if (payload) {
+              setError('email', {message: "Этот почтовый адрес уже используется"});
+            } else {
+              dispatch(userDataFilled({username: username, email: email}));
+            }
+          })
+          .catch((error) => console.log(`Some server error ${error}`))
     }
 
     return (

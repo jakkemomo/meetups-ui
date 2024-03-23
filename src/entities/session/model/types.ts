@@ -9,3 +9,7 @@ export interface RequestRegistrationBody {
   email: string;
   password: string;
 }
+
+export interface RequestEmailCheckBody {
+  email: string;
+}

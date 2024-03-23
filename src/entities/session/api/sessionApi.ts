@@ -1,7 +1,7 @@
 import {baseApi, SESSION_TAG} from '@/shared/api'
 import {mapSession} from '@/shared/lib/mapSession'
 import {RefreshToken, Session, SessionDto} from "@/shared/model/types";
-import {RequestLoginBody, RequestRegistrationBody} from '../model/types';
+import {RequestEmailCheckBody, RequestLoginBody, RequestRegistrationBody} from '../model/types';
 
 
 export const sessionApi = baseApi.injectEndpoints({
@@ -30,8 +30,15 @@ export const sessionApi = baseApi.injectEndpoints({
               body,
             }),
             invalidatesTags: [SESSION_TAG]
+        }),
+        checkEmail: build.mutation<null, RequestEmailCheckBody>({
+            query: (body) => ({
+              url: `/email-exists/`,
+              method: 'POST',
+              body,
+            })
         })
     }),
 })
 
-export const {useLoginMutation, useLogoutMutation} = sessionApi
+export const {useLoginMutation, useLogoutMutation, useRegisterMutation, useCheckEmailMutation} = sessionApi

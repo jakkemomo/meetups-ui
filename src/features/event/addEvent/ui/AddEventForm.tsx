@@ -1,5 +1,6 @@
 import {ReactElement} from "react";
 import {Button, Input, SelectInput, LargeTextInput, SwitchInput} from "@/shared";
+import { FileInputWithDrag } from "@/shared/ui";
 
 // mock data for testing
 const people = [
@@ -27,23 +28,28 @@ const currency = [
 ]
 
 export default function AddEventForm(): ReactElement {
-
   return (
-    <form noValidate className="flex flex-col gap-[30px] scrollbar">
-      <Input
-        HTMLType='text'
-        labelText='Название'
-        placeholder='Введите название'
-        id='add-event-name'
-        extraBoxClass={'w-[480px] md:w-[480px] mt-[7px]'}
-        extraContentClass={'h-[44px]'}
-      />
+    <form noValidate className="flex flex-col scrollbar">
+      <div className="flex items-end mt-[40px]">
+        <div className="flex flex-col mr-[45px]">
+          <Input
+            HTMLType='text'
+            labelText='Название'
+            placeholder='Введите название'
+            id='add-event-name'
+            extraBoxClass={'w-[480px] md:w-[480px] mt-[7px]'}
+            extraContentClass={'h-[44px]'}
+          />
 
-      <SelectInput
-        labelText='Категория'
-        options={people}
-        placeholder='Выберите категорию'
-      />
+          <SelectInput
+            labelText='Категория'
+            options={people}
+            placeholder='Выберите категорию'
+            extraBoxClass="mt-[18px]"
+          />
+        </div>
+        <FileInputWithDrag />
+      </div>
 
       <LargeTextInput
         labelText='Описание'
@@ -51,7 +57,7 @@ export default function AddEventForm(): ReactElement {
         extraBoxClass={'mt-[7px]'}
       />
 
-      <div className='flex items-center relative'>
+      <div className='flex items-center relative mt-[18px]'>
         <Input
           HTMLType='date'
           labelText='Дата'
@@ -76,7 +82,7 @@ export default function AddEventForm(): ReactElement {
         </div>
       </div>
 
-      <div className='flex items-center relative'>
+      <div className='flex items-center relative mt-[20px]'>
         <Input
           HTMLType='time'
           labelText='Время'
@@ -101,7 +107,7 @@ export default function AddEventForm(): ReactElement {
         </div>
       </div>
 
-      <div className={'flex'}>
+      <div className={'flex mt-[18px]'}>
         <Input
           HTMLType='number'
           labelText='Количество мест'
@@ -117,14 +123,14 @@ export default function AddEventForm(): ReactElement {
         />
       </div>
 
-      <div className={`flex items-center`}>
+      <div className={`flex items-center mt-[18px]`}>
         <Input
           HTMLType='number'
           labelText='Возраст участников'
           placeholder='18'
           id='add-event-people-age'
           inlineLabel={true}
-          extraBoxClass={'w-[70px] md:w-[70px]  mt-[7px]'}
+          extraBoxClass={'w-[70px] md:w-[70px] mt-[7px]'}
           extraContentClass={'h-[44px]'}
         />
         <p className={`text-xl text-text-black font-medium ml-1.5`}>+</p>
@@ -134,9 +140,10 @@ export default function AddEventForm(): ReactElement {
         labelText='Доступ к мероприятию'
         options={typeOfEvent}
         placeholder='Публичное/по ссылке'
+        extraBoxClass="mt-[18px]"
       />
 
-      <div className={'flex items-center'}>
+      <div className={'flex items-center mt-[18px]'}>
         <Input
           HTMLType='number'
           labelText='Стоимость'
@@ -160,7 +167,7 @@ export default function AddEventForm(): ReactElement {
 
       <Input
         HTMLType='text'
-        labelText='Галерея фото (необязательно)'
+        labelText='Галерея фото и видео (необязательно)'
         placeholder='Загрузите дополнительные фото'
         id='add-event-photos'
       />

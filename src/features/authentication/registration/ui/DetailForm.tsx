@@ -36,7 +36,7 @@ export function DetailForm(): ReactElement {
           .unwrap()
           .then((payload) => {
             if (payload) {
-              setError('email', {message: "This email address is already in use"});
+              setError('email', {message: "Этот почтовый адрес уже используется"});
             } else {
               dispatch(userDataFilled({username: username, email: email}));
             }

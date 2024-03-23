@@ -9,12 +9,13 @@ interface IInputProps {
   placeholder?: string;
   extraBoxClass?: string;
   extraContentClass?: string;
+  extraInputClass?: string;
   defaultValue?: string;
   error?: any;
   hookFormValues?: UseFormRegisterReturn<string>;
 }
 
-export function Input({ onChange, HTMLType, iconType, value, placeholder, extraBoxClass, extraContentClass, defaultValue, error, hookFormValues }: IInputProps) {
+export function Input({ onChange, HTMLType, iconType, value, placeholder, extraBoxClass, extraContentClass, extraInputClass, defaultValue, error, hookFormValues }: IInputProps) {
   const [type, setType] = useState<string>(HTMLType);
   const [passwordIcon, setPasswordIcon] = useState<string>('show-password');
 
@@ -30,8 +31,8 @@ export function Input({ onChange, HTMLType, iconType, value, placeholder, extraB
 
   return (
     <>
-      <div className={`bg-custom-gray rounded-[10px] border w-[316px] md:w-80 ${extraBoxClass} ${error ? 'border-input-error' : 'border-transparent'}`}>
-        <div className={`flex items-center h-48px w-full overflow-hidden p-3.5 ${extraContentClass}`}>
+      <div className={`bg-custom-gray rounded-[10px] border ${extraBoxClass} ${error ? 'border-input-error' : 'border-transparent'}`}>
+        <div className={`flex items-center h-48px w-full overflow-hidden ${extraContentClass}`}>
           {iconType &&
             <div
               className='min-w-6 h-6 bg-center bg-no-repeat bg-cover'
@@ -45,7 +46,7 @@ export function Input({ onChange, HTMLType, iconType, value, placeholder, extraB
             defaultValue={defaultValue}
             placeholder={placeholder}
             aria-invalid={error ? 'true' : 'false'}
-            className={`h-full w-full outline-none text-black bg-inherit px-3 font-normal text-base md:text-lg`}
+            className={`h-full w-full outline-none text-black bg-inherit font-normal text-base md:text-lg ${extraInputClass}`}
           />
           {(HTMLType === 'password') &&
             <div

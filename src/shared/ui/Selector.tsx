@@ -11,12 +11,13 @@ export function Selector({
   extraClasses
 }: ISelectorProps): ReactElement {
   return (
-    <div className={`relative after:absolute after:border-transparent after:border-t-black after:border-[9px] after:border-solid after:right-0 after:top-8 after:pointer-events-none ${extraClasses}`}>
-      <select className="appearance-none text-[45px] text-text-black font-bold underline outline-none leading-normal pr-8 cursor-pointer">
+    <div className={`relative pr-8 ${extraClasses}`}>
+      <select className="appearance-none text-[45px] text-text-black font-semibold underline outline-none leading-normal pr-8 cursor-pointer">
         {
           options.map((el, index) => <option key={index} value={el.value}>{el.name}</option>)
         }
       </select>
+      <div className="absolute w-6 h-6 top-[20px] right-[32px] bg-selector-triangle bg-no-repeat bg-center pointer-events-none"></div>
     </div>
   );
 }

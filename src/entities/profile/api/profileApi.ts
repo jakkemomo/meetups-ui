@@ -13,7 +13,17 @@ export const profileApi = baseApi.injectEndpoints({
       transformResponse: (response: ProfileDetailsDto) =>
           mapProfileDetails(response),
     }),
+    myDetails: build.query<ProfileDetails, void>({
+      query: () => ({
+        url: `/me`,
+      }),
+      transformResponse: (response: ProfileDetailsDto) =>
+          mapProfileDetails(response),
+    }),
 }),
 })
 
-export const {  useProfileDetailsQuery } = profileApi
+export const {
+  useProfileDetailsQuery,
+  useMyDetailsQuery,
+} = profileApi

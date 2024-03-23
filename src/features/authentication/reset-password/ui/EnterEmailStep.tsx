@@ -53,6 +53,8 @@ export function EnterEmailStep(): ReactElement  {
           hookFormValues={register('email')}
           extraBoxClass='mb-2.5'
           error={errors.email}
+          extraContentClass="p-3.5"
+          extraInputClass="px-3"
         />
         <InputErrorMessage error={errors.email} />
         <Button

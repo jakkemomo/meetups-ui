@@ -30,3 +30,10 @@ export type DebounceFunctionType = () => {
   payload: string;
   type: "searchFilter/setSearchFilter";
 }
+
+export interface IApiResponse<T> {
+  count: number;
+  next: string | null;
+  previous: string | null;
+  results: T;
+}

@@ -26,3 +26,8 @@ export interface IFeatures {
   properties: IFeaturesProperties;
   geometry: IFeaturesGeometry;
 }
+
+export interface IAddedMarker {
+  lat: number;
+  lng: number;
+}

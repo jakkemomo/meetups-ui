@@ -20,7 +20,7 @@ export function Header(): ReactElement {
         <header className="w-full flex items-center">
             <Logo/>
             <InputWithFilter/>
-            <div className="ml-[364.4px]">
+            <div className="ml-auto">
                 {!access && <Button HTMLType='button' type='secondary' onClick={onLoginClick}>Войти</Button>}
                 {access &&  <ProfileButton/>}
                 {refresh && <LogoutButton refresh={refresh}/>}

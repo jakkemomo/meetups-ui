@@ -2,10 +2,12 @@ import { createSlice } from "@reduxjs/toolkit";
 
 interface IGlobalFilterState {
   search: string;
+  checkedCategories: string;
 }
 
 const initialState: IGlobalFilterState = {
   search: '',
+  checkedCategories: ''
 }
 
 export const searchFilterSlice = createSlice({
@@ -13,9 +15,12 @@ export const searchFilterSlice = createSlice({
   initialState,
   reducers: {
     setSearchFilter: (state, { payload: inputValue }: { payload: string }) => ({
-      search: inputValue,
+      ...state, search: inputValue,
+    }),
+    categorySetted: (state, { payload: checkedCategories }: { payload: string }) => ({
+      ...state, checkedCategories
     })
   }
 })
 
-export const { setSearchFilter } = searchFilterSlice.actions;
+export const { setSearchFilter, categorySetted } = searchFilterSlice.actions;

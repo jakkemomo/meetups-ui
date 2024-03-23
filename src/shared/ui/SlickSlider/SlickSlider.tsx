@@ -1,4 +1,4 @@
-import { ReactElement, useState } from "react";
+import { ReactElement, createRef, useEffect, useState } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -14,6 +14,13 @@ interface ISlickSliderProps {
 
 export function SlickSlider({ children, extraSettings, arrowsExtraClasses }: ISlickSliderProps): ReactElement {
   const [slide, setSlide] = useState(0);
+  const sliderRef = createRef<Slider>();
+
+  useEffect(() => {
+    sliderRef.current?.slickGoTo(0);
+    setSlide(0);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [children.length]);
 
   // About Settings for react-slick: https://react-slick.neostack.com/docs/api
   const settings = {
@@ -26,7 +33,7 @@ export function SlickSlider({ children, extraSettings, arrowsExtraClasses }: ISl
   }
 
   return (
-    <Slider {...settings}>
+    <Slider ref={sliderRef} {...settings}>
       {children}
     </Slider>
   );

@@ -44,6 +44,8 @@ export function PasswordForm(): ReactElement {
           iconType='password'
           placeholder='Пароль'
           hookFormValues={register('password')}
+          extraContentClass="p-3.5"
+          extraInputClass="px-3"
         />
         <div className='flex mt-5 md:mt-18 pb-3.5 md:pb-3 items-center'>
           {(isValid && isSubmitted) ? (

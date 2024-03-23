@@ -38,6 +38,8 @@ export function DetailForm(): ReactElement {
           placeholder='Имя пользователя'
           error={errors.username}
           hookFormValues={register('username')}
+          extraContentClass="p-3.5"
+          extraInputClass="px-3"
         />
         <Input
           extraBoxClass='mt-3.5 mb-3 md:mb-2.5'
@@ -46,6 +48,8 @@ export function DetailForm(): ReactElement {
           placeholder='Почта'
           error={errors.email}
           hookFormValues={register('email')}
+          extraContentClass="p-3.5"
+          extraInputClass="px-3"
         />
         <InputErrorMessage error={errors.email ?? errors.username} />
         <Button

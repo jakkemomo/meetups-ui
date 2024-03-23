@@ -40,7 +40,9 @@ module.exports = {
         'text-gray': 'rgb(84, 84, 84)',
         'text-light-gray': 'rgb(153, 153, 153);',
         'text-black': 'rgb(46, 46, 46)',
-        'text-red': 'rgb(187, 16, 16)'
+        'text-red': 'rgb(187, 16, 16)',
+        'popup-bg': 'rgba(26, 26, 26, .4)',
+        'button-purple': 'rgb(94, 92, 206)'
       },
       padding: {
         '60': '60px',
@@ -67,7 +69,13 @@ module.exports = {
         'heart-icon': "url('images/heart-icon.png')",
         'rating-star': "url('images/rating-star.png')",
         'text-fade-out': "linear-gradient(to right, transparent, #E5E5E3 50%)",
-        'slider-fade-out': "linear-gradient(to right, transparent, #FFFEFC 60%)"
+        'slider-fade-out': "linear-gradient(to right, transparent, #FFFEFC 60%)",
+        'close-cross': "url('images/close-cross.svg')",
+        'checkbox': "url('images/checkbox.svg')",
+        'checkbox-checked': "url('images/checkbox-checked.svg')",
+        'check': "url('images/check.svg')",
+        'event-card-people': "url('images/event-card-people.png')",
+        'selector-triangle': "url('images/selector-triangle.png')"
       },
       borderRadius: {
         '12': '12px',

@@ -1,11 +1,11 @@
+import { AddEventForm } from "@/features/event/addEvent";
+import { AddEventPageTitle } from "@/widgets/AddEventPageTitle";
 import {ReactElement} from "react";
-import AddEventForm from "@/features/event/addEvent/ui/AddEventForm";
 
 function AddEventPage(): ReactElement {
-
   return (
-    <main className="w-full max-w-[1005px] mx-auto">
-      <h1 className="text-[45px] text-text-black font-bold leading-normal mt-14">Cоздайте мероприятие</h1>
+    <main className="w-full max-w-[1005px] mx-auto pb-[98px]">
+      <AddEventPageTitle />
       <AddEventForm />
     </main>
   );

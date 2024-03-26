@@ -4,7 +4,7 @@ import {ChangeEvent, useState} from "react";
 interface IInputProps {
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
   HTMLType: 'email' | 'text' | 'password' | 'date' | 'search' | 'number' | 'time';
-  iconType?: 'person' | 'mail' | 'password' | 'search-icon-gray';
+  iconType?: 'person' | 'mail' | 'password' | 'search-icon-gray' | 'add-media-icon';
   value?: string;
   placeholder?: string;
   extraBoxClass?: string;
@@ -33,7 +33,7 @@ export function Input({ onChange, HTMLType, iconType, value, placeholder, extraB
   };
 
   return (
-    <div className={`flex  ${inlineLabel ? 'flex-row items-center gap-x-3.5' : 'flex-col'}`}>
+    <div className={`flex ${inlineLabel ? 'flex-row items-center gap-x-3.5' : 'flex-col'}`}>
       {labelText && (
         <label htmlFor={id} className={`text-xl text-text-black`}>{labelText}</label>
       )}

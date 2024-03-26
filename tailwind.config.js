@@ -9,6 +9,14 @@ module.exports = {
   ],
   theme: {
     extend: {
+      borderWidth: {
+        '1': '1px',
+        '2': '2px',
+        '3': '3px',
+        '4': '4px',
+        '5': '5px',
+        '6': '6px',
+      },
       width: {
         '860': '860px',
         '600': '600px',
@@ -33,6 +41,7 @@ module.exports = {
       },
       colors: {
         'main-purple': 'rgb(87, 84, 198)',
+        'main-violet': 'rgba(73, 70, 185, 1)',
         'custom-gray': 'rgb(243, 243, 245)',
         'main-blue': 'rgb(94, 92, 206)',
         'main-dark-blue': 'rgb(49, 46, 112)',
@@ -49,6 +58,7 @@ module.exports = {
         'button-purple': 'rgb(94, 92, 206)',
         'text-light-gray': 'rgb(153, 153, 153)',
         'toggle-color': 'rgb(185, 185, 186, 1)',
+        'select-disable': 'rgba(191, 189, 189, 1)'
       },
       padding: {
         '60': '60px',
@@ -66,8 +76,8 @@ module.exports = {
         'custom': '0 14px 30px 0px rgba(71, 32, 89, 0.3)',
       },
       backgroundImage: {
-        'logo': "url('images/logo.svg')",
-        'filter-icon': "url('images/filter-icon.svg')",
+        'logo': "url('/images/logo.svg')",
+        'filter-icon': "url('/images/filter-icon.svg')",
         'map-marker-icon': "url('images/map-marker-icon.svg')",
         'burger-menu-icon': "url('images/burger-menu-icon.svg')",
         'right-arrow': "url('images/right-arrow.png')",
@@ -77,11 +87,14 @@ module.exports = {
         'text-fade-out': "linear-gradient(to right, transparent, #E5E5E3 50%)",
         'slider-fade-out': "linear-gradient(to right, transparent, #FFFEFC 60%)",
         'close-cross': "url('images/close-cross.svg')",
-        'checkbox': "url('images/checkbox.svg')",
-        'checkbox-checked': "url('images/checkbox-checked.svg')",
-        'check': "url('images/check.svg')",
+        'check': "url('/images/check.svg')",
         'event-card-people': "url('images/event-card-people.png')",
-        'selector-triangle': "url('images/selector-triangle.png')"
+        'selector-triangle': "url('images/selector-triangle.png')",
+        'chevron-down-white': "url('/images/chevron-down-white.svg')",
+        'chevron-down-black': "url('/images/chevron-down-black.svg')",
+        'edit-pen-icon': "url('/images/edit-pen-icon.svg')",
+        'link-icon': "url('/images/link-icon.svg')",
+        'chevron-left-purple': "url('/images/chevron-left-purple.svg')"
       },
       borderRadius: {
         '12': '12px',

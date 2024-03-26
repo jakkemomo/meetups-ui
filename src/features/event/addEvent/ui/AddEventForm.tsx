@@ -1,6 +1,8 @@
 import {ReactElement} from "react";
-import {Button, Input, SelectInput, LargeTextInput, SwitchInput} from "@/shared";
+import {Input, SelectInput, LargeTextInput, SwitchInput, CheckboxWithValue} from "@/shared";
 import { FileInputWithDrag } from "@/shared/ui";
+import { MapWidget } from "@/widgets/mapWidget";
+import { PeriodicControl } from "./PeriodicControl";
 
 // mock data for testing
 const people = [
@@ -27,7 +29,7 @@ const currency = [
   { id: 3, name: 'RUB', unavailable: false },
 ]
 
-export default function AddEventForm(): ReactElement {
+export function AddEventForm(): ReactElement {
   return (
     <form noValidate className="flex flex-col scrollbar">
       <div className="flex items-end mt-[40px]">
@@ -39,6 +41,7 @@ export default function AddEventForm(): ReactElement {
             id='add-event-name'
             extraBoxClass={'w-[480px] md:w-[480px] mt-[7px]'}
             extraContentClass={'h-[44px]'}
+            extraInputClass={'px-[22px]'}
           />
 
           <SelectInput
@@ -54,7 +57,7 @@ export default function AddEventForm(): ReactElement {
       <LargeTextInput
         labelText='Описание'
         placeholder='Расскажите подробнее'
-        extraBoxClass={'mt-[7px]'}
+        extraBoxClass={'mt-[18px]'}
       />
 
       <div className='flex items-center relative mt-[18px]'>
@@ -65,6 +68,7 @@ export default function AddEventForm(): ReactElement {
           id='add-event-start-date'
           extraBoxClass={'w-[480px] md:w-[480px] mt-[7px]'}
           extraContentClass={'h-[44px]'}
+          extraInputClass='px-[22px]'
         />
         <div
           className='w-4 h-0.5 mx-3.5 mt-8'
@@ -77,6 +81,7 @@ export default function AddEventForm(): ReactElement {
             id='add-event-end-date'
             extraBoxClass={'w-[480px] md:w-[480px] mt-[7px]'}
             extraContentClass={'h-[44px]'}
+            extraInputClass='px-[22px]'
           />
           <p className='text-text-light-gray mt-2 absolute bottom-[-26px] left-0'>Необязательное поле</p>
         </div>
@@ -90,6 +95,7 @@ export default function AddEventForm(): ReactElement {
           id='add-event-start-time'
           extraBoxClass={'w-[480px] md:w-[480px] mt-[7px]'}
           extraContentClass={'h-[44px]'}
+          extraInputClass='px-[22px]'
         />
         <div
           className='w-4 h-0.5 mx-3.5 mt-8'
@@ -100,26 +106,39 @@ export default function AddEventForm(): ReactElement {
             HTMLType='time'
             placeholder='Конец'
             id='add-event-end-time'
-            extraBoxClass={'w-[480px] md:w-[480px] mt-[7px]'}
+            extraBoxClass={'w-[480px] md:w-[480px] mt-[7px] px-[22px]'}
             extraContentClass={'h-[44px]'}
           />
           <p className='text-text-light-gray mt-2 absolute bottom-[-26px] left-0'>Необязательное поле</p>
         </div>
       </div>
 
-      <div className={'flex mt-[18px]'}>
+      <div className="mt-[30px] mb-[18px] text-text-black">
+        <PeriodicControl />
+      </div>
+
+      <MapWidget text="Точка на карте" position={{ lat: 53.9, lng: 27.56667 }} zoom={14} markers={[]} withAddressControl={true} />
+
+      <div className={'flex items-center mt-[18px]'}>
         <Input
           HTMLType='number'
           labelText='Количество мест'
           placeholder='25'
           id='add-event-people-number'
           inlineLabel={true}
-          extraBoxClass={'w-[70px] md:w-[70px] mt-[7px]'}
+          extraBoxClass={'w-[72px] md:w-[72px] mt-[7px]'}
           extraContentClass={'h-[44px]'}
+          extraInputClass="px-[24px] [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
         />
         <SwitchInput
           labelText={'Места не ограничены'}
           extraBoxClass={'ml-[60px]'}
+        />
+        <CheckboxWithValue
+          id="chat"
+          value="Добавить чат участников"
+          extraBoxClass="ml-auto"
+          extraLabelClass="ml-2.5"
         />
       </div>
 
@@ -130,18 +149,25 @@ export default function AddEventForm(): ReactElement {
           placeholder='18'
           id='add-event-people-age'
           inlineLabel={true}
-          extraBoxClass={'w-[70px] md:w-[70px] mt-[7px]'}
+          extraBoxClass={'w-[62px] md:w-[62px] mt-[7px]'}
           extraContentClass={'h-[44px]'}
+          extraInputClass="px-[19px] [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
         />
         <p className={`text-xl text-text-black font-medium ml-1.5`}>+</p>
       </div>
 
-      <SelectInput
-        labelText='Доступ к мероприятию'
-        options={typeOfEvent}
-        placeholder='Публичное/по ссылке'
-        extraBoxClass="mt-[18px]"
-      />
+      <div className="flex flex-col">
+        <SelectInput
+          labelText='Доступ к мероприятию'
+          options={typeOfEvent}
+          placeholder='Публичное/по ссылке'
+          extraBoxClass="mt-[18px]"
+        />
+        <div className="flex items-center py-2.5 px-3.5 text-white bg-select-disable h-[44px] w-[133px] mt-2.5 rounded-[10px]">
+          <div className="w-6 h-6 bg-link-icon bg-no-repeat bg-center"></div>
+          <p className="text-[18px] font-semibold ml-2">Ссылка</p>
+        </div>
+      </div>
 
       <div className={'flex items-center mt-[18px]'}>
         <Input
@@ -152,6 +178,7 @@ export default function AddEventForm(): ReactElement {
           inlineLabel={true}
           extraBoxClass={'w-[92px] md:w-[92px] mr-1.5'}
           extraContentClass={'h-[44px]'}
+          extraInputClass="px-[34px] [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
         />
         <SelectInput
           extraBoxClass={'w-[90px] my-auto'}
@@ -165,25 +192,33 @@ export default function AddEventForm(): ReactElement {
         />
       </div>
 
-      <Input
-        HTMLType='text'
-        labelText='Галерея фото и видео (необязательно)'
-        placeholder='Загрузите дополнительные фото'
-        id='add-event-photos'
-      />
+      <div className="mt-[18px]">
+        <Input
+          HTMLType='text'
+          iconType='add-media-icon'
+          labelText='Галерея фото и видео (необязательно)'
+          placeholder='Загрузите дополнительные материалы'
+          id='add-event-photos'
+          extraBoxClass="mt-[7px]"
+          extraContentClass="ml-[22px]"
+          extraInputClass="ml-3"
+        />
+      </div>
 
-      <div>
+      <div className="mt-[18px]">
         <Input
           HTMLType='text'
           iconType='search-icon-gray'
           labelText='Тэги (необязательно)'
           placeholder='Ищите теги'
           id='add-event-name'
+          extraBoxClass="px-[22px] mt-[7px]"
+          extraInputClass="pl-3"
         />
         <p className='text-text-light-gray mt-2'>Тезисно опишите свое мероприятие</p>
       </div>
 
-      <Button type={'primary'} HTMLType={'submit'}>Создать</Button>
+      <button type="submit" className="self-start h-[44px] w-[165px] bg-button-purple text-[18px] font-semibold text-white rounded-[10px] mt-10">Создать</button>
     </form>
   )
 }

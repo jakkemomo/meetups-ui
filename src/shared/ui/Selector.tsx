@@ -17,7 +17,7 @@ export function Selector({
           options.map((el, index) => <option key={index} value={el.value}>{el.name}</option>)
         }
       </select>
-      <div className="absolute w-6 h-6 top-[20px] right-[32px] bg-selector-triangle bg-no-repeat bg-center pointer-events-none"></div>
+      <div className="absolute w-6 h-6 top-[20px] right-[32px] bg-chevron-down-black bg-no-repeat bg-center pointer-events-none"></div>
     </div>
   );
 }

@@ -1,0 +1,1 @@
+export { AddEventPageTitle } from './AddEventPageTitle';

@@ -40,7 +40,14 @@ export function FilterPopup({ categories }: IFilterPopupProps): ReactElement {
             <h3 className="text-[24px] font-semibold leading-[30.12px] w-[148px]">Катерогии</h3>
             {
               categories.map((category, index) =>
-              <CheckboxWithValue key={index} id={String(category.id)} value={category.name} onChangeFunc={(e) => handleCheckedCategories(e, category)} />
+              <CheckboxWithValue
+                key={index}
+                id={String(category.id)}
+                value={category.name}
+                extraBoxClass="mt-3 first-of-type:mt-4"
+                extraLabelClass="ml-2"
+                onChangeFunc={(e) => handleCheckedCategories(e, category)}
+              />
             )
             }
           </div>
@@ -59,8 +66,18 @@ export function FilterPopup({ categories }: IFilterPopupProps): ReactElement {
           </div>
           <div className="ml-[65px]">
             <h3 className="text-[24px] font-semibold leading-[30.12px] w-[137px]">Стоимость</h3>
-            <CheckboxWithValue id="paid" value="Платное"/>
-            <CheckboxWithValue id="free" value="Бесплатное"/>
+            <CheckboxWithValue
+              id="paid"
+              value="Платное"
+              extraBoxClass="mt-3 first-of-type:mt-4"
+              extraLabelClass="ml-2"
+            />
+            <CheckboxWithValue
+              id="free"
+              value="Бесплатное"
+              extraBoxClass="mt-3 first-of-type:mt-4"
+              extraLabelClass="ml-2"
+            />
           </div>
         </div>
         <button type="button" onClick={onButtonClick} className="text-[18px] font-bold text-white bg-button-purple rounded-[10px] min-h-[44px] min-w-[127px] duration-150 hover:opacity-[0.8] self-end">Найти</button>

@@ -1,17 +1,23 @@
 import {Fragment, useEffect, useState} from 'react'
 import { Listbox } from '@headlessui/react'
 
+interface ISelectInputOptions {
+  id: number;
+  name: string;
+  unavailable: boolean;
+}
+
 interface ISelectInputProps {
   labelText?: string;
   placeholder?: string;
   extraBoxClass?: string;
   extraContentClass?: string;
   extraDropdownClass?: string;
-  options: any[]
+  options: ISelectInputOptions[];
 }
 
 export function SelectInput({options, labelText, placeholder, extraBoxClass, extraContentClass, extraDropdownClass}: ISelectInputProps) {
-  const [selectedOption, setSelectedOption] = useState("")
+  const [selectedOption, setSelectedOption] = useState<ISelectInputOptions | null>(null);
 
   useEffect(() => {
     if (!placeholder) {
@@ -40,7 +46,7 @@ export function SelectInput({options, labelText, placeholder, extraBoxClass, ext
               {(!value && placeholder) ? (
                 <p className={'text-lg text-text-light-gray'}>{placeholder}</p>
                 ) : (
-                <p className={'text-lg text-text-black'}>{selectedOption.name}</p>
+                <p className={'text-lg text-text-black'}>{selectedOption?.name}</p>
               )}
               <div
                 className={`bg-center bg-no-repeat bg-cover w-6 h-6 ml-1 ${open ? 'transition ease-in-out rotate-180 duration-100': 'transition ease-in-out rotate-0 duration-100'}`}

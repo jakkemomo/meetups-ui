@@ -62,7 +62,7 @@ export function AddressControl(): ReactElement {
     <>
       <h3 className="text-[20px] font-normal leading-[25.1px] mb-[7px]">Адрес</h3>
       <div className="relative">
-        <Input HTMLType="search" value={inputValue} onChange={onInputChange} placeholder="Введите адрес" extraContentClass="p-2.5" />
+        <Input HTMLType="search" value={inputValue} onChange={onInputChange} placeholder="Введите адрес" extraBoxClass="w-[480px]" extraInputClass="px-[22px]" />
         {predictionResults.length > 0 && (
           <ul className="flex flex-col absolute bg-custom-gray rounded-[10px] z-50">
             {predictionResults.map(({place_id, description}) => {

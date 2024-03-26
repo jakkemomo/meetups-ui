@@ -11,3 +11,4 @@ export { LargeTextInput } from './ui/LargeTextInput';
 export { SwitchInput } from './ui/SwitchInput';
 export { Popup } from './ui/Popup';
 export { CheckboxWithValue } from './ui/CheckboxWithValue';
+export { FileInputWithDrag } from './ui/FileInputWithDrag';

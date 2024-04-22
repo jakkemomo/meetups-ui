@@ -9,8 +9,9 @@ import ResetPasswordPage from "@/pages/reset-password/ResetPasswordPage";
 import {selectAccessToken} from "@/shared/lib";
 import AddEventPage from "@/pages/add-event/AddEventPage";
 import {HomePage} from "@/pages/home/HomePage.tsx";
+import CurrentProfileView from "@/pages/profile/CurrentProfileView"
 
-interface GuestGuardProps {
+interface GuestGuardProps { 
   children: ReactElement
 }
 
@@ -30,7 +31,7 @@ function AuthGuard({children}: AuthGuardProps) {
   return children
 }
 
-export const appRouter = createBrowserRouter([
+export const appRouter = createBrowserRouter([ 
   {
     element: <BaseLayout />,
     errorElement: <div>error</div>,
@@ -39,6 +40,12 @@ export const appRouter = createBrowserRouter([
         path: '/',
         element: (
           <HomePage/>
+        ),
+      },
+      {
+        path: '/profile/me',
+        element: (
+          <CurrentProfileView/>
         ),
       },
       {

@@ -1,10 +1,11 @@
 import {ReactElement} from "react";
 
 
-export default function currentProfileView(): ReactElement {
+ function CurrentProfileView(): ReactElement {
 
   return (
-    <section className="">
+    <section className="w-full max-w-[1005px] mx-auto pb-[98px] min-h-[1000px] border-2 border-sky-500">
+    {/* <p>page with profile</p>   */}
     {/* 
     <ProfileInfo />
     <ProfileEvents />
@@ -15,3 +16,5 @@ export default function currentProfileView(): ReactElement {
     </section>
   )
 }
+
+export default CurrentProfileView;

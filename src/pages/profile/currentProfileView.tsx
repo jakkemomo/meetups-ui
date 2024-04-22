@@ -10,8 +10,8 @@ import { ProfileInfo } from "@/widgets/Profile/ProfileInfo";
   return (
     <section className="w-full max-w-[1215px] mx-auto pb-[98px] flex flex-row flex-wrap min-h-[1000px]">
     <ProfileInfo />
-    <div className="flex-1 basis-7/12 border-2 border-black-500  min-h-[1000px]">
-      <p>02</p>
+    <div className="flex-auto basis-7/12 min-h-[1000px]">
+      {/* <p>02</p> */}
     </div>
     
     {/* <ProfileEvents /> */}

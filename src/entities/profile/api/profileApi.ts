@@ -27,3 +27,4 @@ export const {
   useProfileDetailsQuery,
   useMyDetailsQuery,
 } = profileApi
+ 

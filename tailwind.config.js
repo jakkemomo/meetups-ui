@@ -105,7 +105,9 @@ module.exports = {
         'link-icon': "url('/images/link-icon.svg')",
         'chevron-left-purple': "url('/images/chevron-left-purple.svg')",
         'gallery-icon': "url('/images/gallery-icon.svg')",
-        'plus-icon': "url('/images/plus-icon.svg')"
+        'plus-icon': "url('/images/plus-icon.svg')",
+        'edit-photo': "url('/images/edit-photo.svg')",
+
       },
       borderRadius: {
         "12": "12px",

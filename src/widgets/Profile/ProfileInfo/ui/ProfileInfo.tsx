@@ -1,7 +1,8 @@
 import { ReactElement } from "react";
 import { useMyDetailsQuery } from "@/entities/profile/api/profileApi.ts";
-import { Button } from "@/shared/ui/Button";
+import { Button } from "@/shared/ui/Buttons/Button";
 import Svg from "@/shared/ui/Svg";
+import { BackButton } from "@/shared/ui/Buttons/BackButton";
 
 export function ProfileInfo(): ReactElement {
   const { data: profileData } = useMyDetailsQuery();
@@ -16,16 +17,18 @@ export function ProfileInfo(): ReactElement {
   ));
 
   return (
-    <section className="flex-auto flex flex-col basis-5/12 min-h-[1000px] ">
-      <img
-        className="w-[270px] h-[270px] bg-neutral-800 bg-opacity-40 rounded-[200px] mt-[56px]"
-        src={`https://storage.googleapis.com/meetups-dev/media/${profileData?.image}`}
-        alt={`Аватар пользователя ${profileData?.username}`}
-      />
+    <section className="flex-auto flex flex-col basis-5/12 min-h-[1000px]">
+      <div className="cursor-pointer w-[270px] h-[270px] mt-[56px] rounded-[200px] bg-neutral-800 bg-edit-photo bg-no-repeat bg-center">
+        <img
+          className="bg-neutral-800 bg-opacity-40 rounded-[200px] hover:opacity-60"
+          src={`https://storage.googleapis.com/meetups-dev/media/${profileData?.image}`}
+          alt={`Аватар пользователя ${profileData?.username}`}
+        />
+      </div>
       <p className="text-zinc-800 font-semibold text-[32px] mt-[20px]">
         {profileData?.firstName} &nbsp; {profileData?.lastName}
       </p>
-      <div className="flex flex-row mt-[10px]">
+      <div className="flex flex-row mt-[10px] cursor-pointer">
         <Svg
           id="location"
           width="24"
@@ -51,17 +54,8 @@ export function ProfileInfo(): ReactElement {
       <div className="flex flex-row-revers max-w-[414px] max-h-[115px] text-pretty text-ellipsis overflow-hidden mt-[14px]">
         {interstsList}
       </div>
-      <div className="flex flex-row items-center mt-[130px] border-1">
-        <Svg
-          id="previous-arrow"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-        />
-        <Button size="sm" importance="none" extraClass="text-indigo-600 ml-[0px]">
-          Назад
-        </Button>
+      <div className="flex mt-auto ">
+        <BackButton />
       </div>
     </section>
   );

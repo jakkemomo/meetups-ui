@@ -7,8 +7,8 @@ import {mapProfileDetails} from "@/entities/profile/lib/mapProfileDetails";
 export const profileApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
     profileDetails: build.query<ProfileDetails, ProfileId>({
-      query: (profileId) => ({
-        url: `/profiles/${profileId}/`,
+      query: ({userId}) => ({
+        url: `/users/${userId}/`,
       }),
       transformResponse: (response: ProfileDetailsDto) =>
           mapProfileDetails(response),

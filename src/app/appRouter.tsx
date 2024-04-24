@@ -10,6 +10,9 @@ import {selectAccessToken} from "@/shared/lib";
 import AddEventPage from "@/pages/add-event/AddEventPage";
 import {HomePage} from "@/pages/home/HomePage.tsx";
 import CurrentProfileView from "@/pages/profile/CurrentProfileView"
+import RemoteProfileView from "@/pages/profile/RemoteProfileView"
+
+import { EditProfile } from '@/features/profile';
 
 interface GuestGuardProps { 
   children: ReactElement
@@ -46,6 +49,18 @@ export const appRouter = createBrowserRouter([
         path: '/profile/me',
         element: (
           <CurrentProfileView/>
+        ),
+      },
+      {
+        path: '/profile/:userId',
+        element: (
+          <RemoteProfileView/>
+        )
+      },
+      {
+        path: '/profile/edit',
+        element: (
+          <EditProfile/>
         ),
       },
       {

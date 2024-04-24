@@ -1,9 +1,9 @@
 import {type ProfileDetailsDto} from '../api/types'
-import {type ProfileDetails, type ProfileId} from '../model/types'
+import {type ProfileDetails} from '../model/types'
 
 export function mapProfileDetails(dto: ProfileDetailsDto): ProfileDetails {
     return {
-        id: dto.id as ProfileId,
+        id: dto.id,
         username: dto.username,
         email: dto.email,
         firstName: dto.first_name,

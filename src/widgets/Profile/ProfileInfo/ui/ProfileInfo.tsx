@@ -7,11 +7,13 @@ interface IProfileData {
   profileData?: ProfileDetails;
   children: ReactNode;
   OnEditProfile?: () => void;
+  report?: ReactNode
 }
 function ProfileInfo({
   profileData,
   children,
   OnEditProfile,
+  report
 }: IProfileData): ReactElement {
   const interstsList = profileData?.category_favorite.map(({ name }, id) => (
     <p
@@ -21,14 +23,16 @@ function ProfileInfo({
       {name}
     </p>
   ));
+  // const avaStyle = 'bg-neutral-800 bg-edit-photo bg-no-repeat bg-center'
   return (
-    <section className="flex-auto flex flex-col basis-5/12 min-h-[1000px]">
+    <section className="flex-auto flex flex-col basis-5/12 h-[1100px]">
       <div
         onClick={OnEditProfile}
-        className="cursor-pointer w-[270px] h-[270px] mt-[56px] rounded-[200px] bg-neutral-800 bg-edit-photo bg-no-repeat bg-center"
+        // className="cursor-pointer w-[270px] h-[270px] mt-[56px] rounded-[200px] bg-neutral-800 bg-edit-photo bg-no-repeat bg-center"
+        className={`w-[270px] h-[270px] mt-[56px] rounded-[200px] opacity-100 ${OnEditProfile? "cursor-pointer bg-neutral-800 bg-edit-photo bg-no-repeat bg-center" : ''}`}
       >
         <img
-          className="bg-neutral-800 bg-opacity-40 rounded-[200px] hover:opacity-60"
+          className={`bg-neutral-800 bg-opacity-40 rounded-[200px] pointer-events-none ${OnEditProfile? "hover:opacity-60 pointer-events-auto" : ''}`}
           src={`https://storage.googleapis.com/meetups-dev/media/${profileData?.image}`}
           alt={`Аватар пользователя ${profileData?.username}`}
         />
@@ -50,12 +54,15 @@ function ProfileInfo({
       </div>
       <div className="mt-[30px]">{children}</div>
       <p className="text-zinc-800 text-2xl font-semibold mt-[30px]">О себе</p>
-      <p className="max-w-[414px] max-h-[115px] text-zinc-800 text-lg font-normal text-pretty text-ellipsis overflow-hidden mt-[12px]">
+      <p className="max-w-[414px] h-[115px] text-zinc-800 text-lg font-normal text-pretty text-ellipsis overflow-hidden mt-[12px]">
         {profileData?.bio}
       </p>
       <p className="text-zinc-800 text-2xl font-semibold mt-[30px]">Интересы</p>
       <div className="flex flex-row-revers max-w-[414px] max-h-[115px] text-pretty text-ellipsis overflow-hidden mt-[14px]">
         {interstsList}
+      </div>
+      <div className="flex mt-[80px] ">
+        {report}
       </div>
       <div className="flex mt-auto ">
         <BackButton />

@@ -7,9 +7,7 @@ import { LogoutButton } from "@/features/authentication/logout";
 export function BurgerMenu() {
   const refresh = selectRefreshToken();
   const menuList = menuItems.map(({ img, name, link }, id) => (
-    <Menu.Item key={id}>
-      <MenuItem img={img} name={name} link={link} />
-    </Menu.Item>
+    <MenuItem img={img} name={name} link={link} key={id} />
   ));
 
   return (

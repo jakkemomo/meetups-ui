@@ -15,7 +15,7 @@ export function Header(): ReactElement {
   }
 
   return (
-    <header className="w-full flex items-center">
+    <header className="w-full flex items-center max-h-[50px]">
       <Logo/>
       <InputWithFilter/>
       <div className="ml-auto">

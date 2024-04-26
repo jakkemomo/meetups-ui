@@ -83,6 +83,12 @@ module.exports = {
       boxShadow: {
         custom: "0 14px 30px 0px rgba(71, 32, 89, 0.3)",
       },
+      dropShadow: {
+        'bm': [
+            '0 4px 4px 0 rgba(0, 0, 0, 0.25)',
+            '0 4px 32px 0 rgba(0, 0, 0, 0.14)'
+        ]
+      },
       backgroundImage: {
         'logo': "url('/images/logo.svg')",
         'filter-icon': "url('/images/filter-icon.svg')",

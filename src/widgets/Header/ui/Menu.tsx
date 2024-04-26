@@ -8,7 +8,7 @@ export function Menu(): ReactElement {
   const location = useLocation();
 
   return (
-    <div className="flex">
+    <div className="flex max-h-[50px]"> 
       <Button
         type="button"
         size="sm"

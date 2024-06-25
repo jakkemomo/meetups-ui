@@ -7,6 +7,7 @@ interface ICalendarCard {
   isStartDate: boolean;
   isEndDate: boolean;
   isBetweenDate: boolean;
+  isSelectedDate: boolean;
   onClickDate?: (date: ICardProps) => void;
   onCloseCalendarFilter: () => void;
 }
@@ -16,12 +17,13 @@ export function CalendarCard({
   isStartDate,
   isEndDate,
   isBetweenDate,
+  isSelectedDate,
   onClickDate,
   onCloseCalendarFilter,
 }: ICalendarCard): ReactElement {
   return (
     <div className="relative flex flex-col mt-[29px]">
-      {isEndDate ? (
+      {(isEndDate || isSelectedDate) ? (
         <Svg
           className="absolute top-[-29px] self-center"
           id="calendar-filter-x"

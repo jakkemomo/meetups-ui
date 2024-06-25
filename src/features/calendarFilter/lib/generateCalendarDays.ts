@@ -18,11 +18,13 @@ export function generateCalendarDays(days_quantity: number) {
   for (let i = 0; i < days_quantity; i++) {
 
     const day = new Date(date.getFullYear(), date.getMonth(), date.getDate() + i);
+    const calendarDay = String(day.getDate());
+    const summary = String(day.getFullYear())+'-'+(String(day.getMonth()).length < 2? `0${String(day.getMonth()+1)}` : (String(day.getMonth()+1))) +'-'+(String(day.getDate()).length <2? `0${String(day.getDate())}` : String(day.getDate()));
     let weekDay: string | number = day.getDay() > 0 ? day.getDay() - 1 : 6;
 
     Object.keys(formatedWeekDays).forEach((el) => Number(el) === weekDay ? weekDay = formatedWeekDays[el as keyof IFormatedWeekDays] : null);
 
-    dateArr.push({date: String(day.getDate()), weekDay: String(weekDay), summary: String(day.getFullYear())+'-'+(String(day.getMonth()).length < 2? `0${String(day.getMonth()+1)}` : (String(day.getMonth()+1))) +'-'+(String(day.getDate()).length <2? `0${String(day.getDate())}` : String(day.getDate()))});
+    dateArr.push({date: calendarDay, weekDay: String(weekDay), summary: summary});
 
   }
 

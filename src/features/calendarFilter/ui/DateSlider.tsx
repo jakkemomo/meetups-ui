@@ -64,6 +64,7 @@ export function DateSlider({
       isStartDate={selectedDate === el.summary || startDate === el.summary}
       isEndDate={endDate === el.summary}
       isBetweenDate={el.summary < endDate && el.summary > startDate}
+      isSelectedDate={selectedDate === el.summary}
       onClickDate={isLoading || isFetching ? undefined : onHandleClickDate}
       onCloseCalendarFilter={onCloseCalendarFilter}
     />

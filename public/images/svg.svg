@@ -140,4 +140,8 @@
   <symbol id="slider-empty-folder">
     <path d="M44.8222 69.8227H80.1775M12.5047 91.3596L12.5052 43.8371C12.5052 39.0771 12.5035 32.2973 12.502 27.3882C12.5009 23.9355 15.2995 21.1398 18.7522 21.1398H48.5346L62.9358 36.5233H106.25C109.702 36.5233 112.5 39.3216 112.5 42.7735L112.498 91.3603C112.498 98.2637 106.902 103.86 99.9982 103.86L25.0047 103.86C18.1011 103.86 12.5047 98.2632 12.5047 91.3596Z" stroke="#F5F5F7" stroke-width="10.4167" stroke-linecap="round" stroke-linejoin="round"/>
   </symbol>
+  <symbol id="calendar-filter-x">
+    <rect width="22" height="22" rx="3" fill="#5E5CCE"/>
+    <path d="M17 5L5 17M17 17L5 5" stroke="#F3F3F5" stroke-width="2" stroke-linecap="round"/>
+  </symbol>
 </svg>

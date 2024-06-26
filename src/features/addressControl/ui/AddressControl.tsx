@@ -5,9 +5,10 @@ import { selectedPlaceSetted } from "../model/addressControlSlice";
 import { LabeledInput } from "@/shared";
 import { useFormContext } from "react-hook-form";
 import { AddEventValidationSchema } from "@/features/addEvent/addEventForm/model/addEventFormSchema";
+import { IOnSelectAddressArgs } from "@/entities/event/model/types";
 
 interface IAddressControlProps {
-  setValuesFunc?: (city: string, country: string, geometry: google.maps.places.PlaceGeometry | null) => void;
+  setValuesFunc?: (args: IOnSelectAddressArgs) => void;
 }
 
 export function AddressControl({ setValuesFunc }: IAddressControlProps): ReactElement {
@@ -63,7 +64,12 @@ export function AddressControl({ setValuesFunc }: IAddressControlProps): ReactEl
         const detailsRequestCallback = (placeDetails: google.maps.places.PlaceResult | null) => {
           if (!placeDetails?.geometry?.location) return;
 
-          setValuesFunc && setValuesFunc(city, country, placeDetails.geometry);
+          setValuesFunc && setValuesFunc({
+            city,
+            country,
+            geometry: placeDetails.geometry,
+            place_id: res.predictions[0].place_id
+          });
         }
 
         getDetailsFromPlaceService(detailRequestOptions, detailsRequestCallback);
@@ -82,20 +88,28 @@ export function AddressControl({ setValuesFunc }: IAddressControlProps): ReactEl
     const detailsRequestCallback = (
       placeDetails: google.maps.places.PlaceResult | null
     ) => {
-      if (!placeDetails) return;
+      if (!placeDetails?.geometry?.location) return;
 
       dispatch(selectedPlaceSetted(placeDetails));
       setPredictionResults([]);
       setInputValue(placeDetails.formatted_address ?? '');
+
       clearErrors('address');
       setValue('address', placeDetails.formatted_address ?? '', { shouldDirty: true });
+
+      const location = placeDetails.geometry.location.toJSON();
+      setValue('location', { latitude: String(location.lat), longitude: String(location.lng) }, { shouldDirty: true });
+
       reset((state) => ({
         ...state,
         city: '',
         country: '',
-        city_north_east_point: { latitude: '', longitude: ''},
-        city_south_west_point: { latitude: '', longitude: ''},
-        location: { latitude: '', longitude: ''}
+        city_location: {
+          north_east_point: { latitude: '', longitude: ''},
+          south_west_point: { latitude: '', longitude: ''},
+          location: { latitude: '', longitude: ''},
+          place_id: ''
+        }
       }), { keepErrors: true, keepDirtyValues: true, keepIsValid: true });
 
       if (!placeDetails.address_components) return;

@@ -3,10 +3,11 @@ import { ReactElement } from "react";
 import { IFeatures } from "../model/types";
 import { ICoordinates } from "@/features/googleMap/model/types";
 import { AddressControl } from "@/features/addressControl";
+import { IOnSelectAddressArgs } from "@/entities/event/model/types";
 
 interface IMapWidgetProps {
   text?: string;
-  setValuesFunc?: (city: string, country: string, geometry: google.maps.places.PlaceGeometry | null) => void;
+  setValuesFunc?: (arg: IOnSelectAddressArgs) => void;
   position: ICoordinates;
   zoom: number;
   markers?: IFeatures[];

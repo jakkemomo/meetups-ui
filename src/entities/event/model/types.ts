@@ -89,10 +89,33 @@ export interface IDetailedEvent {
   schedule: IDay[],
   city: string,
   country: string,
-  participants_age: number
+  participants_age: number,
+  city_location: {
+    id: number,
+    place_id: string,
+    location: {
+      latitude: number,
+      longitude: number
+    },
+    south_west_point: {
+      latitude: number,
+      longitude: number
+    },
+    north_east_point: {
+      latitude: number,
+      longitude: number
+    }
+  }
 }
 
 export interface IEditEventRequest {
   eventInfo: Partial<AddEventValidationSchema>;
   eventId: number;
+}
+
+export interface IOnSelectAddressArgs {
+  city: string;
+  country: string;
+  geometry: google.maps.places.PlaceGeometry | null;
+  place_id: string;
 }

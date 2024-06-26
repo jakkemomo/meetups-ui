@@ -44,17 +44,27 @@ export const addEventSchema = z.object({
   country: z
     .string()
     .min(1, { message: 'Сломался поиск адреса' }),
+  city_location: z
+    .object({
+      place_id: z
+        .string(),
+      location: z
+        .object({
+          latitude: z.string(),
+          longitude: z.string()
+        }),
+      south_west_point: z
+        .object({
+          latitude: z.string(),
+          longitude: z.string()
+        }),
+      north_east_point: z
+        .object({
+          latitude: z.string(),
+          longitude: z.string()
+        }),
+    }),
   location: z
-    .object({
-      latitude: z.string(),
-      longitude: z.string()
-    }),
-  city_south_west_point: z
-    .object({
-      latitude: z.string(),
-      longitude: z.string()
-    }),
-  city_north_east_point: z
     .object({
       latitude: z.string(),
       longitude: z.string()

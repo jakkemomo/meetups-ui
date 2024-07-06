@@ -9,7 +9,8 @@ import {
   genderOption,
   getGenderValue,
   setGenderValue,
-} from "../model/genderValues";
+} from "../model/constants";
+import CityInput from "./CityInput";
 
 interface IEditProfileInfo {
   profileData?: ProfileDetails;
@@ -53,16 +54,14 @@ export function EditProfileInfo({
           extraLabelClass="text-[20px] mt-[18px]"
           size="lg"
         />
-        <LabeledInput
-          hookFormRegister={register("city")}
-          type="text"
-          isError={!!errors.city?.message}
-          placeholder="Введите свой город"
-          maxLength={30}
-          className="text-[18px] w-[480px] mt-[7px]"
-          labelText="Местоположение"
-          extraLabelClass="text-[20px] mt-[18px]"
-          size="lg"
+        <Controller
+          control={control}
+          name="city_location"
+          render={({ field: { onChange }}) => (
+            <CityInput
+              onChange={onChange}
+            />
+          )}
         />
         <Controller
           control={control}

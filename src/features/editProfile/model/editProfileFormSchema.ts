@@ -10,8 +10,26 @@ export const editProfileFormSchema = z.object({
   image_url: z.string().optional(),
   city: z
     .string()
-    .min(1, { message: inputExistErrorMessage })
-    .max(30, { message: inputMaxSize(30) }),
+    .min(1, { message: inputExistErrorMessage }),
+  city_location: z
+    .object({
+      place_id: z.string(),
+      location: z
+        .object({
+          latitude: z.string(),
+          longitude: z.string()
+        }),
+      south_west_point: z
+        .object({
+          latitude: z.string(),
+          longitude: z.string()
+        }),
+      north_east_point: z
+        .object({
+          latitude: z.string(),
+          longitude: z.string()
+        }),
+    }),
   gender: z.string().optional(),
   is_private: z.boolean({
     required_error: inputExistErrorMessage,

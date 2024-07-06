@@ -9,7 +9,7 @@ export function mapProfileDetails(dto: ProfileDetailsDto): ProfileDetails {
     lastName: dto.last_name,
     image: dto.image_url,
     isEmailVerified: dto.is_email_verified,
-    city: dto.city,
+    city_location: dto.city_location,
     is_private: dto.is_private,
     bio: dto.bio,
     age: dto.age,

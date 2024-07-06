@@ -81,7 +81,7 @@ export const eventApi = baseApi.injectEndpoints({
         method: 'GET'
       }),
       providesTags: ['EVENTS_TAG']
-    }),
+    })
   })
 })
 

@@ -1,4 +1,4 @@
-import { ReactElement, useEffect } from "react";
+import { ReactElement, useEffect, useState } from "react";
 import { useMyDetailsQuery } from "@/entities/profile/api/profileApi.ts";
 import { EditProfileForm } from "@/features/editProfile/ui/EditProfileForm";
 import Svg from "@/shared/ui/Svg";
@@ -17,6 +17,8 @@ import { PageTitle } from "@/widgets/PageTitle";
 import { useLogServerError } from "@/shared/lib/hooks";
 
 function EditProfile(): ReactElement {
+  const [isPageReady, setIsPageReady] = useState(false);
+
   const {
     data: profileData,
     isLoading: isProfileDataLoading,
@@ -33,8 +35,8 @@ function EditProfile(): ReactElement {
 
   useLogServerError(isCategoriesError, 'категорий', categoriesError);
 
-  const isFormLoading = isProfileDataLoading || isCategoriesLoading;
-  const isFormDataSuccess = isProfileDataSuccess && isCategoriesSuccess;
+  const isFormLoading = isProfileDataLoading || isCategoriesLoading || !isPageReady;
+  const isFormDataSuccess = isProfileDataSuccess && isCategoriesSuccess && isPageReady;
 
   const methods = useForm<EditProfileValidationSchema>({
     resolver: zodResolver(editProfileFormSchema),
@@ -44,8 +46,12 @@ function EditProfile(): ReactElement {
 
   useEffect(() => {
     if (isProfileDataSuccess) {
-      const editFormValues = removeProfileExtraFields(profileData);
-      methods.reset(editFormValues);
+      removeProfileExtraFields(profileData)
+        .then((res) => {
+          methods.reset(res);
+          setIsPageReady(true);
+        })
+        .catch((err) => console.log(err));
     } else {
       methods.reset(defaultProfileFormValues);
     }
@@ -59,7 +65,6 @@ function EditProfile(): ReactElement {
         <div className="basis-4/6 flex flex-wrap">
           <FormProvider {...methods}>
             <EditProfileForm
-              handleSubmit={methods.handleSubmit}
               isLoading={isFormLoading}
               isDataSuccess={isFormDataSuccess}
               userId={String(profileData?.id) ?? "0"}

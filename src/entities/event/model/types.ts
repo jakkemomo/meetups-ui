@@ -1,6 +1,7 @@
 import { IParticipant } from "@/entities/eventParticipants/model/types";
 import { AddEventValidationSchema } from "@/features/addEvent/addEventForm/model/addEventFormSchema";
 import { IDay } from "@/features/addEvent/periodicControl/model/types";
+import { ICityLocation } from "@/shared/model/types";
 
 export interface IEventTag {
   id: number,
@@ -90,22 +91,7 @@ export interface IDetailedEvent {
   city: string,
   country: string,
   participants_age: number,
-  city_location: {
-    id: number,
-    place_id: string,
-    location: {
-      latitude: number,
-      longitude: number
-    },
-    south_west_point: {
-      latitude: number,
-      longitude: number
-    },
-    north_east_point: {
-      latitude: number,
-      longitude: number
-    }
-  }
+  city_location: ICityLocation
 }
 
 export interface IEditEventRequest {

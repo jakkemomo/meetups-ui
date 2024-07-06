@@ -22,6 +22,7 @@ import { SliderEmptyElem } from "@/shared";
 import { getEventsCards } from "@/widgets/EventsList/model/getEventsCards";
 import { useLogServerError } from "@/shared/lib/hooks";
 import { PrivateUserEventsCap } from "@/widgets/Profile/PrivateUserEventsCap";
+import { useGeocodeIdQuery } from "@/entities/geocode/api/geocodeApi";
 
 function RemoteProfileView(): ReactElement {
   const navigate = useNavigate();
@@ -80,12 +81,23 @@ function RemoteProfileView(): ReactElement {
     }
   );
 
+  const {
+    isLoading: isCityInfoLoading,
+    data: cityInfo,
+    error: cityInfoError,
+    isError: isCityInfoError
+  } = useGeocodeIdQuery(
+    remoteUser?.city_location?.place_id ?? '',
+    { skip: !remoteUser?.city_location?.place_id }
+  );
+
   useLogServerError(isErrorRemoteUser, 'remoteUser', errorRemoteUser);
   useLogServerError(isErrorProfileData, 'currentUser', errorProfileData);
   useLogServerError(isErrorFollowingData, 'подписок', errorFollowingData);
   useLogServerError(isFinishedEventsError, 'посещенных ивентов', finishedEventsError);
   useLogServerError(isPlannedEventsError, 'запланированных ивентов', plannedEventsError);
   useLogServerError(isCreatedEventsError, 'созданных ивентов', createdEventsError);
+  useLogServerError(isCityInfoError, 'города', cityInfoError);
 
   const isPrivateUser = remoteUser?.is_private;
 
@@ -125,6 +137,10 @@ function RemoteProfileView(): ReactElement {
   const finishedEventsList = getEventsCards(finishedEvents.results, 'sm');
   const plannedEventsList = getEventsCards(plannedEvents.results, 'sm');
 
+  const city =
+    cityInfo?.results[0].address_components.find((addr) => addr.types.some((el) => el === 'locality'))?.short_name ??
+    undefined;
+
   if (isNaN(Number(userId))) {
     return <h1>404 Page not found</h1>;
   }
@@ -136,7 +152,8 @@ function RemoteProfileView(): ReactElement {
   if (
     isLoadingRemoteUser ||
     isLoadingFollowingData ||
-    isLoadingProfileData
+    isLoadingProfileData ||
+    isCityInfoLoading
   ) {
     return (
       <div className="m-auto">
@@ -150,6 +167,7 @@ function RemoteProfileView(): ReactElement {
       <section className="w-full max-w-[1215px] mx-auto pb-[98px] flex flex-row flex-nowrap min-h-[1000px] overflow-x-hidden">
         <ProfileInfo
           profileData={remoteUser}
+          city={city}
           optionButton={
             <div className="flex mt-[80px] ">
               <Button

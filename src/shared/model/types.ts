@@ -29,3 +29,15 @@ export interface ISelectInputOptions {
   id: number;
   name: string;
 }
+
+export interface ILocation {
+  longitude: string;
+  latitude: string;
+}
+
+export interface ICityLocation {
+  place_id: string;
+  location: ILocation;
+  south_west_point: ILocation;
+  north_east_point: ILocation;
+}

@@ -11,9 +11,9 @@ export function RegisterMultiStepForm(): ReactElement {
   const selectedIndex = useAppSelector(selectTabId);
 
   const tabs = [
-    <DetailForm/>,
-    <PasswordForm/>,
-    <CheckEmail/>
+    <DetailForm key={0}/>,
+    <PasswordForm key={1}/>,
+    <CheckEmail key={2}/>
   ];
 
   const titles = [
@@ -27,4 +27,4 @@ export function RegisterMultiStepForm(): ReactElement {
       { tabs[selectedIndex] }
     </FormWrapper>
   );
-};
+}

@@ -1,15 +1,15 @@
 import {baseApi} from '@/shared/api'
-import {ProfileDetailsDto} from "@/entities/profile/api/types";
-import {ProfileDetails, ProfileId} from "@/entities/profile/model/types";
+import {ProfileDetails, ProfileId, ProfileFollowing, IFollowResponse, ProfileDetailsDto} from "@/entities/profile/model/types";
 import {mapProfileDetails} from "@/entities/profile/lib/mapProfileDetails";
-
+import { EditProfileValidationSchema } from '@/features/editProfile/model/editProfileFormSchema';
 
 export const profileApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
     profileDetails: build.query<ProfileDetails, ProfileId>({
-      query: (profileId) => ({
-        url: `/profiles/${profileId}/`,
+      query: ({userId}) => ({
+        url: `/users/${userId}/`,
       }),
+      providesTags: ['PROFILE_TAG'],
       transformResponse: (response: ProfileDetailsDto) =>
           mapProfileDetails(response),
     }),
@@ -19,6 +19,38 @@ export const profileApi = baseApi.injectEndpoints({
       }),
       transformResponse: (response: ProfileDetailsDto) =>
           mapProfileDetails(response),
+      providesTags: ['PROFILE_TAG', 'SESSION_TAG'],
+
+    }),
+    getFollowing: build.query<ProfileFollowing[], ProfileId>({
+      query: ({userId}) => ({
+        url: `/users/${userId}/following/`,
+      }),
+    }),
+    getFollowers: build.query<ProfileFollowing[], ProfileId>({
+      query: ({userId}) => ({
+        url: `/users/${userId}/followers/`,
+      }),
+    }),
+    follow: build.mutation<IFollowResponse, ProfileId>({
+      query: ({userId}) => ({
+        url: `/users/${userId}/follow/`,
+        method: 'POST',
+      }),
+    }),
+    unFollow: build.mutation<void, ProfileId>({
+      query: ({userId}) => ({
+        url: `/users/${userId}/unfollow/`,
+        method: 'DELETE',
+      }),
+    }),
+    editProfile: build.mutation<EditProfileValidationSchema, ProfileId>({
+      query: ({userId, ...patch}) => ({
+        url: `/users/${userId}/`,
+        method: 'PATCH',
+        body: patch
+      }),
+      invalidatesTags: ['PROFILE_TAG']
     }),
 }),
 })
@@ -26,4 +58,10 @@ export const profileApi = baseApi.injectEndpoints({
 export const {
   useProfileDetailsQuery,
   useMyDetailsQuery,
+  useLazyMyDetailsQuery,
+  useGetFollowingQuery,
+  useGetFollowersQuery,
+  useFollowMutation,
+  useUnFollowMutation,
+  useEditProfileMutation,
 } = profileApi

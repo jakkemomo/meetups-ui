@@ -1,18 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { IAddedMarker } from "../../../widgets/mapWidget/model/types";
 
 interface IInitialState {
   selectedPlace: google.maps.places.PlaceResult | null;
   placesService: google.maps.places.PlacesService | null;
   autocompleteService: google.maps.places.AutocompleteService | null;
-  implementMarker: IAddedMarker | null;
 }
 
 const initialState: IInitialState = {
   selectedPlace: null,
   placesService: null,
-  autocompleteService: null,
-  implementMarker: null
+  autocompleteService: null
 }
 
 const addressControlSlice = createSlice({
@@ -27,13 +24,10 @@ const addressControlSlice = createSlice({
     }),
     autocompleteServiceSetted: (state, { payload: autocompleteService }: { payload: google.maps.places.AutocompleteService | null }) => ({
       ...state, autocompleteService
-    }),
-    implementMarkerSetted: (state, { payload: implementMarker }: { payload: IAddedMarker | null }) => ({
-      ...state, implementMarker
     })
   }
 })
 
-export const { selectedPlaceSetted, placesServiceSetted, autocompleteServiceSetted, implementMarkerSetted } = addressControlSlice.actions;
+export const { selectedPlaceSetted, placesServiceSetted, autocompleteServiceSetted } = addressControlSlice.actions;
 
 export default addressControlSlice;

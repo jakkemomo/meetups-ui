@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Switch } from '@headlessui/react'
 
 interface ISwitchInputProps {
@@ -10,6 +10,10 @@ interface ISwitchInputProps {
 
 export function SwitchInput({ labelText, extraBoxClass, onChange, value }: ISwitchInputProps) {
   const [enabled, setEnabled] = useState(value || false);
+
+  useEffect(() => {
+    setEnabled(value);
+  }, [value]);
 
   const onSwitch = (state: boolean) => {
     setEnabled(state);

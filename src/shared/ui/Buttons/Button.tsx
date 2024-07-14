@@ -6,7 +6,7 @@ export interface IButtonProps {
   children?: ReactNode;
   type?: 'submit' | 'button' | 'reset';
   size?: 'none' | 'sm' | 'md' | 'lg' | 'xl';
-  importance?: 'none' | 'primary' | 'primary-faded' | 'secondary';
+  importance?: 'none' | 'primary' | 'secondary' | 'primary-opposite';
   extraClass?: string;
   disabled?: boolean;
 }
@@ -37,6 +37,7 @@ export function Button({
             'bg-transparent text-black': importance === 'none',
             'bg-but-primary hoverscreen:hover:bg-but-primary-hover active:bg-but-primary-active text-white font-semibold rounded-def': importance === 'primary',
             'bg-but-second hoverscreen:hover:bg-but-second-hover active:bg-but-second-active text-main-violet font-semibold rounded-def': importance === 'secondary',
+            'bg-but-orange hoverscreen:hover:opacity-70': importance === 'primary-opposite',
             'cursor-default !bg-but-disable !text-white pointer-events-none': disabled
           },
           extraClass

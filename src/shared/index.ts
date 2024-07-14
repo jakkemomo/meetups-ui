@@ -14,3 +14,4 @@ export { Popup } from './ui/Popup';
 export { CheckboxWithLabel } from './ui/CheckboxWithLabel';
 export { FileInputWithDrag } from './ui/Inputs/FileInputWithDrag';
 export { PasswordInput } from './ui/Inputs/PasswordInput';
+export { SliderEmptyElem } from './ui/SliderEmptyElem';

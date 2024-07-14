@@ -8,7 +8,7 @@ export interface SvgProps extends Partial<SVGProps<SVGSVGElement>> {
 const Svg = (({ id, extraUseClass, ...rest }: SvgProps): ReactNode => {
   return (
     <svg {...rest}>
-      <use className={`fill-none ${extraUseClass ?? ''}`} href={`/public/images/svg.svg#${id}`} />
+      <use className={`fill-none ${extraUseClass ?? ''}`} href={`/images/svg.svg#${id}`} />
     </svg>
   );
 });

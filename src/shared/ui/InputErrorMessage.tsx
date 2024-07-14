@@ -1,5 +1,7 @@
+import { FieldError } from "react-hook-form";
+
 interface IInputErrorMessageProps {
-  error?: any;
+  error?: FieldError;
 }
 
 export function InputErrorMessage({ error }: IInputErrorMessageProps) {

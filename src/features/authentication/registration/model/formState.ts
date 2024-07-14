@@ -2,7 +2,7 @@ import {createSlice, PayloadAction} from '@reduxjs/toolkit'
 
 export interface IRegisterFormState {
     selectedTab: number,
-    bgCardType: Array<'WELCOME' | 'VISIT_EVENTS' | 'FIND_FRIENDS'>,
+    bgCardType: ('WELCOME' | 'VISIT_EVENTS' | 'FIND_FRIENDS')[],
     data: {
         username: string,
         email: string,

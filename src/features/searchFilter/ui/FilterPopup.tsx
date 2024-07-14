@@ -4,6 +4,7 @@ import { ICategory } from "../model/types";
 import { useAppDispatch, useAppSelector } from "@/shared/model";
 import { isPopupOpenSetted } from "../model/filterPopupSlice";
 import { categorySetted } from "../model/SearchFilterSlice";
+import Svg from "@/shared/ui/Svg";
 
 interface IFilterPopupProps {
   categories: ICategory[];
@@ -12,26 +13,25 @@ interface IFilterPopupProps {
 export function FilterPopup({ categories }: IFilterPopupProps): ReactElement {
   const dispatch = useAppDispatch();
   const { isOpen } = useAppSelector((state) => state.filterPopup);
-  const [checkedCategories, setCheckedCategories] = useState<ICategory[]>([]);
+  const { checkedCategories } = useAppSelector((state) => state.searchFilter);
+  const [checkedCategoriesArr, setCheckedCategoriesArr] = useState<number[]>(checkedCategories || []);
 
   const handleCheckedCategories = (e: ChangeEvent<HTMLInputElement>, category: ICategory) => {
     e.target.checked
-    ? setCheckedCategories((state) => ([...state, category]))
-    : setCheckedCategories((state) => state.filter((el) => el.id !== category.id));
+    ? setCheckedCategoriesArr((state) => ([...state, category.id]))
+    : setCheckedCategoriesArr((state) => state.filter((el) => el !== category.id));
   }
 
   const onButtonClick = () => {
     dispatch(isPopupOpenSetted(false));
 
-    const checkedCategoriesString = checkedCategories.map((el) => el.name).join(',');
-
-    dispatch(categorySetted(checkedCategoriesString));
+    dispatch(categorySetted(checkedCategoriesArr));
   }
 
   return (
     <Popup isOpen={isOpen} onClose={() => dispatch(isPopupOpenSetted(false))}>
-      <div className="absolute flex flex-col top-[100px] left-[50%] translate-x-[-50%] bg-white min-w-[584px] rounded-[10px] px-[45px] py-[35px]">
-        <div onClick={() => dispatch(isPopupOpenSetted(false))} className="absolute top-[42px] right-[45px] bg-close-cross bg-no-repeat bg-cover bg-center w-6 h-6 cursor-pointer"></div>
+      <div className="absolute flex flex-col top-[100px] left-[50%] translate-x-[-50%] bg-white min-w-[584px] rounded-def px-[45px] py-[35px]">
+        <Svg onClick={() => dispatch(isPopupOpenSetted(false))} id="close-cross" className="absolute top-[42px] right-[45px] w-6 h-6 cursor-pointer duration-150 hoverscreen:hover:opacity-70" />
         <div className="flex items-center">
           <h2 className="text-[30px] font-semibold leading-[37.65px]">Фильтр</h2>
           <div className="bg-filter-icon w-6 h-6 bg-cover bg-no-repeat bg-center ml-3"></div>
@@ -47,7 +47,8 @@ export function FilterPopup({ categories }: IFilterPopupProps): ReactElement {
                 label={category.name}
                 extraBoxClass="mt-3 first-of-type:mt-4"
                 extraLabelClass="ml-2"
-                onChange={(e) => handleCheckedCategories(e, category)}
+                onChange={(e: ChangeEvent<HTMLInputElement>) => handleCheckedCategories(e, category)}
+                value={checkedCategories.some((el) => el === category.id)}
               />
             )
             }

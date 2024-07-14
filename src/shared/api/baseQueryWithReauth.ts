@@ -17,7 +17,7 @@ export const baseQueryWithReauth: BaseQueryFn<
   console.debug(api.endpoint, 'ENDPOINT')
   let result = await baseQuery(args, api, extraOptions)
   if (result.error && result.error.status === 401) {
-    let refreshToken = selectRefreshToken()
+    const refreshToken = selectRefreshToken()
     if (!mutex.isLocked() && refreshToken) {
       const release = await mutex.acquire()
       try {

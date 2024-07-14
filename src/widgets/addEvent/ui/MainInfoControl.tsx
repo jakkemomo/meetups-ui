@@ -18,12 +18,15 @@ export function MainInfoControl({ categories }: IMainInfoProps): ReactElement {
 
   return (
     <>
-      <div className="flex items-end mt-[40px]">
-        <div className="flex flex-col mr-[45px]">
+      <div className="flex items-start mt-10">
+        <div className="flex flex-col justify-start mr-[45px]">
           <LabeledInput
             hookFormRegister={register('name')}
             type='text'
-            error={!!errors.name?.message}
+            isError={!!errors.name}
+            errorMessage={errors.name?.message}
+            extraErrorClass="ml-[22px]"
+            extraBoxClass="relative"
             placeholder='Введите название'
             maxLength={250}
             className="text-[18px] w-[480px] mt-[7px]"
@@ -42,10 +45,11 @@ export function MainInfoControl({ categories }: IMainInfoProps): ReactElement {
                   onChange(option.id);
                 }}
                 error={errors.category?.message}
+                extraErrorClass="ml-[22px]"
                 labelText='Категория'
                 options={categories}
                 placeholder='Выберите категорию'
-                extraBoxClass="mt-[18px]"
+                extraBoxClass="mt-[18px] relative"
               />
             )}
           />
@@ -72,6 +76,7 @@ export function MainInfoControl({ categories }: IMainInfoProps): ReactElement {
         extraBoxClass={'mt-[18px]'}
         maxLength={250}
       />
+      {errors.description && <p className="text-input-error mt-[7px] ml-[22px]">{errors.description.message}</p>}
     </>
   )
 }

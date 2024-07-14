@@ -1,12 +1,12 @@
 import {createApi} from '@reduxjs/toolkit/query/react'
-import {PROFILE_TAG, SESSION_TAG} from './tags'
+import {EVENTS_TAG, PARTICIPANTS_TAG, PROFILE_TAG, SESSION_TAG} from './tags'
 import {baseQuery} from "./baseQuery";
 import {AccessToken, AccessTokenDto, RefreshToken} from "../model/types";
 import {mapAccessToken} from "../lib/mapSession";
 import {baseQueryWithReauth} from "./baseQueryWithReauth";
 
 export const baseApi = createApi({
-  tagTypes: [SESSION_TAG, PROFILE_TAG],
+  tagTypes: [SESSION_TAG, PROFILE_TAG, PARTICIPANTS_TAG, EVENTS_TAG],
   reducerPath: 'api',
   baseQuery: baseQueryWithReauth,
   endpoints: () => ({}),

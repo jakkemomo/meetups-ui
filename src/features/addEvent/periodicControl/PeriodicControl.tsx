@@ -2,22 +2,26 @@ import { CheckboxWithLabel } from "@/shared";
 import { Disclosure } from "@headlessui/react";
 import { ReactElement, useState } from "react";
 import { daysArr, parityDayNames } from "./model/consts";
-import { Control, Controller, UseFormClearErrors } from "react-hook-form";
+import { Controller, useFormContext } from "react-hook-form";
 import { AddEventValidationSchema } from "../addEventForm/model/addEventFormSchema";
 import { IDay } from "./model/types";
 import TimeInput from "@/shared/ui/Inputs/TimeInput";
 
 interface IPeriodicControlProps {
   isPeriodic: boolean;
-  control: Control<AddEventValidationSchema>;
   onChange: (day: IDay[]) => void;
   schedule: IDay[];
   error?: string;
-  clearErrors: UseFormClearErrors<AddEventValidationSchema>;
 }
 
-export function PeriodicControl({ isPeriodic, control, onChange, schedule, error, clearErrors }: IPeriodicControlProps): ReactElement {
+export function PeriodicControl({ isPeriodic, onChange, schedule, error }: IPeriodicControlProps): ReactElement {
   const [isInputsDisabled, setIsInputsDisabled] = useState(true);
+
+  const {
+    setValue,
+    control,
+    clearErrors
+  } = useFormContext<AddEventValidationSchema>();
 
   const handleInputsDisable = () => {
     setIsInputsDisabled((state) => !state);
@@ -37,8 +41,17 @@ export function PeriodicControl({ isPeriodic, control, onChange, schedule, error
     onChange(newSchedule);
   }
 
-  const onChangePeriodic = () => {
+  const onChangePeriodic = (checked: boolean) => {
     clearErrors(['schedule', 'start_date', 'start_time', 'end_date', 'end_time']);
+
+    if (!checked) {
+      setValue('schedule', null, { shouldDirty: true });
+    } else {
+      setValue('start_date', null, { shouldDirty: true });
+      setValue('end_date', null, { shouldDirty: true });
+      setValue('start_time', null, { shouldDirty: true });
+      setValue('end_time', null, { shouldDirty: true });
+    }
   }
 
   return (
@@ -57,7 +70,7 @@ export function PeriodicControl({ isPeriodic, control, onChange, schedule, error
                   onChange={(e) => {
                     !e.target.checked && close();
 
-                    onChangePeriodic();
+                    onChangePeriodic(e.target.checked);
 
                     onChange(e.target.checked);
                   }}

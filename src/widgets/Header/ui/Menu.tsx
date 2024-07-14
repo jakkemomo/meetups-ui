@@ -1,14 +1,14 @@
 import { Button } from "@/shared";
-import { ProfileButton } from "@/widgets/ProfileButton";
 import { ReactElement } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { ProfileButton } from "./ProfileButton";
 
 export function Menu(): ReactElement {
   const navigate = useNavigate();
   const location = useLocation();
 
   return (
-    <div className="flex">
+    <div className="flex max-h-[50px]"> 
       <Button
         type="button"
         size="sm"

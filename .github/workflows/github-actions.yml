@@ -1,0 +1,25 @@
+name: GitHub Actions Demo
+run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
+on:
+  push:
+    branches: [ dev ]
+  pull_request:
+    branches: [ dev ]
+jobs:
+  init:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [ 21.x ]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Starting Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node/@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: install modules
+        run: npm install
+      - name: build project
+        run: npm run build
+      - name: eslint check
+        run: npm run lint

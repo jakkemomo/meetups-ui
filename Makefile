@@ -30,8 +30,11 @@ download_node_modules:
 	${COMPOSE} stop dev
 
 # Clean up artifacts
-clean:
+clean: docker-rm
 	rm -rf build/
+	rm -rf node_modules/
 
 # Default target (run tests and build)
 all: lint test build
+
+rerundev: clean docker-build download_node_modules dev-demon

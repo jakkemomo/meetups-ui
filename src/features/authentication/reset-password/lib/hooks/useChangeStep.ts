@@ -14,7 +14,7 @@ export const useChangeStep = (formKey: string, path: string,  activeStep: number
       }
       navigation(path, { ...location, state: { activeStep } });
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [navigation, location, activeStep]
   );
 }
-

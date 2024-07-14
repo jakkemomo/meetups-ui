@@ -20,7 +20,7 @@ interface ILoginFormProps {
 export function LoginForm({onComplete}: ILoginFormProps): ReactElement {
   const {
     setError,
-    formState: {errors, isValid, isSubmitting, isSubmitted},
+    formState: {errors, isValid, isSubmitted},
     handleSubmit,
     register,
     setValue,
@@ -40,24 +40,25 @@ export function LoginForm({onComplete}: ILoginFormProps): ReactElement {
     setFormValuesInStorage(AUTH_FORM_VALUES_KEY, { email });
     loginTrigger({email, password})
         .unwrap()
-        .then((payload) => onComplete?.())
-        .catch((error) => setError('email', {message: error.data.detail}))
+        .then(() => onComplete?.())
+        .catch((error: {data: {detail: string}}) => setError('email', {message: error.data.detail}))
   }
 
   const onResetPasswordClick = useCallback(() => {
     const values = getValues();
     setFormValuesInStorage(AUTH_FORM_VALUES_KEY, { email: values.email });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [navigate])
 
   return (
     <FormWrapper redirectType='register' headerText='Вход в Аккаунт'>
-      <form noValidate onSubmit={handleSubmit(onSubmit)} className="flex flex-col px-0 w-full max-w-[320px] md:px-90">
+      <form noValidate onSubmit={(data) => void handleSubmit(onSubmit)(data)} className="flex flex-col px-0 w-full max-w-[320px] md:px-90">
         <Input
           type='email'
           head={<Svg className="w-6 h-6" id="email-icon" />}
           extraInputClass="pl-3"
           placeholder='Почта'
-          error={!!errors.email}
+          isError={!!errors.email}
           size="md"
           hookFormRegister={register('email')}
           className="text-[18px]"
@@ -67,7 +68,7 @@ export function LoginForm({onComplete}: ILoginFormProps): ReactElement {
           head={<Svg className="w-6 h-6" id="password-icon" />}
           placeholder='Пароль'
           extraInputClass="pl-3"
-          error={!!errors.password}
+          isError={!!errors.password}
           hookFormRegister={register('password')}
           size="md"
           className="mt-3.5 text-[18px] !pr-5"

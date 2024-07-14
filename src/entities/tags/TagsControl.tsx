@@ -100,8 +100,8 @@ export function TagsControl({ tags, onChange, value }: ITagsControlProps): React
           <ul className="flex flex-wrap max-w-[796px] ml-[-20px]">
             {
               value.map((tag, index) => (
-                <li key={index} className="flex items-center h-[34px] border-1 border-main-blue border-solid rounded-[12px] pl-[22px] pr-3.5 ml-5 mt-3">
-                  <p className="text-[18px] text-main-blue">{[...tags, ...createdTags].find((el) => el.id === tag)?.name}</p>
+                <li key={index} className="flex items-center h-[34px] border-1 border-but-primary border-solid rounded-[12px] pl-[22px] pr-3.5 ml-5 mt-3">
+                  <p className="text-[18px] text-but-primary">{[...tags, ...createdTags].find((el) => el.id === tag)?.name}</p>
                   <div onClick={() => handleTagDelete(tag)} className="w-6 h-6 bg-close-cross-purple bg-center bg-no-repeat ml-1.5 cursor-pointer"></div>
                 </li>
               ))

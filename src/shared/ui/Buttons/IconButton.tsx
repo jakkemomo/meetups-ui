@@ -20,7 +20,7 @@ export function IconButton({
     <Button
       extraClass={
         cx(
-          'flex items-center justify-center duration-150 hoverscreen:hover:opacity-70',
+          'flex items-center justify-center',
           {
             'w-10 h-10 !p-2 rounded-def': size === 'lg',
           },

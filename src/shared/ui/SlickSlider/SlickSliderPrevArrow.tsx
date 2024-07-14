@@ -1,4 +1,5 @@
 import { ArrowsExtraClasses } from "@/shared/types";
+import Svg from "../Svg";
 
 interface IPrevArrowProps {
   onClick?: () => void;
@@ -8,6 +9,6 @@ interface IPrevArrowProps {
 
 export function SlickSliderPrevArrow({ onClick, slide, extraClasses }: IPrevArrowProps) {
   return (
-    <div onClick={onClick} className={`absolute bg-right-arrow bg-no-repeat bg-center w-3 h-[25px] z-10 cursor-pointer origin-center rotate-180 block ${extraClasses.leftArrow} ${slide ? "" : "hidden"}`}></div>
+    <Svg onClick={onClick} id="slider-chevron" className={`absolute w-9 h-9 z-10 cursor-pointer origin-center rotate-180 block ${extraClasses.leftArrow} ${slide ? "" : "hidden"}`}/>
   )
 }

@@ -1,23 +1,35 @@
 import { useAppDispatch, useAppSelector } from "@/shared/model";
 import { useMapsLibrary } from "@vis.gl/react-google-maps";
-import { ReactElement, SyntheticEvent, useState } from "react";
-import { implementMarkerSetted, selectedPlaceSetted } from "../model/addressControlSlice";
+import { ReactElement, SyntheticEvent, useEffect, useState } from "react";
+import { selectedPlaceSetted } from "../model/addressControlSlice";
 import { LabeledInput } from "@/shared";
-import { UseFormSetValue } from "react-hook-form";
+import { useFormContext } from "react-hook-form";
 import { AddEventValidationSchema } from "@/features/addEvent/addEventForm/model/addEventFormSchema";
 
 interface IAddressControlProps {
   setValuesFunc?: (city: string, country: string, geometry: google.maps.places.PlaceGeometry | null) => void;
-  setValue?: UseFormSetValue<AddEventValidationSchema>;
-  error?: string;
 }
 
-export function AddressControl({ setValuesFunc, setValue, error }: IAddressControlProps): ReactElement {
+export function AddressControl({ setValuesFunc }: IAddressControlProps): ReactElement {
   const places = useMapsLibrary('places');
   const [inputValue, setInputValue] = useState('');
   const [predictionResults, setPredictionResults] = useState<google.maps.places.AutocompletePrediction[]>([]);
   const { placesService, autocompleteService } = useAppSelector((state) => state.addressControl);
   const dispatch = useAppDispatch();
+
+  const {
+    setValue,
+    formState: { errors },
+    clearErrors,
+    getValues,
+    reset
+  } = useFormContext<AddEventValidationSchema>();
+
+  const addressFormValue = getValues('address');
+
+  useEffect(() => {
+    setInputValue(addressFormValue);
+  }, [addressFormValue]);
 
   const fetchPredictions = async (inputValue: string) => {
     if (!autocompleteService || !inputValue) {
@@ -75,14 +87,16 @@ export function AddressControl({ setValuesFunc, setValue, error }: IAddressContr
       dispatch(selectedPlaceSetted(placeDetails));
       setPredictionResults([]);
       setInputValue(placeDetails.formatted_address ?? '');
-      setValue && setValue('address', placeDetails.formatted_address ?? '');
-
-      if (!placeDetails?.geometry?.location?.lng || !placeDetails.geometry.location.lat) return;
-
-      const lng = placeDetails.geometry.location.lng();
-      const lat = placeDetails.geometry.location.lat();
-
-      dispatch(implementMarkerSetted({lng, lat}));
+      clearErrors('address');
+      setValue('address', placeDetails.formatted_address ?? '', { shouldDirty: true });
+      reset((state) => ({
+        ...state,
+        city: '',
+        country: '',
+        city_north_east_point: { latitude: '', longitude: ''},
+        city_south_west_point: { latitude: '', longitude: ''},
+        location: { latitude: '', longitude: ''}
+      }), { keepErrors: true, keepDirtyValues: true, keepIsValid: true });
 
       if (!placeDetails.address_components) return;
 
@@ -99,7 +113,7 @@ export function AddressControl({ setValuesFunc, setValue, error }: IAddressContr
     const value = (event.target as HTMLInputElement)?.value;
 
     if (!value) {
-      setValue && setValue('address', '');
+      setValue('address', '');
     }
 
     setInputValue(value);
@@ -114,7 +128,9 @@ export function AddressControl({ setValuesFunc, setValue, error }: IAddressContr
         <LabeledInput
           value={inputValue}
           onChange={onInputChange}
-          error={!!error}
+          isError={!!(errors.address ?? errors.city)}
+          errorMessage={errors.address?.message ?? errors.city?.message}
+          extraErrorClass="ml-[22px]"
           type="search"
           placeholder="Введите адрес"
           className="w-full text-[18px] mt-[7px]"
@@ -124,7 +140,7 @@ export function AddressControl({ setValuesFunc, setValue, error }: IAddressContr
           extraLabelClass="text-[20px]"
         />
         {predictionResults.length > 0 && (
-          <ul className="w-full flex flex-col absolute top-[48px] bg-custom-gray rounded-[10px] z-50">
+          <ul className="w-full flex flex-col absolute top-[90px] bg-custom-gray rounded-[10px] z-50">
             {predictionResults.map(({place_id, description}) => {
               return (
                 <li

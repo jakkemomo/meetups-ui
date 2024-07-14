@@ -1,37 +1,67 @@
-import type {ReactElement} from 'react'
-import {createBrowserRouter, Navigate} from 'react-router-dom'
+import {createBrowserRouter} from 'react-router-dom'
 import NonFound from "@/pages/errors/NonFound";
 import LoginPage from "@/pages/login/LoginPage";
 import RegistrationPage from "@/pages/register/RegistrationPage";
 import BaseLayout from "@/app/layouts/baseLayout.tsx";
 import {AuthLayout} from "@/app/layouts/authLayout";
 import ResetPasswordPage from "@/pages/reset-password/ResetPasswordPage";
-import {selectAccessToken} from "@/shared/lib";
 import AddEventPage from "@/pages/add-event/AddEventPage";
 import {HomePage} from "@/pages/home/HomePage.tsx";
-import ChatPage from '@/pages/chat/ChatPage';
+import { EventPage } from '@/pages/event/EventPage';
+import CurrentProfileView from "@/pages/profile/CurrentProfileView"
+import RemoteProfileView from "@/pages/profile/RemoteProfileView"
+import EditProfile from '@/pages/profile/EditProfile';
+import SecurityPage from '@/pages/security/SecurityPage';
+import ProxyConfirmEmailPage from '@/features/authentication/registration/ui/ProxyConfirmEmailPage';
+import RouteGuard from './guards/RouteGuard';
 
-interface GuestGuardProps {
-  children: ReactElement
-}
-
-function GuestGuard({children}: GuestGuardProps) {
-  if (!selectAccessToken()) return <Navigate to="/login"/>
-
-  return children
-}
-
-interface AuthGuardProps {
-  children: ReactElement
-}
-
-function AuthGuard({children}: AuthGuardProps) {
-  if (selectAccessToken()) return <Navigate to="/"/>
-
-  return children
-}
-
-export const appRouter = createBrowserRouter([
+const appRouter = createBrowserRouter([
+  {
+    element: <RouteGuard type="guest"><BaseLayout /></RouteGuard>,
+    errorElement: <div>error</div>,
+    children: [
+      {
+        path: '/security',
+        element: (
+          <SecurityPage />
+        )
+      },
+      {
+        path: '/security/email/confirm',
+        element: <ProxyConfirmEmailPage type='security' />
+      },
+      {
+        path: '/events/:eventId/edit',
+        element: (
+          <AddEventPage type='edit' />
+        )
+      },
+      {
+        path: '/profile/me',
+        element: (
+          <CurrentProfileView/>
+        ),
+      },
+      {
+        path: '/profile/:userId',
+        element: (
+          <RemoteProfileView/>
+        )
+      },
+      {
+        path: '/profile/edit',
+        element: (
+          <EditProfile/>
+        ),
+      },
+      {
+        path: '/event/add',
+        element: (
+          <AddEventPage type='add' />
+        ),
+      }
+    ]
+  },
   {
     element: <BaseLayout />,
     errorElement: <div>error</div>,
@@ -43,10 +73,10 @@ export const appRouter = createBrowserRouter([
         ),
       },
       {
-        path: '/event/add',
+        path: '/events/:eventId',
         element: (
-          <AddEventPage/>
-        ),
+          <EventPage/>
+        )
       },
       {
         path: '*',
@@ -63,7 +93,7 @@ export const appRouter = createBrowserRouter([
     ]
   },
   {
-    element: <AuthGuard><AuthLayout/></AuthGuard>,
+    element: <RouteGuard type="auth"><AuthLayout/></RouteGuard>,
     errorElement: <div>error</div>,
     children: [
       {
@@ -73,6 +103,10 @@ export const appRouter = createBrowserRouter([
       {
         path: 'register',
         element: <RegistrationPage/>,
+      },
+      {
+        path: 'register/email/confirm',
+        element: <ProxyConfirmEmailPage type='register' />
       },
       {
         path: 'password/reset/',
@@ -85,3 +119,5 @@ export const appRouter = createBrowserRouter([
     ]
   },
 ])
+
+export default appRouter;

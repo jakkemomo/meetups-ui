@@ -9,6 +9,7 @@ interface ISelectInputProps {
   value?: ISelectInputOptions;
   onChange?: (option: ISelectInputOptions) => void;
   error?: string;
+  extraErrorClass?: string;
   extraBoxClass?: string;
   extraContentClass?: string;
   extraDropdownClass?: string;
@@ -21,6 +22,7 @@ export function SelectInput({
   placeholder,
   isDisabled,
   error,
+  extraErrorClass,
   value,
   onChange,
   extraBoxClass,
@@ -35,6 +37,7 @@ export function SelectInput({
 
       onChange && onChange(options[0]);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const onSelectOption = (option: ISelectInputOptions) => {
@@ -54,7 +57,7 @@ export function SelectInput({
         {({open, value}) => (
           <>
             {labelText && (
-              <Listbox.Label className={'text-xl text-text-black mb-[7px]'}>
+              <Listbox.Label as='label' className={'text-xl text-text-black mb-[7px] cursor-pointer'}>
                 {labelText}
               </Listbox.Label>
             )}
@@ -89,6 +92,7 @@ export function SelectInput({
           </>
         )}
       </Listbox>
+      { error && <p className={`text-input-error leading-[20px] mt-[7px] ${extraErrorClass}`}>{error}</p>}
     </div>
   )
 }

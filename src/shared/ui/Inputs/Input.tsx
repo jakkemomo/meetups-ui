@@ -11,7 +11,7 @@ export interface IInputProps extends NativeInputPropsWithoutSize {
   after?: ReactNode;
   extraInputClass?: string;
   size?: 'none' | 'sm' | 'md' | 'lg';
-  error?: boolean;
+  isError?: boolean;
   locator?: string;
   hookFormRegister?: UseFormRegisterReturn<string>;
 }
@@ -24,7 +24,7 @@ export function Input({
   className = '',
   extraInputClass = '',
   size = 'none',
-  error = false,
+  isError = false,
   locator,
   disabled,
   hookFormRegister,
@@ -41,7 +41,7 @@ export function Input({
             'p-2.5': size === 'sm',
             'p-[13px]': size === 'md',
             'px-[22px] py-2.5': size === 'lg',
-            'border-1 border-input-error border-solid': error,
+            'border-1 border-input-error border-solid': isError,
           },
           className,
         )

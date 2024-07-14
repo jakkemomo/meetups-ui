@@ -24,14 +24,15 @@ export function PasswordForm(): ReactElement {
     })
 
     const [
-      registerTrigger
+      registerTrigger,
+      { isLoading }
     ] = useRegisterMutation();
 
     const regUser = (password: string) => {
       registerTrigger({...data, password: password})
         .unwrap()
         .then(() => dispatch(passwordFilled({password: password})))
-        .catch((error) => setError('password', {message: error.data.detail}))
+        .catch((error: {data: {detail: string}}) => setError('password', {message: error.data.detail}))
     };
 
     const onPrev = () => dispatch(goBack());
@@ -41,14 +42,14 @@ export function PasswordForm(): ReactElement {
     }
 
     return (
-      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col w-full max-w-[320px]">
+      <form onSubmit={(data) => void handleSubmit(onSubmit)(data)} className="flex flex-col w-full max-w-[320px]">
         <p className="text-neutral-500 text-base md:text-lg font-normal">Придумайте уникальный пароль</p>
         <PasswordInput
           type='password'
           head={<Svg className="w-6 h-6" id="password-icon" />}
           placeholder='Пароль'
           extraInputClass="pl-3"
-          error={!!errors.password}
+          isError={!!errors.password}
           hookFormRegister={register('password')}
           size="md"
           className="mt-3.5 text-[18px] !pr-5"
@@ -71,7 +72,7 @@ export function PasswordForm(): ReactElement {
           importance="primary"
           extraClass='mt-[60px] md:mt-6'
           size="xl"
-          disabled={isSubmitted}
+          disabled={(!isValid && isSubmitted) || isLoading}
         >Зарегистрироваться</Button>
         <Button
           onClick={onPrev}

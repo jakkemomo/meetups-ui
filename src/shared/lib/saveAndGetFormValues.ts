@@ -12,8 +12,11 @@ interface ReturnType {
 
 export const getFormValuesFromStorage = (formKey: string): ReturnType => {
   const rawFormData = sessionStorage.getItem(formKey);
+
   if (!rawFormData) {
     return {};
   }
+
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-return
   return JSON.parse(rawFormData);
 }

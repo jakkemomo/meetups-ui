@@ -1,5 +1,5 @@
 import {ReactElement, useCallback} from "react";
-import {Button, FormWrapper, Input} from "@/shared/ui";
+import {Button, FormWrapper} from "@/shared/ui";
 import {useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {
@@ -11,6 +11,8 @@ import {useConfirmResetPasswordMutation} from "@/features/authentication/reset-p
 import {RESET_PASSWORD_FORM_VALUES_KEY} from "@/features/authentication/reset-password/model/constants";
 import {ValueTextField} from "@/shared/types";
 import {useFilledValue} from "@/shared/lib/hooks";
+import { PasswordInput } from "@/shared";
+import Svg from "@/shared/ui/Svg";
 
 interface ILoginFormProps {
   onComplete?: () => void;
@@ -29,7 +31,7 @@ export function EnterNewPasswordStep({onComplete}: ILoginFormProps): ReactElemen
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
 
-  const [ postConfirmResetPassword ] = useConfirmResetPasswordMutation();
+  const [ postConfirmResetPassword, { isLoading } ] = useConfirmResetPasswordMutation();
   useFilledValue(RESET_PASSWORD_FORM_VALUES_KEY, setValue, [ValueTextField.PASSWORD]);
 
   const onSubmit = useCallback(({password}: PasswordValidationSchema) => {
@@ -42,22 +44,24 @@ export function EnterNewPasswordStep({onComplete}: ILoginFormProps): ReactElemen
         onComplete?.();
       })
       .catch(err => console.log(err))
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchParams]);
 
   return (
     <FormWrapper redirectType='register' headerText='Новый пароль'>
-      <form noValidate onSubmit={handleSubmit(onSubmit)} className="flex flex-col px-0 md:px-90">
-        <p className='text-neutral-500 text-base md:text-lg font-normal mb-2.5 md:mb-3.5'>Придумайте уникальный пароль</p>
-        <Input
-          HTMLType='password'
-          iconType='password'
+      <form noValidate onSubmit={(data) => void handleSubmit(onSubmit)(data)} className="flex flex-col px-0 md:px-90 w-full max-w-[320px]">
+        <h1 className='text-neutral-500 text-base md:text-lg font-normal md:mb-3.5'>Придумайте уникальный пароль</h1>
+        <PasswordInput
+          type='password'
+          head={<Svg id="password-icon" className="w-6 h-6" />}
+          extraInputClass="pl-3"
           placeholder='Пароль'
-          hookFormValues={register('password')}
-          error={errors.password}
-          extraContentClass="p-3.5"
-          extraInputClass="px-3"
+          hookFormRegister={register('password')}
+          isError={!!errors.password}
+          size="md"
+          className="mt-3.5 text-[18px] !pr-5"
         />
-        <div className='flex mt-5 md:mt-18 pb-3.5 md:pb-3 items-center'>
+        <div className='flex mt-[18px] md:mt-18 md:pb-3 items-center'>
           {(isValid && isSubmitted) ? (
             <div
               className='w-[18px] h-[18px] mr-3 bg-center bg-no-repeat'
@@ -74,8 +78,8 @@ export function EnterNewPasswordStep({onComplete}: ILoginFormProps): ReactElemen
           type='submit'
           size="xl"
           importance="primary"
-          extraClass='mt-[21px] md:mt-[15px] mb-[31px] md:mb-0'
-          disabled={!isValid || isSubmitted}
+          extraClass='mt-[60px] md:mt-[15px] md:mb-0'
+          disabled={(!isValid && isSubmitted) || isLoading}
         >
           Войти
         </Button>

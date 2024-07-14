@@ -1,7 +1,13 @@
 import { AddEventValidationSchema } from "./addEventFormSchema";
 
-export const prepareDataToRequest = (data: AddEventValidationSchema) => {
-  const dataToCreateEvent = data;
+interface IPrepareDataToRequestProps {
+  data: AddEventValidationSchema;
+  toEdit: boolean;
+  dirtyFields: Record<string, boolean | undefined>;
+}
+
+export const prepareDataToRequest = ({ data, toEdit, dirtyFields }: IPrepareDataToRequestProps): Partial<AddEventValidationSchema> => {
+  const dataToCreateEvent: Partial<AddEventValidationSchema> = data;
 
   if (!dataToCreateEvent.repeatable) {
     dataToCreateEvent.schedule = null;
@@ -9,10 +15,6 @@ export const prepareDataToRequest = (data: AddEventValidationSchema) => {
 
   if (dataToCreateEvent.any_participant_number) {
     dataToCreateEvent.desired_participants_number = null;
-  }
-
-  if (dataToCreateEvent.type === 'open') {
-    dataToCreateEvent.private_url = null;
   }
 
   if (dataToCreateEvent.free) {
@@ -35,5 +37,17 @@ export const prepareDataToRequest = (data: AddEventValidationSchema) => {
     dataToCreateEvent.end_time = null;
   }
 
-  return { dataToCreateEvent };
+  if (toEdit) {
+    const filteredData: Record<string, unknown> = {};
+
+    for (const key in dirtyFields) {
+      if (dirtyFields[key]) {
+        filteredData[key as keyof AddEventValidationSchema] = dataToCreateEvent[key as keyof AddEventValidationSchema];
+      }
+    }
+
+    return filteredData;
+  }
+
+  return dataToCreateEvent;
 }

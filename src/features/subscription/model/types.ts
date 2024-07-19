@@ -4,8 +4,8 @@ export enum FollowingType {
 }
 
 export interface IFollowing {
-    image: string,
-    name: string,
+    image_url: string,
+    username: string,
     id: number,
     type: `${FollowingType}`,
 }

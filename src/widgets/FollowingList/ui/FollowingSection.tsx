@@ -26,7 +26,7 @@ function FollowingSection({ title, items }: FollowingSectionProps): ReactElement
     <div className="container mx-auto mt-4">
       <h2 className="text-[#5E5CCE] text-[22px] font-medium">{title}</h2>
       {items.length === 0 ? (
-        <p className="text-gray-500">Не найдено</p>
+        <p className="text-gray-500 pb-10 pt-10">Не найдено</p>
       ) : (
         <>
           <ul>

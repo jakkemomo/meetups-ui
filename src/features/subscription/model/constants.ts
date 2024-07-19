@@ -17,8 +17,8 @@ export const followings: IFollowing[] = [
 
     },
     {
-        image: 'https://pm1.aminoapps.com/6771/99236e4f95cc4d58de95deeddbc005a43e62cb70v2_00.jpg',
-        name: 'Саске Учиха',
+        image: 'https://ixbt.online/gametech/covers/2023/09/04/nova-filepond-SEdtU9.png',
+        name: 'Шедоухарт',
         id: 2,
         type: 'people',
     },
@@ -35,33 +35,33 @@ export const followings: IFollowing[] = [
         type: 'organization'
     },
     {
-        image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRB8iYirZ5XJW4Ut7vwiFyMt7sF1BrUKeO6DQ&s',
-        name: 'Обанай Игуро',
+        image: 'https://n1s2.hsmedia.ru/f9/d8/72/f9d872c2f2f022ffe88b50b69b5ad31d/600x600_1_4b286d4073df51c9d4667aae8cc00b2f@1080x1080_0xac120004_3507355061680265005.jpeg',
+        name: 'Леон',
         id: 5,
         type: 'people'
     },
     {
-        image: 'https://img.wattpad.com/a6d7599fdf99b12192dfd747ccbe41a4d6e96a11/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f776174747061642d6d656469612d736572766963652f53746f7279496d6167652f6d306b556d6547384e507a655a673d3d2d313038363934363134372e313638613431316233363338376563333733303334373038333737382e6a7067?s=fit&w=720&h=720',
-        name: 'Сугуру Гето',
+        image: 'https://n1s1.hsmedia.ru/e8/ab/ee/e8abeec6dd6016773d35afc49714ee96/600x600_1_6ffdae9bda1713936b82e920705d0693@720x720_0xac120003_4640371981653646610.png',
+        name: 'Солдер бой',
         id: 6,
         type: 'people'
     },
     {
-        image: 'https://i.pinimg.com/736x/e7/02/93/e7029376bec801c262b2992afde3b198.jpg',
-        name: 'Сатору Годжо',
+        image: 'https://fbimages.teinon.net/fanfic-covers/m_zJrZcPuRoWgzD5mXejYHJMopP0v1sJ9V.jpg',
+        name: 'Астарион',
         id: 7,
         type: 'people',
 
     },
     {
-        image: 'https://pm1.aminoapps.com/6771/99236e4f95cc4d58de95deeddbc005a43e62cb70v2_00.jpg',
-        name: 'Саске Учиха',
+        image: 'https://www.soyuz.ru/public/uploads/files/2/7623937/2023051921222764a17e33e2.jpg',
+        name: 'Хоум Лендер',
         id: 8,
         type: 'people',
     },
     {
-        image: 'https://i.pinimg.com/736x/e7/02/93/e7029376bec801c262b2992afde3b198.jpg',
-        name: 'Сатору Годжо',
+        image: 'https://i.pinimg.com/736x/f5/56/13/f55613e268b2f5737910775aff0e65cb.jpg',
+        name: 'Бутчер',
         id: 9,
         type: 'people',
 

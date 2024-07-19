@@ -1,4 +1,5 @@
 import React from 'react';
+import rightArrow from '../../../public/images/right-arrow.png';
 
 interface PaginationProps {
   currentPage: number;
@@ -31,7 +32,7 @@ const Pagination = ({ currentPage, totalPages, itemsPerPage, totalItems, onPageC
         disabled={currentPage === 1}
         className={`text-[#5E5CCE] ${currentPage === 1 ? 'opacity-50 cursor-not-allowed' : ''}`}
       >
-        Назад
+        <img src={rightArrow} className={`transform scale-x-[-1] ${currentPage === 1 ? 'hidden' : '' }`}/>
       </button>
       <span>{`${endItem} из ${totalItems}`}</span>
       <button
@@ -39,7 +40,7 @@ const Pagination = ({ currentPage, totalPages, itemsPerPage, totalItems, onPageC
         disabled={currentPage === totalPages}
         className={`text-[#5E5CCE] ${currentPage === totalPages ? 'opacity-50 cursor-not-allowed' : ''}`}
       >
-        Далее
+         <img src={rightArrow} />
       </button>
     </div>
   );

@@ -25,22 +25,28 @@ function FollowingSection({ title, items }: FollowingSectionProps): ReactElement
   return (
     <div className="container mx-auto mt-4">
       <h2 className="text-[#5E5CCE] text-[22px] font-medium">{title}</h2>
-      <ul>
-        {currentItems.map((following: IFollowing) => (
-          <li key={following.id}>
-            <FollowingItem following={following} />
-          </li>
-        ))}
-      </ul>
-      {items.length > 6 && 
-        <Pagination
-            currentPage={currentPage}
-            totalPages={totalPages}
-            itemsPerPage={ITEMS_PER_PAGE}
-            totalItems={items.length}
-            onPageChange={handlePageChange}
-        />
-      }
+      {items.length === 0 ? (
+        <p className="text-gray-500">Не найдено</p>
+      ) : (
+        <>
+          <ul>
+            {currentItems.map((following: IFollowing) => (
+              <li key={following.id}>
+                <FollowingItem following={following} />
+              </li>
+            ))}
+          </ul>
+          {items.length > ITEMS_PER_PAGE && (
+            <Pagination
+              currentPage={currentPage}
+              totalPages={totalPages}
+              itemsPerPage={ITEMS_PER_PAGE}
+              totalItems={items.length}
+              onPageChange={handlePageChange}
+            />
+          )}
+        </>
+      )}
     </div>
   );
 }

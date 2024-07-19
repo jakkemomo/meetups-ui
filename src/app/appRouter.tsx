@@ -7,13 +7,14 @@ import {AuthLayout} from "@/app/layouts/authLayout";
 import ResetPasswordPage from "@/pages/reset-password/ResetPasswordPage";
 import AddEventPage from "@/pages/add-event/AddEventPage";
 import {HomePage} from "@/pages/home/HomePage.tsx";
-import { EventPage } from '@/pages/event/EventPage';
+import {EventPage} from '@/pages/event/EventPage';
 import CurrentProfileView from "@/pages/profile/CurrentProfileView"
 import RemoteProfileView from "@/pages/profile/RemoteProfileView"
 import EditProfile from '@/pages/profile/EditProfile';
 import SecurityPage from '@/pages/security/SecurityPage';
 import ProxyConfirmEmailPage from '@/features/authentication/registration/ui/ProxyConfirmEmailPage';
 import RouteGuard from './guards/RouteGuard';
+import SubscriptionPage from '@/pages/subscription/SubscriptionPage';
 
 const appRouter = createBrowserRouter([
   {
@@ -48,11 +49,17 @@ const appRouter = createBrowserRouter([
           <RemoteProfileView/>
         )
       },
+  {
+        path: '/subscription',
+        element: (
+          <SubscriptionPage/>
+        ),
+      },    
       {
         path: '/profile/edit',
         element: (
           <EditProfile/>
-        ),
+        ), 
       },
       {
         path: '/event/add',

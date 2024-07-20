@@ -1,5 +1,5 @@
 import {baseApi} from '@/shared/api'
-import {ProfileDetails, ProfileId, ProfileFollowing, IFollowResponse, ProfileDetailsDto} from "@/entities/profile/model/types";
+import {ProfileDetails, ProfileId, ProfileFollowing, IFollowResponse, ProfileDetailsDto, IGetFollowStatusRequest} from "@/entities/profile/model/types";
 import {mapProfileDetails} from "@/entities/profile/lib/mapProfileDetails";
 import { EditProfileValidationSchema } from '@/features/editProfile/model/editProfileFormSchema';
 
@@ -20,12 +20,12 @@ export const profileApi = baseApi.injectEndpoints({
       transformResponse: (response: ProfileDetailsDto) =>
           mapProfileDetails(response),
       providesTags: ['PROFILE_TAG', 'SESSION_TAG'],
-
     }),
-    getFollowing: build.query<ProfileFollowing[], ProfileId>({
-      query: ({userId}) => ({
-        url: `/users/${userId}/following/`,
-      }),
+    getFollowStatus: build.query<ProfileFollowing, IGetFollowStatusRequest>({
+      query: ({ user_id, followed_user_id }) => ({
+        url: `/users/${followed_user_id}/follow/${user_id}/status/`,
+        method: 'GET'
+      })
     }),
     getFollowers: build.query<ProfileFollowing[], ProfileId>({
       query: ({userId}) => ({
@@ -36,13 +36,13 @@ export const profileApi = baseApi.injectEndpoints({
       query: ({userId}) => ({
         url: `/users/${userId}/follow/`,
         method: 'POST',
-      }),
+      })
     }),
     unFollow: build.mutation<void, ProfileId>({
       query: ({userId}) => ({
         url: `/users/${userId}/unfollow/`,
         method: 'DELETE',
-      }),
+      })
     }),
     editProfile: build.mutation<EditProfileValidationSchema, ProfileId>({
       query: ({userId, ...patch}) => ({
@@ -59,7 +59,7 @@ export const {
   useProfileDetailsQuery,
   useMyDetailsQuery,
   useLazyMyDetailsQuery,
-  useGetFollowingQuery,
+  useGetFollowStatusQuery,
   useGetFollowersQuery,
   useFollowMutation,
   useUnFollowMutation,

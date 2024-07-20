@@ -17,8 +17,8 @@ export const followings: IFollowing[] = [
 
     },
     {
-        image_url: 'https://ixbt.online/gametech/covers/2023/09/04/nova-filepond-SEdtU9.png',
-        username: 'Шедоухарт',
+        image_url: 'https://pm1.aminoapps.com/6771/99236e4f95cc4d58de95deeddbc005a43e62cb70v2_00.jpg',
+        username: 'Саске Учиха',
         id: 2,
         type: 'people',
     },

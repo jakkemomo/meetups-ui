@@ -8,7 +8,7 @@ interface FollowingSectionProps {
   items: IFollowing[];
 }
 
-const ITEMS_PER_PAGE = 5;
+const ITEMS_PER_PAGE = 6;
 
 function FollowingSection({ title, items }: FollowingSectionProps): ReactElement {
   const [currentPage, setCurrentPage] = useState(1);

@@ -9,7 +9,7 @@ function FollowingList(): ReactElement {
     const organizations = followings.filter(item => item.type === 'organization');
   
     return (
-        <section className="flex flex-col mt-5">
+        <section className="flex flex-col mt-5 mb-10">
             <SummaryLabel title='Всего' count={followings.length} />
             <div className="flex gap-40">
                 <FollowingSection title="Люди" items={people} />

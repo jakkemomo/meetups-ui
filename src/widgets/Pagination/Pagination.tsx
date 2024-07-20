@@ -34,7 +34,7 @@ const Pagination = ({ currentPage, totalPages, itemsPerPage, totalItems, onPageC
       >
         <img src={rightArrow} className={`transform scale-x-[-1] ${currentPage === 1 ? 'hidden' : '' }`}/>
       </button>
-      <span>{`${endItem} из ${totalItems}`}</span>
+      <span className="text-[#2E2E2E]">{`${endItem} из ${totalItems}`}</span>
       <button
         onClick={handleNextPage}
         disabled={currentPage === totalPages}

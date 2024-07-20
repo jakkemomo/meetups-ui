@@ -48,7 +48,7 @@ export interface ProfileDetailsDto extends ProfileDto {
   city_location: ICityLocation
 }
 
-export type IFollowStatus = 'ACCEPTED' | 'PENDING' | 'DECLINED' | undefined;
+export type IFollowStatus = 'ACCEPTED' | 'PENDING' | 'DECLINED' | 'NOT_FOLLOWED' | undefined;
 
 export interface ProfileFollowing {
   id: number;
@@ -62,4 +62,9 @@ export interface IFollowResponse {
   user: number;
   follower: number;
   status: IFollowStatus;
+}
+
+export interface IGetFollowStatusRequest {
+  user_id: string;
+  followed_user_id: string;
 }

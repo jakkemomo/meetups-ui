@@ -4,9 +4,9 @@ import { useParams, useNavigate } from "react-router-dom";
 import {
   useProfileDetailsQuery,
   useMyDetailsQuery,
-  useGetFollowingQuery,
   useFollowMutation,
   useUnFollowMutation,
+  useGetFollowStatusQuery,
 } from "@/entities/profile/api/profileApi";
 import { ProfileInfo, ProfileLoader } from "@/widgets/Profile/ProfileInfo";
 import { Button } from "@/shared/ui/Buttons/Button";
@@ -67,17 +67,18 @@ function RemoteProfileView(): ReactElement {
   } = useMyDetailsQuery();
 
   const {
-    data: profileFollowingData = [],
-    isLoading: isLoadingFollowingData,
-    isError: isErrorFollowingData,
-    error: errorFollowingData,
-    isSuccess: isSuccessFollowingData,
-  } = useGetFollowingQuery(
+    data: followStatusData,
+    isSuccess: isFollowStatusSuccess,
+    isLoading: isFollowStatusLoading,
+    isError: isFollowStatusError,
+    error: followStatusError
+  } = useGetFollowStatusQuery(
     {
-      userId: String(currentProfileData?.id),
+      user_id: String(currentProfileData?.id),
+      followed_user_id: userId
     },
     {
-      skip: !currentProfileData,
+      skip: !currentProfileData
     }
   );
 
@@ -93,7 +94,7 @@ function RemoteProfileView(): ReactElement {
 
   useLogServerError(isErrorRemoteUser, 'remoteUser', errorRemoteUser);
   useLogServerError(isErrorProfileData, 'currentUser', errorProfileData);
-  useLogServerError(isErrorFollowingData, 'подписок', errorFollowingData);
+  useLogServerError(isFollowStatusError, 'статуса подписки', followStatusError);
   useLogServerError(isFinishedEventsError, 'посещенных ивентов', finishedEventsError);
   useLogServerError(isPlannedEventsError, 'запланированных ивентов', plannedEventsError);
   useLogServerError(isCreatedEventsError, 'созданных ивентов', createdEventsError);
@@ -116,22 +117,18 @@ function RemoteProfileView(): ReactElement {
   const unfollowUser = () => {
     unfollow({ userId: userId })
       .unwrap()
-      .then(() => setFollowStatus(undefined))
+      .then(() => setFollowStatus('NOT_FOLLOWED'))
       .catch((err) =>
         console.log(err, "Отписаться от пользователя не получилось")
       );
   };
 
   useLayoutEffect(() => {
-    if (isSuccessFollowingData) {
-      setFollowStatus(
-        () =>
-          profileFollowingData.find(({ user }) => user === Number(userId))
-            ?.status
-      );
+    if (isFollowStatusSuccess) {
+      setFollowStatus(followStatusData.status);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isSuccessFollowingData]);
+  }, [isFollowStatusSuccess]);
 
   const createdEventsList = getEventsCards(createdEvents.results, 'sm');
   const finishedEventsList = getEventsCards(finishedEvents.results, 'sm');
@@ -147,7 +144,8 @@ function RemoteProfileView(): ReactElement {
 
   if (
     isLoadingRemoteUser ||
-    isLoadingFollowingData ||
+    isFollowStatusLoading ||
+    isLoadingProfileData ||
     isLoadingProfileData ||
     isCityLoading
   ) {
@@ -158,7 +156,7 @@ function RemoteProfileView(): ReactElement {
     );
   }
 
-  if (isSuccessRemoteUser && isSuccessProfileData && isSuccessFollowingData) {
+  if (isSuccessRemoteUser && isSuccessProfileData && isFollowStatusSuccess) {
     return (
       <section className="w-full max-w-[1215px] mx-auto pb-[98px] flex flex-row flex-nowrap min-h-[1000px] overflow-x-hidden">
         <ProfileInfo

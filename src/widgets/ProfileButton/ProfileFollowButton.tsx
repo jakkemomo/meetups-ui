@@ -47,7 +47,7 @@ export function ProfileFollowButton({
         </Button>
       )}
 
-      {!status && !isPrivate && (
+      {status === 'NOT_FOLLOWED' && !isPrivate && (
         <Button
           size="lg"
           importance="primary"

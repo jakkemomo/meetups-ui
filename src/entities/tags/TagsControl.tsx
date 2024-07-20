@@ -41,7 +41,7 @@ export function TagsControl({ tags, onChange, value }: ITagsControlProps): React
       .unwrap()
       .then((res) => {
         setInputValue('');
-        onChange(res.id, false);
+        onChange(res.id as number, false);
         setCreatedTags((state) => ([...state, res]));
       })
       .catch((err) => console.log(err))
@@ -71,7 +71,7 @@ export function TagsControl({ tags, onChange, value }: ITagsControlProps): React
             <ul className="w-full max-h-[170px] overflow-auto [&::-webkit-scrollbar]:w-1 [&::-webkit-scrollbar-track]:bg-white [&::-webkit-scrollbar-track]:rounded-[10px] [&::-webkit-scrollbar-thumb]:bg-text-light-gray [&::-webkit-scrollbar-thumb]:rounded-[10px]">
               {
                 tips.map((tag, index) => (
-                  <li onClick={() => handleTagSelect(tag.id)} key={index} className="flex mt-2 first-of-type:mt-0 cursor-pointer">
+                  <li onClick={() => handleTagSelect(tag.id as number)} key={index} className="flex mt-2 first-of-type:mt-0 cursor-pointer">
                     <div className="text-[18px] w-[22px] text-center">
                       <p>{tag.id}</p>
                     </div>

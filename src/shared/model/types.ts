@@ -26,7 +26,7 @@ export interface IUploadImageResponse {
 }
 
 export interface ISelectInputOptions {
-  id: number;
+  id: number | string;
   name: string;
 }
 

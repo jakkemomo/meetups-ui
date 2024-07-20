@@ -82,10 +82,10 @@ function RemoteProfileView(): ReactElement {
   );
 
   const {
-    isLoading: isCityInfoLoading,
-    data: cityInfo,
-    error: cityInfoError,
-    isError: isCityInfoError
+    isLoading: isCityLoading,
+    data: city,
+    error: cityError,
+    isError: isCityError
   } = useGeocodeIdQuery(
     remoteUser?.city_location?.place_id ?? '',
     { skip: !remoteUser?.city_location?.place_id }
@@ -97,7 +97,7 @@ function RemoteProfileView(): ReactElement {
   useLogServerError(isFinishedEventsError, 'посещенных ивентов', finishedEventsError);
   useLogServerError(isPlannedEventsError, 'запланированных ивентов', plannedEventsError);
   useLogServerError(isCreatedEventsError, 'созданных ивентов', createdEventsError);
-  useLogServerError(isCityInfoError, 'города', cityInfoError);
+  useLogServerError(isCityError, 'города', cityError);
 
   const isPrivateUser = remoteUser?.is_private;
 
@@ -137,10 +137,6 @@ function RemoteProfileView(): ReactElement {
   const finishedEventsList = getEventsCards(finishedEvents.results, 'sm');
   const plannedEventsList = getEventsCards(plannedEvents.results, 'sm');
 
-  const city =
-    cityInfo?.results[0].address_components.find((addr) => addr.types.some((el) => el === 'locality'))?.short_name ??
-    undefined;
-
   if (isNaN(Number(userId))) {
     return <h1>404 Page not found</h1>;
   }
@@ -153,7 +149,7 @@ function RemoteProfileView(): ReactElement {
     isLoadingRemoteUser ||
     isLoadingFollowingData ||
     isLoadingProfileData ||
-    isCityInfoLoading
+    isCityLoading
   ) {
     return (
       <div className="m-auto">

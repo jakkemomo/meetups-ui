@@ -47,10 +47,10 @@ function CurrentProfileView(): ReactElement {
   } = useGetUserPlannedEventsQuery(isProfileDataSuccess ? profileData.id : 0);
 
   const {
-    isLoading: isCityInfoLoading,
-    data: cityInfo,
-    error: cityInfoError,
-    isError: isCityInfoError
+    isLoading: isCityLoading,
+    data: city,
+    error: cityError,
+    isError: isCityError
   } = useGeocodeIdQuery(
     profileData?.city_location?.place_id ?? '',
     { skip: !profileData?.city_location?.place_id }
@@ -60,7 +60,7 @@ function CurrentProfileView(): ReactElement {
   useLogServerError(isFinishedEventsError, 'посещенных ивентов', finishedEventsError);
   useLogServerError(isPlannedEventsError, 'запланированных ивентов', plannedEventsError);
   useLogServerError(isCreatedEventsError, 'созданных ивентов', createdEventsError);
-  useLogServerError(isCityInfoError, 'города', cityInfoError);
+  useLogServerError(isCityError, 'города', cityError);
 
   const createdEventsList = getEventsCards(createdEvents.results, 'sm');
   const finishedEventsList = getEventsCards(finishedEvents.results, 'sm');
@@ -70,11 +70,7 @@ function CurrentProfileView(): ReactElement {
     navigate("/profile/edit");
   };
 
-  const city =
-    cityInfo?.results[0].address_components.find((addr) => addr.types.some((el) => el === 'locality'))?.short_name ??
-    undefined;
-
-  if (isProfileDataLoading || isCityInfoLoading) {
+  if (isProfileDataLoading || isCityLoading) {
     return (
       <div className="m-auto">
         <ProfileLoader />

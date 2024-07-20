@@ -3,6 +3,8 @@ import { createSlice } from "@reduxjs/toolkit";
 interface IGlobalFilterState {
   search: string;
   checkedCategories: number[];
+  age: string;
+  free?: boolean;
   selectedDate: string;
   endDate: string;
   startDate: string;
@@ -11,6 +13,8 @@ interface IGlobalFilterState {
 const initialState: IGlobalFilterState = {
   search: "",
   checkedCategories: [],
+  age: "",
+  free: undefined,
   selectedDate: "",
   endDate: "",
   startDate: "",
@@ -20,7 +24,7 @@ export const searchFilterSlice = createSlice({
   name: "searchFilter",
   initialState,
   reducers: {
-    setSearchFilter: (state, { payload: inputValue }: { payload: string }) => ({
+    searchFilterSetted: (state, { payload: inputValue }: { payload: string }) => ({
       ...state,
       search: inputValue,
     }),
@@ -30,6 +34,14 @@ export const searchFilterSlice = createSlice({
     ) => ({
       ...state,
       checkedCategories,
+    }),
+    ageFilterSetted: (state, { payload: inputValue }: { payload: string }) => ({
+      ...state,
+      age: inputValue,
+    }),
+    freeFilterSetted: (state, { payload: value }: { payload: boolean | undefined }) => ({
+      ...state,
+      free: value,
     }),
     selectedDateSetted: (state, { payload: selectedDate }: { payload: string }) => ({
       ...state,
@@ -50,8 +62,10 @@ export const searchFilterSlice = createSlice({
 });
 
 export const {
-  setSearchFilter,
+  searchFilterSetted,
   categorySetted,
+  ageFilterSetted,
+  freeFilterSetted,
   selectedDateSetted,
   endDateSetted,
   startDateSetted,

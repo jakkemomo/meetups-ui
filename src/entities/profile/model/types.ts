@@ -48,15 +48,17 @@ export interface ProfileDetailsDto extends ProfileDto {
 export type IFollowStatus = 'ACCEPTED' | 'PENDING' | 'DECLINED' | undefined;
 
 export interface ProfileFollowing {
-  id: number;
   user: number;
   follower: number;
+  username: string;
   status: IFollowStatus;
+  image_url: string
 }
 
 export interface IFollowResponse {
-  id: number;
   user: number;
   follower: number;
+  username: string;
   status: IFollowStatus;
+  image_url: string
 }

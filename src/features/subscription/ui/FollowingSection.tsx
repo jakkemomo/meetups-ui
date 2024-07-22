@@ -1,11 +1,11 @@
 import { ReactElement, useState } from 'react';
 import FollowingItem from './FollowingItem';
-import { Pagination } from '../../Pagination/index';
-import { IFollowing } from '@/features/subscription/model/types';
+import Pagination from './Pagination';
+import { ProfileFollowing } from '@/entities/profile/model/types';
 
 interface FollowingSectionProps {
   title: string;
-  items: IFollowing[];
+  items: ProfileFollowing[];
 }
 
 const ITEMS_PER_PAGE = 6;
@@ -29,9 +29,9 @@ function FollowingSection({ title, items }: FollowingSectionProps): ReactElement
         <p className="text-gray-500 pb-10 pt-10">Не найдено</p>
       ) : (
         <>
-          <ul>
-            {currentItems.map((following: IFollowing) => (
-              <li key={following.id}>
+          <ul className='mt-4 flex flex-col gap-4'>
+            {currentItems.map((following: ProfileFollowing) => (
+              <li key={following.user}>
                 <FollowingItem following={following} />
               </li>
             ))}

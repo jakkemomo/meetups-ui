@@ -6,6 +6,14 @@ export enum FollowingType {
 export interface IFollowing {
     image_url: string,
     username: string,
-    id: number,
-    type: `${FollowingType}`,
+    id: number
 }
+
+export interface IPaginationProps {
+    currentPage: number;
+    totalPages: number;
+    itemsPerPage: number;
+    totalItems: number;
+    onPageChange: (page: number) => void;
+  }
+  

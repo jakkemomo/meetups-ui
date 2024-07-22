@@ -1,15 +1,8 @@
 import React from 'react';
-import rightArrow from '../../../public/images/right-arrow.png';
+import { IPaginationProps } from '../model/types';
+import Svg from '@/shared/ui/Svg';
 
-interface PaginationProps {
-  currentPage: number;
-  totalPages: number;
-  itemsPerPage: number;
-  totalItems: number;
-  onPageChange: (page: number) => void;
-}
-
-const Pagination = ({ currentPage, totalPages, itemsPerPage, totalItems, onPageChange }: PaginationProps): React.ReactElement => {
+const Pagination = ({ currentPage, totalPages, itemsPerPage, totalItems, onPageChange }: IPaginationProps): React.ReactElement => {
   const handleNextPage = () => {
     if (currentPage < totalPages) {
       onPageChange(currentPage + 1);
@@ -32,7 +25,7 @@ const Pagination = ({ currentPage, totalPages, itemsPerPage, totalItems, onPageC
         disabled={currentPage === 1}
         className={`text-[#5E5CCE] ${currentPage === 1 ? 'opacity-50 cursor-not-allowed' : ''}`}
       >
-        <img src={rightArrow} className={`transform scale-x-[-1] ${currentPage === 1 ? 'hidden' : '' }`}/>
+        <Svg className={`w-6 h-6 ${currentPage === 1 ? 'hidden' : '' }`} id="previous-arrow" />
       </button>
       <span className="text-[#2E2E2E]">{`${endItem} из ${totalItems}`}</span>
       <button
@@ -40,10 +33,11 @@ const Pagination = ({ currentPage, totalPages, itemsPerPage, totalItems, onPageC
         disabled={currentPage === totalPages}
         className={`text-[#5E5CCE] ${currentPage === totalPages ? 'opacity-50 cursor-not-allowed' : ''}`}
       >
-         <img src={rightArrow} />
+        <Svg className="transform scale-x-[-1] w-6 h-6" id="previous-arrow" />
       </button>
     </div>
   );
 };
 
 export default Pagination;
+

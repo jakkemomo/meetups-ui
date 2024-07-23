@@ -16,7 +16,6 @@ export const mockFollowings: ProfileFollowing[] = [
         user: 1,
         status: 'ACCEPTED',
         follower: 10
-
     },
     {
         image_url: 'https://pm1.aminoapps.com/6771/99236e4f95cc4d58de95deeddbc005a43e62cb70v2_00.jpg',

@@ -1,36 +1,36 @@
+// FollowingList.tsx
 import { ReactElement } from 'react';
 import FollowingSection from '../../../features/subscription/ui/FollowingSection';
-import { useGetFollowersQuery, useGetFollowingQuery, useMyDetailsQuery } from '@/entities/profile/api/profileApi';
+import { useGetFollowersQuery, useMyDetailsQuery } from '@/entities/profile/api/profileApi';
 import { mockFollowings } from '@/features/subscription/model/constants';
-
+import { useAppSelector } from "@/shared/model";
 
 function FollowingList(): ReactElement {
-  const {
-    data: profileData,
-  } = useMyDetailsQuery();
-
-  const {
-    data: followings,
-    isLoading: isFollowingsLoading,
-    isError: isFollowingsError,
-    error: followingsError
-  } = useGetFollowersQuery({
+  const { data: profileData } = useMyDetailsQuery();
+  const { data: followings = [], isLoading, isError, error } = useGetFollowersQuery({
     userId: String(profileData?.id),
   });
-  
+
+  const searchValue = useAppSelector(state => state.searchUsers.search);
+
+  // Если значение searchValue пустое, показываем все followings, иначе - отфильтрованные
+  const displayedFollowings = searchValue
+    ? followings.filter(following =>
+        following?.username?.toLowerCase().includes(searchValue.toLowerCase())
+      )
+    : followings;
+
   return (
     <section className="flex flex-col mt-5 mb-10">
-      <p className="text-[#9E9E9E]">Всего: {followings?.length + mockFollowings.length}</p>
-      {followings && 
+      <p className="text-[#9E9E9E]">Всего: {displayedFollowings.length + mockFollowings.length}</p>
+      {displayedFollowings.length > 0 &&
        <div className="flex gap-40">
-          <FollowingSection title="Люди" items={followings}/>
+          <FollowingSection title="Люди" items={displayedFollowings}/>
           <FollowingSection title="Организации" items={mockFollowings} />
        </div>
       }
     </section>
-    );
+  );
 }
 
 export default FollowingList;
-
-  

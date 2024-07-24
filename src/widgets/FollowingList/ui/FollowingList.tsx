@@ -23,12 +23,10 @@ function FollowingList(): ReactElement {
   return (
     <section className="flex flex-col mt-5 mb-10">
       <p className="text-[#9E9E9E]">Всего: {displayedFollowings.length + mockFollowings.length}</p>
-      {displayedFollowings.length > 0 &&
-       <div className="flex gap-40">
-          <FollowingSection title="Люди" items={displayedFollowings}/>
-          <FollowingSection title="Организации" items={mockFollowings} />
-       </div>
-      }
+        <div className="flex gap-40">
+          <FollowingSection title="Люди" items={displayedFollowings} isLoading = {isLoading}/>
+          <FollowingSection title="Организации" items={[]} isLoading = {isLoading}/>
+        </div>
     </section>
   );
 }

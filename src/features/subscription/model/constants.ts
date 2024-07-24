@@ -11,7 +11,7 @@ export const title = {
 
 export const mockFollowings: ProfileFollowing[] = [
     {
-        image_url: 'https://i.pinimg.com/736x/e7/02/93/e7029376bec801c262b2992afde3b198.jpg',
+        image_url: 'image/',
         username: 'Сатору Годжо',
         user: 1,
         status: 'ACCEPTED',

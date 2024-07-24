@@ -1,12 +1,12 @@
 // FollowingList.tsx
 import { ReactElement } from 'react';
 import FollowingSection from '../../../features/subscription/ui/FollowingSection';
-import { useGetFollowersQuery, useMyDetailsQuery } from '@/entities/profile/api/profileApi';
+import { useGetFollowingQuery, useMyDetailsQuery } from '@/entities/profile/api/profileApi';
 import { useAppSelector } from "@/shared/model";
 
 function FollowingList(): ReactElement {
   const { data: profileData } = useMyDetailsQuery();
-  const { data: followings = [], isLoading } = useGetFollowersQuery({
+  const { data: followings = [], isLoading } = useGetFollowingQuery({
     userId: String(profileData?.id),
   });
 

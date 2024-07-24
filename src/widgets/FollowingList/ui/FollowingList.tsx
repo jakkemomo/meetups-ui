@@ -1,8 +1,9 @@
 // FollowingList.tsx
-import { ReactElement } from 'react';
-import FollowingSection from '../../../features/subscription/ui/FollowingSection';
-import { useGetFollowingQuery, useMyDetailsQuery } from '@/entities/profile/api/profileApi';
+import { ReactElement } from "react";
+import FollowingSection from "../../../features/subscription/ui/FollowingSection";
+import { useGetFollowingQuery, useMyDetailsQuery } from "@/entities/profile/api/profileApi";
 import { useAppSelector } from "@/shared/model";
+import { ProfileFollowing } from "@/entities/profile/model/types";
 
 function FollowingList(): ReactElement {
   const { data: profileData } = useMyDetailsQuery();
@@ -14,7 +15,7 @@ function FollowingList(): ReactElement {
 
   // Если значение searchValue пустое, показываем все followings, иначе - отфильтрованные
   const displayedFollowings = searchValue
-    ? followings.filter(following =>
+    ? followings.filter((following: ProfileFollowing ) =>
         following?.username?.toLowerCase().includes(searchValue.toLowerCase())
       )
     : followings;

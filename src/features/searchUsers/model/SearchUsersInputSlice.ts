@@ -22,3 +22,4 @@ export const searchUsersSlice = createSlice({
 
 export const { setSearchUsers } = searchUsersSlice.actions;
 export default searchUsersSlice.reducer;
+

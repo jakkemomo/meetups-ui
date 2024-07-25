@@ -1,4 +1,4 @@
-import {baseApi, EVENTS_TAG, PARTICIPANTS_TAG, PROFILE_TAG, SESSION_TAG} from '@/shared/api'
+import {baseApi, EVENTS_TAG, PARTICIPANTS_TAG, PROFILE_TAG, SESSION_TAG, CHAT_TAG} from '@/shared/api'
 import {mapSession} from '@/shared/lib/mapSession'
 import {RefreshToken, Session, SessionDto} from "@/shared/model/types";
 import {RequestEmailCheckBody, RequestLoginBody, RequestRegistrationBody} from '../model/types';
@@ -21,7 +21,7 @@ export const sessionApi = baseApi.injectEndpoints({
                 method: 'POST',
                 body,
             }),
-            invalidatesTags: [SESSION_TAG, EVENTS_TAG, PARTICIPANTS_TAG, PROFILE_TAG],
+            invalidatesTags: [SESSION_TAG, EVENTS_TAG, PARTICIPANTS_TAG, PROFILE_TAG, CHAT_TAG],
         }),
         register: build.mutation<void, RequestRegistrationBody>({
             query: (body) => ({

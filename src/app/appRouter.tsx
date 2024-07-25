@@ -14,6 +14,7 @@ import EditProfile from '@/pages/profile/EditProfile';
 import SecurityPage from '@/pages/security/SecurityPage';
 import ProxyConfirmEmailPage from '@/features/authentication/registration/ui/ProxyConfirmEmailPage';
 import RouteGuard from './guards/RouteGuard';
+import ChatPage from '@/pages/chat/ChatPage';
 
 const appRouter = createBrowserRouter([
   {

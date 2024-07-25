@@ -1,5 +1,5 @@
 import { Chat } from "@/widgets/chat";
-import { PageTitle } from "@/widgets/pageTitle";
+import { PageTitle } from "@/widgets/PageTitle";
 import { ReactElement } from "react";
 
 function ChatPage(): ReactElement {

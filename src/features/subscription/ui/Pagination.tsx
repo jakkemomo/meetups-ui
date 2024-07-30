@@ -1,8 +1,9 @@
 import React from 'react';
 import { IPaginationProps } from '../model/types';
 import Svg from '@/shared/ui/Svg';
+import { ITEMS_PER_PAGE } from '../model/constants';
 
-const Pagination = ({ currentPage, totalPages, itemsPerPage, totalItems, onPageChange }: IPaginationProps): React.ReactElement => {
+const Pagination = ({ currentPage, totalPages, totalItems, onPageChange }: IPaginationProps): React.ReactElement => {
   const handleNextPage = () => {
     if (currentPage < totalPages) {
       onPageChange(currentPage + 1);
@@ -15,8 +16,8 @@ const Pagination = ({ currentPage, totalPages, itemsPerPage, totalItems, onPageC
     }
   };
 
-  const startItem = (currentPage - 1) * itemsPerPage + 1;
-  const endItem = Math.min(startItem + itemsPerPage - 1, totalItems);
+  const startItem = (currentPage - 1) * ITEMS_PER_PAGE + 1;
+  const endItem = Math.min(startItem + ITEMS_PER_PAGE - 1, totalItems);
 
   return (
     <div className="flex justify-between items-center mt-4">

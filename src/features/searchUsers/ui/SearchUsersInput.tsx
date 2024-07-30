@@ -16,6 +16,7 @@ export function SearchUsersInput() {
   };
 
   useEffect(() => {
+    console.log("Dispatching search value:", debouncedValue);
     dispatch(setSearchUsers(debouncedValue));
   }, [debouncedValue, dispatch]);
 
@@ -32,4 +33,3 @@ export function SearchUsersInput() {
     />
   );
 }
-

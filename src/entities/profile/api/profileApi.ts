@@ -1,5 +1,5 @@
 import {baseApi} from '@/shared/api'
-import {ProfileDetails, ProfileId, ProfileFollowing, IFollowResponse, ProfileDetailsDto} from "@/entities/profile/model/types";
+import {ProfileDetails, ProfileId, ProfileFollowing, IFollowResponse, ProfileDetailsDto, IFollowRequest} from "@/entities/profile/model/types";
 import {mapProfileDetails} from "@/entities/profile/lib/mapProfileDetails";
 import { EditProfileValidationSchema } from '@/features/editProfile/model/editProfileFormSchema';
 
@@ -22,9 +22,10 @@ export const profileApi = baseApi.injectEndpoints({
       providesTags: ['PROFILE_TAG', 'SESSION_TAG'],
 
     }),
-    getFollowing: build.query<ProfileFollowing[], ProfileId>({
-      query: ({userId}) => ({
+    getFollowing: build.query<ProfileFollowing[], IFollowRequest>({
+      query: ({ userId, search }) => ({
         url: `/users/${userId}/following/`,
+        params: { search },
       }),
     }),
     getFollowers: build.query<ProfileFollowing[], ProfileId>({

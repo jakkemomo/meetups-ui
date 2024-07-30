@@ -13,7 +13,7 @@ module.exports = {
     },
     extend: {
       borderWidth: {
-        '1': '1px',
+        DEFAULT: '1px',
         '2': '2px',
         '3': '3px',
         '4': '4px',
@@ -21,26 +21,26 @@ module.exports = {
         '6': '6px',
       },
       width: {
-        "860": "860px",
-        "600": "600px",
         "500": "500px",
+        "600": "600px",
+        "860": "860px",
       },
       maxWidth: {
         "screen-max": "1440px",
       },
       fontSize: {
-        "40": "40px",
+        "18": "18px",
         "34": "34px",
         "38": "38px",
+        "40": "40px",
         "50": "50px",
         "lg": ["18px", "23px"],
-        "18": "18px",
       },
       height: {
-        "48px": "48px",
+        "48": "48px",
         "50": "50px",
-        "700": "700px",
         "600": "600px",
+        "700": "700px",
       },
       colors: {
         'main-purple': 'rgb(87, 84, 198)',
@@ -53,11 +53,11 @@ module.exports = {
         'gray': 'rgb(229, 229, 227)',
         'transparent-gray': 'rgb(255, 250, 250)',
         'text-gray': 'rgb(84, 84, 84)',
-        'text-light-gray': 'rgb(153, 153, 153);',
+        'text-light-gray': 'rgb(153, 153, 153)',
         'text-black': 'rgb(46, 46, 46)',
         'text-red': 'rgb(187, 16, 16)',
         'popup-bg': 'rgba(26, 26, 26, .4)',
-        'toggle-color': 'rgb(185, 185, 186, 1)',
+        'toggle-color': 'rgb(185, 185, 186)',
         'select-disable': 'rgba(191, 189, 189, 1)',
         'but-disable': 'rgb(177, 177, 187)',
         'but-primary': 'rgb(94, 92, 206)',
@@ -71,15 +71,15 @@ module.exports = {
         'text-disable': 'rgb(172, 172, 173)'
       },
       padding: {
+        "30": "30px",
         "60": "60px",
         "90": "90px",
         "102": "102px",
-        "30": "30px",
       },
       margin: {
         "18": "18px",
-        "101": "101px",
         "50": "50px",
+        "101": "101px",
         "107": "107px",
       },
       boxShadow: {
@@ -87,7 +87,7 @@ module.exports = {
         'shadow-bm': [
           '0 4px 4px 0 rgba(0, 0, 0, 0.25)',
           '0 4px 32px 0 rgba(0, 0, 0, 0.14)'
-      ]
+        ]
       },
       backgroundImage: {
         'logo': "url('/images/logo.svg')",

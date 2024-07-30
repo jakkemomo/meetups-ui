@@ -62,3 +62,21 @@ export interface IFollowResponse {
   status: IFollowStatus;
   image_url: string
 }
+
+export interface IFollowRequest {
+  search?: string;
+  ordering?: 'start_date' | 'average_rating' | 'participants_number' | '-start_date' | '-average_rating' | '-participants_number';
+  username?: string;
+  username_contains?: string;
+  date_of_birth?: string;
+  date_of_birth__gte?: string;
+  date_of_birth__lte?: string;
+  city?: string;
+  city_in?: string;
+  gender?: string;
+  type?: string;
+  type_contains?: string;
+  limit?: number;
+  offset?: number;
+  userId: string
+}

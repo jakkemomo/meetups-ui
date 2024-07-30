@@ -3,6 +3,7 @@ import FollowingItem from './FollowingItem';
 import FollowingItemSkeleton from './FollowingSkeleton';
 import Pagination from './Pagination';
 import { ProfileFollowing } from '@/entities/profile/model/types';
+import { ITEMS_PER_PAGE } from '../model/constants';
 
 interface FollowingSectionProps {
   title: string;
@@ -10,7 +11,6 @@ interface FollowingSectionProps {
   isLoading: boolean
 }
 
-const ITEMS_PER_PAGE = 6;
 
 function FollowingSection({ title, items, isLoading }: FollowingSectionProps): ReactElement {
   const [currentPage, setCurrentPage] = useState(1);
@@ -50,7 +50,6 @@ function FollowingSection({ title, items, isLoading }: FollowingSectionProps): R
             <Pagination
               currentPage={currentPage}
               totalPages={totalPages}
-              itemsPerPage={ITEMS_PER_PAGE}
               totalItems={items.length}
               onPageChange={handlePageChange}
             />

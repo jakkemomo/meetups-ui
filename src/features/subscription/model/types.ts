@@ -12,7 +12,6 @@ export interface IFollowing {
 export interface IPaginationProps {
     currentPage: number;
     totalPages: number;
-    itemsPerPage: number;
     totalItems: number;
     onPageChange: (page: number) => void;
   }

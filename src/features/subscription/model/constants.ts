@@ -6,6 +6,8 @@ export const title = {
 	[FollowingType.organization]: 'Огранизации',
 }
 
+export const ITEMS_PER_PAGE = 6;
+
 
 //mock 
 

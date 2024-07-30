@@ -1,5 +1,5 @@
-import { IContact } from "@/entities/chat/chatContact/model/types";
 import { IRoomInfo } from "./types";
+import { ChatDetails, ChatType } from "@/entities/chat/model/types";
 
 // mock
 export const roomInfo: IRoomInfo = {
@@ -19,148 +19,200 @@ export const roomInfo: IRoomInfo = {
   ],
   "messages": [
     {
-      "message_id": 1,
-      "sender_id": 1,
+      "id": 1,
+      "created_by": 1,
+      "chat": 1,
       "message_text": "Hello!",
-      "created_at": "2024-04-24T17:52:01Z"
+      "created_at": "2024-04-24T17:52:01Z",
+      "image_url": "www.example.com"
     },
     {
-      "message_id": 2,
-      "sender_id": 2,
+      "id": 2,
+      "created_by": 2,
+      "chat": 1,
       "message_text": "U too!!",
-      "created_at": "2024-04-25T17:57:01Z"
+      "created_at": "2024-04-25T17:57:01Z",
+      "image_url": "www.example.com"
     },
     {
-      "message_id": 1,
-      "sender_id": 1,
+      "id": 1,
+      "created_by": 1,
+      "chat": 1,
       "message_text": "Hello!",
-      "created_at": "2024-04-24T17:52:01Z"
+      "created_at": "2024-04-24T17:52:01Z",
+      "image_url": "www.example.com"
     },
     {
-      "message_id": 2,
-      "sender_id": 2,
+      "id": 2,
+      "created_by": 2,
+      "chat": 1,
       "message_text": "U too!!",
-      "created_at": "2024-04-24T17:57:01Z"
+      "created_at": "2024-04-24T17:57:01Z",
+      "image_url": "www.example.com"
     },
     {
-      "message_id": 1,
-      "sender_id": 1,
+      "id": 1,
+      "created_by": 1,
+      "chat": 1,
       "message_text": "Hello!",
-      "created_at": "2024-04-24T17:52:01Z"
+      "created_at": "2024-04-24T17:52:01Z",
+      "image_url": "www.example.com"
     },
     {
-      "message_id": 2,
-      "sender_id": 2,
+      "id": 2,
+      "created_by": 2,
+      "chat": 1,
       "message_text": "U too!!",
-      "created_at": "2024-04-24T17:57:01Z"
+      "created_at": "2024-04-24T17:57:01Z",
+      "image_url": "www.example.com"
     },
     {
-      "message_id": 1,
-      "sender_id": 1,
+      "id": 1,
+      "created_by": 1,
+      "chat": 1,
       "message_text": "Hello!",
-      "created_at": "2024-04-24T17:52:01Z"
+      "created_at": "2024-04-24T17:52:01Z",
+      "image_url": "www.example.com"
     },
     {
-      "message_id": 2,
-      "sender_id": 2,
+      "id": 2,
+      "created_by": 2,
+      "chat": 1,
       "message_text": "U too!!",
-      "created_at": "2024-04-24T17:57:01Z"
+      "created_at": "2024-04-24T17:57:01Z",
+      "image_url": "www.example.com"
     },
     {
-      "message_id": 1,
-      "sender_id": 1,
+      "id": 1,
+      "created_by": 1,
+      "chat": 1,
       "message_text": "Hello!",
-      "created_at": "2024-04-24T17:52:01Z"
+      "created_at": "2024-04-24T17:52:01Z",
+      "image_url": "www.example.com"
     },
     {
-      "message_id": 2,
-      "sender_id": 2,
+      "id": 2,
+      "created_by": 2,
+      "chat": 1,
       "message_text": "U too!!",
-      "created_at": "2024-04-24T17:57:01Z"
+      "created_at": "2024-04-24T17:57:01Z",
+      "image_url": "www.example.com"
     },
     {
-      "message_id": 1,
-      "sender_id": 1,
+      "id": 1,
+      "created_by": 1,
+      "chat": 1,
       "message_text": "Hello!",
-      "created_at": "2024-04-25T17:52:01Z"
+      "created_at": "2024-04-25T17:52:01Z",
+      "image_url": "www.example.com"
     },
     {
-      "message_id": 2,
-      "sender_id": 2,
+      "id": 2,
+      "created_by": 2,
+      "chat": 1,
       "message_text": "U too!!",
-      "created_at": "2024-04-24T17:57:01Z"
+      "created_at": "2024-04-24T17:57:01Z",
+      "image_url": "www.example.com"
     },
     {
-      "message_id": 1,
-      "sender_id": 1,
+      "id": 1,
+      "created_by": 1,
+      "chat": 1,
       "message_text": "Hello!",
-      "created_at": "2024-04-24T17:52:01Z"
+      "created_at": "2024-04-24T17:52:01Z",
+      "image_url": "www.example.com"
     },
     {
-      "message_id": 2,
-      "sender_id": 2,
+      "id": 2,
+      "created_by": 2,
+      "chat": 1,
       "message_text": "U too!!",
-      "created_at": "2024-04-25T17:57:01Z"
+      "created_at": "2024-04-25T17:57:01Z",
+      "image_url": "www.example.com"
     },
   ]
 }
 
 // mock-data
-export const rooms: IContact[] = [
+export const rooms: ChatDetails[] = [
   {
-    img: 'https://storage.googleapis.com/meetups-dev/media/images/44474d3495df4c99975f7a3ad6f5d9a0.webp',
+    id: 1,
+    image_url: 'https://storage.googleapis.com/meetups-dev/media/images/44474d3495df4c99975f7a3ad6f5d9a0.webp',
     name: 'Иван Буторин Владимирович',
-    lastMessage: 'Привет, как дела? Пойдешь в следующую пятницу на концерт Моргенштерна?',
-    lastMessageDate: '1 марта',
-    messagesQuant: 1
+    type: ChatType.DIRECT,
+    last_message_text: 'Привет, как дела? Пойдешь в следующую пятницу на концерт Моргенштерна?',
+    last_message_is_owner: false
+    // lastMessageDate: '1 марта',
+    // messagesQuant: 1
   },
   {
-    img: 'https://storage.googleapis.com/meetups-dev/media/images/44474d3495df4c99975f7a3ad6f5d9a0.webp',
+    id: 2,
+    image_url: 'https://storage.googleapis.com/meetups-dev/media/images/44474d3495df4c99975f7a3ad6f5d9a0.webp',
     name: 'Иван Буторин',
-    lastMessage: 'Привет, как дела?',
-    lastMessageDate: '1 марта',
-    messagesQuant: 1
+    type: ChatType.DIRECT,
+    last_message_text: 'Привет, как дела?',
+    last_message_is_owner: false
+    // lastMessageDate: '1 марта',
+    // messagesQuant: 1
   },
   {
-    img: 'https://storage.googleapis.com/meetups-dev/media/images/44474d3495df4c99975f7a3ad6f5d9a0.webp',
+    id: 3,
+    image_url: 'https://storage.googleapis.com/meetups-dev/media/images/44474d3495df4c99975f7a3ad6f5d9a0.webp',
     name: 'Иван Буторин',
-    lastMessage: 'Привет, как дела?',
-    lastMessageDate: '1 марта',
-    messagesQuant: 1
+    type: ChatType.DIRECT,
+    last_message_text: 'Привет, как дела?',
+    last_message_is_owner: false
+    // lastMessageDate: '1 марта',
+    // messagesQuant: 1
   },
   {
-    img: 'https://storage.googleapis.com/meetups-dev/media/images/44474d3495df4c99975f7a3ad6f5d9a0.webp',
+    id: 4,
+    image_url: 'https://storage.googleapis.com/meetups-dev/media/images/44474d3495df4c99975f7a3ad6f5d9a0.webp',
     name: 'Иван Буторин',
-    lastMessage: 'Привет, как дела?',
-    lastMessageDate: '1 марта',
-    messagesQuant: 1
+    type: ChatType.DIRECT,
+    last_message_text: 'Привет, как дела?',
+    last_message_is_owner: false
+    // lastMessageDate: '1 марта',
+    // messagesQuant: 1
   },
   {
-    img: 'https://storage.googleapis.com/meetups-dev/media/images/44474d3495df4c99975f7a3ad6f5d9a0.webp',
+    id: 5,
+    image_url: 'https://storage.googleapis.com/meetups-dev/media/images/44474d3495df4c99975f7a3ad6f5d9a0.webp',
     name: 'Иван Буторин',
-    lastMessage: 'Привет, как дела?',
-    lastMessageDate: '1 марта',
-    messagesQuant: 1
+    type: ChatType.DIRECT,
+    last_message_text: 'Привет, как дела?',
+    last_message_is_owner: false
+    // lastMessageDate: '1 марта',
+    // messagesQuant: 1
   },
   {
-    img: 'https://storage.googleapis.com/meetups-dev/media/images/44474d3495df4c99975f7a3ad6f5d9a0.webp',
+    id: 6,
+    image_url: 'https://storage.googleapis.com/meetups-dev/media/images/44474d3495df4c99975f7a3ad6f5d9a0.webp',
     name: 'Иван Буторин',
-    lastMessage: 'Привет, как дела?',
-    lastMessageDate: '1 марта',
-    messagesQuant: 1
+    type: ChatType.DIRECT,
+    last_message_text: 'Привет, как дела?',
+    last_message_is_owner: false
+    // lastMessageDate: '1 марта',
+    // messagesQuant: 1
   },
   {
-    img: 'https://storage.googleapis.com/meetups-dev/media/images/44474d3495df4c99975f7a3ad6f5d9a0.webp',
+    id: 7,
+    image_url: 'https://storage.googleapis.com/meetups-dev/media/images/44474d3495df4c99975f7a3ad6f5d9a0.webp',
     name: 'Иван Буторин',
-    lastMessage: 'Привет, как дела?',
-    lastMessageDate: '1 марта',
-    messagesQuant: 1
+    type: ChatType.DIRECT,
+    last_message_text: 'Привет, как дела?',
+    last_message_is_owner: false
+    // lastMessageDate: '1 марта',
+    // messagesQuant: 1
   },
   {
-    img: 'https://storage.googleapis.com/meetups-dev/media/images/44474d3495df4c99975f7a3ad6f5d9a0.webp',
+    id: 8,
+    image_url: 'https://storage.googleapis.com/meetups-dev/media/images/44474d3495df4c99975f7a3ad6f5d9a0.webp',
     name: 'Иван Буторин',
-    lastMessage: 'Привет, как дела?',
-    lastMessageDate: '1 марта',
-    messagesQuant: 1
+    type: ChatType.DIRECT,
+    last_message_text: 'Привет, как дела?',
+    last_message_is_owner: false
+    // lastMessageDate: '1 марта',
+    // messagesQuant: 1
   }
 ]

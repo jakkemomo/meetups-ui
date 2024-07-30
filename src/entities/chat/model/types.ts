@@ -1,4 +1,4 @@
-enum ChatType {
+export enum ChatType {
     'EVENT' = 'EVENT',
     'DIRECT' = 'DIRECT'
 }
@@ -6,7 +6,6 @@ enum ChatType {
 export interface ChatId {
     chat_id: string
 }
-
 
 export interface ChatDetails {
     id: number, 

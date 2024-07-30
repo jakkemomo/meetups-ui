@@ -15,7 +15,6 @@ export const chatApi = baseApi.injectEndpoints({
         url: `/chats/users/${userId}/direct/`,
         method: 'POST',
       }),
-      invalidatesTags: ['CHAT_TAG'],
     }),
     chatDetails: build.query<ChatDetails, ChatId>({
       query: ({ chat_id }) => ({

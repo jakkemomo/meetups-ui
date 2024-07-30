@@ -5,10 +5,12 @@ export interface IUser {
 }
 
 export interface IMessage {
-  message_id: number;
-  sender_id: number;
+  id: number;
+  created_by: number;
+  chat: number;
   message_text: string;
   created_at: string;
+  image_url: string
 }
 
 export interface IRoomInfo {

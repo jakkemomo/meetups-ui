@@ -39,8 +39,8 @@ function ChatInterface(): ReactElement {
           {roomInfo.messages.map((el, index) => (
             <ChatMessage
               key={index}
-              sender={roomInfo.participants.find((person) => person.user_id === el.sender_id)}
-              message={el} isOwner={el.sender_id === 2}
+              sender={roomInfo.participants.find((person) => person.user_id === el.created_by)}
+              message={el} isOwner={el.created_by === 2}
               isNewDate={index > 0 ? new Date(`${el.created_at.slice(0, 10)} 24:00`) > new Date(`${roomInfo.messages[index - 1].created_at.slice(0, 10)} 24:00`) : false}
             />
           ))}

@@ -1,7 +1,7 @@
 export interface IContact {
-  img: string;
+  image_url: string;
   name: string;
-  lastMessage: string;
+  last_message_text: string;
   lastMessageDate: string;
   messagesQuant: number;
 }

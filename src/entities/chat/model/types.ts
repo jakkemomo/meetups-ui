@@ -23,12 +23,12 @@ export interface ChatRetrieve {
     type: ChatType,
 }
 
-export interface ChatMessage {
+export interface IChatMessage {
     id: number,
     created_by: number,
     chat: number, 
     message_text: string,
-    created_at: Date,
+    created_at: string,
     image_url: string
 }
 

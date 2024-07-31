@@ -3,12 +3,13 @@ import { ChatDetails } from "../../model/types";
 
 interface IContactCard {
   data: ChatDetails;
+  onClick: () => void;
 }
 
 
-function ContactCard({ data }: IContactCard): ReactElement {
+function ContactCard({ data, onClick }: IContactCard): ReactElement {
   return (
-    <div className="flex pr-[11px]">
+    <div className="flex pr-[11px] cursor-pointer" onClick={onClick}>
       <img className="rounded-circle w-[70px] h-[70px]" src={`https://storage.googleapis.com/meetups-dev/media/${data.image_url}`} alt={`Аватар пользователя ${data.name}`} />
       <div className="w-full flex flex-col ml-[22px] mt-2.5">
         <div className="flex w-full justify-between">

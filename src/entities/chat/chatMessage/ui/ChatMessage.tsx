@@ -1,9 +1,9 @@
-import { IMessage, IUser } from "@/features/chat/model/types";
 import { ReactElement } from "react";
+import { IChatMessage, Participant } from "../../model/types";
 
 interface IChatMessageProps {
-  sender?: IUser;
-  message: IMessage;
+  sender?: Participant;
+  message: IChatMessage;
   isOwner: boolean;
   isNewDate?: boolean;
 }

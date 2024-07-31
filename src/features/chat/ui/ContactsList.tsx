@@ -3,14 +3,15 @@ import { Input } from "@/shared";
 import Svg from "@/shared/ui/Svg";
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { useChatListQuery } from "@/entities/chat/api/chatsApi";
-import { getChatsList } from "../model/getContactsList";
+import { ContactCard } from "@/entities/chat/chatContact";
+import { ChatDetails } from "@/entities/chat/model/types";
 
-function ContactsList(): ReactElement {
-  const {
-    data: chats = {results : [] },
-  } = useChatListQuery();
+interface ContactsListProps {
+  onChatSelect: (chatId: number) => void;
+}
 
-  const allChats = getChatsList(chats.results)
+function ContactsList({ onChatSelect }: ContactsListProps): ReactElement {
+  const { data: chats = { results: [] } } = useChatListQuery();
 
   return (
     <div className="max-w-[479px] w-full h-[569px] border-r-3 border-r-solid border-r-custom-gray pr-[45px]">
@@ -25,11 +26,11 @@ function ContactsList(): ReactElement {
         className="flex flex-col gap-3.5 mt-[30px] [&::-webkit-scrollbar]:w-1 [&::-webkit-scrollbar-track]:bg-white [&::-webkit-scrollbar-track]:rounded-[10px] [&::-webkit-scrollbar-thumb]:bg-text-light-gray [&::-webkit-scrollbar-thumb]:rounded-[10px]"
         dataLength={1}
         hasMore={false}
-        next={() => console.log(allChats.length)}
-        loader={allChats.length !== 0 ? '' : <p>Loading...</p>}
+        next={() => console.log(chats.results.length)}
+        loader={chats.results.length !== 0 ? '' : <p>Loading...</p>}
         height={406}
       >
-        {allChats}
+        {chats.results.map((chat: ChatDetails) => <ContactCard key={chat.id} data={chat} onClick={() => {console.log('click'); onChatSelect(chat.id)}}/>)}
       </InfiniteScroll>
     </div>
   );

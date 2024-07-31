@@ -1,5 +1,5 @@
 import { baseApi } from '@/shared/api';
-import { ChatDetails, ChatId, ChatMessage, MessageCreate } from '../model/types';
+import { ChatDetails, ChatId, IChatMessage, MessageCreate, Participant } from '../model/types';
 import { ProfileId } from '@/entities/profile/model/types';
 
 export const chatApi = baseApi.injectEndpoints({
@@ -10,7 +10,7 @@ export const chatApi = baseApi.injectEndpoints({
       }),
       providesTags: ['CHAT_TAG'],
     }),
-    getOrCreateUserDirectChat: build.mutation<ChatDetails, ProfileId>({
+    getOrCreateUserDirectChat: build.mutation<ChatDetails, ProfileId >({
       query: ({ userId }) => ({
         url: `/chats/users/${userId}/direct/`,
         method: 'POST',
@@ -22,13 +22,13 @@ export const chatApi = baseApi.injectEndpoints({
       }),
       providesTags: (result, error, { chat_id }) => [{ type: 'CHAT_TAG', id: chat_id }],
     }),
-    chatMessages: build.query<ChatMessage[], ChatId>({
+    chatMessages: build.query<IChatMessage[], ChatId>({
       query: ({ chat_id }) => ({
         url: `/chats/${chat_id}/messages/`,
       }),
       providesTags: (result, error, { chat_id }) => [{ type: 'CHAT_TAG', id: chat_id }],
     }),
-    chatParticipants: build.query<ProfileId[], ChatId>({
+    chatParticipants: build.query<Participant[], ChatId>({
       query: ({ chat_id }) => ({
         url: `/chats/${chat_id}/participants/`,
       }),
@@ -38,7 +38,7 @@ export const chatApi = baseApi.injectEndpoints({
       query: ({ chat_id, message_text }) => ({
         url: `/chats/${chat_id}/send_message/`,
         method: 'POST',
-        body: message_text,
+        body: { message_text },
       }),
       invalidatesTags: (result, error, { chat_id }) => [{ type: 'CHAT_TAG', id: chat_id }],
     }),

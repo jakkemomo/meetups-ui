@@ -1,21 +1,21 @@
 // searchUsersSlice.ts
 import { createSlice } from "@reduxjs/toolkit";
 
-interface IGlobalUsersSearchState {
-  search: string;
+export interface IGlobalUsersSearchState {
+  username: string;
 }
 
 const initialState: IGlobalUsersSearchState = {
-  search: "",
+  username: "",
 };
 
 export const searchUsersSlice = createSlice({
   name: "searchUsers",
   initialState,
   reducers: {
-    setSearchUsers: (state, { payload: inputValue }: { payload: string }) => ({
+    setSearchUsers: (state, { payload: usernameValue }: { payload: string }) => ({
       ...state,
-      search: inputValue,
+      username: usernameValue,
     }),
   },
 });

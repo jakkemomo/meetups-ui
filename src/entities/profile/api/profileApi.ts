@@ -23,9 +23,9 @@ export const profileApi = baseApi.injectEndpoints({
 
     }),
     getFollowing: build.query<ProfileFollowing[], IFollowRequest>({
-      query: ({ userId, search }) => ({
+      query: ({ userId, username }) => ({
         url: `/users/${userId}/following/`,
-        params: { search },
+        params: { username },
       }),
     }),
     getFollowers: build.query<ProfileFollowing[], ProfileId>({

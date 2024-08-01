@@ -1,30 +1,19 @@
-// FollowingList.tsx
-import { ReactElement, useEffect } from "react";
+import { ReactElement } from "react";
 import FollowingSection from "../../../features/subscription/ui/FollowingSection";
 import { useGetFollowingQuery, useMyDetailsQuery } from "@/entities/profile/api/profileApi";
 import { useAppSelector } from "@/shared/model";
 
 function FollowingList(): ReactElement {
-  const { data: profileData, refetch } = useMyDetailsQuery();
-  const { search } = useAppSelector(state => state.searchUsers);
+  const { data: profileData } = useMyDetailsQuery();
+  
+  const { username } = useAppSelector(state => state.searchUsers);
 
-  const { data: followings = [], 
-    isLoading: isLoading 
-  } = useGetFollowingQuery({
-    userId: String(profileData?.id),
-    search: search
-  },
+  const { data: followings = [], isLoading } = useGetFollowingQuery(
+    { userId: String(profileData?.id), username: username },
     { skip: !profileData }
   );
 
-  useEffect(() => {
-    if (profileData) {
-      console.log("Refetching with search value:", search);
-      void refetch();
-    }
-  }, [search, profileData, refetch]);
-
-  const searchLabel = search ? 'Результаты поиска' : 'Всего';
+  const searchLabel = username ? 'Результаты поиска' : 'Всего';
 
   return (
     <section className="flex flex-col mt-5 mb-10">

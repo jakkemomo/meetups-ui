@@ -33,13 +33,13 @@ export function HomePage(): ReactElement {
     error: eventsError
   } = useGetEventsQuery({
     search,
-    start_date: selectedDate,
-    start_date_gte: startDate,
-    start_date_lte: endDate,
-    category_in,
+    start_date: selectedDate || undefined,
+    start_date_gte: startDate || undefined,
+    start_date_lte: endDate || undefined,
+    category_in: category_in || undefined,
     ordering: 'start_date',
-    participants_age__gte: age,
-    free: free ?? ''
+    participants_age__gte: age || undefined,
+    free: free
   });
 
   const {

@@ -1,4 +1,5 @@
-import { useGetEventsQuery } from "@/entities/event/api/eventApi";
+import { useGetUserCreatedEventsQuery } from "@/entities/event/api/eventApi";
+import { useMyDetailsQuery } from "@/entities/profile/api/profileApi";
 import { SliderEmptyElem } from "@/shared";
 import { useLogServerError } from "@/shared/lib/hooks";
 import { EventsList } from "@/widgets/EventsList";
@@ -11,13 +12,21 @@ interface ICreatedEventsProps {
 
 export function CreatedEvents({ debounedInputValue }: ICreatedEventsProps) {
   const {
+    data: userInfo,
+    isSuccess: isUserInfoSuccess
+  } = useMyDetailsQuery();
+
+  const {
     data: closeEvents = {results: []},
     isLoading: isCloseEventsLoading,
     isError: isCloseEventsError,
     error: closeEventsError
-  } = useGetEventsQuery({
+  } = useGetUserCreatedEventsQuery({
+    user_id: userInfo?.id,
     start_date_gte: dayjs().format('YYYY-MM-DD'),
     search: debounedInputValue || undefined
+  }, {
+    skip: !isUserInfoSuccess
   });
 
   const {
@@ -25,9 +34,12 @@ export function CreatedEvents({ debounedInputValue }: ICreatedEventsProps) {
     isLoading: isPastEventsLoading,
     isError: isPastEventsError,
     error: pastEventsError
-  } = useGetEventsQuery({
+  } = useGetUserCreatedEventsQuery({
+    user_id: userInfo?.id,
     start_date_lte: dayjs().format('YYYY-MM-DD'),
     search: debounedInputValue || undefined
+  }, {
+    skip: !isUserInfoSuccess
   });
 
   useLogServerError(isCloseEventsError, 'ближайших ивентов', closeEventsError);
@@ -41,6 +53,7 @@ export function CreatedEvents({ debounedInputValue }: ICreatedEventsProps) {
       <EventsList
         listTitle="Ближайшие"
         isLoading={isCloseEventsLoading}
+        isError={isCloseEventsError}
         slidesLength={4}
         arrowsExtraClasses={{rightArrow: 'right-[-12px] top-[110px]', leftArrow: 'left-[-42px] top-[110px]'}}
         emptyElement={<SliderEmptyElem text="Не найдено" />}
@@ -49,6 +62,7 @@ export function CreatedEvents({ debounedInputValue }: ICreatedEventsProps) {
           listTitle="Прошедшие"
           extraClasses="mt-[50px]"
           isLoading={isPastEventsLoading}
+          isError={isPastEventsError}
           slidesLength={4}
           arrowsExtraClasses={{rightArrow: 'right-[-12px] top-[110px]', leftArrow: 'left-[-42px] top-[110px]'}}
           emptyElement={<SliderEmptyElem text="Не найдено" />}

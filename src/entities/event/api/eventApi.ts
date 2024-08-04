@@ -61,14 +61,15 @@ export const eventApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ['EVENTS_TAG']
     }),
-    getUserCreatedEvents: build.query<IApiResponse<IEvent[]>, number>({
-      query: (user_id) => ({
+    getUserCreatedEvents: build.query<IApiResponse<IEvent[]>, IGetEventRequest>({
+      query: ({ user_id, ...params }) => ({
         url: `users/${user_id}/events/created/`,
-        method: 'GET'
+        method: 'GET',
+        params
       }),
       providesTags: ['EVENTS_TAG']
     }),
-    getUserPlannedEvents: build.query<IApiResponse<IEvent[]>, { user_id: number, search?: string }>({
+    getUserPlannedEvents: build.query<IApiResponse<IEvent[]>, IGetEventRequest>({
       query: ({ user_id, search }) => ({
         url: `users/${user_id}/events/planned/`,
         method: 'GET',
@@ -83,7 +84,7 @@ export const eventApi = baseApi.injectEndpoints({
       }),
       providesTags: ['EVENTS_TAG']
     }),
-    getUserFavotireEvents: build.query<IApiResponse<IEvent[]>, { user_id: number, search?: string }>({
+    getUserFavotireEvents: build.query<IApiResponse<IEvent[]>, IGetEventRequest>({
       query: ({ user_id, search }) => ({
         url: `users/${user_id}/events/favorited/`,
         method: 'GET',

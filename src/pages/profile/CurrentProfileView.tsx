@@ -29,7 +29,9 @@ function CurrentProfileView(): ReactElement {
     isLoading: isCreatedEventsLoading,
     isError: isCreatedEventsError,
     error: createdEventsError
-  } = useGetUserCreatedEventsQuery(isProfileDataSuccess ? profileData.id : 0);
+  } = useGetUserCreatedEventsQuery({ user_id: profileData?.id }, {
+    skip: !isProfileDataSuccess
+  });
 
   const {
     data: finishedEvents = {results: []},

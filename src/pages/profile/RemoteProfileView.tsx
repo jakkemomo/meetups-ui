@@ -33,7 +33,9 @@ function RemoteProfileView(): ReactElement {
     isLoading: isCreatedEventsLoading,
     isError: isCreatedEventsError,
     error: createdEventsError
-  } = useGetUserCreatedEventsQuery(Number(userId));
+  } = useGetUserCreatedEventsQuery({ user_id: Number(userId) }, {
+    skip: !userId
+  });
 
   const {
     data: finishedEvents = {results: []},

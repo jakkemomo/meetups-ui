@@ -30,6 +30,7 @@ export interface IEvent {
 }
 
 export interface IGetEventRequest {
+  user_id?: number;
   search?: string;
   ordering?: 'start_date' | 'average_rating' | 'participants_number' | '-start_date' | '-average_rating' | '-participants_number';
   name?: string;

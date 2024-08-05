@@ -1,4 +1,4 @@
-import { ComponentPropsWithRef, ReactElement, ReactNode } from 'react';
+import { ComponentPropsWithRef, MouseEventHandler, ReactElement, ReactNode } from 'react';
 import cx from 'classnames';
 import { UseFormRegisterReturn } from 'react-hook-form';
 
@@ -14,6 +14,7 @@ export interface IInputProps extends NativeInputPropsWithoutSize {
   isError?: boolean;
   locator?: string;
   hookFormRegister?: UseFormRegisterReturn<string>;
+  onTailClick?: MouseEventHandler<HTMLDivElement>;
 }
 
 export function Input({
@@ -28,6 +29,7 @@ export function Input({
   locator,
   disabled,
   hookFormRegister,
+  onTailClick,
   ...inputProps
 }: IInputProps): ReactElement {
   return (
@@ -72,7 +74,7 @@ export function Input({
       </div>
       {
         tail && (
-          <div className="flex-none flex justify-center items-center">
+          <div className="flex-none flex justify-center items-center" onClick={onTailClick}>
             { tail }
           </div>
         )

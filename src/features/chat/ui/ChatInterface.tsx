@@ -1,16 +1,16 @@
-import { ReactElement } from "react";
+import { ChangeEvent, ReactElement, useState } from "react";
 import { Input } from "@/shared";
 import Svg from "@/shared/ui/Svg";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { ChatMessage } from "@/entities/chat/chatMessage";
-import { useChatMessagesQuery, useChatParticipantsQuery } from "@/entities/chat/api/chatsApi";
+import { useChatMessagesQuery, useChatParticipantsQuery, useSendMessageMutation } from "@/entities/chat/api/chatsApi";
 import { useMyDetailsQuery } from "@/entities/profile/api/profileApi";
-
 interface ContactsListProps {
   chatId: number;
 }
 
 const ChatInterface = ({ chatId }: ContactsListProps): ReactElement => {
+
   const { 
     data: profileData 
   } = useMyDetailsQuery();
@@ -26,6 +26,29 @@ const ChatInterface = ({ chatId }: ContactsListProps): ReactElement => {
   } = useChatMessagesQuery({
     chat_id: String(chatId),
   });
+
+  const [messageText, setMessageText] = useState<string>('');
+
+  const [sendMessage] = useSendMessageMutation();
+
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setMessageText(e.target.value);
+
+  };
+
+  const handleTailClick = async () => {
+    if (messageText.trim() !== '') {
+      try {
+        await sendMessage({
+          chat_id: String(chatId),
+          message_text: messageText,
+        }).unwrap();
+        setMessageText('');
+      } catch (error) {
+        console.error('Не получилось отправить сообщение', error);
+      }
+    }
+  };
 
   if (messages && participants) {
     const companionInfo = participants.results.find((el) => el.id !== profileData?.id);
@@ -65,12 +88,15 @@ const ChatInterface = ({ chatId }: ContactsListProps): ReactElement => {
               </InfiniteScroll>
             </div>
             <Input
+              value={messageText}
+              onChange={handleInputChange}
               type="text"
               size="lg"
               className="mt-auto text-[18px]"
               head={<Svg className="w-6 h-6 hoverscreen:hover:opacity-70 duration-150 cursor-pointer" id="bm-chat" />}
               tail={<Svg className="w-6 h-6 hoverscreen:hover:opacity-70 duration-150 cursor-pointer" id="bm-chat" />}
               extraInputClass="pl-3"
+              onTailClick={() => { void handleTailClick(); }}
             />
       </div>
     )

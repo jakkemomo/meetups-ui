@@ -15,6 +15,7 @@ import SecurityPage from '@/pages/security/SecurityPage';
 import ProxyConfirmEmailPage from '@/features/authentication/registration/ui/ProxyConfirmEmailPage';
 import RouteGuard from './guards/RouteGuard';
 import SubscriptionPage from '@/pages/subscription/SubscriptionPage';
+import { UserEventsPage } from '@/pages/userEvents/UserEventsPage';
 
 const appRouter = createBrowserRouter([
   {
@@ -66,6 +67,24 @@ const appRouter = createBrowserRouter([
         element: (
           <AddEventPage type='add' />
         ),
+      },
+      {
+        path: '/favorite',
+        element: (
+          <UserEventsPage type="favorite" />
+        )
+      },
+      {
+        path: '/planned',
+        element: (
+          <UserEventsPage type="planned" />
+        )
+      },
+      {
+        path: '/created',
+        element: (
+          <UserEventsPage type="created" />
+        )
       }
     ]
   },

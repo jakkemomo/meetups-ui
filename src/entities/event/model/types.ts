@@ -30,6 +30,7 @@ export interface IEvent {
 }
 
 export interface IGetEventRequest {
+  user_id?: number;
   search?: string;
   ordering?: 'start_date' | 'average_rating' | 'participants_number' | '-start_date' | '-average_rating' | '-participants_number';
   name?: string;
@@ -48,7 +49,7 @@ export interface IGetEventRequest {
   category_in?: string;
   city?: string;
   city_in?: string;
-  free?: string;
+  free?: boolean | '';
   participants_age?: string;
   participants_age__gte?: string;
   participants_age__lte?: string;

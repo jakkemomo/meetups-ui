@@ -3,7 +3,7 @@ import Svg from "@/shared/ui/Svg";
 import { ReactElement } from "react";
 import { useNavigate } from "react-router-dom";
 
-function PageTitle({ title }: { title: string }): ReactElement {
+function PageTitle({ title }: { title?: string }): ReactElement {
   const navigate = useNavigate();
 
   return (

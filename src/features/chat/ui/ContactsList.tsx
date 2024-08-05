@@ -12,9 +12,10 @@ interface ContactsListProps {
 
 function ContactsList({ onChatSelect }: ContactsListProps): ReactElement {
   const {
-    data: chats = {results: []}
+    data: chats = {results: []},
   } 
  = useChatListQuery();
+
 
   if (chats) {
     return (

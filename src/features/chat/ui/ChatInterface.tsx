@@ -1,6 +1,7 @@
-import { ChangeEvent, ReactElement, useState } from "react";
+import { ChangeEvent, ReactElement, useState, KeyboardEvent } from "react";
 import { Input } from "@/shared";
 import Svg from "@/shared/ui/Svg";
+import send from '../../../../public/images/send.svg'
 import InfiniteScroll from "react-infinite-scroll-component";
 import { ChatMessage } from "@/entities/chat/chatMessage";
 import { useChatMessagesQuery, useChatParticipantsQuery, useSendMessageMutation } from "@/entities/chat/api/chatsApi";
@@ -50,8 +51,15 @@ const ChatInterface = ({ chatId }: ContactsListProps): ReactElement => {
     }
   };
 
+  const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      void handleTailClick();
+    }
+  };
+
   if (messages && participants) {
     const companionInfo = participants.results.find((el) => el.id !== profileData?.id);
+    const reversedMessages = [...messages.results].reverse();
 
     return (
       <div className="flex flex-col pl-[46px] w-full">
@@ -78,7 +86,7 @@ const ChatInterface = ({ chatId }: ContactsListProps): ReactElement => {
                 className="flex flex-col"
                 scrollableTarget="scrollableDiv"
               >
-                {messages.results.map((el, index) => (
+                {reversedMessages.map((el, index) => (
                   <ChatMessage
                     key={index}
                     sender={participants.results.find((person) => person.id === el.created_by)}
@@ -93,10 +101,10 @@ const ChatInterface = ({ chatId }: ContactsListProps): ReactElement => {
               type="text"
               size="lg"
               className="mt-auto text-[18px]"
-              head={<Svg className="w-6 h-6 hoverscreen:hover:opacity-70 duration-150 cursor-pointer" id="bm-chat" />}
-              tail={<Svg className="w-6 h-6 hoverscreen:hover:opacity-70 duration-150 cursor-pointer" id="bm-chat" />}
+              tail={<img className="cursor-pointer" src={send} alt="send" />}
               extraInputClass="pl-3"
               onTailClick={() => { void handleTailClick(); }}
+              onKeyDown={handleKeyDown}
             />
       </div>
     )

@@ -27,7 +27,7 @@ const ChatInterface = ({ chatId }: ContactsListProps): ReactElement => {
     chat_id: String(chatId),
   });
 
-  if(messages && participants) {
+  if (messages && participants) {
     const companionInfo = participants.results.find((el) => el.id !== profileData?.id);
 
     return (
@@ -68,8 +68,8 @@ const ChatInterface = ({ chatId }: ContactsListProps): ReactElement => {
               type="text"
               size="lg"
               className="mt-auto text-[18px]"
-              head={<Svg className="w-6 h-6 hoverscreen:hover:opacity-70 duration-150 cursor-pointer" id="chat-input-paperclip" />}
-              tail={<Svg className="w-6 h-6 hoverscreen:hover:opacity-70 duration-150 cursor-pointer" id="chat-input-send-button" />}
+              head={<Svg className="w-6 h-6 hoverscreen:hover:opacity-70 duration-150 cursor-pointer" id="bm-chat" />}
+              tail={<Svg className="w-6 h-6 hoverscreen:hover:opacity-70 duration-150 cursor-pointer" id="bm-chat" />}
               extraInputClass="pl-3"
             />
       </div>

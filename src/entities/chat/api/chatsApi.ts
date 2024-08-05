@@ -1,10 +1,11 @@
 import { baseApi } from '@/shared/api';
 import { ChatDetails, ChatId, IChatMessage, MessageCreate, Participant } from '../model/types';
 import { ProfileId } from '@/entities/profile/model/types';
+import { IApiResponse } from '@/shared/types';
 
 export const chatApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
-    chatList: build.query<ChatDetails[], void>({
+    chatList: build.query<IApiResponse<ChatDetails[]>, void>({
       query: () => ({
         url: '/chats/',
       }),
@@ -16,19 +17,19 @@ export const chatApi = baseApi.injectEndpoints({
         method: 'POST',
       }),
     }),
-    chatDetails: build.query<ChatDetails, ChatId>({
+    chatDetails: build.query<IApiResponse<ChatDetails[]>, ChatId>({
       query: ({ chat_id }) => ({
         url: `/chats/${chat_id}/`,
       }),
       providesTags: (result, error, { chat_id }) => [{ type: 'CHAT_TAG', id: chat_id }],
     }),
-    chatMessages: build.query<IChatMessage[], ChatId>({
+    chatMessages: build.query<IApiResponse<IChatMessage[]>, ChatId>({
       query: ({ chat_id }) => ({
         url: `/chats/${chat_id}/messages/`,
       }),
       providesTags: (result, error, { chat_id }) => [{ type: 'CHAT_TAG', id: chat_id }],
     }),
-    chatParticipants: build.query<Participant[], ChatId>({
+    chatParticipants: build.query<IApiResponse<Participant[]>, ChatId>({
       query: ({ chat_id }) => ({
         url: `/chats/${chat_id}/participants/`,
       }),

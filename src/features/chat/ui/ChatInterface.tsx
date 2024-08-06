@@ -1,4 +1,4 @@
-import { ChangeEvent, ReactElement, useState, KeyboardEvent } from "react";
+import { ChangeEvent, ReactElement, useState, KeyboardEvent, useEffect } from "react";
 import { Input } from "@/shared";
 import Svg from "@/shared/ui/Svg";
 import send from '../../../../public/images/send.svg'
@@ -24,6 +24,7 @@ const ChatInterface = ({ chatId }: ContactsListProps): ReactElement => {
 
   const {
     data: messages = {results: []},
+    refetch
   } = useChatMessagesQuery({
     chat_id: String(chatId),
   });
@@ -56,6 +57,10 @@ const ChatInterface = ({ chatId }: ContactsListProps): ReactElement => {
       void handleTailClick();
     }
   };
+
+  useEffect(() => {
+    void refetch()
+  },[refetch, messages])
 
   if (messages && participants) {
     const companionInfo = participants.results.find((el) => el.id !== profileData?.id);

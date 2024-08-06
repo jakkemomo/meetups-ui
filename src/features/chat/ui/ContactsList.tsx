@@ -24,7 +24,7 @@ function ContactsList({ onChatSelect, chats }: ContactsListProps): ReactElement 
       />
       <InfiniteScroll
         className="flex flex-col gap-3.5 mt-[30px] [&::-webkit-scrollbar]:w-1 [&::-webkit-scrollbar-track]:bg-white [&::-webkit-scrollbar-track]:rounded-[10px] [&::-webkit-scrollbar-thumb]:bg-text-light-gray [&::-webkit-scrollbar-thumb]:rounded-[10px]"
-        dataLength={1}
+        dataLength={chats.length}
         hasMore={false}
         next={() => console.log(chats.length)}
         loader={reversedChats.length !== 0 ? '' : <p>Loading...</p>}

@@ -1,4 +1,5 @@
 import { useChatListQuery } from "@/entities/chat/api/chatsApi";
+import ContactCardSkeleton from "@/entities/chat/chatContact/ui/ContactCardSkeleton";
 import { useMyDetailsQuery } from "@/entities/profile/api/profileApi";
 import { ChatInterface, ContactsList } from "@/features/chat";
 import { ReactElement, useEffect, useState } from "react";
@@ -10,7 +11,6 @@ function Chat(): ReactElement {
   
   const {
     data: chats = {results: []},
-    isLoading: isChatLoading,
     refetch
   } 
   = useChatListQuery();
@@ -42,12 +42,11 @@ function Chat(): ReactElement {
   }, [isRefetched, refetch]);
 
   if (!isRefetched) {
-    return <></>;
+    return <ContactCardSkeleton />;
   }
 
   return (
     <div className="flex justify-start mt-5 max-h-[569px]">
-      { isChatLoading && 'loading'}
       <ContactsList chats={chats.results} onChatSelect={selectChatId}/>
       {selectedChatId !== 0  ?
         <ChatInterface chatId={selectedChatId}/>

@@ -3,3 +3,4 @@ export const PROFILE_TAG = 'PROFILE_TAG'
 export const PARTICIPANTS_TAG = 'PARTICIPANTS_TAG';
 export const EVENTS_TAG = 'EVENTS_TAG';
 export const CHAT_TAG = 'CHAT_TAG';
+export const FOLLOW_TAG = 'FOLLOW_TAG';

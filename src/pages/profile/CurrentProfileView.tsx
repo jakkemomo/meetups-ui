@@ -29,7 +29,9 @@ function CurrentProfileView(): ReactElement {
     isLoading: isCreatedEventsLoading,
     isError: isCreatedEventsError,
     error: createdEventsError
-  } = useGetUserCreatedEventsQuery(isProfileDataSuccess ? profileData.id : 0);
+  } = useGetUserCreatedEventsQuery({ user_id: profileData?.id }, {
+    skip: !isProfileDataSuccess
+  });
 
   const {
     data: finishedEvents = {results: []},
@@ -43,7 +45,9 @@ function CurrentProfileView(): ReactElement {
     isLoading: isPlannedEventsLoading,
     isError: isPlannedEventsError,
     error: plannedEventsError
-  } = useGetUserPlannedEventsQuery(isProfileDataSuccess ? profileData.id : 0);
+  } = useGetUserPlannedEventsQuery({
+    user_id: isProfileDataSuccess ? profileData.id : 0
+  });
 
   useLogServerError(isProfileDataError, 'подписок', profileDataError);
   useLogServerError(isFinishedEventsError, 'посещенных ивентов', finishedEventsError);

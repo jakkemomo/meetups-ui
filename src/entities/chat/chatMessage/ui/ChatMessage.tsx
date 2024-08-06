@@ -6,16 +6,17 @@ interface IChatMessageProps {
   message: IChatMessage;
   isOwner: boolean;
   isNewDate?: boolean;
+  userImage: string
 }
 
-function ChatMessage({ sender, message, isOwner, isNewDate }: IChatMessageProps): ReactElement {
+function ChatMessage({ sender, message, isOwner, isNewDate, userImage }: IChatMessageProps): ReactElement {
   const messageDate = new Date(message.created_at);
 
   return (
     <>
       {isNewDate && <p className="self-center">{messageDate.toLocaleString('ru-RU', {day: 'numeric', month: 'short'})}</p>}
       <div className={`flex items-start mb-2.5 ${isOwner ? "flex-row-reverse" : ""}`}>
-        <img className="w-[50px] h-[50px] rounded-circle" src="https://storage.googleapis.com/meetups-dev/media/images/44474d3495df4c99975f7a3ad6f5d9a0.webp" alt="Аватар пользователя" />
+        <img className="w-[50px] h-[50px] rounded-circle" src={`https://storage.googleapis.com/meetups-dev/media/${userImage}`} alt="Аватар пользователя" />
         <div className={`flex flex-col items-start ml-[22px] ${isOwner ? "items-end !ml-0 mr-[22px]" : ""}`}>
           <div className={`flex items-center mt-2.5 ${isOwner ? "flex-row-reverse" : ""}`}>
             <h3 className={`font-medium leading-[20px] w-[160px] truncate ${isOwner ? "!w-6 " : ""}`}>{isOwner ? 'Вы' : sender?.username}</h3>

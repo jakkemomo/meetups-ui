@@ -88,6 +88,7 @@ const ChatInterface = ({ chatId }: ContactsListProps): ReactElement => {
               >
                 {reversedMessages.map((el, index) => (
                   <ChatMessage
+                    userImage={el.image_url}
                     key={index}
                     sender={participants.results.find((person) => person.id === el.created_by)}
                     message={el} isOwner={el.created_by === profileData?.id}

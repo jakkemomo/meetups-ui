@@ -97,9 +97,12 @@ function RemoteProfileView(): ReactElement {
   const creatheChatUser = () => {
     createChat({ userId: userId })
       .unwrap()
-      .then(() => navigate('/chat'))
+      .then((chat) => {
+        const userIdKey = currentProfileData?.id ? `selectedChatId_${currentProfileData.id}` : 'selectedChatId';
+        localStorage.setItem(userIdKey, JSON.stringify(chat.id));
+        navigate('/chat');
+      })
       .catch((err) => console.log(err, "Создать чат не получилось"));
-
   }
 
   const followUser = () => {

@@ -2,6 +2,7 @@ import { useChatListQuery } from "@/entities/chat/api/chatsApi";
 import ContactCardSkeleton from "@/entities/chat/chatContact/ui/ContactCardSkeleton";
 import { useMyDetailsQuery } from "@/entities/profile/api/profileApi";
 import { ChatInterface, ContactsList } from "@/features/chat";
+import ChatsEmptyState from "@/features/chat/ui/ChatsEmptyState";
 import { ReactElement, useEffect, useState } from "react";
 
 function Chat(): ReactElement {
@@ -43,6 +44,10 @@ function Chat(): ReactElement {
 
   if (!isRefetched) {
     return <ContactCardSkeleton />;
+  }
+
+  if(chats.results.length === 0) {
+    return <ChatsEmptyState />
   }
 
   return (

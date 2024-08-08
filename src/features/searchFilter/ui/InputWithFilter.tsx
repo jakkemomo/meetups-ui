@@ -1,6 +1,6 @@
 import { Input } from "@/shared";
 import { useAppDispatch } from "@/shared/model";
-import { setSearchFilter } from "../model/SearchFilterSlice";
+import { searchFilterSetted } from "../model/SearchFilterSlice";
 import { ChangeEvent, useEffect, useState } from "react";
 import { isPopupOpenSetted } from "../model/filterPopupSlice";
 import { useDebounce } from "use-debounce";
@@ -13,7 +13,7 @@ export function InputWithFilter() {
   const [debouncedValue] = useDebounce(inputValue, 700);
 
   useEffect(() => {
-    dispatch(setSearchFilter(debouncedValue));
+    dispatch(searchFilterSetted(debouncedValue));
   }, [debouncedValue, dispatch]);
 
   return (

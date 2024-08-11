@@ -1,33 +1,23 @@
-import { ChangeEvent, ReactElement, useState, KeyboardEvent, useEffect } from "react";
+import { ChangeEvent, ReactElement, useState, KeyboardEvent } from "react";
 import { Input } from "@/shared";
 import Svg from "@/shared/ui/Svg";
 import send from '../../../../public/images/send.svg'
 import InfiniteScroll from "react-infinite-scroll-component";
 import { ChatMessage } from "@/entities/chat/chatMessage";
-import { useChatMessagesQuery, useChatParticipantsQuery, useSendMessageMutation } from "@/entities/chat/api/chatsApi";
+import { useSendMessageMutation } from "@/entities/chat/api/chatsApi";
 import { useMyDetailsQuery } from "@/entities/profile/api/profileApi";
+import { IChatMessage, Participant } from "@/entities/chat/model/types";
 interface ContactsListProps {
   chatId: number;
+  messages: IChatMessage[];
+  participants: Participant[];
 }
 
-const ChatInterface = ({ chatId }: ContactsListProps): ReactElement => {
+const ChatInterface = ({ chatId, messages, participants }: ContactsListProps): ReactElement => {
 
   const { 
     data: profileData 
   } = useMyDetailsQuery();
-
-  const { 
-    data: participants = {results: []},
-  } = useChatParticipantsQuery({
-    chat_id: String(chatId),
-  });
-
-  const {
-    data: messages = {results: []},
-    refetch
-  } = useChatMessagesQuery({
-    chat_id: String(chatId),
-  });
 
   const [messageText, setMessageText] = useState<string>('');
 
@@ -58,13 +48,10 @@ const ChatInterface = ({ chatId }: ContactsListProps): ReactElement => {
     }
   };
 
-  useEffect(() => {
-    void refetch()
-  },[refetch, messages])
 
   if (messages && participants) {
-    const companionInfo = participants.results.find((el) => el.id !== profileData?.id);
-    const reversedMessages = [...messages.results].reverse();
+    const companionInfo = participants.find((el) => el.id !== profileData?.id);
+    const reversedMessages = [...messages].reverse();
 
     return (
       <div className="flex flex-col pl-[46px] w-full">
@@ -84,7 +71,7 @@ const ChatInterface = ({ chatId }: ContactsListProps): ReactElement => {
               extraInputClass="pl-[9px] placeholder:!text-placeholder-gray" />
           </div><div id="scrollableDiv" className="flex flex-col-reverse overflow-auto pt-[18px] [&::-webkit-scrollbar]:w-1 [&::-webkit-scrollbar-track]:bg-white [&::-webkit-scrollbar-track]:rounded-[10px] [&::-webkit-scrollbar-thumb]:bg-text-light-gray [&::-webkit-scrollbar-thumb]:rounded-[10px]">
               <InfiniteScroll
-                dataLength={messages.results ? messages.results.length : 1}
+                dataLength={messages ? messages.length : 1}
                 next={() => { return; } }
                 hasMore={false}
                 loader={<p>Loading...</p>}
@@ -95,9 +82,9 @@ const ChatInterface = ({ chatId }: ContactsListProps): ReactElement => {
                   <ChatMessage
                     userImage={el.image_url}
                     key={index}
-                    sender={participants.results.find((person) => person.id === el.created_by)}
+                    sender={participants.find((person) => person.id === el.created_by)}
                     message={el} isOwner={el.created_by === profileData?.id}
-                    isNewDate={index > 0 ? new Date(`${el.created_at.slice(0, 10)} 24:00`) > new Date(`${messages.results[index - 1].created_at.slice(0, 10)} 24:00`) : false} />
+                    isNewDate={index > 0 ? new Date(`${el.created_at.slice(0, 10)} 24:00`) > new Date(`${messages[index - 1].created_at.slice(0, 10)} 24:00`) : false} />
                 ))}
               </InfiniteScroll>
             </div>

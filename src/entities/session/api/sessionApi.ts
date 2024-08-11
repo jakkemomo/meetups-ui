@@ -12,7 +12,7 @@ export const sessionApi = baseApi.injectEndpoints({
                 method: 'POST',
                 body,
             }),
-            invalidatesTags: [SESSION_TAG, EVENTS_TAG],
+            invalidatesTags: [SESSION_TAG, EVENTS_TAG, PARTICIPANTS_TAG, PROFILE_TAG, CHAT_TAG],
             transformResponse: (response: SessionDto) => mapSession(response),
         }),
         logout: build.mutation<void, RefreshToken>({

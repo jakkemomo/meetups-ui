@@ -27,7 +27,7 @@ export const chatApi = baseApi.injectEndpoints({
       query: ({ chat_id }) => ({
         url: `/chats/${chat_id}/messages/`,
       }),
-      providesTags: (result, error, { chat_id }) => [{ type: 'CHAT_TAG', id: chat_id }],
+      providesTags: (result, error, { chat_id }) => [{ type: 'MESSAGES_TAG', id: chat_id }],
     }),
     chatParticipants: build.query<IApiResponse<Participant[]>, ChatId>({
       query: ({ chat_id }) => ({
@@ -41,7 +41,7 @@ export const chatApi = baseApi.injectEndpoints({
         method: 'POST',
         body: { message_text },
       }),
-      invalidatesTags: (result, error, { chat_id }) => [{ type: 'CHAT_TAG', id: chat_id }],
+      invalidatesTags: (result, error, { chat_id }) => [{ type: 'MESSAGES_TAG', id: chat_id }],
     }),
   }),
 });

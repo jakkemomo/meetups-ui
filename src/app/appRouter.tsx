@@ -79,6 +79,12 @@ const appRouter = createBrowserRouter([
         element: (
           <UserEventsPage type="created" />
         )
+      },
+      {
+        path: '/chat',
+        element: (
+          <ChatPage />
+        )
       }
     ]
   },
@@ -104,12 +110,6 @@ const appRouter = createBrowserRouter([
           <NonFound/>
         ),
       },
-      {
-        path: '/chat',
-        element: (
-          <ChatPage />
-        )
-      }
     ]
   },
   {

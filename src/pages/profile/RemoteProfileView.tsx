@@ -99,7 +99,7 @@ function RemoteProfileView(): ReactElement {
   const [unfollow, { isLoading: isUnfollowLoading }] = useUnFollowMutation();
   const [createChat] = useGetOrCreateUserDirectChatMutation();
 
-  const creatheChatUser = () => {
+  const createUserChat = () => {
     createChat({ userId: userId })
       .unwrap()
       .then((chat) => {
@@ -184,7 +184,7 @@ function RemoteProfileView(): ReactElement {
               isLoading={isFollowLoading || isUnfollowLoading}
               status={followStatus}
             />
-            <Button size="md" importance="secondary" extraClass="ml-[20px]" onClick={creatheChatUser}>
+            <Button size="md" importance="secondary" extraClass="ml-[20px]" onClick={createUserChat}>
               Написать
             </Button>
           </div>

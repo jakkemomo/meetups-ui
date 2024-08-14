@@ -7,63 +7,91 @@ import { ReactElement, useEffect, useState } from "react";
 
 function Chat(): ReactElement {
   const [selectedChatId, setSelectedChatId] = useState<number>(0);
+  const [isLoadingMessages, setIsLoadingMessages] = useState<boolean>(false);
+
   const {
-    data: currentProfileData,
+    data: currentProfileData
   } = useMyDetailsQuery();
+
+  const {
+    data: chats = { results: [] },
+    isLoading: isChatsLoading
+  } = useChatListQuery();
   
   const {
-    data: chats = {results: []},
-  } 
-  = useChatListQuery();
-
-  const { 
-    data: participants = {results: []},
+    data: participants = { results: [] }
   } = useChatParticipantsQuery({
     chat_id: String(selectedChatId),
   });
 
   const {
-    data: messages = {results: []},
-    isLoading: isMessagesLoading
-    ,
+    data: messages = { results: [] },
+    isLoading: isMessagesLoading,
+    isError: isMessagesError
   } = useChatMessagesQuery({
     chat_id: String(selectedChatId),
   });
 
-
-  const selectChatId = (selectedChatId: number) => {
-    setSelectedChatId(selectedChatId);
-    const userIdKey = `selectedChatId_${currentProfileData?.id}`;
-    localStorage.setItem(userIdKey, JSON.stringify(selectedChatId));
-  }
-
   useEffect(() => {
     const userIdKey = `selectedChatId_${currentProfileData?.id}`;
     const chatId = localStorage.getItem(userIdKey);
-    if (!chatId) { return }
-    const selectedChatId = JSON.parse(chatId) as number;
-    if (selectedChatId) {
-      setSelectedChatId(selectedChatId);
+    if (chatId) {
+      const storedChatId = JSON.parse(chatId) as number;
+      if (storedChatId) {
+        setSelectedChatId(storedChatId);
+      }
     }
   }, [currentProfileData?.id]);
 
-  if (isMessagesLoading) {
-    return <ContactCardSkeleton />;
-  }
+  const selectChatId = (newChatId: number) => {
+    if (newChatId === selectedChatId) {
+      return;
+    }
+    setSelectedChatId(newChatId);
+    setIsLoadingMessages(true); 
+    const userIdKey = `selectedChatId_${currentProfileData?.id}`;
+    localStorage.setItem(userIdKey, JSON.stringify(newChatId));
+  };
 
-  if(chats.results.length === 0) {
-    return <ChatsEmptyState />
+  useEffect(() => {
+    if (selectedChatId !== 0) {
+      setIsLoadingMessages(isMessagesLoading);
+    }
+  }, [isMessagesLoading, selectedChatId]);
+
+  useEffect(() => {
+    if (!isMessagesLoading && selectedChatId !== 0) {
+      setIsLoadingMessages(false);
+    }
+  }, [isMessagesLoading, selectedChatId]);
+
+  if (chats.results.length === 0 && !isChatsLoading) {
+    return <ChatsEmptyState />;
   }
 
   return (
     <div className="flex justify-start mt-5 max-h-[569px]">
-      <ContactsList chats={chats.results} onChatSelect={selectChatId}/>
-      {selectedChatId !== 0  ?
-        <ChatInterface messages={messages.results} participants={participants.results} chatId={selectedChatId}/>
-        : <></>
-      }
+      <ContactsList 
+        chats={chats.results}
+        onChatSelect={selectChatId}
+        selectedChatId={selectedChatId}
+      />
+      {isLoadingMessages && <ContactCardSkeleton />}
+      {selectedChatId !== 0 && !isLoadingMessages ? (
+        isMessagesError ? (
+          <div className="text-red-500 text-center pt-[20%]">
+            Произошла ошибка при попытке загрузить сообщения. Пожалуйста, проверьте ваше интернет соединение.
+          </div>
+        ) : (
+          <ChatInterface
+            messages={messages.results}
+            participants={participants.results}
+            chatId={selectedChatId}
+          />
+        )
+      ) : null}
     </div>
-  )
+  );
 }
 
 export default Chat;

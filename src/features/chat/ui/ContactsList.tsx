@@ -8,9 +8,10 @@ import { ChatDetails } from "@/entities/chat/model/types";
 interface ContactsListProps {
   onChatSelect: (chatId: number) => void;
   chats: ChatDetails[];
+  selectedChatId: number;
 }
 
-function ContactsList({ onChatSelect, chats }: ContactsListProps): ReactElement {
+function ContactsList({ onChatSelect, chats, selectedChatId }: ContactsListProps): ReactElement {
   const reversedChats = [...chats].reverse();
 
   return (
@@ -31,7 +32,7 @@ function ContactsList({ onChatSelect, chats }: ContactsListProps): ReactElement 
         height={406}
       >
         {reversedChats.map((chat: ChatDetails) => (
-          <ContactCard key={chat.id} data={chat} onClick={() => onChatSelect(chat.id)} />
+          <ContactCard key={chat.id} data={chat} onClick={() => onChatSelect(chat.id)} isSelected={chat.id === selectedChatId}/>
         ))}
       </InfiniteScroll>
     </div>

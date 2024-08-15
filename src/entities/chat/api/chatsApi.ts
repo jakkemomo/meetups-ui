@@ -61,7 +61,7 @@ export const chatApi = baseApi.injectEndpoints({
         method: 'PATCH',
         body: { message_text },
       }),
-      invalidatesTags: (result, error, { message_id }) => [{ type: 'MESSAGES_TAG', id: message_id }],
+      invalidatesTags: ['MESSAGES_TAG'],
     }),
     deleteMessage: build.mutation<void, { message_id: number }>({
       query: ({ message_id }) => ({

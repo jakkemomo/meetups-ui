@@ -9,7 +9,7 @@ export const chatApi = baseApi.injectEndpoints({
       query: () => ({
         url: '/chats/',
       }),
-      providesTags: ['CHAT_TAG'],
+      providesTags: ['CHAT_TAG', 'MESSAGES_TAG'],
     }),
     getOrCreateUserDirectChat: build.mutation<ChatDetails, ProfileId >({
       query: ({ userId }) => ({
@@ -28,6 +28,7 @@ export const chatApi = baseApi.injectEndpoints({
         url: `/chats/${chat_id}/messages/`,
       }),
       providesTags: (result, error, { chat_id }) => [{ type: 'MESSAGES_TAG', id: chat_id }],
+      
     }),
     chatParticipants: build.query<IApiResponse<Participant[]>, ChatId>({
       query: ({ chat_id }) => ({
@@ -41,8 +42,8 @@ export const chatApi = baseApi.injectEndpoints({
         method: 'POST',
         body: { message_text },
       }),
-      invalidatesTags: (result, error, { chat_id }) => [{ type: 'MESSAGES_TAG', id: chat_id }],
-    }),
+      invalidatesTags: ['CHAT_TAG', 'MESSAGES_TAG'],
+    })
   }),
 });
 

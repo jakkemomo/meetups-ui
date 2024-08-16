@@ -3,6 +3,7 @@ import {baseApi, jwtApi} from '@/shared/api';
 import SessionSlice from "@/entities/session/model/slice";
 import {registerFormSlice} from '@/features/authentication/registration/model/formState';
 import { searchFilterSlice } from '@/features/searchFilter/model/SearchFilterSlice';
+import { searchUsersSlice } from '@/features/searchUsers/model/SearchUsersInputSlice';
 import addressControlSlice from '@/features/addressControl/model/addressControlSlice';
 import filterPopupSlice from '@/features/searchFilter/model/filterPopupSlice';
 import eventInfoSlice from '@/entities/event/model/eventInfoSlice';
@@ -11,6 +12,7 @@ import securityPopupSlice from '@/features/security/model/securityPopupSlice';
 export const rootReducer = combineReducers({
   session: SessionSlice.reducer,
   searchFilter: searchFilterSlice.reducer,
+  searchUsers: searchUsersSlice.reducer,
   eventInfo: eventInfoSlice.reducer,
   addressControl: addressControlSlice.reducer,
 

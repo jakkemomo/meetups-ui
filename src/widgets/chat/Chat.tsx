@@ -2,6 +2,7 @@ import { useChatListQuery, useChatMessagesQuery, useChatParticipantsQuery } from
 import ContactCardSkeleton from "@/entities/chat/chatContact/ui/ContactCardSkeleton";
 import { useMyDetailsQuery } from "@/entities/profile/api/profileApi";
 import { ChatInterface, ContactsList } from "@/features/chat";
+import { ChatsStateType } from "@/features/chat/model/types";
 import ChatsEmptyState from "@/features/chat/ui/ChatsEmptyState";
 import { ReactElement, useEffect, useMemo, useState } from "react";
 
@@ -15,7 +16,8 @@ function Chat(): ReactElement {
 
   const {
     data: chats = { results: [] },
-    isLoading: isChatsLoading
+    isLoading: isChatsLoading,
+    isError: isChatsError,
   } = useChatListQuery();
   
   const {
@@ -58,8 +60,13 @@ function Chat(): ReactElement {
     return <ContactCardSkeleton />;
   }
 
-  if (chats.results.length === 0) {
-    return <ChatsEmptyState />;
+  if (chats.results.length === 0 && !isChatsError ) {
+    return <ChatsEmptyState type={ChatsStateType.empty}/>;
+  }
+
+
+  if (isChatsError ) {
+    return <ChatsEmptyState type={ChatsStateType.error}/>;
   }
 
   return (

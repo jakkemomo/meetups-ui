@@ -19,3 +19,13 @@ export interface IRoomInfo {
   participants: IUser[];
   messages: IMessage[];
 }
+
+export enum ChatsStateType {
+	empty = 'empty',
+	error = 'error',
+}
+
+export interface ChatsStateProps  {
+	type: `${ChatsStateType}`;
+}
+

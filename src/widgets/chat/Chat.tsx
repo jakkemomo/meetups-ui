@@ -1,5 +1,6 @@
 import { useChatListQuery, useChatMessagesQuery, useChatParticipantsQuery } from "@/entities/chat/api/chatsApi";
 import ContactCardSkeleton from "@/entities/chat/chatContact/ui/ContactCardSkeleton";
+import ChatMessageSkeleton from "@/entities/chat/chatMessage/ui/ChatMessageSkeleton";
 import { useMyDetailsQuery } from "@/entities/profile/api/profileApi";
 import { ChatInterface, ContactsList } from "@/features/chat";
 import { ChatsStateType } from "@/features/chat/model/types";
@@ -76,7 +77,7 @@ function Chat(): ReactElement {
         onChatSelect={selectChatId}
         selectedChatId={selectedChatId}
       />
-      {isChatChanging && <ContactCardSkeleton />}
+      {isChatChanging && <ChatMessageSkeleton />}
       {!isChatChanging && selectedChatId !== 0 && (
         isMessagesError ? (
           <div className="text-red-500 text-center pt-[20%]">

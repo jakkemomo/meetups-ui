@@ -91,7 +91,7 @@ const ChatInterface = ({ chatId, messages, participants }: ContactsListProps): R
           />
           <figcaption className="flex flex-col ml-[22px]">
             <h2 className="text-[18px] rounded-circle font-medium leading-[23px]">{companionInfo?.username}</h2>
-            <p className="text-but-primary text-[14px] font-medium leading-[18px] relative mt-2 ml-[18px]">Онлайн</p>
+            <p className="text-but-primary text-[14px] font-medium leading-[18px] relative mt-2 ml-[18px] before:absolute before:left-[-18px] before:top-1/2 before:translate-y-[-50%] before:rounded-circle before:w-2.5 before:aspect-square before:bg-but-primary">Онлайн</p>
           </figcaption>
         </figure>
         <Input

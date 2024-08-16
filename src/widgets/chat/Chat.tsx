@@ -3,7 +3,7 @@ import ContactCardSkeleton from "@/entities/chat/chatContact/ui/ContactCardSkele
 import { useMyDetailsQuery } from "@/entities/profile/api/profileApi";
 import { ChatInterface, ContactsList } from "@/features/chat";
 import { ChatsStateType } from "@/features/chat/model/types";
-import ChatsEmptyState from "@/features/chat/ui/ChatsEmptyState";
+import ChatsState from "@/features/chat/ui/ChatsState";
 import { ReactElement, useEffect, useMemo, useState } from "react";
 
 function Chat(): ReactElement {
@@ -61,12 +61,12 @@ function Chat(): ReactElement {
   }
 
   if (chats.results.length === 0 && !isChatsError ) {
-    return <ChatsEmptyState type={ChatsStateType.empty}/>;
+    return <ChatsState type={ChatsStateType.empty}/>;
   }
 
 
   if (isChatsError ) {
-    return <ChatsEmptyState type={ChatsStateType.error}/>;
+    return <ChatsState type={ChatsStateType.error}/>;
   }
 
   return (

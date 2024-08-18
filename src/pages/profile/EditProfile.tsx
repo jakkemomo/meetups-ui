@@ -10,7 +10,6 @@ import {
 import { zodResolver } from "@hookform/resolvers/zod";
 import { EditProfileInfo } from "@/features/editProfile/ui/EditProfileInfo";
 import { defaultProfileFormValues } from "@/features/editProfile/model/constants";
-import { removeProfileExtraFields } from "@/features/editProfile/model/removeProfileExtraFields";
 import { useGetCategoriesQuery } from "@/features/searchFilter/api/categoriesApi";
 import { EditOptions } from "@/features/editProfile/ui/EditOptions";
 import { PageTitle } from "@/widgets/PageTitle";
@@ -44,8 +43,10 @@ function EditProfile(): ReactElement {
 
   useEffect(() => {
     if (isProfileDataSuccess) {
-      const editFormValues = removeProfileExtraFields(profileData);
-      methods.reset(editFormValues);
+      methods.reset({
+        ...profileData,
+        city: profileData.city ?? undefined
+      });
     } else {
       methods.reset(defaultProfileFormValues);
     }
@@ -59,7 +60,6 @@ function EditProfile(): ReactElement {
         <div className="basis-4/6 flex flex-wrap">
           <FormProvider {...methods}>
             <EditProfileForm
-              handleSubmit={methods.handleSubmit}
               isLoading={isFormLoading}
               isDataSuccess={isFormDataSuccess}
               userId={String(profileData?.id) ?? "0"}

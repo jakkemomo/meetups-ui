@@ -137,6 +137,7 @@ function RemoteProfileView(): ReactElement {
   if (
     isLoadingRemoteUser ||
     isFollowStatusLoading ||
+    isLoadingProfileData ||
     isLoadingProfileData
   ) {
     return (

@@ -5,7 +5,6 @@ import { Controller, FormProvider, useForm } from "react-hook-form";
 import { AddEventValidationSchema, addEventSchema } from "@/features/addEvent/addEventForm/model/addEventFormSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useGetCategoriesQuery } from "@/features/searchFilter/api/categoriesApi";
-import { useFormActions } from "@/features/addEvent/addEventForm/model/useFormActions";
 import { useGetTagsQuery } from "@/entities/tags/api/tagsApi";
 import { useGetCurrenciesQuery } from "@/features/addEvent/priceControl/api/currencyApi";
 import { ParticipantsControl, TimeControl, MediaControl, MainInfoControl } from "@/widgets/addEvent";
@@ -15,6 +14,8 @@ import { useGetEventQuery } from "@/entities/event/api/eventApi";
 import { removeExtraFields } from "@/features/addEvent/addEventForm/model/removeExtraFields";
 import { defaultFormValues } from "@/features/addEvent/addEventForm/model/constants";
 import { useMyDetailsQuery } from "@/entities/profile/api/profileApi";
+import { ICity } from "@/entities/cities/model/types";
+import { CityInput } from "@/shared/ui/Inputs/CityInput";
 
 interface IAddEventPageProps {
   type: 'add' | 'edit';
@@ -74,8 +75,6 @@ function AddEventPage({ type }: IAddEventPageProps): ReactElement {
     defaultValues: defaultFormValues
   });
 
-  const { onSelectAddress } = useFormActions({ setValue: methods.setValue, clearErrors: methods.clearErrors });
-
   useEffect(() => {
     if (type ==='edit' && isEventSuccess) {
       const editFormValues = removeExtraFields(event);
@@ -110,16 +109,41 @@ function AddEventPage({ type }: IAddEventPageProps): ReactElement {
           <TimeControl />
           <Controller
             control={methods.control}
+            name="city"
+            render={({ field: { onChange, value } }) => (
+              <CityInput
+                onFormValueChange={(city: ICity | null) => {
+                  if (!city) {
+                    return methods.setValue('city', { name: '' }, { shouldDirty: true })
+                  }
+
+                  onChange(city, { shouldDirty: true })
+                  methods.clearErrors('city');
+                }}
+                isError={!!methods.formState.errors.city}
+                errorMessage="Это обязательное поле"
+                labelText='Город'
+                placeholder='Введите город'
+                extraBoxClass="w-[480px] mb-[18px] text-[18px]"
+                extraClass="w-[480px]"
+                cityValue={value?.name || null}
+                extraErrorClass="ml-[22px] text-[16px]"
+              />
+            )}
+          />
+          <Controller
+            control={methods.control}
             name="location"
             render={({ field: { onChange, value }}) => (
               <MapWidget
-                setValuesFunc={onSelectAddress}
                 text="Точка на карте"
                 markers={value ? [{ geometry: { coordinates: [Number(value.longitude), Number(value.latitude)] } }] : []}
                 position={value ? { lat: Number(value.latitude), lng: Number(value.longitude) } : { lat: 53.9, lng: 27.56667 }}
                 zoom={14}
                 withAddressControl={true}
                 onMapClick={({ latitude, longitude }) => {
+                  if (!value) return;
+
                   onChange({ latitude, longitude });
                 }}
               />

@@ -8,9 +8,14 @@ import cx from 'classnames';
 export interface IEventCard {
   event: IEvent;
   size?: 'sm' | 'lg';
+  extraCardClass?: string;
 }
 
-export function EventCard({ event, size = 'lg' }: IEventCard): ReactElement {
+export function EventCard({
+  event,
+  size = 'lg',
+  extraCardClass = ''
+}: IEventCard): ReactElement {
   const [isFavorite, setIsFavorite] = useState(event.is_favorite);
 
   const [likeEvent] = useLikeEventMutation();
@@ -44,7 +49,8 @@ export function EventCard({ event, size = 'lg' }: IEventCard): ReactElement {
           "w-full flex flex-col", {
             'max-w-[225px] mr-[40px]': size === 'sm',
             'max-w-[270px] mr-[45px]': size === 'lg'
-          }
+          },
+          extraCardClass
         )}>
           <div className="flex justify-between">
             <p className={

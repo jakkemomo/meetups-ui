@@ -19,7 +19,9 @@ export function HomePage(): ReactElement {
     selectedDate,
     endDate,
     startDate,
-    city
+    city,
+    age,
+    free,
   } = useAppSelector(state => state.searchFilter);
 
   const category_in = checkedCategories.join(',');
@@ -37,7 +39,9 @@ export function HomePage(): ReactElement {
     start_date_lte: endDate || undefined,
     category_in: category_in || undefined,
     ordering: 'start_date',
-    city: city || undefined
+    city: city || undefined,
+    participants_age__gte: age || undefined,
+    free: free
   });
 
   const {

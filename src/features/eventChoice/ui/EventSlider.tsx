@@ -13,7 +13,7 @@ export function EventSlider({ children, slidesLength, arrowsExtraClasses }: IEve
   useEffect(() => {
     if (children.length < slidesLength) {
       setSlidesToShow(children.length);
-      setSliderWidth(100 - ((slidesLength - children.length) * (100 / slidesLength)));
+      setSliderWidth(Math.floor(100 - ((slidesLength - children.length) * (100 / slidesLength))));
     } else {
       setSlidesToShow(slidesLength);
       setSliderWidth(100);
@@ -25,7 +25,7 @@ export function EventSlider({ children, slidesLength, arrowsExtraClasses }: IEve
     slidesToShow,
     slidesToScroll: 2,
     speed: 400,
-    className: `mt-5 max-w-[${String(sliderWidth).slice(0, 4)}%] min-h-[230px]`
+    className: `mt-5 max-w-[${String(sliderWidth)}%] min-h-[230px]`
   }
 
   return (

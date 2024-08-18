@@ -10,14 +10,12 @@ export interface IProfileInfoProps {
   profileData: ProfileDetails;
   children: ReactNode;
   optionButton?: ReactNode;
-  city?: string;
 }
 
 export function ProfileInfo({
   profileData,
   children,
-  optionButton,
-  city
+  optionButton
 }: IProfileInfoProps): ReactElement {
   const [isAboutOpen, setIsAboutOpen] = useState(false);
 
@@ -56,8 +54,8 @@ export function ProfileInfo({
           fill="none"
         />
         <div className="text-indigo-600 text-xl font-semibold ml-[8px]">
-          {city ? (
-            city
+          {profileData.city ? (
+            profileData.city?.name
           ) : (
             <p className="text-zinc-400 text-[18px]">Укажите свой город</p>
           )}

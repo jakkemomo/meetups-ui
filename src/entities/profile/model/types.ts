@@ -1,4 +1,4 @@
-import { ICityLocation } from "@/shared/model/types";
+import { ICity } from "@/entities/cities/model/types";
 
 export interface ProfileId {
   userId: string;
@@ -12,7 +12,7 @@ export interface ProfileDetails {
   lastName?: string
   image: Url,
   isEmailVerified: boolean,
-  city_location: ICityLocation,
+  city: ICity | null,
   is_private: boolean,
   bio: string,
   age: number,
@@ -38,14 +38,13 @@ export interface ProfileDetailsDto extends ProfileDto {
   email: string
   image_url: string,
   is_email_verified: boolean,
-  city: string,
   is_private: boolean,
   bio: string,
   age: number,
   date_of_birth: string,
   category_favorite: IUserFavorite[] | [],
   gender: string,
-  city_location: ICityLocation
+  city: ICity
 }
 
 export type IFollowStatus = 'ACCEPTED' | 'PENDING' | 'DECLINED' | 'NOT_FOLLOWED' | undefined;

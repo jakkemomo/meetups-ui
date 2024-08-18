@@ -1,4 +1,4 @@
-import { ReactElement } from "react";
+import { ReactElement, useEffect } from "react";
 import { Controller, useFormContext } from "react-hook-form";
 import { ProfileDetails } from "@/entities/profile/model/types";
 import { EditProfileValidationSchema } from "../model/editProfileFormSchema";
@@ -10,7 +10,8 @@ import {
   getGenderValue,
   setGenderValue,
 } from "../model/constants";
-import CityInput from "./CityInput";
+import { ICity } from "@/entities/cities/model/types";
+import { CityInput } from "@/shared/ui/Inputs/CityInput";
 
 interface IEditProfileInfo {
   profileData?: ProfileDetails;
@@ -23,7 +24,13 @@ export function EditProfileInfo({
     register,
     formState: { errors },
     control,
+    getValues
   } = useFormContext<EditProfileValidationSchema>();
+
+  useEffect(() => {
+    console.log(errors);
+    console.log(getValues())
+  }, [errors])
 
   return (
     <div className="flex flex-wrap justify-between text-text-black">
@@ -47,6 +54,7 @@ export function EditProfileInfo({
           hookFormRegister={register("username")}
           type="text"
           isError={!!errors.username?.message}
+          errorMessage={errors.username?.message}
           placeholder="Введите имя"
           maxLength={30}
           className="text-[18px] w-[480px] mt-[7px]"
@@ -56,10 +64,19 @@ export function EditProfileInfo({
         />
         <Controller
           control={control}
-          name="city_location"
-          render={({ field: { onChange }}) => (
+          name="city"
+          render={({ field: { onChange, value } }) => (
             <CityInput
-              onChange={onChange}
+              labelText="Местоположение"
+              placeholder="Введите свой город"
+              onFormValueChange={(city: ICity | null) => {
+                onChange(city?.id);
+              }}
+              isError={!!errors.city}
+              errorMessage='Обязательное поле'
+              extraClass="mt-[18px] text-[18px]"
+              cityValue={value?.name || null}
+              extraErrorClass="text-[16px]"
             />
           )}
         />

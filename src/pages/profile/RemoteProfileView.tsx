@@ -22,7 +22,6 @@ import { SliderEmptyElem } from "@/shared";
 import { getEventsCards } from "@/widgets/EventsList/model/getEventsCards";
 import { useLogServerError } from "@/shared/lib/hooks";
 import { PrivateUserEventsCap } from "@/widgets/Profile/PrivateUserEventsCap";
-import { useGeocodeIdQuery } from "@/entities/geocode/api/geocodeApi";
 
 function RemoteProfileView(): ReactElement {
   const navigate = useNavigate();
@@ -82,23 +81,12 @@ function RemoteProfileView(): ReactElement {
     }
   );
 
-  const {
-    isLoading: isCityLoading,
-    data: city,
-    error: cityError,
-    isError: isCityError
-  } = useGeocodeIdQuery(
-    remoteUser?.city_location?.place_id ?? '',
-    { skip: !remoteUser?.city_location?.place_id }
-  );
-
   useLogServerError(isErrorRemoteUser, 'remoteUser', errorRemoteUser);
   useLogServerError(isErrorProfileData, 'currentUser', errorProfileData);
   useLogServerError(isFollowStatusError, 'статуса подписки', followStatusError);
   useLogServerError(isFinishedEventsError, 'посещенных ивентов', finishedEventsError);
   useLogServerError(isPlannedEventsError, 'запланированных ивентов', plannedEventsError);
   useLogServerError(isCreatedEventsError, 'созданных ивентов', createdEventsError);
-  useLogServerError(isCityError, 'города', cityError);
 
   const isPrivateUser = remoteUser?.is_private;
 
@@ -146,8 +134,7 @@ function RemoteProfileView(): ReactElement {
     isLoadingRemoteUser ||
     isFollowStatusLoading ||
     isLoadingProfileData ||
-    isLoadingProfileData ||
-    isCityLoading
+    isLoadingProfileData
   ) {
     return (
       <div className="m-auto">
@@ -161,7 +148,6 @@ function RemoteProfileView(): ReactElement {
       <section className="w-full max-w-[1215px] mx-auto pb-[98px] flex flex-row flex-nowrap min-h-[1000px] overflow-x-hidden">
         <ProfileInfo
           profileData={remoteUser}
-          city={city}
           optionButton={
             <div className="flex mt-[80px] ">
               <Button

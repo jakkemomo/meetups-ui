@@ -15,14 +15,7 @@ export const removeExtraFields = (event: IDetailedEvent): AddEventValidationSche
     schedule: event.schedule,
     address: event.address,
     city: event.city,
-    country: event.country,
     location: { latitude: String(event.location[1]), longitude: String(event.location[0]) },
-    city_location: {
-      location: { longitude: '', latitude: '' },
-      north_east_point: { longitude: '', latitude: '' },
-      south_west_point: { longitude: '', latitude: '' },
-      place_id: ''
-    },
     desired_participants_number: event.desired_participants_number,
     any_participant_number: event.any_participant_number,
     participants_age: event.participants_age,

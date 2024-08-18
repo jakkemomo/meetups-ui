@@ -2,6 +2,7 @@ import {baseApi} from '@/shared/api'
 import {ProfileDetails, ProfileId, ProfileFollowing, IFollowResponse, ProfileDetailsDto, IGetFollowStatusRequest} from "@/entities/profile/model/types";
 import {mapProfileDetails} from "@/entities/profile/lib/mapProfileDetails";
 import { EditProfileValidationSchema } from '@/features/editProfile/model/editProfileFormSchema';
+import { CITIES_TAG, PROFILE_TAG, SESSION_TAG } from '@/shared/api/tags';
 
 export const profileApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
@@ -9,7 +10,7 @@ export const profileApi = baseApi.injectEndpoints({
       query: ({userId}) => ({
         url: `/users/${userId}/`,
       }),
-      providesTags: ['PROFILE_TAG'],
+      providesTags: [PROFILE_TAG],
       transformResponse: (response: ProfileDetailsDto) =>
           mapProfileDetails(response),
     }),
@@ -19,7 +20,7 @@ export const profileApi = baseApi.injectEndpoints({
       }),
       transformResponse: (response: ProfileDetailsDto) =>
           mapProfileDetails(response),
-      providesTags: ['PROFILE_TAG', 'SESSION_TAG'],
+      providesTags: [PROFILE_TAG, SESSION_TAG],
     }),
     getFollowStatus: build.query<ProfileFollowing, IGetFollowStatusRequest>({
       query: ({ user_id, followed_user_id }) => ({
@@ -50,7 +51,7 @@ export const profileApi = baseApi.injectEndpoints({
         method: 'PATCH',
         body: patch
       }),
-      invalidatesTags: ['PROFILE_TAG']
+      invalidatesTags: [PROFILE_TAG, CITIES_TAG]
     }),
 }),
 })

@@ -38,32 +38,15 @@ export const addEventSchema = z.object({
     .string({ required_error: 'Это обязательное поле', invalid_type_error: 'Это обязательное поле' })
     .min(1, { message: 'Это обязательное поле' })
     .max(250, { message: 'Максимальная длина - 250 символов' }),
-  city: z
-    .string({ required_error: 'Укажите адрес, включающий в себя населенный пункт'})
-    .min(1, { message: 'Укажите адрес, включающий в себя населенный пункт' }),
-  country: z
-    .string()
-    .min(1, { message: 'Сломался поиск адреса' }),
-  city_location: z
-    .object({
-      place_id: z
-        .string(),
-      location: z
-        .object({
-          latitude: z.string(),
-          longitude: z.string()
-        }),
-      south_west_point: z
-        .object({
-          latitude: z.string(),
-          longitude: z.string()
-        }),
-      north_east_point: z
-        .object({
-          latitude: z.string(),
-          longitude: z.string()
-        }),
-    }),
+  city: z.object({
+    id: z.number().optional(),
+    name: z.string({ required_error: 'Это обязательное поле' }),
+    display_name: z.string().optional(),
+    country_id: z.number().optional(),
+    latitude: z.string().optional(),
+    longitude: z.string().optional(),
+    timezone: z.string().optional()
+  }),
   location: z
     .object({
       latitude: z.string(),

@@ -6,6 +6,7 @@ interface IGlobalFilterState {
   selectedDate: string;
   endDate: string;
   startDate: string;
+  city: number;
 }
 
 const initialState: IGlobalFilterState = {
@@ -14,6 +15,7 @@ const initialState: IGlobalFilterState = {
   selectedDate: "",
   endDate: "",
   startDate: "",
+  city: NaN
 };
 
 export const searchFilterSlice = createSlice({
@@ -46,6 +48,10 @@ export const searchFilterSlice = createSlice({
       ...state,
       endDate: endDate,
     }),
+    citySetted: (state, { payload: city }: { payload: number }) => ({
+      ...state,
+      city
+    }),
   },
 });
 
@@ -55,4 +61,5 @@ export const {
   selectedDateSetted,
   endDateSetted,
   startDateSetted,
+  citySetted
 } = searchFilterSlice.actions;

@@ -14,7 +14,5 @@ export const prepareDataToRequest = ({ data, dirtyFields }: IPrepareDataToReques
     }
   }
 
-  delete filteredData.city;
-
   return filteredData;
 }

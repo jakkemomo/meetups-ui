@@ -2,6 +2,7 @@ import { baseApi } from "@/shared/api";
 import {IDetailedEvent, IEditEventRequest, IEvent, IGetEventRequest} from "../model/types";
 import { IApiResponse } from "@/shared/types";
 import { AddEventValidationSchema } from "@/features/addEvent/addEventForm/model/addEventFormSchema";
+import { CITIES_TAG, EVENTS_TAG } from "@/shared/api/tags";
 
 export const eventApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
@@ -18,7 +19,7 @@ export const eventApi = baseApi.injectEndpoints({
         url: `/events/${id}/`,
         method: 'GET'
       }),
-      providesTags: ['EVENTS_TAG']
+      providesTags: [EVENTS_TAG]
     }),
     createEvent: build.mutation<void, Partial<AddEventValidationSchema>>({
       query: (eventInfo) => ({
@@ -26,6 +27,7 @@ export const eventApi = baseApi.injectEndpoints({
         method: 'POST',
         body: eventInfo
       }),
+      invalidatesTags: [CITIES_TAG]
     }),
     editEvent: build.mutation<void, IEditEventRequest>({
       query: ({ eventInfo, eventId }) => ({
@@ -33,7 +35,7 @@ export const eventApi = baseApi.injectEndpoints({
         method: 'PATCH',
         body: eventInfo
       }),
-      invalidatesTags: ['EVENTS_TAG']
+      invalidatesTags: [EVENTS_TAG, CITIES_TAG]
     }),
     registerToEvent: build.mutation<void, number>({
       query: (event_id) => ({
@@ -52,35 +54,35 @@ export const eventApi = baseApi.injectEndpoints({
         url: `/events/${event_id}/favorite/`,
         method: 'POST'
       }),
-      invalidatesTags: ['EVENTS_TAG']
+      invalidatesTags: [EVENTS_TAG]
     }),
     unlikeEvent: build.mutation<void, number>({
       query: (event_id) => ({
         url: `/events/${event_id}/favorite/`,
         method: 'DELETE'
       }),
-      invalidatesTags: ['EVENTS_TAG']
+      invalidatesTags: [EVENTS_TAG]
     }),
     getUserCreatedEvents: build.query<IApiResponse<IEvent[]>, number>({
       query: (user_id) => ({
         url: `users/${user_id}/events/created/`,
         method: 'GET'
       }),
-      providesTags: ['EVENTS_TAG']
+      providesTags: [EVENTS_TAG]
     }),
     getUserPlannedEvents: build.query<IApiResponse<IEvent[]>, number>({
       query: (user_id) => ({
         url: `users/${user_id}/events/planned/`,
         method: 'GET'
       }),
-      providesTags: ['EVENTS_TAG']
+      providesTags: [EVENTS_TAG]
     }),
     getUserFinishedEvents: build.query<IApiResponse<IEvent[]>, number>({
       query: (user_id) => ({
         url: `users/${user_id}/events/finished/`,
         method: 'GET'
       }),
-      providesTags: ['EVENTS_TAG']
+      providesTags: [EVENTS_TAG]
     })
   })
 })

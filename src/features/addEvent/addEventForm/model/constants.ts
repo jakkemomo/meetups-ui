@@ -15,14 +15,7 @@ export const defaultFormValues = {
   start_date: '',
   end_date: '',
   address: '',
-  city: '',
-  country: '',
-  city_location: {
-    place_id: undefined,
-    north_east_point: undefined,
-    south_west_point: undefined,
-    location: undefined
-  },
+  city: undefined,
   location: undefined,
   desired_participants_number: NaN,
   participants_age: NaN,

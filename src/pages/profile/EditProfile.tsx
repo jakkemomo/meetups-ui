@@ -1,4 +1,4 @@
-import { ReactElement, useEffect, useState } from "react";
+import { ReactElement, useEffect } from "react";
 import { useMyDetailsQuery } from "@/entities/profile/api/profileApi.ts";
 import { EditProfileForm } from "@/features/editProfile/ui/EditProfileForm";
 import Svg from "@/shared/ui/Svg";
@@ -10,15 +10,12 @@ import {
 import { zodResolver } from "@hookform/resolvers/zod";
 import { EditProfileInfo } from "@/features/editProfile/ui/EditProfileInfo";
 import { defaultProfileFormValues } from "@/features/editProfile/model/constants";
-import { removeProfileExtraFields } from "@/features/editProfile/model/removeProfileExtraFields";
 import { useGetCategoriesQuery } from "@/features/searchFilter/api/categoriesApi";
 import { EditOptions } from "@/features/editProfile/ui/EditOptions";
 import { PageTitle } from "@/widgets/PageTitle";
 import { useLogServerError } from "@/shared/lib/hooks";
 
 function EditProfile(): ReactElement {
-  const [isPageReady, setIsPageReady] = useState(false);
-
   const {
     data: profileData,
     isLoading: isProfileDataLoading,
@@ -35,8 +32,8 @@ function EditProfile(): ReactElement {
 
   useLogServerError(isCategoriesError, 'категорий', categoriesError);
 
-  const isFormLoading = isProfileDataLoading || isCategoriesLoading || !isPageReady;
-  const isFormDataSuccess = isProfileDataSuccess && isCategoriesSuccess && isPageReady;
+  const isFormLoading = isProfileDataLoading || isCategoriesLoading;
+  const isFormDataSuccess = isProfileDataSuccess && isCategoriesSuccess;
 
   const methods = useForm<EditProfileValidationSchema>({
     resolver: zodResolver(editProfileFormSchema),
@@ -46,12 +43,10 @@ function EditProfile(): ReactElement {
 
   useEffect(() => {
     if (isProfileDataSuccess) {
-      removeProfileExtraFields(profileData)
-        .then((res) => {
-          methods.reset(res);
-          setIsPageReady(true);
-        })
-        .catch((err) => console.log(err));
+      methods.reset({
+        ...profileData,
+        city: profileData.city ?? undefined
+      });
     } else {
       methods.reset(defaultProfileFormValues);
     }

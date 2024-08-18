@@ -2,7 +2,7 @@ import { IInputProps, Input } from "@/shared/ui/Inputs/Input";
 import { ReactElement, useId } from "react";
 import cx from 'classnames';
 
-interface ILabeledInputProps extends IInputProps {
+export interface ILabeledInputProps extends IInputProps {
   extraLabelClass?: string;
   labelText: string;
   extraBoxClass?: string;
@@ -42,7 +42,7 @@ export function LabeledInput({
         {...rest}
       />
       {
-        errorMessage && (
+        rest?.isError && (
           <p className={`text-input-error leading-[20px] mt-[7px] ${extraErrorClass}`}>{errorMessage}</p>
         )
       }

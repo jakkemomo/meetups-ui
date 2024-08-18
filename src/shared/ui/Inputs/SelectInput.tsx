@@ -47,7 +47,7 @@ export function SelectInput({
   }
 
   return (
-    <div className={`w-[480px] flex flex-col items-start relative ${extraBoxClass}`}>
+    <div className={`flex flex-col items-start relative ${extraBoxClass}`}>
       <Listbox
         as={Fragment}
         value={value ?? selectedOption}

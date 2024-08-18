@@ -34,7 +34,10 @@ export function AddEventForm({ children, isLoading, isSuccess, isError, type }: 
       } else {
         const dataToCreateEvent = prepareDataToRequest({ data, toEdit: true, dirtyFields: dirtyFields as Record<string, boolean | undefined> });
 
-        editEvent({ eventId: Number(eventId), eventInfo: dataToCreateEvent })
+        editEvent({
+          eventId: Number(eventId),
+          eventInfo: { ...dataToCreateEvent, city: dataToCreateEvent.city?.id ?? 0 }
+        })
           .unwrap()
           .then(() => navigate(`/events/${eventId}`))
           .catch((err) => console.log(err));

@@ -12,7 +12,6 @@ import { EventsList } from "@/widgets/EventsList";
 import { SliderEmptyElem } from "@/shared";
 import { useLogServerError } from "@/shared/lib/hooks";
 import { getEventsCards } from "@/widgets/EventsList/model/getEventsCards";
-import { useGeocodeIdQuery } from "@/entities/geocode/api/geocodeApi";
 
 function CurrentProfileView(): ReactElement {
   const navigate = useNavigate();
@@ -46,21 +45,10 @@ function CurrentProfileView(): ReactElement {
     error: plannedEventsError
   } = useGetUserPlannedEventsQuery(isProfileDataSuccess ? profileData.id : 0);
 
-  const {
-    isLoading: isCityLoading,
-    data: city,
-    error: cityError,
-    isError: isCityError
-  } = useGeocodeIdQuery(
-    profileData?.city_location?.place_id ?? '',
-    { skip: !profileData?.city_location?.place_id }
-  );
-
   useLogServerError(isProfileDataError, 'подписок', profileDataError);
   useLogServerError(isFinishedEventsError, 'посещенных ивентов', finishedEventsError);
   useLogServerError(isPlannedEventsError, 'запланированных ивентов', plannedEventsError);
   useLogServerError(isCreatedEventsError, 'созданных ивентов', createdEventsError);
-  useLogServerError(isCityError, 'города', cityError);
 
   const createdEventsList = getEventsCards(createdEvents.results, 'sm');
   const finishedEventsList = getEventsCards(finishedEvents.results, 'sm');
@@ -70,7 +58,7 @@ function CurrentProfileView(): ReactElement {
     navigate("/profile/edit");
   };
 
-  if (isProfileDataLoading || isCityLoading) {
+  if (isProfileDataLoading) {
     return (
       <div className="m-auto">
         <ProfileLoader />
@@ -83,7 +71,6 @@ function CurrentProfileView(): ReactElement {
       <section className="w-full max-w-[1215px] mx-auto pb-[98px] flex flex-row flex-nowrap min-h-[1000px] overflow-x-hidden">
         <ProfileInfo
           profileData={profileData}
-          city={city}
         >
           <Button onClick={onEditProfile} size="lg" importance="primary">
             Редактировать

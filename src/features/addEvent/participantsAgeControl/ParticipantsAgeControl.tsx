@@ -49,7 +49,7 @@ function ParticipantsAgeControl(): ReactElement {
             value={value ? value === 'open' ? eventTypesArray[0] : eventTypesArray[1] : undefined}
             options={eventTypesArray}
             placeholder='Публичное/по ссылке'
-            extraBoxClass="mt-[18px]"
+            extraBoxClass="mt-[18px] w-[480px]"
           />
         )}
       />

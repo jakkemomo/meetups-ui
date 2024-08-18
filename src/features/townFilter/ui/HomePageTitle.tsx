@@ -1,58 +1,54 @@
-import { useGetCitiesQuery } from "@/entities/city/api/cityApi";
-import { useMultipleGeocode } from "@/entities/city/model/useMultipleGeocode";
+import { useGetAvailableCitiesQuery } from "@/entities/cities/api/citiesApi";
+import { citySetted } from "@/features/searchFilter/model/SearchFilterSlice";
 import { SelectInput } from "@/shared";
 import { useLogServerError } from "@/shared/lib/hooks";
+import { useAppDispatch } from "@/shared/model";
 import { ISelectInputOptions } from "@/shared/model/types";
-import { useMapsLibrary } from "@vis.gl/react-google-maps";
 import {ReactElement, useEffect, useState} from "react";
 
 export function HomePageTitle(): ReactElement {
+  const dispatch = useAppDispatch();
+
   const [options, setOptions] = useState<ISelectInputOptions[]>([]);
-  const [selectedOption, setSelectedOption] = useState<ISelectInputOptions>({ name: '', id: ''});
-  const [isGeocodeLoading, setIsGeocodeLoading] = useState(true);
+  const [isTitleReady, setIsTitleReady] = useState(false);
 
   const {
-    data: cities,
+    data: cities={results: []},
     isSuccess: isCitiesSuccess,
     isLoading: isCitiesLoading,
     isError: isCitiesError,
     error: citiesError
-  } = useGetCitiesQuery();
+  } = useGetAvailableCitiesQuery({});
 
   useLogServerError(isCitiesError, 'городов', citiesError);
 
-  const geocoding = useMapsLibrary('geocoding');
-
-  const { multipleGeocode } = useMultipleGeocode();
-
   useEffect(() => {
-    if (!isCitiesSuccess || !geocoding || options.length) return;
+    if (isCitiesSuccess) {
+      const mappedCities = cities.results.map((city) => ({ id: city.id, name: city.name }));
 
-    const geocoder = new geocoding.Geocoder();
+      setOptions(mappedCities);
 
-    multipleGeocode(cities.results, geocoder)
-      .then((res) => {
-        setOptions(res);
-        setSelectedOption(res[0]);
-      })
-      .catch((err) => console.log(err))
-      .finally(() => setIsGeocodeLoading(false));
+      setIsTitleReady(true);
+    }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isCitiesSuccess]);
+  }, [cities]);
+
+  const onSelectedOptionChange = (option: ISelectInputOptions) => {
+    void dispatch(citySetted(Number(option.id)));
+  }
 
   return (
     <div className="flex items-center mt-14">
       <h1 className="text-[45px] text-text-black font-semibold leading-normal">Куда сходить в&nbsp;</h1>
       {
-        isGeocodeLoading || isCitiesLoading ? (
+        isCitiesLoading || !isTitleReady ? (
           <></>
         ) : (
           <SelectInput
             options={options}
-            value={selectedOption}
-            onChange={setSelectedOption}
+            onChange={onSelectedOptionChange}
             extraContentClass="bg-transparent w-[unset] !text-[45px] text-text-black font-semibold !px-2 underline"
-            extraDropdownClass="w-[unset] pr-[22px] !text-[25px] leading-[33px] text-text-black font-medium max-h-[400px] top-[50px]"
+            extraDropdownClass="w-full pr-[22px] !text-[25px] leading-[33px] text-text-black font-medium max-h-[400px] top-[50px]"
           />
         )
       }

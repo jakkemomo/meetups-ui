@@ -2,13 +2,7 @@ export const defaultProfileFormValues = {
   username: "",
   gender: "",
   date_of_birth: "",
-  city: "",
-  city_location: {
-    place_id: undefined,
-    north_east_point: undefined,
-    south_west_point: undefined,
-    location: undefined
-  },
+  city: undefined,
   bio: "",
   is_private: false,
   category_favorite: [],

@@ -27,6 +27,7 @@ export const profileApi = baseApi.injectEndpoints({
         url: `/users/${userId}/following/`,
         params: { username },
       }),
+    }),
     getFollowStatus: build.query<ProfileFollowing, IGetFollowStatusRequest>({
       query: ({ user_id, followed_user_id }) => ({
         url: `/users/${followed_user_id}/follow/${user_id}/status/`,
@@ -58,13 +59,14 @@ export const profileApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: [PROFILE_TAG, CITIES_TAG]
     }),
-}),
+  }),
 })
 
 export const {
   useProfileDetailsQuery,
   useMyDetailsQuery,
   useLazyMyDetailsQuery,
+  useGetFollowingQuery,
   useGetFollowStatusQuery,
   useGetFollowersQuery,
   useFollowMutation,

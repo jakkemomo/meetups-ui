@@ -1,4 +1,4 @@
-import { ReactElement, useEffect } from "react";
+import { ReactElement } from "react";
 import { Controller, useFormContext } from "react-hook-form";
 import { ProfileDetails } from "@/entities/profile/model/types";
 import { EditProfileValidationSchema } from "../model/editProfileFormSchema";
@@ -23,14 +23,8 @@ export function EditProfileInfo({
   const {
     register,
     formState: { errors },
-    control,
-    getValues
+    control
   } = useFormContext<EditProfileValidationSchema>();
-
-  useEffect(() => {
-    console.log(errors);
-    console.log(getValues())
-  }, [errors])
 
   return (
     <div className="flex flex-wrap justify-between text-text-black">

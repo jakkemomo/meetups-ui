@@ -1,16 +1,16 @@
 import { ReactElement } from "react";
-import { IChatMessage, Participant } from "../../model/types";
+import { IChatMessage, IParticipant } from "../../model/types";
 
 interface IChatMessageProps {
-  sender?: Participant;
+  sender?: IParticipant;
   message: IChatMessage;
   isOwner: boolean;
   isNewDate?: boolean;
   userImage: string;
-  setEditingMessageId: (id: string) => void;
+  editingMessage: (id: string) => void;
 }
 
-function ChatMessage({ sender, message, isOwner, isNewDate, userImage, setEditingMessageId}: IChatMessageProps): ReactElement {
+function ChatMessage({ sender, message, isOwner, isNewDate, userImage, editingMessage}: IChatMessageProps): ReactElement {
   
   const messageDate = new Date(message.created_at);
 
@@ -22,7 +22,7 @@ function ChatMessage({ sender, message, isOwner, isNewDate, userImage, setEditin
           <button className="w-6 h-6 mt-6 bg-[url('../../../../../public/images/favorites.svg')] bg-no-repeat"></button>
           <button
             className="w-6 h-6 mt-6 bg-[url('../../../../../public/images/edit-02.svg')]"
-            onClick={() => setEditingMessageId(message.id.toString())}
+            onClick={() => editingMessage(message.id.toString())}
           ></button>
         </div>
       ) : (

@@ -3,11 +3,11 @@ import { Input } from "@/shared";
 import Svg from "@/shared/ui/Svg";
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { ContactCard } from "@/entities/chat/chatContact";
-import { ChatDetails } from "@/entities/chat/model/types";
+import { IChatDetails } from "@/entities/chat/model/types";
 
 interface ContactsListProps {
   onChatSelect: (chatId: number) => void;
-  chats: ChatDetails[];
+  chats: IChatDetails[];
   selectedChatId: number;
 }
 
@@ -31,7 +31,7 @@ function ContactsList({ onChatSelect, chats, selectedChatId }: ContactsListProps
         loader={reversedChats.length !== 0 ? '' : <p>Loading...</p>}
         height={406}
       >
-        {reversedChats.map((chat: ChatDetails) => (
+        {reversedChats.map((chat: IChatDetails) => (
           <ContactCard key={chat.id} data={chat} onClick={() => onChatSelect(chat.id)} isSelected={chat.id === selectedChatId}/>
         ))}
       </InfiniteScroll>

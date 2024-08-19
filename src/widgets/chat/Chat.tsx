@@ -25,13 +25,19 @@ function Chat(): ReactElement {
     data: participants = { results: [] },
   } = useChatParticipantsQuery({
     chat_id: String(selectedChatId),
-  });
+  },
+  {
+    skip: !selectedChatId
+});
 
   const {
     data: messages = { results: [] },
     isError: isMessagesError,
   } = useChatMessagesQuery({
     chat_id: String(selectedChatId),
+  },
+  {
+    skip: !selectedChatId
   });
 
   const userIdKey = useMemo(() => `selectedChatId_${currentProfileData?.id}`, [currentProfileData?.id]);

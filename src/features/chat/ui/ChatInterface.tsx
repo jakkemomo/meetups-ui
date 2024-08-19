@@ -1,20 +1,20 @@
-import { ChangeEvent, ReactElement, useState, KeyboardEvent, useEffect } from "react";
+import { ChangeEvent, ReactElement, useState, KeyboardEvent } from "react";
 import { Input } from "@/shared";
 import Svg from "@/shared/ui/Svg";
-import send from '../../../../public/images/send.svg'
+import send from '../../../../public/images/send.svg';
 import InfiniteScroll from "react-infinite-scroll-component";
 import { ChatMessage } from "@/entities/chat/chatMessage";
-import { useMessageDetailsQuery, useSendMessageMutation, useUpdateMessageMutation } from "@/entities/chat/api/chatsApi";
+import { useSendMessageMutation, useUpdateMessageMutation } from "@/entities/chat/api/chatsApi";
 import { useMyDetailsQuery } from "@/entities/profile/api/profileApi";
-import { IChatMessage, Participant } from "@/entities/chat/model/types";
+import { IChatMessage, IParticipant } from "@/entities/chat/model/types";
 
-interface ContactsListProps {
+interface IContactsListProps {
   chatId: number;
   messages: IChatMessage[];
-  participants: Participant[];
+  participants: IParticipant[];
 }
 
-const ChatInterface = ({ chatId, messages, participants }: ContactsListProps): ReactElement => {
+const ChatInterface = ({ chatId, messages, participants }: IContactsListProps): ReactElement => {
   const [editingMessageId, setEditingMessageId] = useState<string>('');
   const [messageText, setMessageText] = useState<string>('');
 
@@ -22,10 +22,6 @@ const ChatInterface = ({ chatId, messages, participants }: ContactsListProps): R
   const [updateMessage] = useUpdateMessageMutation();
 
   const { data: profileData } = useMyDetailsQuery();
-  const { data: message } = useMessageDetailsQuery(
-    { message_id: Number(editingMessageId) },
-    { skip: !editingMessageId } // запрос выполняется только если есть идентификатор сообщения
-  );
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setMessageText(e.target.value);
@@ -55,6 +51,7 @@ const ChatInterface = ({ chatId, messages, participants }: ContactsListProps): R
         await updateMessage({
           message_id: Number(editingMessageId),
           message_text: messageText,
+          chat_id: chatId
         }).unwrap();
         setEditingMessageId('');
         setMessageText('');
@@ -71,17 +68,23 @@ const ChatInterface = ({ chatId, messages, participants }: ContactsListProps): R
     }
   };
 
-  useEffect(() => {
-    if (editingMessageId && message) {
-      setMessageText(message.message_text);
-    }
-  }, [editingMessageId, message]);
+  const editingMessage = (messageId: string, messageText: string) => {
+    setEditingMessageId(messageId);
+    setMessageText(messageText);
+  };
 
   const companionInfo = participants.find((el) => el.id !== profileData?.id);
   const reversedMessages = [...messages].reverse();
 
   return (
     <div className="flex flex-col pl-[46px] w-full">
+      <div className="w-full flex justify-between items-center mb-5">
+        <div className="flex items-center gap-2">
+          <p className="text-[18px] font-regular leading-[18px]">3 сообщения</p>
+          <button className="w-6 h-6 bg-[url('../../../../public/images/close-cross.svg')] bg-no-repeat"></button>
+        </div>
+        <button className="w-6 h-6 bg-[url('../../../../public/images/trash-03.svg')] bg-no-repeat"></button>
+      </div>
       <div className="flex items-end w-full border-b-3 border-b-solid border-b-custom-gray pb-[18px]">
         <figure className="flex items-center">
           <img
@@ -120,7 +123,7 @@ const ChatInterface = ({ chatId, messages, participants }: ContactsListProps): R
               sender={participants.find((person) => person.id === el.created_by)}
               message={el}
               isOwner={el.created_by === profileData?.id}
-              setEditingMessageId={setEditingMessageId}
+              editingMessage={(id: string) => editingMessage(id, el.message_text)}
               isNewDate={
                 index > 0
                   ? new Date(`${el.created_at.slice(0, 10)} 24:00`) >
@@ -137,9 +140,8 @@ const ChatInterface = ({ chatId, messages, participants }: ContactsListProps): R
         type="text"
         size="lg"
         className="mt-auto text-[18px]"
-        tail={<img className="cursor-pointer" src={send} alt="send" />}
+        tail={<img className="cursor-pointer" src={send} alt="send" onClick={() => { void handleTailClick(); }}/>}
         extraInputClass="pl-3"
-        onTailClick={() => { void handleTailClick(); }}
         onKeyDown={handleKeyDown}
       />
     </div>

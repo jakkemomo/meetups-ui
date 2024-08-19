@@ -3,11 +3,11 @@ export enum ChatType {
     'DIRECT' = 'DIRECT'
 }
 
-export interface ChatId {
+export interface IChatId {
     chat_id: string
 }
 
-export interface ChatDetails {
+export interface IChatDetails {
     id: number, 
     name: string,
     image_url: string,
@@ -16,7 +16,7 @@ export interface ChatDetails {
     last_message_is_owner: boolean
 }
 
-export interface ChatRetrieve {
+export interface IChatRetrieve {
     id: number, 
     name: string,
     image_url: string,
@@ -32,14 +32,14 @@ export interface IChatMessage {
     image_url: string
 }
 
-export interface Participant {
+export interface IParticipant {
     id: number,
     username: string,
     image_url: string
 }
 
 
-export interface MessageCreate {
+export interface IMessageCreate {
     message_text: string,
     chat_id: string
 }

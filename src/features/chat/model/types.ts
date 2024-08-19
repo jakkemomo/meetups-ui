@@ -25,7 +25,7 @@ export enum ChatsStateType {
 	error = 'error',
 }
 
-export interface ChatsStateProps  {
+export interface IChatsStateProps  {
 	type: `${ChatsStateType}`;
 }
 

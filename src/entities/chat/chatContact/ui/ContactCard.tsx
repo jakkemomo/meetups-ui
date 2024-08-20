@@ -1,8 +1,8 @@
 import { ReactElement } from "react";
-import { ChatDetails } from "../../model/types";
+import { IChatDetails } from "../../model/types";
 
 interface IContactCard {
-  data: ChatDetails;
+  data: IChatDetails;
   onClick: () => void;
   isSelected: boolean
 }

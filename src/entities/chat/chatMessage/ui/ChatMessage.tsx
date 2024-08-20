@@ -8,10 +8,11 @@ interface IChatMessageProps {
   isNewDate?: boolean;
   userImage: string;
   editingMessage: (id: string) => void;
+  choosingMessage: (id: string) => void;
+  isCheckVisible: boolean; 
 }
 
-function ChatMessage({ sender, message, isOwner, isNewDate, userImage, editingMessage}: IChatMessageProps): ReactElement {
-  
+function ChatMessage({ sender, message, isOwner, isNewDate, userImage, editingMessage, isCheckVisible, choosingMessage}: IChatMessageProps): ReactElement {
   const messageDate = new Date(message.created_at);
 
   return (
@@ -32,6 +33,15 @@ function ChatMessage({ sender, message, isOwner, isNewDate, userImage, editingMe
         </div>
       )}
        <div className={`flex items-start mb-2.5 ${isOwner ? "flex-row-reverse" : ""}`}>
+        <button
+          className="w-6 h-6 bg-no-repeat"
+          style={{
+            backgroundImage: isCheckVisible
+              ? "url('../../../../../public/images/check-contained.svg')" // Show image only when state is true
+              : "none",
+          }}
+          onClick={() => choosingMessage(message.id.toString())}
+        />
         <img className="w-[50px] h-[50px] rounded-circle" src={`https://storage.googleapis.com/meetups-dev/media/${userImage}`} alt="Аватар пользователя" />
         <div className={`flex flex-col items-start ml-[22px] ${isOwner ? "items-end !ml-0 mr-[22px]" : ""}`}>
           <div className={`flex items-center mt-2.5 ${isOwner ? "flex-row-reverse" : ""}`}>

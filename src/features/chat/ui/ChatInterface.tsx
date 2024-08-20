@@ -4,7 +4,7 @@ import Svg from "@/shared/ui/Svg";
 import send from '../../../../public/images/send.svg';
 import InfiniteScroll from "react-infinite-scroll-component";
 import { ChatMessage } from "@/entities/chat/chatMessage";
-import { useSendMessageMutation, useUpdateMessageMutation } from "@/entities/chat/api/chatsApi";
+import { useDeleteMessageMutation, useSendMessageMutation, useUpdateMessageMutation } from "@/entities/chat/api/chatsApi";
 import { useMyDetailsQuery } from "@/entities/profile/api/profileApi";
 import { IChatMessage, IParticipant } from "@/entities/chat/model/types";
 
@@ -17,9 +17,11 @@ interface IContactsListProps {
 const ChatInterface = ({ chatId, messages, participants }: IContactsListProps): ReactElement => {
   const [editingMessageId, setEditingMessageId] = useState<string>('');
   const [messageText, setMessageText] = useState<string>('');
+  const [choosingMessages, setChoosingMessages] = useState<string[]>([]);
 
   const [sendMessage] = useSendMessageMutation();
   const [updateMessage] = useUpdateMessageMutation();
+  const [deleteMessage] = useDeleteMessageMutation();
 
   const { data: profileData } = useMyDetailsQuery();
 
@@ -68,9 +70,41 @@ const ChatInterface = ({ chatId, messages, participants }: IContactsListProps): 
     }
   };
 
+  const choosingMessage = (messageId: string) => {
+    setChoosingMessages((prevState) => {
+      if (prevState.includes(messageId)) {
+        return prevState.filter((mess) => mess !== messageId);
+      } else {
+        return [...prevState, messageId];
+      }
+    });
+  };
+
+  const cleanChoosingMessages = () => {
+    setChoosingMessages([]);
+  }
+
   const editingMessage = (messageId: string, messageText: string) => {
     setEditingMessageId(messageId);
     setMessageText(messageText);
+  };
+
+  const deletingMessage = async (messagesIds: string[]) => {
+    for (const messageId of messagesIds) {
+      try {
+        await deleteMessage({
+          message_id: Number(messageId),
+          chat_id: chatId,
+        }).unwrap();
+        if (editingMessageId === messageId) {
+          setEditingMessageId('');
+          setMessageText('');
+        }
+      } catch (error) {
+        console.error('Ошибка при удалении сообщения:', error);
+      }
+    }
+    cleanChoosingMessages();
   };
 
   const companionInfo = participants.find((el) => el.id !== profileData?.id);
@@ -78,13 +112,26 @@ const ChatInterface = ({ chatId, messages, participants }: IContactsListProps): 
 
   return (
     <div className="flex flex-col pl-[46px] w-full">
-      <div className="w-full flex justify-between items-center mb-5">
-        <div className="flex items-center gap-2">
-          <p className="text-[18px] font-regular leading-[18px]">3 сообщения</p>
-          <button className="w-6 h-6 bg-[url('../../../../public/images/close-cross.svg')] bg-no-repeat"></button>
+      {choosingMessages.length > 0 && 
+        <div className="w-full flex items-center mb-5 justify-between">
+        <div className="flex items-center gap-3">
+          <p className="text-[18px] font-regular leading-[18px]">{choosingMessages.length}</p>
+          <button 
+            className="w-6 h-6 cursor-pointer bg-[url('../../../../public/images/close-cross.svg')] bg-no-repeat"
+            onClick={cleanChoosingMessages}
+            >
+            </button>
         </div>
-        <button className="w-6 h-6 bg-[url('../../../../public/images/trash-03.svg')] bg-no-repeat"></button>
+        <div className="flex gap-3">
+          <button 
+            className="w-6 h-6 cursor-pointer bg-[url('../../../../public/images/trash-03.svg')] bg-no-repeat"
+            onClick={() => void deletingMessage(choosingMessages)}
+          >
+          </button>
+          <button className="w-6 h-6 cursor-pointer bg-[url('../../../../../public/images/favorites.svg')] bg-no-repeat"></button>
+        </div>
       </div>
+      }
       <div className="flex items-end w-full border-b-3 border-b-solid border-b-custom-gray pb-[18px]">
         <figure className="flex items-center">
           <img
@@ -124,11 +171,11 @@ const ChatInterface = ({ chatId, messages, participants }: IContactsListProps): 
               message={el}
               isOwner={el.created_by === profileData?.id}
               editingMessage={(id: string) => editingMessage(id, el.message_text)}
+              choosingMessage={(id: string) => choosingMessage(id)}
+              isCheckVisible={choosingMessages.includes(el.id.toString())}
               isNewDate={
-                index > 0
-                  ? new Date(`${el.created_at.slice(0, 10)} 24:00`) >
-                    new Date(`${messages[index - 1].created_at.slice(0, 10)} 24:00`)
-                  : false
+                index > 0 && new Date(`${el.created_at.slice(0, 10)} 24:00`) >
+                            new Date(`${messages[index - 1].created_at.slice(0, 10)} 24:00`)
               }
             />
           ))}

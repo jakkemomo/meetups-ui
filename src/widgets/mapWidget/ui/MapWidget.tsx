@@ -6,7 +6,6 @@ import { AddressControl } from "@/features/addressControl";
 
 interface IMapWidgetProps {
   text?: string;
-  setValuesFunc?: (city: string, country: string, geometry: google.maps.places.PlaceGeometry | null) => void;
   position: ICoordinates;
   zoom: number;
   markers?: IFeatures[];
@@ -17,7 +16,6 @@ interface IMapWidgetProps {
 
 export function MapWidget({
   text,
-  setValuesFunc,
   position,
   zoom,
   markers = [],
@@ -27,7 +25,7 @@ export function MapWidget({
 }: IMapWidgetProps): ReactElement {
   return (
     <>
-      {withAddressControl && <AddressControl setValuesFunc={setValuesFunc} />}
+      {withAddressControl && <AddressControl />}
       {text && <p className="text-[20px] font-normal leading-[25.1px] mb-[7px] mt-[15px]">{text}</p>}
       <GoogleMap
         position={position}

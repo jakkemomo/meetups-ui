@@ -5,3 +5,4 @@ export const EVENTS_TAG = 'EVENTS_TAG';
 export const CHAT_TAG = 'CHAT_TAG';
 export const FOLLOW_TAG = 'FOLLOW_TAG'
 export const MESSAGES_TAG = 'MESSAGES_TAG';
+export const CITIES_TAG = 'CITIES_TAG';

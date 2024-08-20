@@ -9,7 +9,9 @@ import {
   genderOption,
   getGenderValue,
   setGenderValue,
-} from "../model/genderValues";
+} from "../model/constants";
+import { ICity } from "@/entities/cities/model/types";
+import { CityInput } from "@/shared/ui/Inputs/CityInput";
 
 interface IEditProfileInfo {
   profileData?: ProfileDetails;
@@ -21,7 +23,7 @@ export function EditProfileInfo({
   const {
     register,
     formState: { errors },
-    control,
+    control
   } = useFormContext<EditProfileValidationSchema>();
 
   return (
@@ -46,6 +48,7 @@ export function EditProfileInfo({
           hookFormRegister={register("username")}
           type="text"
           isError={!!errors.username?.message}
+          errorMessage={errors.username?.message}
           placeholder="Введите имя"
           maxLength={30}
           className="text-[18px] w-[480px] mt-[7px]"
@@ -53,16 +56,23 @@ export function EditProfileInfo({
           extraLabelClass="text-[20px] mt-[18px]"
           size="lg"
         />
-        <LabeledInput
-          hookFormRegister={register("city")}
-          type="text"
-          isError={!!errors.city?.message}
-          placeholder="Введите свой город"
-          maxLength={30}
-          className="text-[18px] w-[480px] mt-[7px]"
-          labelText="Местоположение"
-          extraLabelClass="text-[20px] mt-[18px]"
-          size="lg"
+        <Controller
+          control={control}
+          name="city"
+          render={({ field: { onChange, value } }) => (
+            <CityInput
+              labelText="Местоположение"
+              placeholder="Введите свой город"
+              onFormValueChange={(city: ICity | null) => {
+                onChange(city?.id);
+              }}
+              isError={!!errors.city}
+              errorMessage='Обязательное поле'
+              extraClass="mt-[18px] text-[18px]"
+              cityValue={value?.name || null}
+              extraErrorClass="text-[16px]"
+            />
+          )}
         />
         <Controller
           control={control}

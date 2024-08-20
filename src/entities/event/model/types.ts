@@ -1,3 +1,4 @@
+import { ICity } from "@/entities/cities/model/types";
 import { IParticipant } from "@/entities/eventParticipants/model/types";
 import { AddEventValidationSchema } from "@/features/addEvent/addEventForm/model/addEventFormSchema";
 import { IDay } from "@/features/addEvent/periodicControl/model/types";
@@ -47,7 +48,7 @@ export interface IGetEventRequest {
   tags_in?: string;
   category?: string;
   category_in?: string;
-  city?: string;
+  city?: number;
   city_in?: string;
   free?: boolean | '';
   participants_age?: string;
@@ -88,12 +89,22 @@ export interface IDetailedEvent {
   is_participant: boolean,
   repeatable: boolean,
   schedule: IDay[],
-  city: string,
-  country: string,
+  city: ICity,
   participants_age: number
 }
 
+interface IEventInfo extends Omit<Partial<AddEventValidationSchema>, 'city'> {
+  city: number
+}
+
 export interface IEditEventRequest {
-  eventInfo: Partial<AddEventValidationSchema>;
+  eventInfo: IEventInfo;
   eventId: number;
+}
+
+export interface IOnSelectAddressArgs {
+  city: string;
+  country: string;
+  geometry: google.maps.places.PlaceGeometry | null;
+  place_id: string;
 }

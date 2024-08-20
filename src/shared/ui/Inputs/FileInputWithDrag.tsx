@@ -47,7 +47,7 @@ export function FileInputWithDrag({ children, uploadImageFunc, id, extraClass, e
         type="file"
         id={id ? id : uploadInputId}
         className="hidden"
-        accept="image/png, image/gif, image/jpeg"
+        accept="image/png, image/gif, image/jpeg, image/webp"
       />
       <label onDragEnter={handleDrag} onDragOver={handleDrag} onDragLeave={handleDrag} onDrop={handleDrop} htmlFor={id ? id : uploadInputId} className={`bg-custom-gray rounded-[10px] box-border overflow-hidden cursor-pointer ${extraClass} ${isDragActive ? "border-dashed border-2 border-text-light-gray" : ""} ${error && "border-solid border-input-error border-1"}`}>
         {children}

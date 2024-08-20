@@ -47,7 +47,7 @@ export function SelectInput({
   }
 
   return (
-    <div className={`w-[480px] flex flex-col items-start relative ${extraBoxClass}`}>
+    <div className={`flex flex-col items-start relative ${extraBoxClass}`}>
       <Listbox
         as={Fragment}
         value={value ?? selectedOption}
@@ -62,13 +62,13 @@ export function SelectInput({
               </Listbox.Label>
             )}
             <Listbox.Button
-              className={`h-[44px] bg-custom-gray rounded-[10px] border-1 border-solid w-full flex justify-between items-center px-[22px] ${error ? "border-input-error" : "border-transparent"} ${extraContentClass}`}
+              className={`h-[44px] bg-custom-gray rounded-[10px] border-1 border-solid w-full flex justify-between items-center px-[22px] text-lg ${error ? "border-input-error" : "border-transparent"} ${extraContentClass}`}
               aria-disabled={isDisabled}
             >
               {(!value && placeholder) ? (
-                <p className={'text-lg text-text-light-gray'}>{placeholder}</p>
+                <p className={'text-text-light-gray'}>{placeholder}</p>
                 ) : (
-                <p className={`text-lg ${isDisabled ? "text-white" : "text-text-black"}`}>{value?.name ?? selectedOption?.name}</p>
+                <p className={`${isDisabled ? "text-white" : "text-text-black"}`}>{value?.name ?? selectedOption?.name}</p>
               )}
               <div
                 className={`bg-center bg-no-repeat bg-cover w-6 h-6 ml-1 ${isDisabled ? "bg-chevron-down-white" : "bg-chevron-down-black"} ${open ? 'transition ease-in-out rotate-180 duration-100': 'transition ease-in-out rotate-0 duration-100'}`}
@@ -76,14 +76,14 @@ export function SelectInput({
             </Listbox.Button>
               <Listbox.Options
                 as='div'
-                className={`flex flex-col bg-custom-gray rounded-[10px] w-[480px] max-h-[170px] pl-[22px] py-3 mt-1 absolute z-10 ${extraDropdownClass} ${placeholder ? 'top-[80px]' : 'top-11'} left-0 overflow-y-auto scrollbar`}
+                className={`flex flex-col bg-custom-gray rounded-[10px] w-[480px] max-h-[170px] pl-[22px] py-3 mt-1 absolute z-10 gap-2 ${extraDropdownClass} ${placeholder ? 'top-[80px]' : 'top-11'} left-0 overflow-y-auto scrollbar`}
               >
                 {options.map((option) => (
                   <Listbox.Option
                     as='div'
                     key={option.id}
                     value={option}
-                    className={'cursor-pointer pt-2 first-of-type:pt-0'}
+                    className={'cursor-pointer first-of-type:pt-0'}
                   >
                     {option.name}
                   </Listbox.Option>

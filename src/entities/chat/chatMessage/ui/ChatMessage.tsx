@@ -42,7 +42,11 @@ function ChatMessage({ sender, message, isOwner, isNewDate, userImage, editingMe
           }}
           onClick={() => choosingMessage(message.id.toString())}
         />
-        <img className="w-[50px] h-[50px] rounded-circle" src={`https://storage.googleapis.com/meetups-dev/media/${userImage}`} alt="Аватар пользователя" />
+        <img 
+          className="w-[50px] h-[50px] rounded-circle" 
+          src={`https://storage.googleapis.com/meetups-dev/media/${userImage}`} 
+          alt="Аватар пользователя" 
+        />
         <div className={`flex flex-col items-start ml-[22px] ${isOwner ? "items-end !ml-0 mr-[22px]" : ""}`}>
           <div className={`flex items-center mt-2.5 ${isOwner ? "flex-row-reverse" : ""}`}>
             <h3 className={`font-medium leading-[20px] w-[160px] truncate ${isOwner ? "!w-6 " : ""}`}>{isOwner ? 'Вы' : sender?.username}</h3>

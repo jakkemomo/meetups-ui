@@ -112,6 +112,8 @@ const ChatInterface = ({ chatId, messages, participants }: IContactsListProps): 
   const reversedMessages = [...messages].reverse();
 
   return (
+    ///Возможно, здесь можно повыносить некоторый код в отдельные компоненты
+    ///Пока не добавляла кнопки "Ответить и Переслать", т.к логики для них нет
     <div className="flex flex-col pl-[46px] w-full">
       {choosingMessages.length > 0 && 
         <div className="w-full flex items-center mb-5 justify-between">

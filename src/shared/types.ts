@@ -4,11 +4,6 @@ export enum ValueTextField {
   PASSWORD = "password",
 }
 
-export interface ISelectorOptions {
-  value: string;
-  name: string;
-}
-
 export interface ISlickSliderSettings {
   infinite?: boolean;
   speed: number;

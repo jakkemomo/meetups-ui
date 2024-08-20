@@ -1,14 +1,14 @@
 import { ReactElement, ReactNode } from "react";
 import { EditProfileValidationSchema } from "../model/editProfileFormSchema";
 import { useEditProfileMutation } from "@/entities/profile/api/profileApi";
-import { UseFormHandleSubmit } from "react-hook-form";
+import { useFormContext } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/shared";
 import { ProfileLoader } from "@/widgets/Profile/ProfileInfo";
+import { prepareDataToRequest } from "../model/prepareDataToRequest";
 
 interface IEditProfileFormProps {
   children: ReactNode;
-  handleSubmit: UseFormHandleSubmit<EditProfileValidationSchema>;
   isLoading: boolean;
   isDataSuccess: boolean;
   userId: string;
@@ -16,20 +16,31 @@ interface IEditProfileFormProps {
 
 export function EditProfileForm({
   children,
-  handleSubmit,
   isLoading,
   isDataSuccess,
   userId,
 }: IEditProfileFormProps): ReactElement {
   const navigate = useNavigate();
+
+  const {
+    handleSubmit,
+    formState: { dirtyFields }
+  } = useFormContext<EditProfileValidationSchema>();
+
   const [editProfile, { isLoading: isEditProfileLoading }] =
     useEditProfileMutation();
 
   const onSubmit = (data: EditProfileValidationSchema) => {
-    editProfile({ userId, ...data })
-      .unwrap()
-      .then(() => navigate("/profile/me", { replace: true }))
-      .catch((err) => console.log(err));
+    if (Object.keys(dirtyFields).length === 0) {
+      navigate("/profile/me", { replace: true });
+    } else {
+      const dataToRequest = prepareDataToRequest({ data, dirtyFields: dirtyFields as Record<string, boolean | undefined> });
+
+      editProfile({ userId, ...dataToRequest })
+        .unwrap()
+        .then(() => navigate("/profile/me", { replace: true }))
+        .catch((err) => console.log(err));
+    }
   };
 
   if (isLoading) return <ProfileLoader />;

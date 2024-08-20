@@ -6,11 +6,7 @@ import { LabeledInput } from "@/shared";
 import { useFormContext } from "react-hook-form";
 import { AddEventValidationSchema } from "@/features/addEvent/addEventForm/model/addEventFormSchema";
 
-interface IAddressControlProps {
-  setValuesFunc?: (city: string, country: string, geometry: google.maps.places.PlaceGeometry | null) => void;
-}
-
-export function AddressControl({ setValuesFunc }: IAddressControlProps): ReactElement {
+export function AddressControl(): ReactElement {
   const places = useMapsLibrary('places');
   const [inputValue, setInputValue] = useState('');
   const [predictionResults, setPredictionResults] = useState<google.maps.places.AutocompletePrediction[]>([]);
@@ -21,11 +17,10 @@ export function AddressControl({ setValuesFunc }: IAddressControlProps): ReactEl
     setValue,
     formState: { errors },
     clearErrors,
-    getValues,
-    reset
+    watch
   } = useFormContext<AddEventValidationSchema>();
 
-  const addressFormValue = getValues('address');
+  const addressFormValue = watch('address');
 
   useEffect(() => {
     setInputValue(addressFormValue);
@@ -37,44 +32,23 @@ export function AddressControl({ setValuesFunc }: IAddressControlProps): ReactEl
       return;
     }
 
-    const request = {input: inputValue};
+    const request = { input: inputValue };
     const response = await autocompleteService.getPlacePredictions(request);
 
     return response;
   }
 
   const getDetailsFromPlaceService = (
-    detailRequestOptions: { placeId: string; fields: string[] },
+    detailRequestOptions: google.maps.places.PlaceDetailsRequest,
     detailsRequestCallback: (placeDetails: google.maps.places.PlaceResult | null) => void
   ) => {
     placesService?.getDetails(detailRequestOptions, detailsRequestCallback);
   }
 
-  const setHookFormPlaceInfo = (city: string, country: string) => {
-    fetchPredictions(`${city}, ${country}`)
-      .then((res) => {
-        if (!res) return;
-
-        const detailRequestOptions = {
-          placeId: res.predictions[0].place_id,
-          fields: ['geometry']
-        };
-
-        const detailsRequestCallback = (placeDetails: google.maps.places.PlaceResult | null) => {
-          if (!placeDetails?.geometry?.location) return;
-
-          setValuesFunc && setValuesFunc(city, country, placeDetails.geometry);
-        }
-
-        getDetailsFromPlaceService(detailRequestOptions, detailsRequestCallback);
-      })
-      .catch((err) => console.log(err));
-  }
-
   const handleSuggestionClick = (placeId: string) => {
     if (!places) return;
 
-    const detailRequestOptions = {
+    const detailRequestOptions: google.maps.places.PlaceDetailsRequest = {
       placeId,
       fields: ['geometry', 'address_components', 'formatted_address']
     };
@@ -82,28 +56,19 @@ export function AddressControl({ setValuesFunc }: IAddressControlProps): ReactEl
     const detailsRequestCallback = (
       placeDetails: google.maps.places.PlaceResult | null
     ) => {
-      if (!placeDetails) return;
+      if (!placeDetails?.geometry?.location) return;
 
       dispatch(selectedPlaceSetted(placeDetails));
       setPredictionResults([]);
       setInputValue(placeDetails.formatted_address ?? '');
-      clearErrors('address');
+
       setValue('address', placeDetails.formatted_address ?? '', { shouldDirty: true });
-      reset((state) => ({
-        ...state,
-        city: '',
-        country: '',
-        city_north_east_point: { latitude: '', longitude: ''},
-        city_south_west_point: { latitude: '', longitude: ''},
-        location: { latitude: '', longitude: ''}
-      }), { keepErrors: true, keepDirtyValues: true, keepIsValid: true });
 
-      if (!placeDetails.address_components) return;
+      const location = placeDetails.geometry.location.toJSON();
 
-      const city = placeDetails.address_components.find((el) => el.types.some((item) => item === 'locality'))?.long_name;
-      const country = placeDetails.address_components.find((el) => el.types.some((item) => item === 'country'))?.long_name;
+      setValue('location', { latitude: String(location.lat), longitude: String(location.lng) }, { shouldDirty: true });
 
-      city && country && setHookFormPlaceInfo(city, country);
+      clearErrors(['address', 'city']);
     };
 
     getDetailsFromPlaceService(detailRequestOptions, detailsRequestCallback);

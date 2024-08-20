@@ -4,7 +4,6 @@ export { Input } from './ui/Inputs/Input';
 export { LabeledInput } from './ui/Inputs/LabeledInput';
 export { BackgroundCard } from './ui/BackgroundCard';
 export { Layout } from './ui/Layout';
-export { Selector } from './ui/Selector';
 export { SlickSlider } from './ui/SlickSlider/SlickSlider';
 export { InputErrorMessage } from './ui/InputErrorMessage';
 export { SelectInput } from './ui/Inputs/SelectInput';

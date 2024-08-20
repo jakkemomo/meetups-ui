@@ -37,7 +37,7 @@ function ChatMessage({ sender, message, isOwner, isNewDate, userImage, editingMe
           className="w-6 h-6 bg-no-repeat"
           style={{
             backgroundImage: isCheckVisible
-              ? "url('../../../../../public/images/check-contained.svg')" // Show image only when state is true
+              ? "url('../../../../../public/images/check-contained.svg')"
               : "none",
           }}
           onClick={() => choosingMessage(message.id.toString())}

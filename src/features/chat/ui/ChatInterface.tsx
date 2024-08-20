@@ -7,6 +7,7 @@ import { ChatMessage } from "@/entities/chat/chatMessage";
 import { useDeleteMessageMutation, useSendMessageMutation, useUpdateMessageMutation } from "@/entities/chat/api/chatsApi";
 import { useMyDetailsQuery } from "@/entities/profile/api/profileApi";
 import { IChatMessage, IParticipant } from "@/entities/chat/model/types";
+import { getMessageText } from "../lib/getMessageText";
 
 interface IContactsListProps {
   chatId: number;
@@ -115,7 +116,7 @@ const ChatInterface = ({ chatId, messages, participants }: IContactsListProps): 
       {choosingMessages.length > 0 && 
         <div className="w-full flex items-center mb-5 justify-between">
         <div className="flex items-center gap-3">
-          <p className="text-[18px] font-regular leading-[18px]">{choosingMessages.length}</p>
+          <p className="text-[18px] font-regular leading-[18px]">{getMessageText(choosingMessages.length)}</p>
           <button 
             className="w-6 h-6 cursor-pointer bg-[url('../../../../public/images/close-cross.svg')] bg-no-repeat"
             onClick={cleanChoosingMessages}

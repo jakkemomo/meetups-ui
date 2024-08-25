@@ -67,28 +67,28 @@ export function SelectInput({
             >
               {(!value && placeholder) ? (
                 <p className={'text-secondary-600'}>{placeholder}</p>
-                ) : (
+              ) : (
                 <p className={`${isDisabled ? "text-white" : "text-text-black"}`}>{value?.name ?? selectedOption?.name}</p>
               )}
               <div
                 className={`bg-center bg-no-repeat bg-cover w-6 h-6 ml-1 ${isDisabled ? "bg-chevron-down-white" : "bg-chevron-down-black"} ${open ? 'transition ease-in-out rotate-180 duration-100': 'transition ease-in-out rotate-0 duration-100'}`}
               ></div>
             </Listbox.Button>
-              <Listbox.Options
-                as='div'
-                className={`flex flex-col bg-white shadow-select rounded-[20px] w-[104%] translate-x-[-2%] max-h-[296px] py-3 mt-3 absolute z-10 gap-2 ${extraDropdownClass} ${placeholder ? 'top-[80px]' : 'top-11'} left-0 overflow-y-auto scrollbar`}
-              >
-                {options.map((option) => (
-                  <Listbox.Option
-                    as='div'
-                    key={option.id}
-                    value={option}
-                    className={'text-[20px] cursor-pointer pl-[22px] hoverscreen:hover:bg-secondary-200 py-2'}
-                  >
-                    {option.name}
-                  </Listbox.Option>
-                ))}
-              </Listbox.Options>
+            <Listbox.Options
+              as='div'
+              className={`flex flex-col bg-white shadow-select rounded-[20px] w-[104%] translate-x-[-2%] max-h-[296px] py-3 mt-3 absolute z-10 gap-2 ${extraDropdownClass} ${placeholder ? 'top-[80px]' : 'top-11'} left-0 overflow-y-auto scrollbar`}
+            >
+              {options.map((option) => (
+                <Listbox.Option
+                  as='div'
+                  key={option.id}
+                  value={option}
+                  className={'text-[20px] cursor-pointer pl-[22px] hoverscreen:hover:bg-secondary-200 py-2'}
+                >
+                  {option.name}
+                </Listbox.Option>
+              ))}
+            </Listbox.Options>
           </>
         )}
       </Listbox>

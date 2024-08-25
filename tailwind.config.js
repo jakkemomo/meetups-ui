@@ -91,7 +91,7 @@ module.exports = {
         'system-500': '#ca6a6a',
         'system-800': '#7e3636',
         // TODO: change when design is ready
-        'text-black': 'rgb(46, 46, 46)',
+        'text-black': '#2e2e2e',
         'edit-profile-shadow': 'rgba(38, 38, 38, .42)'
       },
       padding: {

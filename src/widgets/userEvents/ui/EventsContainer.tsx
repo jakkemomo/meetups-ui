@@ -72,7 +72,7 @@ export function EventsContainer({ debounedInputValue, type }: IEventsConteinerPr
         ) : events.results.length === 0 ? (
           <p>{`У вас нет ${textAccordingType.find((el) => el.type === type)?.placeholder} ивентов`}</p>
         ) : isSuccess ? (
-          events.results?.map((event) => <EventCard key={event.id} event={event} extraCardClass="!mr-0" />)
+          events.results?.map((event) => <EventCard key={event.id} event={event} extraCardClass="!mx-0" />)
         ) : (<></>)
       }
     </section>

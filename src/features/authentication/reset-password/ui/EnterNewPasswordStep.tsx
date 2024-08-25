@@ -68,9 +68,9 @@ export function EnterNewPasswordStep({onComplete}: ILoginFormProps): ReactElemen
               style={{ backgroundImage: `url("/images/icon-checked.svg")` }}
             />
             ) : (
-            <div className='bg-custom-gray w-[18px] h-[18px] rounded-full mr-3' />
+            <div className='bg-secondary-100 w-[18px] h-[18px] rounded-full mr-3' />
           )}
-          <p className={`text-base md:text-lg font-normal  ${errors.password ? 'text-input-error' : 'text-neutral-500'}`}>
+          <p className={`text-base md:text-lg font-normal  ${errors.password ? 'text-system-500' : 'text-neutral-500'}`}>
             Минимум 8 символов
           </p>
         </div>

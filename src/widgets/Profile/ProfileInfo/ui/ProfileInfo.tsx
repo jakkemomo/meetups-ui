@@ -19,7 +19,9 @@ export function ProfileInfo({
 }: IProfileInfoProps): ReactElement {
   const [isAboutOpen, setIsAboutOpen] = useState(false);
 
-  const { ref, isOverflowY } = useOverflowY();
+  const { ref, isOverflowY } = useOverflowY({
+    deps: [profileData.bio]
+  });
 
   const interstsList = profileData.category_favorite.map(
     ({ name, image_url, id }) => (
@@ -42,7 +44,7 @@ export function ProfileInfo({
   return (
     <section className="flex-auto flex flex-col basis-5/12 min-h-[1027px] w-[420px] mr-[106px]">
       <ProfileAvatar image={profileData.image} name={profileData.username} />
-      <p className="text-zinc-800 font-semibold text-[32px] mt-[20px]">
+      <p className="text-zinc-800 font-semibold text-[32px] truncate max-w-[300px] mt-5">
         {profileData.username}
       </p>
       <div className="flex flex-row mt-[10px] cursor-pointer">

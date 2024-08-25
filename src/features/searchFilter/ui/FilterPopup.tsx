@@ -120,7 +120,7 @@ export function FilterPopup({ categories }: IFilterPopupProps): ReactElement {
         <Button
           type="submit"
           importance="primary"
-          extraClass="text-[18px] font-semibold text-white bg-main-purple !px-[35px] self-end"
+          extraClass="text-[18px] !px-[35px] self-end"
           size="md"
         >Найти</Button>
       </form>

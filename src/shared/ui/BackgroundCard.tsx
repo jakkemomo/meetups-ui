@@ -31,7 +31,7 @@ export function BackgroundCard({cardType}: IBackgroundCardProps): ReactElement  
           className='w-600 h-700 bg-center bg-no-repeat rounded-2xl shadow-custom flex items-center justify-center'
           style={{ backgroundImage: `url("/images/auth-bg.png")` }}
         >
-          <div className='w-4/6 flex flex-col items-center justify-center text-main-dark-blue text-center'>
+          <div className='w-4/6 flex flex-col items-center justify-center text-main-violet-900 text-center'>
             <span className='font-bold text-34'>{pageText[0]}</span>
             <span className='font-bold text-50'>{pageText[1]}</span>
             <p className='w-3/4 font-semibold text-lg'>{pageText[2]}</p>

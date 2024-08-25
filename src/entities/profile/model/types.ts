@@ -47,13 +47,18 @@ export interface ProfileDetailsDto extends ProfileDto {
   city: ICity
 }
 
-export type IFollowStatus = 'ACCEPTED' | 'PENDING' | 'DECLINED' | 'NOT_FOLLOWED' | undefined;
+export enum FollowStatusEnum {
+  ACCEPTED = 'ACCEPTED',
+  PENDING = 'PENDING',
+  DECLINED = 'DECLINED',
+  NOT_FOLLOWED = 'NOT_FOLLOWED'
+}
 
 export interface ProfileFollowing {
   user: number;
   follower: number;
   username: string;
-  status: IFollowStatus;
+  status: FollowStatusEnum;
   image_url: string
 }
 
@@ -61,7 +66,7 @@ export interface IFollowResponse {
   user: number;
   follower: number;
   username: string;
-  status: IFollowStatus;
+  status: FollowStatusEnum;
   image_url: string
 }
 

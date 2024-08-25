@@ -22,8 +22,8 @@ export function CalendarCard({
   onCloseCalendarFilter,
 }: ICalendarCard): ReactElement {
   return (
-    <div className="relative flex flex-col mt-[29px]">
-      {(isEndDate || isSelectedDate) ? (
+    <div className="relative flex flex-col duration-150 mt-[29px] hoverscreen:hover:opacity-70">
+      {(isEndDate || isSelectedDate) && (
         <Svg
           className="absolute top-[-29px] self-center"
           id="calendar-filter-x"
@@ -34,14 +34,12 @@ export function CalendarCard({
           extraUseClass="cursor-pointer"
           onClick={onCloseCalendarFilter}
         />
-      ) : (
-        ""
       )}
 
       <div
-        className={`flex flex-col mr-8 shrink-0 max-w-[42px] w-full cursor-pointer ${
+        className={`flex flex-col shrink-0 max-w-[42px] w-full cursor-pointer ${
           isStartDate || isEndDate
-            ? " bg-zinc-100 rounded-xl border border-neutral-600 w-full"
+            ? "bg-zinc-100 rounded-xl border border-neutral-600 w-full"
             : ""
         } ${isBetweenDate ? "bg-zinc-100 rounded-xl w-full" : ""}`}
         onClick={() => onClickDate && onClickDate(date)}
@@ -50,10 +48,10 @@ export function CalendarCard({
           {date.date}
         </p>
         <p
-          className={`text-[13px] font-medium mt-2 text-text-black text-center uppercase ${
+          className={`text-[13px] font-medium mt-2 text-center uppercase ${
             date.weekDay === "СБ" || date.weekDay === "ВС"
-              ? "text-text-red"
-              : ""
+              ? "text-system-500"
+              : "text-text-black"
           }`}
         >
           {date.weekDay}

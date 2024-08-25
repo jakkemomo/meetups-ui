@@ -26,7 +26,7 @@ export function TimeControl(): ReactElement {
           extraErrorClass="ml-[22px] mt-[7px] leading-[20px]"
           type='date'
           placeholder='Начало'
-          className={`w-[480px] text-[18px] mt-[7px] h-[44px] ${watch('repeatable') ? "bg-select-disable" : ""}`}
+          className={`w-[480px] text-[18px] mt-[7px] h-[44px] ${watch('repeatable') ? "bg-secondary-300" : ""}`}
           size="lg"
           max="9999-12-31"
           disabled={watch('repeatable')}
@@ -34,7 +34,7 @@ export function TimeControl(): ReactElement {
           extraLabelClass="text-[20px] leading-[25px]"
         />
         <div
-          className='w-4 h-0.5 mx-3.5 mt-[54px] border-1 border-text-light-gray border-solid rounded-full'
+          className='w-4 h-0.5 mx-3.5 mt-[54px] border-1 border-secondary-600 border-solid rounded-full'
         />
         <div className='mt-8 relative max-h-[44px]'>
           <Input
@@ -42,12 +42,12 @@ export function TimeControl(): ReactElement {
             isError={!!errors.end_date}
             type='date'
             placeholder='Конец'
-            className={`w-[480px] h-[44px] ${watch('repeatable') ? "bg-select-disable" : ""}`}
+            className={`w-[480px] h-[44px] ${watch('repeatable') ? "bg-secondary-300" : ""}`}
             size="lg"
             max="9999-12-31"
             disabled={watch('repeatable')}
           />
-          <p className={`absolute bottom-[-27px] left-[22px] leading-[20px] ${errors.end_date ? "text-input-error" : "text-text-light-gray"}`}>
+          <p className={`absolute bottom-[-27px] left-[22px] leading-[20px] ${errors.end_date ? "text-system-500" : "text-secondary-600"}`}>
             {errors.end_date ? errors.end_date.message : "Необязательное поле"}
           </p>
         </div>
@@ -65,17 +65,17 @@ export function TimeControl(): ReactElement {
                   onStringChange={onChange}
                   stringValue={value}
                   error={errors.start_time?.message}
-                  extraFieldClass={`flex items-center w-[480px] h-[44px] px-[22px] ${watch('repeatable') ? "bg-select-disable" : ""}`}
+                  extraFieldClass={`flex items-center w-[480px] h-[44px] px-[22px] ${watch('repeatable') ? "bg-secondary-300" : ""}`}
                   extraSegmentClass="text-[18px]"
                   id={startTimeId}
                   isDisabled={watch('repeatable')}
                 />
               )}
             />
-            {errors.start_time && <p className="text-input-error mt-[7px] ml-[22px] leading-[20px]">{errors.start_time.message}</p>}
+            {errors.start_time && <p className="text-system-500 mt-[7px] ml-[22px] leading-[20px]">{errors.start_time.message}</p>}
           </div>
           <div
-            className='w-4 h-0.5 mx-3.5 mt-[22px] border-1 border-text-light-gray border-solid rounded-full'
+            className='w-4 h-0.5 mx-3.5 mt-[22px] border-1 border-secondary-600 border-solid rounded-full'
           />
           <div className="max-h-[44px] relative">
             <Controller
@@ -86,14 +86,14 @@ export function TimeControl(): ReactElement {
                   onStringChange={onChange}
                   stringValue={value}
                   error={errors.end_time?.message}
-                  extraFieldClass={`flex items-center w-[480px] h-[44px] px-[22px] ${watch('repeatable') ? "bg-select-disable" : ""}`}
+                  extraFieldClass={`flex items-center w-[480px] h-[44px] px-[22px] ${watch('repeatable') ? "bg-secondary-300" : ""}`}
                   extraSegmentClass="text-[18px]"
                   id={endTimeId}
                   isDisabled={watch('repeatable')}
                 />
               )}
             />
-            <p className='text-text-light-gray absolute bottom-[-27px] left-[22px] leading-[20px]'>Необязательное поле</p>
+            <p className='text-secondary-600 absolute bottom-[-27px] left-[22px] leading-[20px]'>Необязательное поле</p>
           </div>
         </div>
       </div>

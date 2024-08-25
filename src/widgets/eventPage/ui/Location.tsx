@@ -30,7 +30,7 @@ export function Location({event}: ILocationProps): ReactElement {
         Локация
       </div>
       <div className="flex w-full h-[300px] mt-7">
-        <div className="bg-but-primary p-[24px] text-white flex flex-col justify-between rounded-l-def w-[34.5%]">
+        <div className="bg-main-violet-600 p-[24px] text-white flex flex-col justify-between rounded-l-def w-[34.5%]">
           <p className="text-[20px] leading-[25px]">
             {event.address}
           </p>
@@ -51,7 +51,7 @@ export function Location({event}: ILocationProps): ReactElement {
             />
           </div>
         </div>
-        <GoogleMap position={{ lat: event.location[1], lng: event.location[0] }} zoom={14} markersArr={[{geometry: {coordinates: event.location}}]} extraClasses="!rounded-r-[10px] !rounded-l-none max-h-full border-2 border-but-primary"/>
+        <GoogleMap position={{ lat: event.location[1], lng: event.location[0] }} zoom={14} markersArr={[{geometry: {coordinates: event.location}}]} extraClasses="!rounded-r-[10px] !rounded-l-none max-h-full border-2 border-main-violet-600"/>
       </div>
     </section>
   )

@@ -56,12 +56,12 @@ export function HeaderDetails({ event, handleOpenParticipantsPopup }: IHeaderDet
   }
 
   return (
-    <section className="relative flex flex-col w-[43.2%] bg-custom-gray px-[30px] py-5 rounded-l-[15px]">
+    <section className="relative flex flex-col w-[43.2%] bg-secondary-100 px-[30px] py-5 rounded-l-[15px]">
       <h2 className="text-[18px] text-indigo-700">{event.category?.name}</h2>
       <h1 className="font-semibold leading-[44px] text-[35px] text-text-black mt-5 max-w-[430px] break-words">{event.name}</h1>
       <Svg
         id="heart-icon"
-        extraUseClass={isFavorite ? "!fill-but-primary stroke-but-primary" : "stroke-text-black"}
+        extraUseClass={isFavorite ? "!fill-main-violet-600 stroke-main-violet-600" : "stroke-text-black"}
         className="absolute top-[76px] right-[30px] w-6 h-6 cursor-pointer duration-150 hoverscreen:hover:opacity-70"
         // eslint-disable-next-line @typescript-eslint/no-misused-promises
         onClick={isFavorite ? handleUnlikeEvent : handleLikeEvent}
@@ -93,7 +93,7 @@ export function HeaderDetails({ event, handleOpenParticipantsPopup }: IHeaderDet
             {
               event.type !== 'open' && (
                 <Popover className="relative ml-auto mr-[35px]">
-                  <Popover.Panel className="absolute bottom-[50px] flex items-center border-1 border-solid border-main-blue rounded-[10px] h-[45px] w-[450px] bg-gray px-5 py-2 z-50">
+                  <Popover.Panel className="absolute bottom-[50px] flex items-center border-1 border-solid border-main-blue rounded-[10px] h-[45px] w-[450px] bg-secondary-100 px-5 py-2 z-50">
                     <p className="truncate">{event.private_token}</p>
                     <button type="button" onClick={copyToClipboard} className="text-[30px] ml-auto">&#10557;</button>
                   </Popover.Panel>

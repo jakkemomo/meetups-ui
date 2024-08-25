@@ -29,12 +29,14 @@ export function ReviewSlider({ reviews, slidesLength }: IReviewSlider): ReactEle
     slidesToShow,
     slidesToScroll: 1,
     speed: 400,
-    className: `mt-5 max-w-[${String(sliderWidth).slice(0, 4)}%] min-h-[230px]`
+    className: `mt-5 w-full min-h-[230px]`
   }
 
   return (
-    <SlickSlider extraSettings={settings} arrowsExtraClasses={{rightArrow: 'right-[-12px] top-[110px]', leftArrow: 'left-[-42px] top-[110px]'}}>
-      {cards}
-    </SlickSlider>
+    <div style={{ width: `${sliderWidth}%` }}>
+      <SlickSlider extraSettings={settings} arrowsExtraClasses={{rightArrow: 'right-[-12px] top-[110px]', leftArrow: 'left-[-42px] top-[110px]'}}>
+        {cards}
+      </SlickSlider>
+    </div>
   )
 }

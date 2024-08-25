@@ -24,7 +24,7 @@ export function PlacesNumberControl(): ReactElement {
         extraErrorClass="absolute bottom-[-15px] left-0"
         type='number'
         placeholder='25'
-        className={`w-[70px] max-h-11 ml-3.5 text-[18px] ${isPlacesDisabled ? "bg-select-disable" : ""}`}
+        className={`w-[70px] max-h-11 ml-3.5 text-[18px] ${isPlacesDisabled ? "bg-secondary-300" : ""}`}
         extraBoxClass="!flex-row !items-center relative"
         size="sm"
         extraInputClass={`text-center [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none ${isPlacesDisabled && "text-white"}`}

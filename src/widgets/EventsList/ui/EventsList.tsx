@@ -3,7 +3,7 @@ import { ReactElement, ReactNode } from "react";
 import { IEventSlider } from "@/features/eventChoice/ui/EventSlider";
 import { EventSkeleton } from "./EventSkeleton";
 
-interface IEventList extends IEventSlider {
+interface IEventList extends Omit<IEventSlider, 'slidesToShow'> {
   listTitle: string;
   isLoading: boolean;
   extraClasses?: string;
@@ -17,10 +17,10 @@ export function EventsList({
   isLoading,
   children,
   extraClasses,
-  slidesLength,
   arrowsExtraClasses,
   emptyElement,
   isError,
+  slidesLength,
   errorElement = <p>Произошла ошибка на сервере, попробуйте перезагрузить страницу</p>
 }: IEventList): ReactElement {
   return (
@@ -38,7 +38,10 @@ export function EventsList({
         ) : children.length === 0 ? (
           emptyElement
         ) : (
-          <EventSlider arrowsExtraClasses={arrowsExtraClasses} slidesLength={slidesLength}>{children}</EventSlider>
+          <EventSlider
+            arrowsExtraClasses={arrowsExtraClasses}
+            slidesLength={slidesLength}
+          >{children}</EventSlider>
         )
       }
     </div>

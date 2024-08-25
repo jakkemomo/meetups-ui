@@ -18,9 +18,9 @@ export function TagsControl({ tags, onChange, value }: ITagsControlProps): React
   const tips = tags.filter((tag) => tag.name.toLowerCase().includes(inputValue.toLowerCase()) && !value.some((el) => el === tag.id)).slice(0, 3);
 
   const isCreateEventButtonShow =
-  !tips.some((el) => el.name.toLowerCase() === inputValue.toLowerCase())
-  && ![...tags, ...createdTags].some((el) => el.name.toLowerCase() === inputValue.toLowerCase())
-  && inputValue.length > 3;
+    !tips.some((el) => el.name.toLowerCase() === inputValue.toLowerCase())
+    && ![...tags, ...createdTags].some((el) => el.name.toLowerCase() === inputValue.toLowerCase())
+    && inputValue.length > 3;
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);
@@ -62,13 +62,13 @@ export function TagsControl({ tags, onChange, value }: ITagsControlProps): React
         labelText="Тэги (необязательно)"
         extraLabelClass="text-[20px]"
       />
-      <p className='text-text-light-gray mt-2'>Тезисно опишите свое мероприятие</p>
+      <p className='text-secondary-600 mt-2'>Тезисно опишите свое мероприятие</p>
       {
         inputValue === '' || (tips.length === 0 && !isCreateEventButtonShow) ? (
           <></>
         ) : (
-          <div className="absolute top-[90px] w-full bg-custom-gray rounded-[10px] pl-[22px] py-[13px] pr-1.5 max-w-[480px] z-10">
-            <ul className="w-full max-h-[170px] overflow-auto [&::-webkit-scrollbar]:w-1 [&::-webkit-scrollbar-track]:bg-white [&::-webkit-scrollbar-track]:rounded-[10px] [&::-webkit-scrollbar-thumb]:bg-text-light-gray [&::-webkit-scrollbar-thumb]:rounded-[10px]">
+          <div className="absolute top-[90px] w-full bg-secondary-600 rounded-[10px] pl-[22px] py-[13px] pr-1.5 max-w-[480px] z-10">
+            <ul className="w-full max-h-[170px] overflow-auto [&::-webkit-scrollbar]:w-1 [&::-webkit-scrollbar-track]:bg-white [&::-webkit-scrollbar-track]:rounded-[10px] [&::-webkit-scrollbar-thumb]:bg-secondary-600 [&::-webkit-scrollbar-thumb]:rounded-[10px]">
               {
                 tips.map((tag, index) => (
                   <li onClick={() => handleTagSelect(tag.id as number)} key={index} className="flex mt-2 first-of-type:mt-0 cursor-pointer">
@@ -100,8 +100,8 @@ export function TagsControl({ tags, onChange, value }: ITagsControlProps): React
           <ul className="flex flex-wrap max-w-[796px] ml-[-20px]">
             {
               value.map((tag, index) => (
-                <li key={index} className="flex items-center h-[34px] border-1 border-but-primary border-solid rounded-[12px] pl-[22px] pr-3.5 ml-5 mt-3">
-                  <p className="text-[18px] text-but-primary">{[...tags, ...createdTags].find((el) => el.id === tag)?.name}</p>
+                <li key={index} className="flex items-center h-[34px] border-1 border-main-violet-600 border-solid rounded-[12px] pl-[22px] pr-3.5 ml-5 mt-3">
+                  <p className="text-[18px] text-main-violet-600">{[...tags, ...createdTags].find((el) => el.id === tag)?.name}</p>
                   <div onClick={() => handleTagDelete(tag)} className="w-6 h-6 bg-close-cross-purple bg-center bg-no-repeat ml-1.5 cursor-pointer"></div>
                 </li>
               ))

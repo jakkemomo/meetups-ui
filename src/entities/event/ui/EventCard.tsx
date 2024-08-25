@@ -1,6 +1,6 @@
-import {ReactElement, useEffect, useState} from "react";
+import {MouseEvent, ReactElement, useEffect, useState} from "react";
 import {IEvent} from "../model/types";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Svg from "@/shared/ui/Svg";
 import { useLikeEventMutation, useUnlikeEventMutation } from "../api/eventApi";
 import cx from 'classnames';
@@ -18,10 +18,14 @@ export function EventCard({
 }: IEventCard): ReactElement {
   const [isFavorite, setIsFavorite] = useState(event.is_favorite);
 
+  const navigate = useNavigate();
+
   const [likeEvent] = useLikeEventMutation();
   const [unlikeEvent] = useUnlikeEventMutation();
 
-  const onLike = () => {
+  const onLike = (e: MouseEvent<SVGSVGElement>) => {
+    e.stopPropagation();
+
     setIsFavorite(true);
 
     likeEvent(event.id)
@@ -30,7 +34,9 @@ export function EventCard({
       .catch(() => setIsFavorite(false));
   }
 
-  const onUnlike = () => {
+  const onUnlike = (e: MouseEvent<SVGSVGElement>) => {
+    e.stopPropagation();
+
     setIsFavorite(false);
 
     unlikeEvent(event.id)
@@ -46,12 +52,16 @@ export function EventCard({
   return (
       <div className={
         cx(
-          "w-full flex flex-col", {
+          "relative w-full flex flex-col my-3 ml-2.5", {
             'max-w-[225px] mr-[40px]': size === 'sm',
             'max-w-[270px] mr-[45px]': size === 'lg'
           },
           extraCardClass
         )}>
+          <div
+            onClick={() => navigate(`/events/${event.id}`)}
+            className="absolute inset-[-10px] hoverscreen:hover:border-1 border-solid border-main-violet-600 hoverscreen:hover:rounded-def cursor-pointer z-10"
+          />
           <div className="flex justify-between">
             <p className={
               cx(
@@ -64,50 +74,48 @@ export function EventCard({
               id="heart-icon"
               className={
                 cx(
-                "cursor-pointer", {
+                "cursor-pointer z-20 duration-150 hoverscreen:hover:opacity-70", {
                   'w-5 h-5': size === 'sm',
                   'w-6 h-6': size === 'lg'
                 }
               )}
               viewBox="0 0 24 24"
-              onClick={isFavorite ? onUnlike : onLike}
-              extraUseClass={isFavorite ? "!fill-but-primary stroke-but-primary" : "stroke-text-black"}
+              onClick={isFavorite ? (e) => onUnlike(e) : (e) => onLike(e)}
+              extraUseClass={isFavorite ? "!fill-main-violet-600 stroke-main-violet-600" : "stroke-text-black"}
             />
           </div>
-          <Link to={`/events/${event.id}`}>
-            <figure className={
-              cx(
-                "group flex flex-col cursor-pointer rounded-12 max-h-[188px] mt-[7px] overflow-hidden", {
-                  'max-h-[157px]': size === 'sm',
-                  'max-h-[188px]': size === 'lg'
-                }
-              )}>
-                <img className={
-                  cx(
-                    "group-hover:scale-105 duration-300 ease-in-out rounded-t-def object-cover", {
-                      'h-[120px]': size === 'sm',
-                      'h-[143px]': size === 'lg'
-                    }
-                  )
-                } src={`https://storage.googleapis.com/meetups-dev/media/${event.image_url}`} alt={`Изображение ивента ${event.name}`} />
-                <div className={
-                  cx(
-                    `h-[45px] bg-gray rounded-b-def flex items-center justify-center pl-[16px] pr-[7px] relative ${event.name.length > 21 && "before:w-[60px] before:rounded-b-[12px] before:absolute before:right-0 before:h-full before:bg-text-fade-out"}`, {
-                      'h-[37px]': size === 'sm',
-                      'h-[45px]': size === 'lg'
-                    }
-                  )}>
-                    <figcaption className={
-                      cx(
-                        "group-hover:font-bold capitalize font-semibold text-text-black overflow-hidden whitespace-nowrap text-clip", {
-                          'text-[16px]': size === 'sm',
-                          'text-[20px]': size === 'lg'
-                        }
-                      )
-                    }>{event.name}</figcaption>
-                </div>
-            </figure>
-          </Link>
+          <figure className={
+            cx(
+              "flex flex-col cursor-pointer rounded-12 max-h-[188px] mt-[7px] overflow-hidden", {
+                'max-h-[157px]': size === 'sm',
+                'max-h-[188px]': size === 'lg'
+              }
+            )}>
+              <img className={
+                cx(
+                  "duration-300 ease-in-out rounded-t-def object-cover", {
+                    'h-[120px]': size === 'sm',
+                    'h-[143px]': size === 'lg'
+                  }
+                )
+              } src={`https://storage.googleapis.com/meetups-dev/media/${event.image_url}`} alt={`Изображение ивента ${event.name}`} />
+              <div className={
+                cx(
+                  `h-[45px] bg-secondary-100 rounded-b-def flex items-center justify-center relative ${event.name.length > 21 && "before:w-[60px] before:rounded-b-[12px] before:absolute before:right-0 before:h-full before:bg-text-fade-out pl-4"}`, {
+                    'h-[37px]': size === 'sm',
+                    'h-[45px]': size === 'lg'
+                  }
+                )}>
+                  <figcaption className={
+                    cx(
+                      "capitalize font-semibold text-text-black overflow-hidden whitespace-nowrap text-clip", {
+                        'text-[16px]': size === 'sm',
+                        'text-[20px]': size === 'lg'
+                      }
+                    )
+                  }>{event.name}</figcaption>
+              </div>
+          </figure>
           <div className={
             cx(
               "flex justify-between", {

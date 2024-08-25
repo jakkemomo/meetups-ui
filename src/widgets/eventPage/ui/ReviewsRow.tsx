@@ -25,10 +25,10 @@ export function ReviewsRow({reviews, rating}: IReviewsRow): ReactElement {
         )
       }
 
-      {reviews && reviews.length > 0 ? (
+      {reviews.length > 0 ? (
         <ReviewSlider reviews={reviews} slidesLength={3}></ReviewSlider>
       ) : (
-        <div>No reviews yet.</div>
+        <div>У ивента пока нет отзывов</div>
       )}
     </section>
   )

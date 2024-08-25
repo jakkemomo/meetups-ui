@@ -15,12 +15,12 @@ import {useMyDetailsQuery} from '@/entities/profile/api/profileApi';
 import {isFavoriteSetted, isParticipantSetted} from '@/entities/event/model/eventInfoSlice.ts';
 import {useAppDispatch, useAppSelector} from '@/shared/model';
 import {EventPageContext} from './model/EventPageContext';
-import {mockReviews} from './model/consts';
 import {useGetReviewsQuery} from '@/entities/review/api/reviewApi';
 import { ParticipantsPopup } from '@/entities/eventParticipants';
 import { SliderEmptyElem } from '@/shared';
 import { useLogServerError } from '@/shared/lib/hooks';
 import { getEventsCards } from '@/widgets/EventsList/model/getEventsCards';
+import { mockReviews } from './model/consts';
 
 export function EventPage(): ReactElement {
   const [isPageReady, setIsPageReady] = useState(false);
@@ -50,6 +50,7 @@ export function EventPage(): ReactElement {
   } = useGetEventsQuery({ ordering: '-average_rating' });
 
   const {
+    data: reviews={results: []},
     error: reviewsError,
     isLoading: isReviwesLoading,
     isError: isReviewsError

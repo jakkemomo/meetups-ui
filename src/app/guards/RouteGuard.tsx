@@ -1,5 +1,5 @@
 import { useMyDetailsQuery } from "@/entities/profile/api/profileApi";
-import { ReactElement } from "react";
+import { ReactElement, useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
 
 interface GuestGuardProps {
@@ -8,10 +8,22 @@ interface GuestGuardProps {
 }
 
 function RouteGuard({ children, type }: GuestGuardProps) {
+  const [isError, setIsError] = useState(false);
+
   const {
-    isError,
+    isError: isProfileError,
     isSuccess
   } = useMyDetailsQuery();
+
+  useEffect(() => {
+    if (isProfileError) {
+      setIsError(true);
+    }
+
+    if (isSuccess) {
+      setIsError(false);
+    }
+  }, [isSuccess, isProfileError]);
 
   if (isError && type === 'guest') {
     return <Navigate to="/" replace />

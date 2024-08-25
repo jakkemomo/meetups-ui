@@ -25,7 +25,7 @@ export function FormWrapper({children, headerText, redirectType}: ILoginFormProp
   return (
     <div className={`flex flex-col items-center ${isMobileDevice ? classNames.container.mobile : classNames.container.desktop}`}>
       <div className='flex flex-col items-center justify-center w-full'>
-        <p className={`text-main-purple font-bold w-11/12 md:w-3/4 text-center text-38 md:text-40 pb-10 mb:pb-[37px`}>
+        <p className={`text-main-violet-600 font-bold w-11/12 md:w-3/4 text-center text-38 md:text-40 pb-10 mb:pb-[37px`}>
           {headerText}
         </p>
         {children}

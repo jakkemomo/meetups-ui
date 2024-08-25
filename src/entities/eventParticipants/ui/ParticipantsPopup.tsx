@@ -147,7 +147,7 @@ function ParticipantsPopup({ eventId, owner, isOpen, handleClose }: IParticipant
                   next={() => setOffset((state) => state + 10)}
                   loader={<p>Loading...</p>}
                   height={372}
-                  className="pr-[22px] rounded-l-[20px] [&::-webkit-scrollbar]:w-1 [&::-webkit-scrollbar-track]:bg-[#F3F3F5] [&::-webkit-scrollbar-track]:rounded-[10px] [&::-webkit-scrollbar-thumb]:bg-text-light-gray [&::-webkit-scrollbar-thumb]:rounded-[10px]"
+                  className="pr-[22px] rounded-l-[20px] [&::-webkit-scrollbar]:w-1 [&::-webkit-scrollbar-track]:bg-[#F3F3F5] [&::-webkit-scrollbar-track]:rounded-[10px] [&::-webkit-scrollbar-thumb]:bg-secondary-600 [&::-webkit-scrollbar-thumb]:rounded-[10px]"
                 >
                   {
                     collectPartiсipants().participants.map((el) => (

@@ -10,9 +10,11 @@ import { EventsList } from '@/widgets/EventsList';
 import { getEventsCards } from '@/widgets/EventsList/model/getEventsCards';
 import { MapWidget } from '@/widgets/mapWidget';
 import { useGetMarkersQuery } from '@/widgets/mapWidget/api/markersApi';
-import { ReactElement } from 'react';
+import { ReactElement, useEffect, useState } from 'react';
 
 export function HomePage(): ReactElement {
+  const [isEventsSearched, setIsEventsSearched] = useState(false);
+
   const {
     search,
     checkedCategories,
@@ -69,6 +71,14 @@ export function HomePage(): ReactElement {
   useLogServerError(isTopEventsError, 'лучших ивентов', topEventsError);
   useLogServerError(isCategoriesError, 'категорий', categoriesError);
 
+  useEffect(() => {
+    if (search) {
+      setIsEventsSearched(true);
+    } else {
+      setIsEventsSearched(false);
+    }
+  }, [events]);
+
   const eventsList = getEventsCards(events.results, 'lg');
   const topEventsList = getEventsCards(topEvents.results, 'lg');
 
@@ -78,7 +88,7 @@ export function HomePage(): ReactElement {
       <HomePageTitle />
       <DateSlider isLoading={isEventsLoading} isFetching={isEventsFetching}/>
       <EventsList
-        listTitle="Ближайшие"
+        listTitle={isEventsSearched ? "Найдено" : "Ближайшие"}
         isLoading={isEventsLoading}
         extraClasses="mt-14 mb-[50px]"
         slidesLength={4}

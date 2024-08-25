@@ -29,7 +29,7 @@ export function PriceControl({ currencies }: IPriceControlProps): ReactElement {
         extraErrorClass="absolute bottom-[-20px] left-0"
         type='number'
         placeholder={`${isPriceActive ? "12" : ""}`}
-        className={`w-[90px] max-h-11 text-[18px] mr-1.5 ml-3.5 ${!isPriceActive && "bg-select-disable"}`}
+        className={`w-[90px] max-h-11 text-[18px] mr-1.5 ml-3.5 ${!isPriceActive && "bg-secondary-300"}`}
         size="sm"
         extraBoxClass={`!flex-row !items-center relative`}
         extraInputClass={`text-center [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none ${!isPriceActive && "text-white"}`}
@@ -43,7 +43,7 @@ export function PriceControl({ currencies }: IPriceControlProps): ReactElement {
         render={({ field: { onChange, value } }) => (
           <SelectInput
             extraBoxClass={'w-[90px] my-auto'}
-            extraContentClass={`pl-[14px] pr-[10px] ${isPriceActive ? "" : "bg-select-disable cursor-default"}`}
+            extraContentClass={`pl-[14px] pr-[10px] ${isPriceActive ? "" : "bg-secondary-300 cursor-default"}`}
             extraDropdownClass={'w-[90px]'}
             isDisabled={!isPriceActive}
             options={currencies}

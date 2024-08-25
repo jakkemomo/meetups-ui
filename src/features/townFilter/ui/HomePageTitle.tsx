@@ -48,7 +48,7 @@ export function HomePageTitle(): ReactElement {
             options={options}
             onChange={onSelectedOptionChange}
             extraContentClass="bg-transparent w-[unset] !text-[45px] text-text-black font-semibold !px-2 underline"
-            extraDropdownClass="w-full pr-[22px] !text-[25px] leading-[33px] text-text-black font-medium max-h-[400px] top-[50px]"
+            extraDropdownClass="w-full !text-[25px] leading-[33px] text-text-black font-medium max-h-[400px] top-[50px]"
           />
         )
       }

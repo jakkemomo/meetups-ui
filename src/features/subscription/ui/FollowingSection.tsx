@@ -36,7 +36,7 @@ function FollowingSection({ title, items, isLoading }: FollowingSectionProps): R
           ))}
         </ul>
       ) : items.length === 0 ? (
-        <p className="text-gray-500 pb-10 pt-10">Не найдено</p>
+        <p className="text-secondary-600 pb-10 pt-10">Не найдено</p>
       ) : (
         <>
           <ul className='mt-4 flex flex-col gap-4'>

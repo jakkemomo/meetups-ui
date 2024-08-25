@@ -31,12 +31,12 @@ export function MainImageControl({ error, value, onChange }: IMainImageControlPr
           ) : (
             <>
               <img className="mt-[45px]" src={addImageIcon} alt="Поле для загрузки фото" />
-              <p className="text-[18px] font-light text-text-light-gray mt-5 mb-[22px] whitespace-nowrap leading-[22.59px]">Загрузите главное фото</p>
+              <p className="text-[18px] font-light text-secondary-600 mt-5 mb-[22px] whitespace-nowrap leading-[22.59px]">Загрузите главное фото</p>
             </>
           )
         }
       </FileInputWithDrag>
-      {error && <p className={"text-input-error max-w-[460px] ml-[22px] mt-2.5 leading-[20px]"}>{error}</p>}
+      {error && <p className={"text-system-500 max-w-[460px] ml-[22px] mt-2.5 leading-[20px]"}>{error}</p>}
     </div>
   )
 }

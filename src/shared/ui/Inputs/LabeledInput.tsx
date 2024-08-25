@@ -43,7 +43,7 @@ export function LabeledInput({
       />
       {
         rest?.isError && (
-          <p className={`text-input-error leading-[20px] mt-[7px] ${extraErrorClass}`}>{errorMessage}</p>
+          <p className={`text-system-500 leading-[20px] mt-[7px] ${extraErrorClass}`}>{errorMessage}</p>
         )
       }
     </div>

@@ -76,7 +76,7 @@ export function MainInfoControl({ categories }: IMainInfoProps): ReactElement {
         extraBoxClass={'mt-[18px]'}
         maxLength={250}
       />
-      {errors.description && <p className="text-input-error mt-[7px] ml-[22px]">{errors.description.message}</p>}
+      {errors.description && <p className="text-system-500 mt-[7px] ml-[22px]">{errors.description.message}</p>}
     </>
   )
 }

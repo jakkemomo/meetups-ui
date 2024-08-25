@@ -9,7 +9,7 @@ export function BackButton(): ReactElement {
   return (
       <Button
         onClick={() => navigate(-1)}
-        extraClass="text-but-primary text-[18px] font-semibold hoverscreen:hover:opacity-70 !bg-white"
+        extraClass="text-main-violet-600 text-[18px] font-semibold hoverscreen:hover:opacity-70 !bg-white"
       >
         <Svg className="w-6 h-6 mr-2" id="chevron-left-purple" />
         Назад

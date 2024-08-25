@@ -31,13 +31,13 @@ export function SwitchInput({ labelText, extraBoxClass, onChange, value }: ISwit
           checked={enabled}
           onChange={onSwitch}
           className={`${
-            enabled ? 'bg-but-primary' : 'bg-custom-gray'
+            enabled ? 'bg-main-violet-600' : 'bg-secondary-100'
           } relative inline-flex h-[30px] w-[60px] items-center rounded-full transition-colors `}
         >
           <span
             className={`${
-              enabled ? 'translate-x-8 bg-white' : 'translate-x-1 bg-toggle-color'
-            } inline-block h-[22px] w-[22px] transform rounded-full  transition-transform`}
+              enabled ? 'translate-x-8 bg-white' : 'translate-x-1 bg-secondary-400'
+            } inline-block h-[22px] w-[22px] transform rounded-full transition-transform`}
           />
         </Switch>
       </div>

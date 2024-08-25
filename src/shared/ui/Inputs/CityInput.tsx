@@ -64,12 +64,12 @@ export function CityInput({
         extraLabelClass="text-[20px]"
       />
       {cities.length > 0 && (
-        <ul className="w-full flex flex-col absolute top-[90px] bg-custom-gray rounded-[10px] z-50">
+        <ul className="w-full flex flex-col absolute top-[90px] bg-secondary-100 rounded-[10px] z-50">
           {cities.map((city) => {
             return (
               <li
                 key={city.id}
-                className="px-2 py-1.5 cursor-pointer hover:bg-gray rounded-[10px]"
+                className="px-2 py-1.5 cursor-pointer hover:bg-secondary-100 rounded-[10px]"
                 onClick={() => onSuggestionClick(city)}
               >
                 {city.name}

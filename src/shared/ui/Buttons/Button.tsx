@@ -1,30 +1,27 @@
-import { ReactElement, ReactNode } from "react";
+import { ComponentPropsWithRef, ReactElement, ReactNode } from "react";
 import cx from 'classnames';
 
-export interface IButtonProps {
-  onClick?: () => void;
+type NativeButtonProps = ComponentPropsWithRef<'button'>
+
+export interface IButtonProps extends NativeButtonProps {
   children?: ReactNode;
-  type?: 'submit' | 'button' | 'reset';
   size?: 'none' | 'sm' | 'md' | 'lg' | 'xl';
-  importance?: 'none' | 'primary' | 'secondary' | 'primary-opposite';
+  importance?: 'none' | 'primary' | 'secondary' | 'tetriary';
   extraClass?: string;
-  disabled?: boolean;
 }
 
 export function Button({
-  onClick,
   children,
-  type = 'button',
   size = 'none',
   importance = 'none',
   extraClass = '',
-  disabled = false
+  disabled = false,
+  ...other
 }: IButtonProps): ReactElement {
   return (
     <button
-      type={type}
+      {...other}
       disabled={disabled}
-      onClick={!disabled ? onClick : undefined}
       className={
         cx(
           'relative inline-flex items-center justify-center select-none outline-none overflow-hidden duration-150 text-[18px] leading-def',
@@ -35,10 +32,11 @@ export function Button({
             'px-[45px] py-2.5': size === 'lg',
             'w-full py-3.5': size === 'xl',
             'bg-transparent text-black': importance === 'none',
-            'bg-but-primary hoverscreen:hover:bg-but-primary-hover active:bg-but-primary-active text-white font-semibold rounded-def': importance === 'primary',
-            'bg-but-second hoverscreen:hover:bg-but-second-hover active:bg-but-second-active text-main-violet font-semibold rounded-def': importance === 'secondary',
-            'bg-but-orange hoverscreen:hover:opacity-70': importance === 'primary-opposite',
-            'cursor-default !bg-but-disable !text-white pointer-events-none': disabled
+            'bg-main-violet-600 hoverscreen:hover:bg-main-violet-700 active:bg-main-violet-800 text-white font-semibold rounded-def': importance === 'primary',
+            'bg-main-violet-100 hoverscreen:hover:bg-main-violet-200 active:bg-main-violet-300 text-main-violet-600 font-semibold rounded-def': importance === 'secondary',
+            'bg-white border-main-violet-300 border-1 border-solid hoverscreen:hover:bg-main-violet-100 active:bg-main-violet-200 text-main-violet-600 font-semibold rounded-def': importance === 'tetriary',
+            'cursor-default !bg-secondary-300 !text-white pointer-events-none': disabled && importance !== 'tetriary',
+            'cursor-default !bg-white !text-secondary-300 border-secondary-300 border-1 border-solid pointer-events-none': disabled && importance === 'tetriary',
           },
           extraClass
         )

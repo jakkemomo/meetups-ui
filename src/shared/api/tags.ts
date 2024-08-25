@@ -4,3 +4,18 @@ export const PARTICIPANTS_TAG = 'PARTICIPANTS_TAG';
 export const EVENTS_TAG = 'EVENTS_TAG';
 export const FOLLOW_TAG = 'FOLLOW_TAG';
 export const CITIES_TAG = 'CITIES_TAG';
+export const FOLLOWERS_TAG = 'FOLLOWERS_TAG';
+export const FOLLOWINGS_TAG = 'FOLLOWINGS_TAG';
+export const FOLLOW_STATUS_TAG = 'FOLLOW_STATUS_TAG';
+
+export const allTags = [
+  'SESSION_TAG',
+  'PROFILE_TAG',
+  'PARTICIPANTS_TAG',
+  'EVENTS_TAG',
+  'FOLLOW_TAG',
+  'CITIES_TAG',
+  'FOLLOWERS_TAG',
+  'FOLLOWINGS_TAG',
+  'FOLLOW_STATUS_TAG'
+]

@@ -1,8 +1,8 @@
 export const settings = {
-  slidesToShow: 22,
+  slidesToShow: 21,
   slidesToScroll: 5,
   speed: 500,
-  className: "mt-3",
+  className: "mt-1.5 ml-[-8px]",
 };
 
 export const currentMonth = new Date().toLocaleString("default", {

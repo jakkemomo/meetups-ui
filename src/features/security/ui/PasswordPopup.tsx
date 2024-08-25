@@ -17,10 +17,10 @@ function PasswordPopup(): ReactElement {
       <Svg
         id="password-lock-icon"
         className="w-[64px] h-[64px]"
-        extraUseClass="!stroke-but-primary"
+        extraUseClass="!stroke-main-violet-600"
         viewBox="0 0 24 24"
       />
-      <h2 className="text-[30px] font-semibold text-center leading-[38px] mt-[30px]">Ваш пароль <br /><span className="text-but-primary">обновлен</span></h2>
+      <h2 className="text-[30px] font-semibold text-center leading-[38px] mt-[30px]">Ваш пароль <br /><span className="text-main-violet-600">обновлен</span></h2>
       <Button
         onClick={() => dispatch(securityPopupSetted({ isOpen: false }))}
         size="md"

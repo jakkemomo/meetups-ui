@@ -1,13 +1,17 @@
 import { useLayoutEffect, useRef, useState } from "react"
 
-interface OverflowY {
+interface IOverflowYReturn {
   ref: React.RefObject<HTMLDivElement>
   isOverflowY: boolean
 }
 
-export const useOverflowY = (
-  callback?: (hasOverflow: boolean) => void
-): OverflowY => {
+interface IOverflowYProps {
+  callback?: (hasOverflow: boolean) => void,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  deps?: any[]
+}
+
+export const useOverflowY = ({ callback, deps = [] }: IOverflowYProps): IOverflowYReturn => {
   const [isOverflowY, setIsOverflowY] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
@@ -19,7 +23,8 @@ export const useOverflowY = (
       setIsOverflowY(hasOverflowY);
       callback?.(hasOverflowY);
     }
-  }, [callback, ref])
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, react-hooks/exhaustive-deps
+  }, [callback, ref, ...deps])
 
   return { ref, isOverflowY }
 }

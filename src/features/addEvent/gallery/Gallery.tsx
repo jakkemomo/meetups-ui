@@ -32,7 +32,7 @@ export function Gallery({ onChange, value }: IGalleryProps): ReactElement {
           ) : (
             <div className="flex items-end py-[13px]">
               <div className="w-6 h-6 bg-gallery-icon bg-center bg-no-repeat"></div>
-              <p className="text-text-light-gray text-[18px] leading-[22.59px] ml-[12px]">Загрузите дополнительные материалы</p>
+              <p className="text-secondary-600 text-[18px] leading-[22.59px] ml-[12px]">Загрузите дополнительные материалы</p>
             </div>
           )
         }

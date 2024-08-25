@@ -77,6 +77,7 @@ export function HomePage(): ReactElement {
     } else {
       setIsEventsSearched(false);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [events]);
 
   const eventsList = getEventsCards(events.results, 'lg');

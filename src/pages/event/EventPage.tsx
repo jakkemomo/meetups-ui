@@ -20,7 +20,6 @@ import { ParticipantsPopup } from '@/entities/eventParticipants';
 import { SliderEmptyElem } from '@/shared';
 import { useLogServerError } from '@/shared/lib/hooks';
 import { getEventsCards } from '@/widgets/EventsList/model/getEventsCards';
-import { mockReviews } from './model/consts';
 
 export function EventPage(): ReactElement {
   const [isPageReady, setIsPageReady] = useState(false);
@@ -114,7 +113,7 @@ export function EventPage(): ReactElement {
           <EventDescription event={event}/>
           <CreatorDetails creator={event.created_by}/>
           <Location event={event}/>
-          <ReviewsRow reviews={mockReviews} rating={event.average_rating}/>
+          <ReviewsRow reviews={reviews.results} rating={event.average_rating}/>
           <EventsList
             listTitle="Рекомендации для Вас"
             isLoading={isTopEventsLoading}

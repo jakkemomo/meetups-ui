@@ -1,5 +1,10 @@
 import { ReactElement } from "react";
 import { IChatMessage, IParticipant } from "../../model/types";
+import answer from "../../../../../public/images/answer.svg";
+import edit from "../../../../../public/images/edit-02.svg";
+import favorites from "../../../../../public/images/favorites.svg";
+import checked from "../../../../../public/images/check-contained.svg";
+import { useNavigate } from "react-router-dom";
 
 interface IChatMessageProps {
   sender?: IParticipant;
@@ -14,34 +19,51 @@ interface IChatMessageProps {
 
 function ChatMessage({ sender, message, isOwner, isNewDate, userImage, editingMessage, isCheckVisible, choosingMessage}: IChatMessageProps): ReactElement {
   const messageDate = new Date(message.created_at);
+  const navigate = useNavigate();
 
   return (
     <div className="relative group flex flex-col">
       {isNewDate && <p className="self-center">{messageDate.toLocaleString('ru-RU', { day: 'numeric', month: 'short' })}</p>}
       {isOwner ? (
         <div className="absolute top-0 left-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex gap-3">
-          <button className="w-6 h-6 mt-6 bg-[url('../../../../../public/images/favorites.svg')] bg-no-repeat"></button>
-          <button
-            className="w-6 h-6 mt-6 bg-[url('../../../../../public/images/edit-02.svg')]"
+          <img 
+            src={favorites} 
+            alt="закрепить"
+            className="w-6 h-6 mt-6 cursor-pointer" 
+          />
+          <img
+            src={edit}
+            alt="редактировать"
+            className="w-6 h-6 mt-6 cursor-pointer"
             onClick={() => editingMessage(message.id.toString())}
-          ></button>
+          />
         </div>
       ) : (
         <div className="absolute top-0 right-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex gap-3">
-          <button className="w-5 h-5 mt-6 bg-center bg-[url('../../../../../public/images/answer.svg')]"></button>
-          <button className="w-6 h-6 mt-6 bg-[url('../../../../../public/images/favorites.svg')] bg-no-repeat"></button>
+          <img 
+            src={answer}
+            alt="ответить"
+            className="w-5 h-5 mt-6 cursor-pointer" 
+          />
+          <img 
+            src={favorites} 
+            alt="закрепить"
+            className="w-6 h-6 mt-6 cursor-pointer" 
+          />
         </div>
       )}
        <div className={`flex items-start mb-2.5 ${isOwner ? "flex-row-reverse" : ""}`}>
         <button
-          className="w-6 h-6 bg-no-repeat"
-          style={{
-            backgroundImage: isCheckVisible
-              ? "url('../../../../../public/images/check-contained.svg')"
-              : "none",
-          }}
+          className="w-6 h-6 cursor-pointer"
           onClick={() => choosingMessage(message.id.toString())}
-        />
+        >
+          {isCheckVisible && 
+            <img
+              className="w-6 h-6 cursor-pointer"
+              src={checked}
+            />
+          }
+        </button>
         <img 
           className="w-[50px] h-[50px] rounded-circle" 
           src={`https://storage.googleapis.com/meetups-dev/media/${userImage}`} 
@@ -49,10 +71,15 @@ function ChatMessage({ sender, message, isOwner, isNewDate, userImage, editingMe
         />
         <div className={`flex flex-col items-start ml-[22px] ${isOwner ? "items-end !ml-0 mr-[22px]" : ""}`}>
           <div className={`flex items-center mt-2.5 ${isOwner ? "flex-row-reverse" : ""}`}>
-            <h3 className={`font-medium leading-[20px] w-[160px] truncate ${isOwner ? "!w-6 " : ""}`}>{isOwner ? 'Вы' : sender?.username}</h3>
+            <h3 
+              className={`font-medium leading-[20px] w-[160px] truncate cursor-pointer ${isOwner ? "!w-6 " : ""}`}
+              onClick={() => navigate(`/profile/${sender?.id}`)}
+              >
+                {isOwner ? 'Вы' : sender?.username}
+              </h3>
             <p className={`text-[14px] leading-[18px] ml-[22px] text-placeholder-gray ${isOwner ? "!ml-0 mr-[22px]" : ""}`}>{messageDate.toLocaleString('ru-RU', {hour: 'numeric', minute: 'numeric'})}</p>
           </div>
-          <div className={`bg-custom-gray p-3.5 rounded-b-def rounded-se-def mt-2.5 max-w-[290px] ${isOwner ? "!rounded-se-none rounded-s-def !bg-but-primary text-white" : ""}`}>
+          <div className={`p-3.5 rounded-b-def rounded-se-def mt-2.5 max-w-[290px] ${isOwner ? "rounded-se-none rounded-s-def bg-main-violet-600 text-white" : "bg-secondary-100"}`}>
             <p className="break-words">{message.message_text}</p>
           </div>
         </div>

@@ -13,7 +13,8 @@ export interface IChatDetails {
     image_url: string,
     type: ChatType,
     last_message_text: string,
-    last_message_is_owner: boolean
+    last_message_is_owner: boolean,
+    last_message_created_at: string
 }
 
 export interface IChatRetrieve {

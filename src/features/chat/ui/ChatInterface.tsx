@@ -1,13 +1,17 @@
 import { ChangeEvent, ReactElement, useState, KeyboardEvent } from "react";
+import { useNavigate } from "react-router-dom";
 import { Input } from "@/shared";
 import Svg from "@/shared/ui/Svg";
-import send from '../../../../public/images/send.svg';
 import InfiniteScroll from "react-infinite-scroll-component";
 import { ChatMessage } from "@/entities/chat/chatMessage";
 import { useDeleteMessageMutation, useSendMessageMutation, useUpdateMessageMutation } from "@/entities/chat/api/chatsApi";
 import { useMyDetailsQuery } from "@/entities/profile/api/profileApi";
 import { IChatMessage, IParticipant } from "@/entities/chat/model/types";
 import { getMessageText } from "../lib/getMessageText";
+import send from '../../../../public/images/send.svg';
+import favorites from '../../../../public/images/favorites.svg';
+import trash from '../../../../public/images/trash-03.svg';
+import close from '../../../../public/images/close-cross.svg';
 
 interface IContactsListProps {
   chatId: number;
@@ -16,9 +20,11 @@ interface IContactsListProps {
 }
 
 const ChatInterface = ({ chatId, messages, participants }: IContactsListProps): ReactElement => {
+  const navifate = useNavigate();
+
   const [editingMessageId, setEditingMessageId] = useState<string>('');
   const [messageText, setMessageText] = useState<string>('');
-  const [choosingMessages, setChoosingMessages] = useState<string[]>([]);
+  const [checkedMessages, setCheckedMessages] = useState<Record<string, boolean>>({});
 
   const [sendMessage] = useSendMessageMutation();
   const [updateMessage] = useUpdateMessageMutation();
@@ -72,17 +78,14 @@ const ChatInterface = ({ chatId, messages, participants }: IContactsListProps): 
   };
 
   const choosingMessage = (messageId: string) => {
-    setChoosingMessages((prevState) => {
-      if (prevState.includes(messageId)) {
-        return prevState.filter((mess) => mess !== messageId);
-      } else {
-        return [...prevState, messageId];
-      }
-    });
+    setCheckedMessages((prevState) => ({
+      ...prevState,
+      [messageId]: !prevState[messageId],
+    }));
   };
 
   const cleanChoosingMessages = () => {
-    setChoosingMessages([]);
+    setCheckedMessages({});
   }
 
   const editingMessage = (messageId: string, messageText: string) => {
@@ -111,31 +114,39 @@ const ChatInterface = ({ chatId, messages, participants }: IContactsListProps): 
   const companionInfo = participants.find((el) => el.id !== profileData?.id);
   const reversedMessages = [...messages].reverse();
 
+  const selectedMessagesCount = Object.values(checkedMessages).filter(Boolean).length;
+
   return (
     ///Возможно, здесь можно повыносить некоторый код в отдельные компоненты
     ///Пока не добавляла кнопки "Ответить и Переслать", т.к логики для них нет
     <div className="flex flex-col pl-[46px] w-full">
-      {choosingMessages.length > 0 && 
+      {selectedMessagesCount > 0 && 
         <div className="w-full flex items-center mb-5 justify-between">
         <div className="flex items-center gap-3">
-          <p className="text-[18px] font-regular leading-[18px]">{getMessageText(choosingMessages.length)}</p>
-          <button 
-            className="w-6 h-6 cursor-pointer bg-[url('../../../../public/images/close-cross.svg')] bg-no-repeat"
+          <p className="text-[18px] font-regular leading-[18px]">{getMessageText(selectedMessagesCount)}</p>
+          <img 
+            src={close}
+            alt="закрыть"
+            className="w-6 h-6 cursor-pointer"
             onClick={cleanChoosingMessages}
-            >
-            </button>
+          />
         </div>
         <div className="flex gap-3">
-          <button 
-            className="w-6 h-6 cursor-pointer bg-[url('../../../../public/images/trash-03.svg')] bg-no-repeat"
-            onClick={() => void deletingMessage(choosingMessages)}
-          >
-          </button>
-          <button className="w-6 h-6 cursor-pointer bg-[url('../../../../../public/images/favorites.svg')] bg-no-repeat"></button>
+          <img 
+            src={trash}
+            alt="удалить"
+            className="w-6 h-6 cursor-pointer"
+            onClick={() => void deletingMessage(Object.keys(checkedMessages).filter(id => checkedMessages[id]))}
+          />
+          <img 
+            src={favorites}
+            alt="закрепить"
+            className="w-6 h-6 cursor-pointer" 
+          />
         </div>
       </div>
       }
-      <div className="flex items-end w-full border-b-3 border-b-solid border-b-custom-gray pb-[18px]">
+      <div className="flex items-end w-full border-b-3 border-b-solid border-b-secondary-100 pb-[18px]">
         <figure className="flex items-center">
           <img
             className="w-[70px] aspect-square rounded-circle"
@@ -143,8 +154,13 @@ const ChatInterface = ({ chatId, messages, participants }: IContactsListProps): 
             alt={`Аватар пользователя ${companionInfo?.username}`}
           />
           <figcaption className="flex flex-col ml-[22px]">
-            <h2 className="text-[18px] rounded-circle font-medium leading-[23px]">{companionInfo?.username}</h2>
-            <p className="text-but-primary text-[14px] font-medium leading-[18px] relative mt-2 ml-[18px] before:absolute before:left-[-18px] before:top-1/2 before:translate-y-[-50%] before:rounded-circle before:w-2.5 before:aspect-square before:bg-but-primary">Онлайн</p>
+            <h2 
+              className="text-[18px] rounded-circle font-medium leading-[23px] cursor-pointer"
+              onClick={() => navifate(`/profile/${companionInfo?.id}`)}
+            >
+              {companionInfo?.username}
+            </h2>
+            <p className="text-main-violet-600 text-[14px] font-medium leading-[18px] relative mt-2 ml-[18px] before:absolute before:left-[-18px] before:top-1/2 before:translate-y-[-50%] before:rounded-circle before:w-2.5 before:aspect-square before:bg-main-violet-600">Онлайн</p>
           </figcaption>
         </figure>
         <Input
@@ -169,13 +185,13 @@ const ChatInterface = ({ chatId, messages, participants }: IContactsListProps): 
           {reversedMessages.map((el, index) => (
             <ChatMessage
               userImage={el.image_url}
-              key={index}
+              key={el.id}
               sender={participants.find((person) => person.id === el.created_by)}
               message={el}
               isOwner={el.created_by === profileData?.id}
               editingMessage={(id: string) => editingMessage(id, el.message_text)}
               choosingMessage={(id: string) => choosingMessage(id)}
-              isCheckVisible={choosingMessages.includes(el.id.toString())}
+              isCheckVisible={!!checkedMessages[el.id.toString()]}
               isNewDate={
                 index > 0 && new Date(`${el.created_at.slice(0, 10)} 24:00`) >
                             new Date(`${messages[index - 1].created_at.slice(0, 10)} 24:00`)

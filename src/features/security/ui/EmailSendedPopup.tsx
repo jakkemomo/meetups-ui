@@ -17,7 +17,7 @@ function EmailSendedPopup(): ReactElement {
       />
       <Svg id="email-sended-icon" className="w-[64px] h-[64px]" />
       <h2 className="text-[30px] font-semibold text-text-black leading-[44px] text-center mt-3.5">Вам пришло сообщение на почту<br />
-        <span className="text-but-primary">{newEmail}</span>
+        <span className="text-main-violet-600">{newEmail}</span>
       </h2>
       <p className="text-[18px] text-center mt-[30px]">Перейдите по ссылке в сообщении, <br />чтобы подтвердить почту</p>
       <Button
@@ -30,7 +30,7 @@ function EmailSendedPopup(): ReactElement {
       <p className="text-[18px] mt-[90px]">Не пришло сообщение?</p>
       <Button
         type="button"
-        extraClass="text-[18px] font-light text-but-primary mt-0.5 duration-150 hoverscreen:hover:opacity-70"
+        extraClass="text-[18px] font-light text-main-violet-600 mt-0.5 duration-150 hoverscreen:hover:opacity-70"
       >Прислать повторно</Button>
     </div>
   )

@@ -15,7 +15,6 @@ import {useMyDetailsQuery} from '@/entities/profile/api/profileApi';
 import {isFavoriteSetted, isParticipantSetted} from '@/entities/event/model/eventInfoSlice.ts';
 import {useAppDispatch, useAppSelector} from '@/shared/model';
 import {EventPageContext} from './model/EventPageContext';
-import {mockReviews} from './model/consts';
 import {useGetReviewsQuery} from '@/entities/review/api/reviewApi';
 import { ParticipantsPopup } from '@/entities/eventParticipants';
 import { SliderEmptyElem } from '@/shared';
@@ -50,6 +49,7 @@ export function EventPage(): ReactElement {
   } = useGetEventsQuery({ ordering: '-average_rating' });
 
   const {
+    data: reviews={results: []},
     error: reviewsError,
     isLoading: isReviwesLoading,
     isError: isReviewsError
@@ -113,7 +113,7 @@ export function EventPage(): ReactElement {
           <EventDescription event={event}/>
           <CreatorDetails creator={event.created_by}/>
           <Location event={event}/>
-          <ReviewsRow reviews={mockReviews} rating={event.average_rating}/>
+          <ReviewsRow reviews={reviews.results} rating={event.average_rating}/>
           <EventsList
             listTitle="Рекомендации для Вас"
             isLoading={isTopEventsLoading}

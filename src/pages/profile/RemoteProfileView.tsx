@@ -11,7 +11,7 @@ import {
 import { ProfileInfo, ProfileLoader } from "@/widgets/Profile/ProfileInfo";
 import { Button } from "@/shared/ui/Buttons/Button";
 import { ProfileFollowButton } from "@/widgets/ProfileButton";
-import { IFollowStatus } from "@/entities/profile/model/types";
+import { FollowStatusEnum } from "@/entities/profile/model/types";
 import {
   useGetUserCreatedEventsQuery,
   useGetUserFinishedEventsQuery,
@@ -27,7 +27,7 @@ import { useGetOrCreateUserDirectChatMutation } from "@/entities/chat/api/chatsA
 function RemoteProfileView(): ReactElement {
   const navigate = useNavigate();
   const { userId = "0" } = useParams();
-  const [followStatus, setFollowStatus] = useState<IFollowStatus>(undefined);
+  const [followStatus, setFollowStatus] = useState<FollowStatusEnum>(FollowStatusEnum.ACCEPTED);
 
   const {
     data: createdEvents = {results: []},
@@ -122,7 +122,7 @@ function RemoteProfileView(): ReactElement {
   const unfollowUser = () => {
     unfollow({ userId: userId })
       .unwrap()
-      .then(() => setFollowStatus('NOT_FOLLOWED'))
+      .then(() => setFollowStatus(FollowStatusEnum.NOT_FOLLOWED))
       .catch((err) =>
         console.log(err, "Отписаться от пользователя не получилось")
       );
@@ -170,7 +170,7 @@ function RemoteProfileView(): ReactElement {
               <Button
                 size="sm"
                 importance="none"
-                extraClass="text-but-primary text-red-700 pl-[0] hoverscreen:hover:opacity-70 !bg-white"
+                extraClass="text-main-violet-600 text-system-500 pl-[0] hoverscreen:hover:opacity-70 !bg-white"
               >
                 Пожаловаться
               </Button>

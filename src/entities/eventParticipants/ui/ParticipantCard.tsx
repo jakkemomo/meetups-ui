@@ -59,7 +59,7 @@ function ParticipantCard({
             onClick={isOwnerView ? () => onKick(participant.id) : undefined}
             iconId={isOwnerView ? "delete-person-icon" : "add-person-icon"}
             size="lg"
-            importance={isOwnerView ? "primary-opposite" : "primary"}
+            importance={isOwnerView ? "tetriary" : "primary"}
             extraClass="ml-auto"
             disabled={isButtonDisabled}
           />

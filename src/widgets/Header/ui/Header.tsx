@@ -37,7 +37,7 @@ export function Header(): ReactElement {
           <>
             <Button
               type='button'
-              extraClass="!p-0 text-but-primary font-semibold hoverscreen:hover:text-[#332FA0] active:text-[#332FA0]"
+              extraClass="!p-0 text-main-violet-600 font-semibold hoverscreen:hover:text-[#332FA0] active:text-[#332FA0]"
               onClick={onLoginClick}
             >Войти</Button>
             <Button

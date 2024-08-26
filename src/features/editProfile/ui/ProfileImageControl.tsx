@@ -39,7 +39,7 @@ export function ProfileImageControl({
       {error && (
         <p
           className={
-            "text-input-error max-w-[460px] ml-[22px] mt-2.5 leading-[20px]"
+            "text-system-500 max-w-[460px] ml-[22px] mt-2.5 leading-[20px]"
           }
         >
           {error}

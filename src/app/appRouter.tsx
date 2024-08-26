@@ -51,12 +51,12 @@ const appRouter = createBrowserRouter([
           <RemoteProfileView/>
         )
       },
-  {
+      {
         path: '/subscription',
         element: (
           <SubscriptionPage/>
         ),
-      },    
+      },
       {
         path: '/profile/edit',
         element: (
@@ -102,19 +102,19 @@ const appRouter = createBrowserRouter([
       {
         path: '/',
         element: (
-          <HomePage/>
+          <HomePage />
         ),
       },
       {
         path: '/events/:eventId',
         element: (
-          <EventPage/>
+          <EventPage />
         )
       },
       {
         path: '*',
         element: (
-          <NonFound/>
+          <NonFound />
         ),
       },
     ]

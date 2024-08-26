@@ -34,7 +34,7 @@ function TimeInput<T extends TimeValue>(
       shouldForceLeadingZeros={true}
       hourCycle={24}
       aria-labelledby={id}
-      className={`bg-custom-gray rounded-[10px] ${extraFieldClass} ${error ? "border-input-error border-1 border-solid" : ""}`}
+      className={`bg-secondary-100 rounded-[10px] ${extraFieldClass} ${error ? "border-system-500 border-1 border-solid" : ""}`}
       isInvalid={error ? true : false}
       id={id}
       isDisabled={isDisabled}

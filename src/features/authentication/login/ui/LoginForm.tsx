@@ -38,10 +38,11 @@ export function LoginForm({onComplete}: ILoginFormProps): ReactElement {
 
   const onSubmit = ({email, password}: LoginValidationSchema) => {
     setFormValuesInStorage(AUTH_FORM_VALUES_KEY, { email });
+
     loginTrigger({email, password})
-        .unwrap()
-        .then(() => onComplete?.())
-        .catch((error: {data: {detail: string}}) => setError('email', {message: error.data.detail}))
+      .unwrap()
+      .then(() => onComplete?.())
+      .catch((error: {data: {detail: string}}) => setError('email', {message: error.data.detail}))
   }
 
   const onResetPasswordClick = useCallback(() => {
@@ -71,7 +72,7 @@ export function LoginForm({onComplete}: ILoginFormProps): ReactElement {
           isError={!!errors.password}
           hookFormRegister={register('password')}
           size="md"
-          className="mt-3.5 text-[18px] !pr-5"
+          className="mt-3.5 text-[18px] w-full"
         />
         <Link
           to='/password/reset/'

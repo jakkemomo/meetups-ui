@@ -34,14 +34,14 @@ export function Input({
     <label
       className={
         cx(
-          'flex rounded-def bg-custom-gray cursor-text outline-none',
+          'flex rounded-def bg-secondary-100 cursor-text outline-none',
           {
-            'bg-select-disable cursor-default': disabled,
+            'bg-secondary-300 cursor-default': disabled,
             'p-0': size === 'none',
             'p-2.5': size === 'sm',
             'p-[13px]': size === 'md',
             'px-[22px] py-2.5': size === 'lg',
-            'border-1 border-input-error border-solid': isError,
+            'border-1 border-system-500 border-solid': isError,
           },
           className,
         )
@@ -59,7 +59,7 @@ export function Input({
         <input
           className={
             cx(
-              'w-full flex-1 outline-none bg-transparent placeholder:text-text-light-gray',
+              'w-full flex-1 outline-none bg-transparent placeholder:text-secondary-600',
               extraInputClass,
             )
           }

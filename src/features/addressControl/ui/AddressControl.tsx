@@ -105,12 +105,12 @@ export function AddressControl(): ReactElement {
           extraLabelClass="text-[20px]"
         />
         {predictionResults.length > 0 && (
-          <ul className="w-full flex flex-col absolute top-[90px] bg-custom-gray rounded-[10px] z-50">
+          <ul className="w-full flex flex-col absolute top-[90px] bg-secondary-100 rounded-[10px] z-50">
             {predictionResults.map(({place_id, description}) => {
               return (
                 <li
                   key={place_id}
-                  className="px-2 py-1.5 cursor-pointer hover:bg-gray rounded-[10px]"
+                  className="px-2 py-1.5 cursor-pointer hover:bg-secondary-100 rounded-[10px]"
                   onClick={() => handleSuggestionClick(place_id)}>
                   {description}
                 </li>

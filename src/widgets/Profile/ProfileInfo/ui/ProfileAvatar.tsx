@@ -17,7 +17,7 @@ function ProfileAvatar({
   return (
     <div
       onClick={onClick ? onClick : undefined}
-      className={`flex w-[250px] h-[250px] mt-[56px] rounded-circle shadow border border-select-disable place-content-center`}>
+      className={`flex w-[250px] h-[250px] mt-[56px] rounded-circle shadow border border-secondary-300 place-content-center`}>
       <div className={`relative flex w-[236px] h-[236px] bg-opacity-40 rounded-circle self-center ${extraClass ? extraClass : ""}`}>
         <img
           className="object-cover rounded-circle"

@@ -1,3 +1,4 @@
+import { FollowStatusEnum } from "@/entities/profile/model/types";
 import { Button } from "@/shared/ui/Buttons/Button";
 import { ReactElement } from "react";
 
@@ -6,7 +7,7 @@ export interface IProfileFollowButton {
   onUnFollow?: () => void;
   isPrivate?: boolean;
   isLoading?: boolean;
-  status?: string;
+  status?: FollowStatusEnum;
 }
 
 export function ProfileFollowButton({
@@ -16,10 +17,9 @@ export function ProfileFollowButton({
   isLoading,
   status,
 }: IProfileFollowButton): ReactElement {
-  
   return (
     <>
-      {status && status === "ACCEPTED" && (
+      {status && status === FollowStatusEnum.ACCEPTED && (
         <Button
           size="lg"
           importance="secondary"
@@ -30,7 +30,7 @@ export function ProfileFollowButton({
         </Button>
       )}
 
-      {isPrivate && (!status || status === "DECLINE") && (
+      {isPrivate && (!status || status === FollowStatusEnum.DECLINED) && (
         <Button
           size="lg"
           importance="primary"
@@ -41,13 +41,13 @@ export function ProfileFollowButton({
         </Button>
       )}
 
-      {status && status === "PENDING" && (
+      {status && status === FollowStatusEnum.PENDING && (
         <Button size="lg" importance="primary" disabled={true}>
           Заявка подана
         </Button>
       )}
 
-      {status === 'NOT_FOLLOWED' && !isPrivate && (
+      {status === FollowStatusEnum.NOT_FOLLOWED && !isPrivate && (
         <Button
           size="lg"
           importance="primary"

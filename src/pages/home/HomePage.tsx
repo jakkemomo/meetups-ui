@@ -10,9 +10,11 @@ import { EventsList } from '@/widgets/EventsList';
 import { getEventsCards } from '@/widgets/EventsList/model/getEventsCards';
 import { MapWidget } from '@/widgets/mapWidget';
 import { useGetMarkersQuery } from '@/widgets/mapWidget/api/markersApi';
-import { ReactElement } from 'react';
+import { ReactElement, useEffect, useState } from 'react';
 
 export function HomePage(): ReactElement {
+  const [isEventsSearched, setIsEventsSearched] = useState(false);
+
   const {
     search,
     checkedCategories,
@@ -69,6 +71,15 @@ export function HomePage(): ReactElement {
   useLogServerError(isTopEventsError, 'лучших ивентов', topEventsError);
   useLogServerError(isCategoriesError, 'категорий', categoriesError);
 
+  useEffect(() => {
+    if (search) {
+      setIsEventsSearched(true);
+    } else {
+      setIsEventsSearched(false);
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [events]);
+
   const eventsList = getEventsCards(events.results, 'lg');
   const topEventsList = getEventsCards(topEvents.results, 'lg');
 
@@ -78,11 +89,11 @@ export function HomePage(): ReactElement {
       <HomePageTitle />
       <DateSlider isLoading={isEventsLoading} isFetching={isEventsFetching}/>
       <EventsList
-        listTitle="Ближайшие"
+        listTitle={isEventsSearched ? "Найдено" : "Ближайшие"}
         isLoading={isEventsLoading}
         extraClasses="mt-14 mb-[50px]"
         slidesLength={4}
-        arrowsExtraClasses={{rightArrow: 'right-[-12px] top-[110px]', leftArrow: 'left-[-42px] top-[110px]'}}
+        arrowsExtraClasses={{rightArrow: 'right-[-22px] top-[110px]', leftArrow: 'left-[-42px] top-[110px]'}}
         emptyElement={<SliderEmptyElem text="Не найдено" />}
       >{eventsList}</EventsList>
       <MapWidget position={{ lat: 53.9, lng: 27.56667 }} zoom={14} markers={markers.features} isLoading={isMarkersLoading} />
@@ -91,7 +102,7 @@ export function HomePage(): ReactElement {
         isLoading={isTopEventsLoading}
         extraClasses="mt-[50px]"
         slidesLength={4}
-        arrowsExtraClasses={{rightArrow: 'right-[-12px] top-[110px]', leftArrow: 'left-[-42px] top-[110px]'}}
+        arrowsExtraClasses={{rightArrow: 'right-[-22px] top-[110px]', leftArrow: 'left-[-42px] top-[110px]'}}
         emptyElement={<SliderEmptyElem text="Не найдено" />}
       >{topEventsList}</EventsList>
       <EventsList
@@ -99,7 +110,7 @@ export function HomePage(): ReactElement {
         isLoading={isTopEventsLoading}
         extraClasses="mt-[50px]"
         slidesLength={4}
-        arrowsExtraClasses={{rightArrow: 'right-[-12px] top-[110px]', leftArrow: 'left-[-42px] top-[110px]'}}
+        arrowsExtraClasses={{rightArrow: 'right-[-22px] top-[110px]', leftArrow: 'left-[-42px] top-[110px]'}}
         emptyElement={<SliderEmptyElem text="Не найдено" />}
       >{topEventsList}</EventsList>
     </main>

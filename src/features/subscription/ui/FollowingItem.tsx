@@ -35,6 +35,7 @@ function FollowingItem(props: { following: ProfileFollowing }): ReactElement {
       </div>
       <Button
         extraClass="ml-auto text-main-violet-600 !text-[16px]"
+        onClick={() => createUserChat(String(props.following.user))}
       >
         Написать
       </Button>

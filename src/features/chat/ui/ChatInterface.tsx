@@ -94,19 +94,18 @@ const ChatInterface = ({ chatId, messages, participants }: IContactsListProps): 
   };
 
   const deletingMessage = async (messagesIds: string[]) => {
-    for (const messageId of messagesIds) {
-      try {
-        await deleteMessage({
-          message_id: Number(messageId),
-          chat_id: chatId,
-        }).unwrap();
-        if (editingMessageId === messageId) {
-          setEditingMessageId('');
-          setMessageText('');
-        }
-      } catch (error) {
-        console.error('Ошибка при удалении сообщения:', error);
+    try {
+      const numericMessageIds = messagesIds.map(id => Number(id));
+      await deleteMessage({
+        message_ids: numericMessageIds,
+        chat_id: chatId,
+      }).unwrap();
+      if (numericMessageIds.includes(+editingMessageId)) {
+        setEditingMessageId('');
+        setMessageText('');
       }
+    } catch (error) {
+      console.error('Ошибка при удалении сообщений:', error);
     }
     cleanChoosingMessages();
   };
@@ -117,7 +116,6 @@ const ChatInterface = ({ chatId, messages, participants }: IContactsListProps): 
   const selectedMessagesCount = Object.values(checkedMessages).filter(Boolean).length;
 
   return (
-    ///Возможно, здесь можно повыносить некоторый код в отдельные компоненты
     ///Пока не добавляла кнопки "Ответить и Переслать", т.к логики для них нет
     <div className="flex flex-col pl-[46px] w-full">
       {selectedMessagesCount > 0 && 

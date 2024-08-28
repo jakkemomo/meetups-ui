@@ -66,13 +66,14 @@ export const chatApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: (result, error, { chat_id }) => [
         { type: 'MESSAGES_TAG', id: chat_id },
-        { type: 'CHAT_TAG', id: chat_id },
+        { type: 'CHAT_TAG' },
       ],
     }),
-    deleteMessage: build.mutation<void, { message_id: number; chat_id: number }>({
-      query: ({ message_id }) => ({
-        url: `/messages/${message_id}/`,
+    deleteMessage: build.mutation<void, { message_ids: number[]; chat_id: number }>({
+      query: ({ message_ids }) => ({
+        url: `/messages/delete/`,
         method: 'DELETE',
+        body: { ids: message_ids },
       }),
       invalidatesTags: (result, error, { chat_id }) => [
         { type: 'MESSAGES_TAG', id: chat_id },

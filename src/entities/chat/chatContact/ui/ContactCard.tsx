@@ -11,7 +11,7 @@ interface IContactCard {
 
 function ContactCard({ data, onClick, isSelected }: IContactCard): ReactElement {
   return (
-    <div className={`flex pr-[11px] cursor-pointer ${isSelected ? 'bg-gradient-to-l from-secondary-100 rounded-lg' : ''}`} onClick={onClick}>
+    <div className={`flex pr-[11px] cursor-pointer hover:bg-gradient-to-l from-secondary-100 rounded-lg ${isSelected ? 'bg-gradient-to-l from-secondary-100 rounded-lg' : ''}`} onClick={onClick}>
       <img className="rounded-circle w-[70px] h-[70px]" src={`https://storage.googleapis.com/meetups-dev/media/${data.image_url}`} alt={`Аватар пользователя ${data.name}`} />
       <div className="w-full flex flex-col ml-[22px] mt-2.5">
         <div className="flex w-full justify-between">

@@ -23,23 +23,23 @@ function ChatMessage({ sender, message, isOwner, isNewDate, userImage, editingMe
 
   return (
     <div className="relative group flex flex-col">
-      {isNewDate && <p className="self-center">{messageDate.toLocaleString('ru-RU', { day: 'numeric', month: 'short' })}</p>}
+      {isNewDate && <p className="self-center text-[14px] text-secondary-300">{messageDate.toLocaleString('ru-RU', { day: 'numeric', month: 'short' })}</p>}
       {isOwner ? (
-        <div className="absolute top-0 left-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex gap-3">
-          <img 
-            src={favorites} 
-            alt="закрепить"
-            className="w-6 h-6 mt-6 cursor-pointer" 
-          />
+        <div className="absolute top-0 right-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex gap-3 mr-10">
           <img
             src={edit}
             alt="редактировать"
             className="w-6 h-6 mt-6 cursor-pointer"
             onClick={() => editingMessage(message.id.toString())}
           />
+          <img 
+            src={favorites} 
+            alt="закрепить"
+            className="w-6 h-6 mt-6 cursor-pointer" 
+          />
         </div>
       ) : (
-        <div className="absolute top-0 right-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex gap-3">
+        <div className="absolute top-0 right-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex gap-3 mr-10">
           <img 
             src={answer}
             alt="ответить"
@@ -52,7 +52,7 @@ function ChatMessage({ sender, message, isOwner, isNewDate, userImage, editingMe
           />
         </div>
       )}
-       <div className={`flex items-start mb-2.5 ${isOwner ? "flex-row-reverse" : ""}`}>
+       <div className="flex items-start mb-2.5">
         <button
           className="w-6 h-6 cursor-pointer"
           onClick={() => choosingMessage(message.id.toString())}
@@ -69,17 +69,17 @@ function ChatMessage({ sender, message, isOwner, isNewDate, userImage, editingMe
           src={`https://storage.googleapis.com/meetups-dev/media/${userImage}`} 
           alt="Аватар пользователя" 
         />
-        <div className={`flex flex-col items-start ml-[22px] ${isOwner ? "items-end !ml-0 mr-[22px]" : ""}`}>
-          <div className={`flex items-center mt-2.5 ${isOwner ? "flex-row-reverse" : ""}`}>
+        <div className="flex flex-col items-start ml-[22px]">
+          <div className="flex items-center mt-2.5">
             <h3 
-              className={`font-medium leading-[20px] w-[160px] truncate cursor-pointer ${isOwner ? "!w-6 " : ""}`}
+              className="font-medium leading-[20px] w-auto truncate cursor-pointer hover:text-secondary-500"
               onClick={() => navigate(`/profile/${sender?.id}`)}
-              >
-                {isOwner ? 'Вы' : sender?.username}
-              </h3>
-            <p className={`text-[14px] leading-[18px] ml-[22px] text-placeholder-gray ${isOwner ? "!ml-0 mr-[22px]" : ""}`}>{messageDate.toLocaleString('ru-RU', {hour: 'numeric', minute: 'numeric'})}</p>
+            >
+              {sender?.username}
+            </h3>
+            <p className="text-[14px] leading-[18px] ml-[22px] text-secondary-300">{messageDate.toLocaleString('ru-RU', {hour: 'numeric', minute: 'numeric'})}</p>
           </div>
-          <div className={`p-3.5 rounded-b-def rounded-se-def mt-2.5 max-w-[290px] ${isOwner ? "rounded-se-none rounded-s-def bg-main-violet-600 text-white" : "bg-secondary-100"}`}>
+          <div className={`p-3.5 rounded-b-def rounded-se-def mt-2.5 max-w-[290px] ${isOwner ? "bg-main-violet-600 text-white" : "bg-secondary-100"}`}>
             <p className="break-words">{message.message_text}</p>
           </div>
         </div>

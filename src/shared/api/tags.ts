@@ -19,5 +19,7 @@ export const allTags = [
   'CITIES_TAG',
   'FOLLOWERS_TAG',
   'FOLLOWINGS_TAG',
-  'FOLLOW_STATUS_TAG'
+  'FOLLOW_STATUS_TAG',
+  'MESSAGES_TAG',
+  'CHAT_TAG'
 ]

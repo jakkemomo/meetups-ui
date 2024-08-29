@@ -65,7 +65,7 @@ function ChatMessage({ sender, message, isOwner, isNewDate, userImage, editingMe
           }
         </button>
         <img 
-          className="w-[50px] h-[50px] rounded-circle" 
+          className={`w-[50px] h-[50px] rounded-circle ${isCheckVisible ? 'bg-color-secondary-200' : ''}`} 
           src={`https://storage.googleapis.com/meetups-dev/media/${userImage}`} 
           alt="Аватар пользователя" 
         />

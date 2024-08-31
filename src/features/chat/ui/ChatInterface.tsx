@@ -12,6 +12,7 @@ import favorites from '../../../../public/images/favorites.svg';
 import trash from '../../../../public/images/trash-03.svg';
 import close from '../../../../public/images/close-cross.svg';
 import dots from '../../../../public/images/dot-horizontal.svg';
+import Svg from "@/shared/ui/Svg";
 
 interface IContactsListProps {
   chatId: number;
@@ -95,18 +96,30 @@ const ChatInterface = ({ chatId, messages, participants }: IContactsListProps): 
 
   const deletingMessage = async (messagesIds: string[]) => {
     try {
-      const numericMessageIds = messagesIds.map(id => Number(id));
-      await deleteMessage({
-        message_ids: numericMessageIds,
-        chat_id: chatId,
-      }).unwrap();
-      if (numericMessageIds.includes(+editingMessageId)) {
-        setEditingMessageId('');
-        setMessageText('');
-      }
+        const numericMessageIds = messagesIds
+            .map(id => Number(id))
+            .filter(id => {
+                const message = messages.find(message => message.id === id);
+                return message?.created_by === profileData?.id;
+            });
+
+        if (numericMessageIds.length > 0) {
+            await deleteMessage({
+                message_ids: numericMessageIds,
+                chat_id: chatId,
+            }).unwrap();
+
+            if (numericMessageIds.includes(+editingMessageId)) {
+                setEditingMessageId('');
+                setMessageText('');
+            }
+        } else {
+            console.warn('Нет сообщений для удаления');
+        }
     } catch (error) {
-      console.error('Ошибка при удалении сообщений:', error);
+        console.error('Ошибка при удалении сообщений:', error);
     }
+
     cleanChoosingMessages();
   };
 
@@ -144,7 +157,7 @@ const ChatInterface = ({ chatId, messages, participants }: IContactsListProps): 
         </div>
       </div>
       }
-      <div className="flex items-start justify-between w-full border-b-3 border-b-solid border-b-secondary-100 pb-[18px]">
+      <div className="flex items-end justify-between w-full border-b-3 border-b-solid border-b-secondary-100 pb-[18px]">
         <figure className="flex items-center">
           <img
             className="w-[70px] aspect-square rounded-circle"
@@ -161,7 +174,13 @@ const ChatInterface = ({ chatId, messages, participants }: IContactsListProps): 
             <p className="text-main-violet-600 text-[14px] font-medium leading-[18px] relative mt-2 ml-[18px] before:absolute before:left-[-18px] before:top-1/2 before:translate-y-[-50%] before:rounded-circle before:w-2.5 before:aspect-square before:bg-main-violet-600">Онлайн</p>
           </figcaption>
         </figure>
-        <img src={dots} className="cursor-pointer" alt="дополнительные возможности"/>
+        <Input
+          type="search"
+          placeholder="Ищите в диалоге"
+          head={<Svg id="search-icon-def" className="w-6 h-6" />}
+          className="!bg-transparent ml-auto mb-2 max-w-[200px]"
+          extraInputClass="pl-[8px] placeholder:!text-placeholder-gray"
+        />
       </div>
       <div
         id="scrollableDiv"

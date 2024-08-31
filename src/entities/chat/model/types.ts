@@ -14,7 +14,8 @@ export interface IChatDetails {
     type: ChatType,
     last_message_text: string,
     last_message_is_owner: boolean,
-    last_message_created_at: string
+    last_message_created_at: string,
+    unread_message_counter: number
 }
 
 export interface IChatRetrieve {
@@ -30,7 +31,8 @@ export interface IChatMessage {
     chat: number, 
     message_text: string,
     created_at: string,
-    image_url: string
+    image_url: string,
+    read_at: string
 }
 
 export interface IParticipant {

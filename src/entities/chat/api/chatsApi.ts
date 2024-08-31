@@ -52,6 +52,14 @@ export const chatApi = baseApi.injectEndpoints({
       }),
       providesTags: ['MESSAGES_TAG'],
     }),
+    markMessagesAsRead: build.mutation<void, { ids: number[] }>({
+      query: ({ ids }) => ({
+        url: `/messages/mark_as_read/`,
+        method: 'PATCH',
+        body: { ids },
+      }),
+      invalidatesTags: ['MESSAGES_TAG'],
+    }),
     messageDetails: build.query<IChatMessage, { message_id: number }>({
       query: ({ message_id }) => ({
         url: `/messages/${message_id}/`,
@@ -91,6 +99,7 @@ export const {
   useChatParticipantsQuery,
   useSendMessageMutation,
   useMessageListQuery,
+  useMarkMessagesAsReadMutation,
   useMessageDetailsQuery,
   useUpdateMessageMutation,
   useDeleteMessageMutation,

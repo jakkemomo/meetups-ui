@@ -20,7 +20,10 @@ function ContactCard({ data, onClick, isSelected }: IContactCard): ReactElement 
         </div>
         <div className="flex items-center justify-between mt-2.5">
           <p className="text-[14px] text-[#616161] leading-[18px] truncate max-w-[280px]">{data.last_message_text}</p>
-          <div className="rounded-circle bg-main-violet-600 w-4 h-4 flex items-center justify-center text-white text-[12px]"></div>
+          {
+            data.unread_message_counter !== 0 && 
+              <div className="rounded-circle bg-main-violet-600 w-4 h-4 flex items-center justify-center text-white text-[12px]">{data.unread_message_counter}</div>
+          }
         </div>
       </div>
     </div>

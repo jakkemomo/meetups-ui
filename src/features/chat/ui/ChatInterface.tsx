@@ -1,9 +1,9 @@
-import { ChangeEvent, ReactElement, useState, KeyboardEvent } from "react";
+import { ChangeEvent, ReactElement, useState, KeyboardEvent, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Input } from "@/shared";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { ChatMessage } from "@/entities/chat/chatMessage";
-import { useDeleteMessageMutation, useSendMessageMutation, useUpdateMessageMutation } from "@/entities/chat/api/chatsApi";
+import { useDeleteMessageMutation, useMarkMessagesAsReadMutation, useSendMessageMutation, useUpdateMessageMutation } from "@/entities/chat/api/chatsApi";
 import { useMyDetailsQuery } from "@/entities/profile/api/profileApi";
 import { IChatMessage, IParticipant } from "@/entities/chat/model/types";
 import { getMessageText } from "../lib/getMessageText";
@@ -11,7 +11,6 @@ import send from '../../../../public/images/send.svg';
 import favorites from '../../../../public/images/favorites.svg';
 import trash from '../../../../public/images/trash-03.svg';
 import close from '../../../../public/images/close-cross.svg';
-import dots from '../../../../public/images/dot-horizontal.svg';
 import Svg from "@/shared/ui/Svg";
 
 interface IContactsListProps {
@@ -27,6 +26,7 @@ const ChatInterface = ({ chatId, messages, participants }: IContactsListProps): 
   const [messageText, setMessageText] = useState<string>('');
   const [checkedMessages, setCheckedMessages] = useState<Record<string, boolean>>({});
 
+  const [markMessagesAsRead] = useMarkMessagesAsReadMutation();
   const [sendMessage] = useSendMessageMutation();
   const [updateMessage] = useUpdateMessageMutation();
   const [deleteMessage] = useDeleteMessageMutation();
@@ -122,6 +122,19 @@ const ChatInterface = ({ chatId, messages, participants }: IContactsListProps): 
 
     cleanChoosingMessages();
   };
+
+  useEffect(() => {
+    const unreadMessageIds = messages
+      .filter(message => message.created_by !== profileData?.id) 
+      .filter(message => !message.read_at) 
+      .map(message => message.id);
+
+    if (unreadMessageIds.length > 0) {
+      markMessagesAsRead({ ids: unreadMessageIds }).catch(err => {
+        console.error('Ошибка при пометке сообщений как прочитанных:', err);
+      });
+    }
+  }, [messages, markMessagesAsRead, profileData?.id]);
 
   const companionInfo = participants.find((el) => el.id !== profileData?.id);
   const reversedMessages = [...messages].reverse();

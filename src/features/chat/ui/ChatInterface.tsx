@@ -142,7 +142,6 @@ const ChatInterface = ({ chatId, messages, participants }: IContactsListProps): 
   const selectedMessagesCount = Object.values(checkedMessages).filter(Boolean).length;
 
   return (
-    ///Пока не добавляла кнопки "Ответить и Переслать", т.к логики для них нет
     <div className="flex flex-col pl-[46px] w-full">
       {selectedMessagesCount > 0 && 
         <div className="w-full flex items-center mb-5 justify-between">

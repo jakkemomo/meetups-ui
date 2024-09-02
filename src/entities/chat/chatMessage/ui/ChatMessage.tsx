@@ -2,6 +2,8 @@ import { ReactElement } from "react";
 import { IChatMessage, IParticipant } from "../../model/types";
 import edit from "../../../../../public/images/edit-02.svg";
 import checked from "../../../../../public/images/check-contained.svg";
+import check from "../../../../../public/images/check-message.svg";
+import doubleCheck from "../../../../../public/images/double-check.svg";
 import { useNavigate } from "react-router-dom";
 
 interface IChatMessageProps {
@@ -72,10 +74,14 @@ function ChatMessage({ sender, message, isOwner, isNewDate, userImage, editingMe
             >
               {sender?.username}
             </h3>
-            <p className={`text-[14px] leading-[18px] text-secondary-300 ${isOwner ? "mr-[22px]" : "ml-[22px]"}`}>{messageDate.toLocaleString('ru-RU', {hour: 'numeric', minute: 'numeric'})}</p>
           </div>
-          <div className={`p-3.5 mt-2.5 max-w-[290px] ${isOwner ? "bg-main-violet-600 text-white rounded-b-def rounded-s-lg" : "bg-secondary-100 rounded-b-def rounded-se-def"}`}>
-            <p className="break-words">{message.message_text}</p>
+          <div className={`mt-2.5 max-w-[290px] flex items-end ${isOwner ? "bg-main-violet-600 text-white rounded-[20px] rounded-tr-[4px] self-start" : "bg-secondary-100 rounded-[20px] rounded-tl-[4px] self-end"} p-3`}>
+            <p className="break-words flex-1 mr-2">{message.message_text}</p>
+            <div className={`flex items-center gap-1 ${isOwner ? "text-secondary-300" : "text-secondary-500"} text-[12px] italic whitespace-nowrap`}>
+              <p>{messageDate.toLocaleString('ru-RU', { hour: 'numeric', minute: 'numeric' })}</p>
+              {message.read_at && isOwner && <img src={doubleCheck} alt="просмотрено" />}
+              {!message.read_at && isOwner && <img src={check} alt="не просмотрено" />}
+            </div>
           </div>
         </div>
       </div>

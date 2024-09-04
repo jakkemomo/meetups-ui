@@ -1,7 +1,8 @@
 import { ChangeEvent, ReactElement, useState, KeyboardEvent, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { Input } from "@/shared";
 import InfiniteScroll from "react-infinite-scroll-component";
+import { Input } from "@/shared";
+import { SearchMessagesInput } from "@/features/searchMessages/ui/SearchMessagesInput";
 import { ChatMessage } from "@/entities/chat/chatMessage";
 import { useDeleteMessageMutation, useMarkMessagesAsReadMutation, useSendMessageMutation, useUpdateMessageMutation } from "@/entities/chat/api/chatsApi";
 import { useMyDetailsQuery } from "@/entities/profile/api/profileApi";
@@ -11,7 +12,6 @@ import send from '../../../../public/images/send.svg';
 import favorites from '../../../../public/images/favorites.svg';
 import trash from '../../../../public/images/trash-03.svg';
 import close from '../../../../public/images/close-cross.svg';
-import Svg from "@/shared/ui/Svg";
 
 interface IContactsListProps {
   chatId: number;
@@ -34,8 +34,8 @@ const ChatInterface = ({ chatId, messages, participants }: IContactsListProps): 
 
   const { data: profileData } = useMyDetailsQuery();
 
-  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setMessageText(e.target.value);
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>, func: (value: string) => void) => {
+    func(e.target.value);
   };
 
   const handleTailClick = async () => {
@@ -192,13 +192,7 @@ const ChatInterface = ({ chatId, messages, participants }: IContactsListProps): 
             <p className="text-main-violet-600 text-[14px] font-medium leading-[18px] relative mt-2 ml-[18px] before:absolute before:left-[-18px] before:top-1/2 before:translate-y-[-50%] before:rounded-circle before:w-2.5 before:aspect-square before:bg-main-violet-600">Онлайн</p>
           </figcaption>
         </figure>
-        <Input
-          type="search"
-          placeholder="Ищите в диалоге"
-          head={<Svg id="search-icon-def" className="w-6 h-6" />}
-          className="!bg-transparent ml-auto mb-2 max-w-[200px]"
-          extraInputClass="pl-[8px] placeholder:!text-placeholder-gray"
-        />
+        <SearchMessagesInput />
       </div>
       <div
         id="scrollableDiv"
@@ -240,7 +234,7 @@ const ChatInterface = ({ chatId, messages, participants }: IContactsListProps): 
       )}
       <Input
         value={messageText}
-        onChange={handleInputChange}
+        onChange={(e) => handleInputChange(e, setMessageText)}
         type="text"
         size="lg"
         className={`text-[18px] ${editingMessageId ? 'mt-4' : 'mt-auto'}`}

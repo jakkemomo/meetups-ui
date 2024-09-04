@@ -1,5 +1,5 @@
 import { baseApi } from '@/shared/api';
-import { IChatDetails, IChatId, IChatMessage, IMessageCreate, IParticipant } from '../model/types';
+import { IChatDetails, IChatId, IChatMessage, IChatRequest, IMessageCreate, IParticipant } from '../model/types';
 import { ProfileId } from '@/entities/profile/model/types';
 import { IApiResponse } from '@/shared/types';
 
@@ -23,9 +23,10 @@ export const chatApi = baseApi.injectEndpoints({
       }),
       providesTags: (result, error, { chat_id }) => [{ type: 'CHAT_TAG', id: chat_id }],
     }),
-    chatMessages: build.query<IApiResponse<IChatMessage[]>, IChatId>({
-      query: ({ chat_id }) => ({
+    chatMessages: build.query<IApiResponse<IChatMessage[]>, IChatRequest>({
+      query: ({ chat_id, search }) => ({
         url: `/chats/${chat_id}/messages/`,
+        params: {search}
       }),
       providesTags: (result, error, { chat_id }) => [{ type: 'MESSAGES_TAG', id: chat_id }],
     }),

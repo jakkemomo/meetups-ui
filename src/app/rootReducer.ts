@@ -4,6 +4,7 @@ import SessionSlice from "@/entities/session/model/slice";
 import {registerFormSlice} from '@/features/authentication/registration/model/formState';
 import { searchFilterSlice } from '@/features/searchFilter/model/SearchFilterSlice';
 import { searchUsersSlice } from '@/features/searchUsers/model/SearchUsersInputSlice';
+import { SearchMessagesSlice } from '@/features/searchMessages/model/SearchMessagesSlice';
 import addressControlSlice from '@/features/addressControl/model/addressControlSlice';
 import filterPopupSlice from '@/features/searchFilter/model/filterPopupSlice';
 import eventInfoSlice from '@/entities/event/model/eventInfoSlice';
@@ -13,6 +14,7 @@ export const rootReducer = combineReducers({
   session: SessionSlice.reducer,
   searchFilter: searchFilterSlice.reducer,
   searchUsers: searchUsersSlice.reducer,
+  searchMessages: SearchMessagesSlice.reducer,
   eventInfo: eventInfoSlice.reducer,
   addressControl: addressControlSlice.reducer,
 

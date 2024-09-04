@@ -46,3 +46,10 @@ export interface IMessageCreate {
     message_text: string,
     chat_id: string
 }
+
+export interface IChatRequest {
+    search?: string;
+    limit?: number;
+    offset?: number;
+    chat_id: string
+  }

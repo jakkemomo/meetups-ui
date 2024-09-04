@@ -1,3 +1,5 @@
+import { ReactElement, useEffect, useMemo, useState } from "react";
+import { useAppSelector } from "@/shared/model";
 import { useChatListQuery, useChatMessagesQuery, useChatParticipantsQuery } from "@/entities/chat/api/chatsApi";
 import ContactCardSkeleton from "@/entities/chat/chatContact/ui/ContactCardSkeleton";
 import ChatMessageSkeleton from "@/entities/chat/chatMessage/ui/ChatMessageSkeleton";
@@ -5,11 +7,12 @@ import { useMyDetailsQuery } from "@/entities/profile/api/profileApi";
 import { ChatInterface, ContactsList } from "@/features/chat";
 import { ChatsStateType } from "@/features/chat/model/types";
 import ChatsState from "@/features/chat/ui/ChatsState";
-import { ReactElement, useEffect, useMemo, useState } from "react";
 
 function Chat(): ReactElement {
   const [selectedChatId, setSelectedChatId] = useState<number>(0);
   const [isChatChanging, setIsChatChanging] = useState<boolean>(false);
+
+  const { search } = useAppSelector(state => state.searchMessages);
 
   const {
     data: currentProfileData
@@ -34,6 +37,7 @@ function Chat(): ReactElement {
     data: messages = { results: [] },
     isError: isMessagesError,
   } = useChatMessagesQuery({
+    search: search,
     chat_id: String(selectedChatId),
   },
   {

@@ -77,7 +77,7 @@ function ChatMessage({ sender, message, isOwner, isNewDate, userImage, editingMe
           </div>
           <div className={`mt-2.5 max-w-[290px] flex items-end ${isOwner ? "bg-main-violet-600 text-white rounded-[20px] rounded-tr-[4px] self-start" : "bg-secondary-100 rounded-[20px] rounded-tl-[4px] self-end"} p-3`}>
             <p className="break-words flex-1 mr-2">{message.message_text}</p>
-            <div className={`flex items-center gap-1 ${isOwner ? "text-secondary-300" : "text-secondary-500"} text-[12px] italic whitespace-nowrap`}>
+            <div className={`flex items-center gap-1 mt-1 ${isOwner ? "text-secondary-300" : "text-secondary-500"} text-[11px] italic whitespace-nowrap`}>
               <p>{messageDate.toLocaleString('ru-RU', { hour: 'numeric', minute: 'numeric' })}</p>
               {message.read_at && isOwner && <img src={doubleCheck} alt="просмотрено" />}
               {!message.read_at && isOwner && <img src={check} alt="не просмотрено" />}

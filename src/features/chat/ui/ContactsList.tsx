@@ -24,7 +24,7 @@ function ContactsList({ onChatSelect, chats, selectedChatId }: ContactsListProps
         extraInputClass="pl-3 placeholder:!text-placeholder-gray"
       />
       <InfiniteScroll
-        className="flex flex-col gap-3.5 mt-[30px] [&::-webkit-scrollbar]:w-1 [&::-webkit-scrollbar-track]:bg-white [&::-webkit-scrollbar-track]:rounded-[10px] [&::-webkit-scrollbar-thumb]:bg-text-light-gray [&::-webkit-scrollbar-thumb]:rounded-[10px]"
+        className="flex flex-col gap-3.5 mt-[30px] [&::-webkit-scrollbar]:w-1 [&::-webkit-scrollbar-track]:bg-white [&::-webkit-scrollbar-track]:rounded-[10px] [&::-webkit-scrollbar-thumb]:bg-secondary-600 [&::-webkit-scrollbar-thumb]:rounded-[10px]"
         dataLength={chats.length}
         hasMore={false}
         next={() => console.log(chats.length)}

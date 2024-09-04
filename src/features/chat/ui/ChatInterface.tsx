@@ -24,6 +24,7 @@ const ChatInterface = ({ chatId, messages, participants }: IContactsListProps): 
 
   const [editingMessageId, setEditingMessageId] = useState<string>('');
   const [messageText, setMessageText] = useState<string>('');
+  const [initialMessageText, setInitialMessageText] = useState<string>('');
   const [checkedMessages, setCheckedMessages] = useState<Record<string, boolean>>({});
 
   const [markMessagesAsRead] = useMarkMessagesAsReadMutation();
@@ -55,16 +56,21 @@ const ChatInterface = ({ chatId, messages, participants }: IContactsListProps): 
     }
   };
 
+  const cleanMessage = () => {
+    setEditingMessageId('');
+    setMessageText('');
+    setInitialMessageText('');
+  };
+
   const handleSaveEdit = async () => {
-    if (editingMessageId) {
+    if (editingMessageId && messageText !== initialMessageText) {
       try {
         await updateMessage({
           message_id: Number(editingMessageId),
           message_text: messageText,
           chat_id: chatId
         }).unwrap();
-        setEditingMessageId('');
-        setMessageText('');
+        cleanMessage();
       } catch (error) {
         console.error('Ошибка при обновлении сообщения:', error);
       }
@@ -92,6 +98,7 @@ const ChatInterface = ({ chatId, messages, participants }: IContactsListProps): 
   const editingMessage = (messageId: string, messageText: string) => {
     setEditingMessageId(messageId);
     setMessageText(messageText);
+    setInitialMessageText(messageText);
   };
 
   const deletingMessage = async (messagesIds: string[]) => {
@@ -110,8 +117,7 @@ const ChatInterface = ({ chatId, messages, participants }: IContactsListProps): 
             }).unwrap();
 
             if (numericMessageIds.includes(+editingMessageId)) {
-                setEditingMessageId('');
-                setMessageText('');
+              cleanMessage();
             }
         } else {
             console.warn('Нет сообщений для удаления');
@@ -223,12 +229,21 @@ const ChatInterface = ({ chatId, messages, participants }: IContactsListProps): 
           ))}
         </InfiniteScroll>
       </div>
+      {editingMessageId && (
+        <div className="w-full flex justify-between mt-auto items-center">
+          <div className="flex flex-col pl-3 border-l-2 border-l-main-violet-600">
+            <p className="text-[16px] text-main-violet-600">Редактирование</p>
+            <p className="text-[16px] text-secondary-600">{initialMessageText}</p>
+          </div>
+          <img src={close} alt="отменить" className="cursor-pointer" onClick={cleanMessage} />
+        </div>
+      )}
       <Input
         value={messageText}
         onChange={handleInputChange}
         type="text"
         size="lg"
-        className="mt-auto text-[18px]"
+        className={`text-[18px] ${editingMessageId ? 'mt-4' : 'mt-auto'}`}
         tail={<img className="cursor-pointer" src={send} alt="send" onClick={() => { void handleTailClick(); }}/>}
         extraInputClass="pl-3"
         onKeyDown={handleKeyDown}

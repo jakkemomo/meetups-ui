@@ -17,9 +17,11 @@ interface IContactsListProps {
   chatId: number;
   messages: IChatMessage[];
   participants: IParticipant[];
+  handleOffset: () => void;
+  hasMore: boolean
 }
 
-const ChatInterface = ({ chatId, messages, participants }: IContactsListProps): ReactElement => {
+const ChatInterface = ({ chatId, messages, participants, handleOffset, hasMore }: IContactsListProps): ReactElement => {
   const navifate = useNavigate();
 
   const [editingMessageId, setEditingMessageId] = useState<string>('');
@@ -142,6 +144,7 @@ const ChatInterface = ({ chatId, messages, participants }: IContactsListProps): 
     }
   }, [messages, markMessagesAsRead, profileData?.id]);
 
+
   const companionInfo = participants.find((el) => el.id !== profileData?.id);
   const reversedMessages = [...messages].reverse();
 
@@ -198,12 +201,14 @@ const ChatInterface = ({ chatId, messages, participants }: IContactsListProps): 
         id="scrollableDiv"
         className="flex flex-col-reverse overflow-auto pt-[18px]">
         <InfiniteScroll
-          dataLength={messages ? messages.length : 1}
-          next={() => { return; }}
-          hasMore={false}
+          dataLength={messages.length}
+          next={handleOffset}
+          hasMore={hasMore}
           loader={<p>Loading...</p>}
+          inverse={true}
           className="flex flex-col"
           scrollableTarget="scrollableDiv"
+          style={{ overflow: 'auto' }}
         >
           {reversedMessages.map((el, index) => (
             <ChatMessage

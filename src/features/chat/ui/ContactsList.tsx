@@ -12,7 +12,16 @@ interface ContactsListProps {
 }
 
 function ContactsList({ onChatSelect, chats, selectedChatId }: ContactsListProps): ReactElement {
-  const reversedChats = [...chats].reverse();
+  const reversedChats = [...chats].sort((a, b) => {
+    const dateA = new Date(a.last_message_created_at);
+    const dateB = new Date(b.last_message_created_at);
+  
+    if (isNaN(dateA.getTime()) || isNaN(dateB.getTime())) {
+      return 0;
+    }
+  
+    return dateB.getTime() - dateA.getTime();
+  });
 
   return (
     <div className="max-w-[479px] w-full h-[569px] border-r-3 border-r-solid border-r-custom-gray pr-[45px]">

@@ -62,9 +62,10 @@ function ChatMessage({ sender, message, isOwner, isNewDate, userImage, editingMe
           }
         </button>
         <img 
-          className={`w-[50px] h-[50px] rounded-circle ${isCheckVisible ? "bg-color-secondary-200" : ""}`} 
+          className={`w-[50px] h-[50px] rounded-circle cursor-pointer ${isCheckVisible ? "bg-color-secondary-200" : ""}`} 
           src={`https://storage.googleapis.com/meetups-dev/media/${userImage}`} 
           alt="Аватар пользователя" 
+          onClick={() => navigate(`/profile/${sender?.id}`)}
         />
         <div className={`flex flex-col ${isOwner ? "flex-row-reverse items-end mr-[22px]" : "items-start ml-[22px]"}`}>
           <div className={`flex items-center mt-2.5 ${isOwner ? "flex-row-reverse" : ""}`}>

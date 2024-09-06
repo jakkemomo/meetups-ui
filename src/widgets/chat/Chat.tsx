@@ -7,10 +7,16 @@ import { useMyDetailsQuery } from "@/entities/profile/api/profileApi";
 import { ChatInterface, ContactsList } from "@/features/chat";
 import { ChatsStateType } from "@/features/chat/model/types";
 import ChatsState from "@/features/chat/ui/ChatsState";
+import { IChatMessage } from "@/entities/chat/model/types";
 
 function Chat(): ReactElement {
   const [selectedChatId, setSelectedChatId] = useState<number>(0);
+  const [messages, setMessages] = useState<IChatMessage[]>([]);
   const [isChatChanging, setIsChatChanging] = useState<boolean>(false);
+
+  //может быть есть какой-то вариант гораздо лучше, но пока у меня такой костыль🥲
+  const [offset, setOffset] = useState(0);
+  const pageSize = 10;
 
   const { search } = useAppSelector(state => state.searchMessages);
 
@@ -34,10 +40,12 @@ function Chat(): ReactElement {
 });
 
   const {
-    data: messages = { results: [] },
+    data: messagesData = {count: 0, next: null, results: []},
     isError: isMessagesError,
   } = useChatMessagesQuery({
     search: search,
+    offset,
+    limit: pageSize,
     chat_id: String(selectedChatId),
   },
   {
@@ -58,14 +66,29 @@ function Chat(): ReactElement {
 
     setIsChatChanging(true);
     setSelectedChatId(newChatId);
+    //и вот здесь
+    setOffset(0);
+    setMessages([]);
     localStorage.setItem(userIdKey, JSON.stringify(newChatId));
   };
 
   useEffect(() => {
-    if (messages) {
-      setIsChatChanging(false)
+    if (messagesData.results.length > 0) {
+      setMessages(prevMessages => {
+        const newMessages = messagesData.results.filter(newMsg => 
+          !prevMessages.some(prevMsg => prevMsg.id === newMsg.id)
+        );
+        return [...prevMessages, ...newMessages];
+      });
     }
-  }, [messages]);
+    setIsChatChanging(false);
+  }, [messagesData]);
+
+  const handleOffset = () => {
+    if (offset + pageSize < messagesData.count) {
+      setOffset(prevState => prevState + pageSize);
+    }
+  };
 
   if (isChatsLoading) {
     return <ContactCardSkeleton />;
@@ -74,7 +97,6 @@ function Chat(): ReactElement {
   if (chats.results.length === 0 && !isChatsError ) {
     return <ChatsState type={ChatsStateType.empty}/>;
   }
-
 
   if (isChatsError ) {
     return <ChatsState type={ChatsStateType.error}/>;
@@ -95,9 +117,11 @@ function Chat(): ReactElement {
           </div>
         ) : (
           <ChatInterface
-            messages={messages.results}
+            messages={messages}
             participants={participants.results}
             chatId={selectedChatId}
+            handleOffset={handleOffset}
+            hasMore={offset + pageSize < messagesData.count}
           />
         )
       )}

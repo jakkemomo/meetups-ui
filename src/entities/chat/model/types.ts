@@ -52,4 +52,4 @@ export interface IChatRequest {
     limit?: number;
     offset?: number;
     chat_id: string
-  }
+}

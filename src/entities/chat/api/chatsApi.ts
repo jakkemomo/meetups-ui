@@ -24,9 +24,9 @@ export const chatApi = baseApi.injectEndpoints({
       providesTags: (result, error, { chat_id }) => [{ type: 'CHAT_TAG', id: chat_id }],
     }),
     chatMessages: build.query<IApiResponse<IChatMessage[]>, IChatRequest>({
-      query: ({ chat_id, search }) => ({
+      query: ({ chat_id, search, offset, limit }) => ({
         url: `/chats/${chat_id}/messages/`,
-        params: {search}
+        params: {search, offset, limit}
       }),
       providesTags: (result, error, { chat_id }) => [{ type: 'MESSAGES_TAG', id: chat_id }],
     }),
@@ -34,7 +34,7 @@ export const chatApi = baseApi.injectEndpoints({
       query: ({ chat_id }) => ({
         url: `/chats/${chat_id}/participants/`,
       }),
-      providesTags: (result, error, { chat_id }) => [{ type: 'CHAT_TAG', id: chat_id }],
+      providesTags: (result, error, { chat_id }) => [{ type: 'CHAT_PARTICIPANTS_TAG', id: chat_id }],
     }),
     sendMessage: build.mutation<void, IMessageCreate>({
       query: ({ chat_id, message_text }) => ({
@@ -43,7 +43,7 @@ export const chatApi = baseApi.injectEndpoints({
         body: { message_text },
       }),
       invalidatesTags: (result, error, { chat_id }) => [
-        { type: 'CHAT_TAG', id: chat_id },
+        { type: 'CHAT_TAG' },
         { type: 'MESSAGES_TAG', id: chat_id },
       ],
     }),
@@ -86,7 +86,7 @@ export const chatApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: (result, error, { chat_id }) => [
         { type: 'MESSAGES_TAG', id: chat_id },
-        { type: 'CHAT_TAG', id: chat_id },
+        { type: 'CHAT_TAG' },
       ],
     }),
   }),

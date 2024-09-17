@@ -32,7 +32,8 @@ export interface IChatMessage {
     message_text: string,
     created_at: string,
     image_url: string,
-    read_at: string
+    read_at: string,
+    username? : string
 }
 
 export interface IParticipant {
@@ -52,4 +53,10 @@ export interface IChatRequest {
     limit?: number;
     offset?: number;
     chat_id: string
+}
+
+export interface IAllChatRequest {
+    search?: string;
+    limit?: number;
+    offset?: number;
 }

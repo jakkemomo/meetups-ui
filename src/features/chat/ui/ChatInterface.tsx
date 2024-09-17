@@ -17,17 +17,19 @@ interface IContactsListProps {
   chatId: number;
   messages: IChatMessage[];
   participants: IParticipant[];
-  handleOffset: () => void;
-  hasMore: boolean
+  // handleOffset: () => void;
+  // hasMore: boolean,
+  // type: ChatType
 }
 
-const ChatInterface = ({ chatId, messages, participants, handleOffset, hasMore }: IContactsListProps): ReactElement => {
+const ChatInterface = ({ chatId, messages, participants }: IContactsListProps): ReactElement => {
   const navifate = useNavigate();
 
   const [editingMessageId, setEditingMessageId] = useState<string>('');
   const [messageText, setMessageText] = useState<string>('');
   const [initialMessageText, setInitialMessageText] = useState<string>('');
   const [checkedMessages, setCheckedMessages] = useState<Record<string, boolean>>({});
+  const [isSending, setIsSending] = useState(false);
 
   const [markMessagesAsRead] = useMarkMessagesAsReadMutation();
   const [sendMessage] = useSendMessageMutation();
@@ -41,20 +43,19 @@ const ChatInterface = ({ chatId, messages, participants, handleOffset, hasMore }
   };
 
   const handleTailClick = async () => {
-    if (messageText.trim() !== '') {
+    if (messageText.trim() !== '' && !isSending) {
+      setIsSending(true);
       if (editingMessageId) {
         await handleSaveEdit();
       } else {
         try {
-          await sendMessage({
-            chat_id: String(chatId),
-            message_text: messageText,
-          }).unwrap();
+          await sendMessage({ chat_id: String(chatId), message_text: messageText }).unwrap();
           setMessageText('');
         } catch (error) {
           console.error('Не получилось отправить сообщение', error);
         }
       }
+      setIsSending(false);
     }
   };
 
@@ -181,9 +182,10 @@ const ChatInterface = ({ chatId, messages, participants, handleOffset, hasMore }
       <div className="flex items-end justify-between w-full border-b-3 border-b-solid border-b-secondary-100 pb-[18px]">
         <figure className="flex items-center">
           <img
-            className="w-[70px] aspect-square rounded-circle"
+            className="w-[70px] aspect-square rounded-circle cursor-pointer"
             src={`https://storage.googleapis.com/meetups-dev/media/${companionInfo?.image_url}`}
             alt={`Аватар пользователя ${companionInfo?.username}`}
+            onClick={() => navifate(`/profile/${companionInfo?.id}`)}
           />
           <figcaption className="flex flex-col ml-[22px]">
             <h2 
@@ -201,9 +203,9 @@ const ChatInterface = ({ chatId, messages, participants, handleOffset, hasMore }
         id="scrollableDiv"
         className="flex flex-col-reverse overflow-auto pt-[18px]">
         <InfiniteScroll
-          dataLength={messages.length}
-          next={handleOffset}
-          hasMore={hasMore}
+          dataLength={messages ? messages.length : 1}
+          next={() => { return; }}
+          hasMore={false}
           loader={<p>Loading...</p>}
           inverse={true}
           className="flex flex-col"

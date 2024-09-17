@@ -1,11 +1,11 @@
 // searchUsersSlice.ts
 import { createSlice } from "@reduxjs/toolkit";
 
-export interface IGlobalUsersSearchState {
+export interface IGlobalMessagesSearchState {
   search: string;
 }
 
-const initialState: IGlobalUsersSearchState = {
+const initialState: IGlobalMessagesSearchState = {
   search: "",
 };
 

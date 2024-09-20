@@ -14,13 +14,11 @@ interface ContactsListProps {
 const ContactsList = ({ onChatSelect, chats, selectedChatId, type }: ContactsListProps): ReactElement => {
 
   const sortedChats = useMemo(() => {
-    console.log(chats)
     return [...chats].sort((a, b) => {
-      const dateA = new Date(a.last_message_created_at);
-      const dateB = new Date(b.last_message_created_at);
+      const dateA = new Date(a.last_message_created_at || a.created_at || 0);
+      const dateB = new Date(b.last_message_created_at || b.created_at || 0);
       return dateB.getTime() - dateA.getTime();
     });
-
   }, [chats]);
 
   const handleChatSelect = useCallback((chat: IChatDetails | IChatMessage) => {

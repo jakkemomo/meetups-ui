@@ -14,6 +14,7 @@ import EditProfile from '@/pages/profile/EditProfile';
 import SecurityPage from '@/pages/security/SecurityPage';
 import ProxyConfirmEmailPage from '@/features/authentication/registration/ui/ProxyConfirmEmailPage';
 import RouteGuard from './guards/RouteGuard';
+import ChatPage from '@/pages/chat/ChatPage';
 import SubscriptionPage from '@/pages/subscription/SubscriptionPage';
 import { UserEventsPage } from '@/pages/userEvents/UserEventsPage';
 
@@ -84,6 +85,12 @@ const appRouter = createBrowserRouter([
         path: '/created',
         element: (
           <UserEventsPage type="created" />
+        )
+      },
+      {
+        path: '/chat',
+        element: (
+          <ChatPage />
         )
       }
     ]

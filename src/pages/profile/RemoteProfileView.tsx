@@ -22,6 +22,7 @@ import { SliderEmptyElem } from "@/shared";
 import { getEventsCards } from "@/widgets/EventsList/model/getEventsCards";
 import { useLogServerError } from "@/shared/lib/hooks";
 import { PrivateUserEventsCap } from "@/widgets/Profile/PrivateUserEventsCap";
+import { useGetOrCreateUserDirectChatMutation } from "@/entities/chat/api/chatsApi";
 
 function RemoteProfileView(): ReactElement {
   const navigate = useNavigate();
@@ -96,6 +97,18 @@ function RemoteProfileView(): ReactElement {
 
   const [follow, { isLoading: isFollowLoading }] = useFollowMutation();
   const [unfollow, { isLoading: isUnfollowLoading }] = useUnFollowMutation();
+  const [createChat] = useGetOrCreateUserDirectChatMutation();
+
+  const createUserChat = () => {
+    createChat({ userId: userId })
+      .unwrap()
+      .then((chat) => {
+        const userIdKey = currentProfileData?.id ? `selectedChatId_${currentProfileData.id}` : 'selectedChatId';
+        localStorage.setItem(userIdKey, JSON.stringify(chat.id));
+        navigate('/chat');
+      })
+      .catch((err) => console.log(err, "Создать чат не получилось"));
+  }
 
   const followUser = () => {
     follow({ userId: userId })
@@ -172,7 +185,7 @@ function RemoteProfileView(): ReactElement {
               isLoading={isFollowLoading || isUnfollowLoading}
               status={followStatus}
             />
-            <Button size="md" importance="secondary" extraClass="ml-[20px]">
+            <Button size="md" importance="secondary" extraClass="ml-[20px]" onClick={createUserChat}>
               Написать
             </Button>
           </div>
